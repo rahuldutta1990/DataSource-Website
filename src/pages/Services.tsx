@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
 import { SEOHead } from '../components/SEOHead.js';
 import { ServiceCardSkeleton, Spinner } from '../components/SkeletonLoader.js';
+import { ITConsultingServicesSection } from '../components/ITConsultingServicesSection.js';
 import { api } from '../services/api.js';
 import { ServiceItem, ServiceCategory } from '../types.js';
 
@@ -231,6 +232,9 @@ export const Services: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* Detailed 10-Practice IT Consulting Services Section */}
+      <ITConsultingServicesSection />
     </div>
   );
 };

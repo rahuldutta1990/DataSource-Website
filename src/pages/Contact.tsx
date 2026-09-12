@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon, AlertCircle, ExternalLink, QrCode, Copy, Check } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
@@ -12,6 +12,7 @@ import { WhatsAppIcon, cleanWhatsAppDigits } from '../components/WhatsAppChatbot
 
 export const Contact: React.FC = () => {
   const { user, profile, signInWithGoogle, refreshInquiries } = useAuth();
+  const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -37,6 +38,33 @@ export const Contact: React.FC = () => {
     phone?: string;
     message?: string;
   }>({});
+
+  useEffect(() => {
+    const problemParam = searchParams.get('problem');
+    const typeParam = searchParams.get('type');
+    const serviceParam = searchParams.get('service');
+
+    if (problemParam) {
+      setFormData((prev) => ({
+        ...prev,
+        projectType: 'Technology Assessment / IT Audit',
+        message: prev.message || `We are experiencing the following business/data challenge:\n• ${problemParam}\n\nWe would like an initial consultation to diagnose this bottleneck and review recommended solutions.`,
+      }));
+    } else if (typeParam === 'assessment') {
+      setFormData((prev) => ({
+        ...prev,
+        projectType: 'Technology Assessment / IT Audit',
+        message: prev.message || `Requesting a Free Initial IT & Data Architecture Assessment for our organization.`,
+      }));
+    }
+
+    if (serviceParam) {
+      setFormData((prev) => ({
+        ...prev,
+        serviceInterest: serviceParam,
+      }));
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (user) {
@@ -608,9 +636,9 @@ ${lead.message || 'Architecture consultation requested'}
                   <div className="flex items-start gap-3">
                     <Phone className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-400">Phone</p>
-                      <a href="tel:+18005123282" className="text-white font-bold hover:text-cyan-400">
-                        +1 (800) 512-3282
+                      <p className="text-xs text-slate-400">Phone &amp; WhatsApp</p>
+                      <a href="tel:+919038417437" className="text-white font-bold hover:text-cyan-400">
+                        +91 9038417437
                       </a>
                     </div>
                   </div>
@@ -628,8 +656,10 @@ ${lead.message || 'Architecture consultation requested'}
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-400">Headquarters</p>
-                      <p className="text-white font-medium">Innovation Quarter, Tech Park Plaza</p>
+                      <p className="text-xs text-slate-400">Headquarters &amp; Hub</p>
+                      <p className="text-white font-medium text-xs leading-relaxed">
+                        3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India
+                      </p>
                     </div>
                   </div>
 
@@ -637,7 +667,7 @@ ${lead.message || 'Architecture consultation requested'}
                     <Clock className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-slate-400">Office Hours</p>
-                      <p className="text-white font-medium">Mon – Fri: 9:00 AM – 6:00 PM EST</p>
+                      <p className="text-white font-medium">Mon – Fri: 9:30 AM – 6:30 PM IST</p>
                     </div>
                   </div>
                 </div>

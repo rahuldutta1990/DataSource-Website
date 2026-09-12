@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, Phone, MapPin, Clock, Linkedin, Twitter, Github, Newspaper } from 'lucide-react';
 import { DataSourceLogo } from './DataSourceLogo.js';
 import { NewsletterForm } from './NewsletterForm.js';
+import { api } from '../services/api.js';
+import { SiteSettings } from '../types.js';
 
 export const Footer: React.FC = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    api.getSettings().then(setSettings).catch(() => {});
+  }, []);
+
   return (
     <footer className="bg-[#0B1B2B] dark:bg-[#060D17] text-slate-300 border-t border-slate-800 dark:border-slate-800/80 transition-colors duration-200">
       {/* Upper CTA Consultation Banner */}
@@ -82,7 +90,7 @@ export const Footer: React.FC = () => {
 
       {/* Main Footer Links Columns */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-12">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
             <Link to="/" className="inline-block focus:outline-none" aria-label="DataSource Home">
@@ -210,7 +218,9 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                <span className="text-slate-400">Innovation Quarter, Tech Park Plaza</span>
+                <span className="text-slate-400 text-xs leading-relaxed">
+                  3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India
+                </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -220,15 +230,33 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <a href="tel:+18005123282" className="hover:text-cyan-400 transition-colors font-medium">
-                  +1 (800) 512-3282
+                <a href="tel:+919038417437" className="hover:text-cyan-400 transition-colors font-medium">
+                  +91 9038417437
                 </a>
               </li>
               <li className="flex items-start gap-2.5 pt-1 text-xs text-slate-400">
                 <Clock className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                <span>Mon – Fri: 9:00 AM – 6:00 PM EST</span>
+                <span>Mon – Fri: 9:30 AM – 6:30 PM IST</span>
               </li>
             </ul>
+          </div>
+
+          {/* UPI QR Code Column */}
+          <div>
+            <h3 className="text-white text-sm font-bold uppercase tracking-wider mb-4 font-heading">
+              UPI Payment QR
+            </h3>
+            <div className="bg-white p-3 rounded-xl shadow-lg border border-slate-700/80 inline-block space-y-2">
+              <img
+                src={settings?.footerQrCodeUrl || '/upi-qr.png'}
+                alt="DataSource UPI Payment QR"
+                className="w-32 h-32 object-contain mx-auto rounded-lg"
+                referrerPolicy="no-referrer"
+              />
+              <p className="text-[11px] font-semibold text-slate-700 text-center tracking-tight">
+                Scan with GPay / PhonePe / Paytm
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -433,4 +433,42 @@ export const api = {
       modelUsed: string;
     };
   },
+
+  async analyzeBusinessProblem(params: { problemText: string }) {
+    const res = await fetch('/api/ai/analyze-problem', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    });
+    return res.json();
+  },
+
+  async evaluateHealthCheck(scores: Record<string, number>) {
+    const res = await fetch('/api/ai/health-check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(scores),
+    });
+    return res.json();
+  },
+
+  async findAISolution(params: { requirement: string }) {
+    const res = await fetch('/api/ai/solution-finder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    });
+    return res.json();
+  },
+
+  async trackConversionEvent(event: { eventName: string; timestamp: string; meta?: any }) {
+    try {
+      await fetch('/api/analytics/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(event),
+      });
+    } catch {}
+  },
 };
+

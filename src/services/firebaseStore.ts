@@ -126,7 +126,27 @@ export async function getSiteSettingsFromFirestore(): Promise<SiteSettings> {
   try {
     const d = await getDoc(doc(db, 'siteSettings', 'global'));
     if (d.exists()) {
-      return d.data() as SiteSettings;
+      const data = d.data() as SiteSettings;
+      // If Firestore still has the old address or previous multiple office locations, synchronize with latest configured Kolkata location
+      if (
+        !data.officeLocations ||
+        data.officeLocations.length > 1 ||
+        data.address?.includes('Bellandur') ||
+        (data.officeLocations.length === 1 && data.officeLocations[0].id !== 'kolkata') ||
+        (data.officeLocations[0]?.address && !data.officeLocations[0].address.includes('Sanhita Simoco'))
+      ) {
+        const synced: SiteSettings = {
+          ...data,
+          address: initialDbData.settings.address,
+          googleMapsTitle: initialDbData.settings.googleMapsTitle || data.googleMapsTitle,
+          googleMapsSubtitle: initialDbData.settings.googleMapsSubtitle || data.googleMapsSubtitle,
+          officeLocations: initialDbData.settings.officeLocations as unknown as SiteSettings['officeLocations'],
+        };
+        // Update in background
+        setDoc(doc(db, 'siteSettings', 'global'), synced, { merge: true }).catch(() => {});
+        return synced;
+      }
+      return data;
     }
     await seedFirestoreIfEmpty();
     return initialDbData.settings as unknown as SiteSettings;

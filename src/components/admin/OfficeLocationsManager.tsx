@@ -231,7 +231,7 @@ export const OfficeLocationsManager: React.FC<OfficeLocationsManagerProps> = ({
     if (!settings) return;
     if (
       !confirm(
-        'Reset office locations to the 4 default flagship hubs (Boston Global HQ, New York, London, and Bengaluru)?'
+        'Reset office locations to the default Kolkata Technology Hub & Consultation Office?'
       )
     ) {
       return;
@@ -245,7 +245,7 @@ export const OfficeLocationsManager: React.FC<OfficeLocationsManagerProps> = ({
       });
       onUpdateSettings(updated);
       setSelectedPreviewLocation(OFFICE_LOCATIONS[0]);
-      showNotification('Restored default flagship office locations');
+      showNotification('Restored default Kolkata office location');
     } catch (err: any) {
       alert('Error restoring locations: ' + err.message);
     } finally {

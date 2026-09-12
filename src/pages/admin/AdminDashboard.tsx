@@ -36,6 +36,7 @@ import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
 import { OfficeLocationsManager } from '../../components/admin/OfficeLocationsManager.js';
 import { TargetKeywordManager } from '../../components/admin/TargetKeywordManager.js';
+import { BusinessProblemsManager } from '../../components/admin/BusinessProblemsManager.js';
 import { api } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.js';
 import {
@@ -61,6 +62,7 @@ export const AdminDashboard: React.FC = () => {
     | 'casestudies'
     | 'insights'
     | 'faq-testimonials'
+    | 'problems'
     | 'maps-locations'
     | 'keywords'
     | 'settings'
@@ -670,6 +672,23 @@ export const AdminDashboard: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setActiveTab('problems')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'problems'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-4 h-4 text-[#38BDF8]" />
+                <span>Business Problems</span>
+              </div>
+              <span className="text-xs bg-blue-500/20 text-[#38BDF8] font-bold px-2 py-0.5 rounded-full border border-blue-500/30">
+                {settings?.businessProblems?.length || 9}
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('maps-locations')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
                 activeTab === 'maps-locations'
@@ -861,6 +880,29 @@ export const AdminDashboard: React.FC = () => {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* Business Problems Diagnostic Manager Banner */}
+            <div className="bg-gradient-to-r from-cyan-950/40 via-slate-950 to-slate-950 p-6 rounded-2xl border border-cyan-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-[#38BDF8] flex items-center justify-center shrink-0">
+                  <AlertCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white font-heading">
+                    “What Business Problem Are You Trying to Solve?” Diagnostic
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Configure the problem-first homepage diagnostic section, executive symptom quotes, and consulting solutions.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveTab('problems')}
+                className="px-4 py-2.5 rounded-xl bg-[#0077FF] hover:bg-[#0062D6] text-white text-xs font-bold shrink-0 transition-colors shadow"
+              >
+                Manage Business Problems ({settings?.businessProblems?.length || 9})
+              </button>
             </div>
 
             {/* WCAG Contrast & Accessibility Verifier Banner */}
@@ -1670,6 +1712,73 @@ export const AdminDashboard: React.FC = () => {
                 </div>
               </div>
 
+              {/* Footer UPI QR Code Management */}
+              <div className="pt-6 border-t border-slate-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-heading">
+                      Footer UPI Payment QR Code
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Upload or replace the payment QR code displayed in the website footer. Valid formats: PNG, JPEG, WEBP, SVG (Max 5MB).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                  <div className="bg-white p-3 rounded-xl shadow border border-slate-700 shrink-0 text-center">
+                    <img
+                      src={settings.footerQrCodeUrl || '/upi-qr.png'}
+                      alt="Footer QR Preview"
+                      className="w-28 h-28 object-contain rounded-lg mx-auto"
+                      referrerPolicy="no-referrer"
+                    />
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider mt-1.5 block">Current QR Preview</span>
+                  </div>
+
+                  <div className="space-y-3 flex-1 w-full">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                      Upload New QR Image File
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/png, image/jpeg, image/jpg, image/webp, image/svg+xml"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+
+                        // Validate file type
+                        const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/svg+xml'];
+                        if (!validTypes.includes(file.type)) {
+                          alert('Invalid file format. Please upload a PNG, JPEG, WEBP, or SVG image.');
+                          return;
+                        }
+
+                        // Validate file size (max 5MB)
+                        if (file.size > 5 * 1024 * 1024) {
+                          alert('File size exceeds 5MB limit. Please choose a smaller file.');
+                          return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = (uploadEvent) => {
+                          const result = uploadEvent.target?.result as string;
+                          if (result) {
+                            setSettings({ ...settings, footerQrCodeUrl: result });
+                            showNotification('QR code updated in draft. Click "Save System Settings" to apply.');
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }}
+                      className="block w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#0077FF] file:text-white hover:file:bg-[#0062D6] cursor-pointer"
+                    />
+                    <p className="text-[11px] text-slate-400">
+                      Changes will reflect immediately in the website footer upon saving settings.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-6 py-3 rounded-xl font-bold text-sm shadow"
@@ -1681,7 +1790,16 @@ export const AdminDashboard: React.FC = () => {
           </div>
         )}
 
-        {/* 8. GOOGLE MAPS & GLOBAL OFFICE HUBS MANAGER */}
+        {/* 8. BUSINESS PROBLEMS DIAGNOSTIC MANAGER */}
+        {activeTab === 'problems' && (
+          <BusinessProblemsManager
+            settings={settings}
+            onUpdateSettings={setSettings}
+            showNotification={showNotification}
+          />
+        )}
+
+        {/* 9. GOOGLE MAPS & GLOBAL OFFICE HUBS MANAGER */}
         {activeTab === 'maps-locations' && (
           <OfficeLocationsManager
             settings={settings}
@@ -1690,7 +1808,7 @@ export const AdminDashboard: React.FC = () => {
           />
         )}
 
-        {/* 9. GOOGLE SEARCH & TARGET KEYWORDS MANAGER */}
+        {/* 10. GOOGLE SEARCH & TARGET KEYWORDS MANAGER */}
         {activeTab === 'keywords' && (
           <TargetKeywordManager
             settings={settings}
@@ -1699,7 +1817,7 @@ export const AdminDashboard: React.FC = () => {
           />
         )}
 
-        {/* 10. WCAG CONTRAST & ACCESSIBILITY TOOL */}
+        {/* 11. WCAG CONTRAST & ACCESSIBILITY TOOL */}
         {activeTab === 'contrast' && <ContrastChecker />}
       </main>
 

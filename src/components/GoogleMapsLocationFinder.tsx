@@ -41,46 +41,23 @@ interface MapsResult {
 }
 
 const DEFAULT_MAPS_RESULT: MapsResult = {
-  text: 'DataSource operates premier technology consulting hubs, client innovation briefing centers, and 24/7 engineering facilities in key global tech corridors. Explore our verified Google Maps locations below for direct driving directions, transit options, and consultation details.',
+  text: 'DataSource operates its principal technology consulting hub and client consultation center in Kolkata, West Bengal. Explore our verified Google Maps location below for direct driving directions, transit options, and consultation booking details.',
   mapsChunks: [
     {
-      title: 'DataSource Global Headquarters (Boston Innovation Hub)',
-      uri: 'https://www.google.com/maps/search/?api=1&query=100+Northern+Ave+Boston+MA+02210',
-      address: '100 Northern Ave, Seaport Innovation District, Boston, MA 02210',
+      title: 'DataSource Kolkata Technology Hub & Consultation Office',
+      uri: 'https://www.google.com/maps/search/?api=1&query=3B13+Flat+5D+Sanhita+Simoco+Township+New+Town+Action+3+Kolkata+700135',
+      address:
+        '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India',
       placeAnswerSources: {
         reviewSnippets: [
-          { snippet: 'Premier enterprise cloud consulting and data architecture hub in the Seaport Innovation District.' },
-          { snippet: 'Modern collaborative briefing rooms, direct transit access from South Station & Silver Line.' },
-        ],
-      },
-    },
-    {
-      title: 'DataSource New York Strategy Center',
-      uri: 'https://www.google.com/maps/search/?api=1&query=200+Park+Ave+New+York+NY+10166',
-      address: '200 Park Ave, Midtown Manhattan, New York, NY 10166',
-      placeAnswerSources: {
-        reviewSnippets: [
-          { snippet: 'Executive meeting spaces for financial services data platform modernizations and Power BI governance.' },
-        ],
-      },
-    },
-    {
-      title: 'DataSource London Innovation Office',
-      uri: 'https://www.google.com/maps/search/?api=1&query=25+Bank+St+Canary+Wharf+London+E14+5JP',
-      address: '25 Bank St, Canary Wharf, London E14 5JP',
-      placeAnswerSources: {
-        reviewSnippets: [
-          { snippet: 'European technology delivery center specializing in Lakehouse pipelines and cloud migration.' },
-        ],
-      },
-    },
-    {
-      title: 'DataSource Technology Delivery & Engineering Center',
-      uri: 'https://www.google.com/maps/search/?api=1&query=Bellandur+Outer+Ring+Road+Bengaluru+Karnataka+560103',
-      address: 'Outer Ring Rd, Bellandur Tech Corridor, Bengaluru, Karnataka 560103',
-      placeAnswerSources: {
-        reviewSnippets: [
-          { snippet: 'Core 24/7 full-stack engineering, DevOps pipelines, and AI engineering excellence center.' },
+          {
+            snippet:
+              'Principal technology consulting hub, data analytics lab, and modern software engineering consultation office in New Town Action 3, Kolkata.',
+          },
+          {
+            snippet:
+              'Easily accessible via Hatisala Six Lane & New Town Expressway, 25 minutes from Biswa Bangla Gate.',
+          },
         ],
       },
     },
@@ -89,25 +66,13 @@ const DEFAULT_MAPS_RESULT: MapsResult = {
 
 const PRESET_QUERIES = [
   {
-    label: 'Boston HQ & Innovation District',
-    prompt: 'What are the main technology hubs, landmarks, and transit options near the DataSource office at 100 Northern Ave, Boston, MA 02210?',
-    mapQuery: '100 Northern Ave, Boston, MA 02210',
-    lat: 42.3524,
-    lng: -71.0435,
-  },
-  {
-    label: 'New York Tech Hub',
-    prompt: 'Show the tech consulting centers, Silicon Alley hubs, and meeting spaces in Manhattan, New York, NY near Grand Central.',
-    mapQuery: '200 Park Ave, New York, NY 10166',
-    lat: 40.7527,
-    lng: -73.9772,
-  },
-  {
-    label: 'London Innovation Hub',
-    prompt: 'What are the major tech centers, client venues, and transit connections in London near Canary Wharf / Tech City?',
-    mapQuery: '25 Bank St, Canary Wharf, London E14 5JP',
-    lat: 51.5054,
-    lng: -0.0235,
+    label: 'Kolkata HQ & Consultation Center',
+    prompt:
+      'What are the main landmarks, highways, and transit routes near the DataSource Technology Hub at Sanhita Simoco Township, Hatisala Six Lane, New Town Action 3, Kolkata 700135?',
+    mapQuery:
+      '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India',
+    lat: 22.5292,
+    lng: 88.5085,
   },
   {
     label: 'Find Tech Hubs Near Me',
@@ -124,9 +89,11 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
   const [prompt, setPrompt] = useState(
     initialCity
       ? `Find technology consulting offices, client meeting venues, and transit options near ${initialCity}.`
-      : 'Find technology consulting hubs, enterprise venues, and innovation centers in Boston, MA.'
+      : 'Find technology consulting hubs, enterprise venues, and innovation centers in Kolkata, West Bengal.'
   );
-  const [currentMapQuery, setCurrentMapQuery] = useState('100 Northern Ave, Boston, MA 02210');
+  const [currentMapQuery, setCurrentMapQuery] = useState(
+    '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India'
+  );
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [locating, setLocating] = useState(false);
   const [geoStatus, setGeoStatus] = useState<string | null>(null);
@@ -175,14 +142,8 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
 
     // Update map preview query based on prompt keywords
     const pLow = searchPrompt.toLowerCase();
-    if (pLow.includes('new york') || pLow.includes('nyc') || pLow.includes('manhattan')) {
-      setCurrentMapQuery('200 Park Ave, New York, NY 10166');
-    } else if (pLow.includes('london') || pLow.includes('canary wharf') || pLow.includes('uk')) {
-      setCurrentMapQuery('25 Bank St, Canary Wharf, London E14 5JP');
-    } else if (pLow.includes('bengaluru') || pLow.includes('bangalore') || pLow.includes('india')) {
-      setCurrentMapQuery('Bellandur Outer Ring Road, Bengaluru, Karnataka 560103');
-    } else if (pLow.includes('boston') || pLow.includes('seaport') || pLow.includes('northern ave')) {
-      setCurrentMapQuery('100 Northern Ave, Boston, MA 02210');
+    if (pLow.includes('kolkata') || pLow.includes('hatisala') || pLow.includes('new town')) {
+      setCurrentMapQuery('3B13, Flat: 5D, Sanhita Simoco Township, New Town Action 3, Kolkata 700135, West Bengal, India');
     } else {
       setCurrentMapQuery(searchPrompt);
     }
@@ -227,7 +188,7 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
 
   // Perform initial search on mount
   useEffect(() => {
-    handleSearch('Key tech hubs and consultation offices near 100 Northern Ave, Boston MA (DataSource HQ)', 42.3524, -71.0435);
+    handleSearch('Key tech hubs and consultation offices near Sanhita Simoco Township, New Town Action 3, Kolkata 700135 (DataSource HQ)', 22.5292, 88.5085);
   }, []);
 
   const embedMapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
@@ -288,7 +249,7 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Search offices, tech hubs, city venues (e.g. Boston, London, New York)..."
+              placeholder="Search offices, tech hubs, city venues (e.g. Kolkata, New Town Action 3)..."
               className="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-[#131D2E] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#0077FF] transition-all shadow-xs"
             />
           </div>

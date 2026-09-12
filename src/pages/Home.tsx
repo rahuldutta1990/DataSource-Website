@@ -5,6 +5,8 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   TrendingUp,
   ShieldCheck,
   Zap,
@@ -24,6 +26,10 @@ import {
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
 import { SEOHead } from '../components/SEOHead.js';
+import { BusinessProblemsSection } from '../components/BusinessProblemsSection.js';
+import { AIProblemAnalyzer } from '../components/AIProblemAnalyzer.js';
+import { AIHealthCheck } from '../components/AIHealthCheck.js';
+import { AISolutionFinder } from '../components/AISolutionFinder.js';
 import {
   CyberCircuitTrace,
   FloatingDataHologram,
@@ -94,6 +100,38 @@ export const Home: React.FC = () => {
         if (data.length > 0) setActiveFaq(data[0].id);
       }).catch(() => {}),
     ]).finally(() => setLoading(false));
+  }, []);
+
+  // Automatic carousel scroll effect for "The DataSource Way"
+  useEffect(() => {
+    const container = document.getElementById('datasource-way-carousel');
+    if (!container) return;
+
+    let isPaused = false;
+    const handleMouseEnter = () => { isPaused = true; };
+    const handleMouseLeave = () => { isPaused = false; };
+
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    const interval = setInterval(() => {
+      if (isPaused) return;
+      if (!container) return;
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      if (container.scrollLeft >= maxScrollLeft - 10) {
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        container.scrollBy({ left: 340, behavior: 'smooth' });
+      }
+    }, 3500);
+
+    return () => {
+      clearInterval(interval);
+      if (container) {
+        container.removeEventListener('mouseenter', handleMouseEnter);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
   }, []);
 
   const filteredServices =
@@ -206,23 +244,23 @@ export const Home: React.FC = () => {
               className="lg:col-span-7 space-y-6"
             >
               <div className="flex flex-wrap items-center gap-3">
-                <Eyebrow text="Professional Technology & Data Consulting" variant="blue" />
+                <Eyebrow text="Problem-First IT Consulting & Data Solutions" variant="blue" />
                 <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  REAL-TIME PIPELINE ACTIVE
+                  REAL-TIME ADVISORY ACTIVE
                 </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight leading-[1.12] font-heading">
-                Turning Technology and Data Into{' '}
+                We Solve the Business and Data Problems{' '}
                 <span className="text-[#0077FF] dark:text-[#38BDF8] inline-block relative">
-                  Business Solutions
+                  Holding Your Growth Back
                   <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#38BDF8] rounded-full opacity-60" />
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl text-[#475569] dark:text-slate-300 leading-relaxed max-w-2xl font-body">
-                DataSource helps businesses design, develop, analyse and improve digital solutions through technology, data and practical problem solving.
+                DataSource is a practical IT consulting and data analytics partner. We diagnose operational bottlenecks first—then engineer automated Power BI dashboards, unified data pipelines, and scalable cloud systems.
               </p>
 
               {/* Floating Holographic Telemetry Cards */}
@@ -230,13 +268,13 @@ export const Home: React.FC = () => {
                 <FloatingDataHologram
                   icon="cpu"
                   label="Architecture"
-                  value="Zero-Downtime Microservices"
+                  value="Zero-Downtime Systems"
                   delay={0.1}
                 />
                 <FloatingDataHologram
                   icon="activity"
                   label="Data Telemetry"
-                  value="Sub-Second ETL Sync"
+                  value="Automated KPI Gateways"
                   delay={0.2}
                 />
               </div>
@@ -247,27 +285,28 @@ export const Home: React.FC = () => {
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Our Philosophy</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Our Core Philosophy</p>
                   <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-0.5">
-                    &ldquo;We start with the problem, understand the business need and build the solution that actually fits.&rdquo;
+                    &ldquo;We understand your business problem first, then recommend the exact technology and data solution that delivers measurable ROI.&rdquo;
                   </p>
                 </div>
               </div>
 
-              {/* Action CTAs */}
+              {/* Action CTAs: Discuss Your Problem & Get a Free Initial Assessment */}
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Link
                   to="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] dark:bg-[#0077FF] dark:hover:bg-[#0066EE] text-white px-7 py-4 rounded-xl text-base font-bold shadow-lg shadow-blue-600/25 transition-all hover:translate-y-[-2px] active:translate-y-0"
                 >
-                  <span>Book a Consultation</span>
+                  <span>Discuss Your Problem</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  to="/services"
+                  to="/contact?type=assessment"
                   className="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300/90 dark:border-slate-700 px-6 py-4 rounded-xl text-base font-bold transition-all hover:border-[#0077FF]/40 shadow-sm"
                 >
-                  <span>Explore Our Services</span>
+                  <Sparkles className="w-4 h-4 text-[#0077FF] dark:text-[#38BDF8]" />
+                  <span>Get a Free Initial Assessment</span>
                 </Link>
               </div>
 
@@ -456,8 +495,16 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. ABOUT / EXPERTISE ASYMMETRIC SECTION WITH SECTION IMAGERY */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
+      {/* 3. INTERACTIVE BUSINESS PROBLEM SOLVER: What Business Problem Are You Trying to Solve? */}
+      <BusinessProblemsSection />
+
+      {/* PROMINENT AI LEAD GENERATION & DIAGNOSTIC TOOLS */}
+      <AIProblemAnalyzer />
+      <AIHealthCheck />
+      <AISolutionFinder />
+
+      {/* 4. ABOUT / EXPERTISE ASYMMETRIC SECTION WITH SECTION IMAGERY */}
+      <section className="py-12 lg:py-18 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Column */}
@@ -582,7 +629,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 5. SERVICES SECTION WITH HIGH-RESOLUTION SECTION IMAGERY & SCROLL ANIMATIONS */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
+      <section className="py-12 lg:py-18 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -713,7 +760,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 6. CASE STUDIES WITH VERIFIED BEFORE/AFTER PHOTOGRAPHY */}
-      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
+      <section className="py-12 lg:py-18 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -842,8 +889,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. METHODOLOGY: THE DATASOURCE WAY (With High-Tech Delivery Center Background & Phase Images) */}
-      <section className="py-16 lg:py-24 bg-[#0B1B2B] text-white relative overflow-hidden">
+      {/* 7. METHODOLOGY: THE DATASOURCE WAY (With Carousel Scroll & Delivery Center Background) */}
+      <section className="py-12 lg:py-18 bg-[#0B1B2B] text-white relative overflow-hidden">
         {/* Background Delivery Center Image Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
@@ -855,35 +902,65 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-16"
-          >
-            <Eyebrow text="Our Methodology" variant="white" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-heading">
-              The DataSource Way
-            </h2>
-            <p className="text-slate-300 text-base mt-2">
-              A structured four-phase delivery framework that guarantees alignment with your business problem from discovery through deployment.
-            </p>
-            <div className="mt-4 inline-block bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
-              &ldquo;We start with the problem, not the technology.&rdquo;
-            </div>
-          </motion.div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5 }}
+              className="max-w-2xl text-left"
+            >
+              <Eyebrow text="Our Methodology" variant="white" />
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-heading">
+                The DataSource Way
+              </h2>
+              <p className="text-slate-300 text-base mt-2">
+                A structured four-phase delivery framework that guarantees alignment with your business problem from discovery through deployment.
+              </p>
+              <div className="mt-3 inline-block bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
+                &ldquo;We start with the problem, not the technology.&rdquo;
+              </div>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Carousel Navigation Buttons */}
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={() => {
+                  const container = document.getElementById('datasource-way-carousel');
+                  if (container) container.scrollBy({ left: -340, behavior: 'smooth' });
+                }}
+                className="p-3 rounded-full bg-slate-800/90 hover:bg-cyan-500 hover:text-slate-950 text-white border border-slate-700 transition-all shadow-md focus:outline-none"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => {
+                  const container = document.getElementById('datasource-way-carousel');
+                  if (container) container.scrollBy({ left: 340, behavior: 'smooth' });
+                }}
+                className="p-3 rounded-full bg-slate-800/90 hover:bg-cyan-500 hover:text-slate-950 text-white border border-slate-700 transition-all shadow-md focus:outline-none"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="datasource-way-carousel"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scrollbar-none focus:outline-none focus:ring-2 focus:ring-cyan-500/30 rounded-2xl"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {processSteps.map((step, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="bg-slate-900/90 rounded-2xl border border-slate-800 hover:border-cyan-400/50 transition-all group flex flex-col justify-between overflow-hidden shadow-lg"
+                className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] flex-1 snap-start bg-slate-900/90 rounded-2xl border border-slate-800 hover:border-cyan-400/50 transition-all group flex flex-col justify-between overflow-hidden shadow-xl"
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                   <img
@@ -901,8 +978,9 @@ export const Home: React.FC = () => {
                   <h3 className="text-lg font-bold text-white font-heading mb-2">{step.title}</h3>
                   <p className="text-xs text-slate-400 leading-relaxed font-body">{step.desc}</p>
                   
-                  <div className="mt-4 pt-3 border-t border-slate-800 flex items-center gap-1.5 text-xs text-cyan-400 font-semibold">
+                  <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-cyan-400 font-semibold">
                     <span>Phase {step.num} Delivery</span>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 bg-slate-800 px-2 py-0.5 rounded">Carousel Item</span>
                   </div>
                 </div>
               </motion.div>
@@ -912,7 +990,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 8. INDUSTRIES SECTION WITH DEDICATED PHOTOGRAPHY ON EVERY CARD */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
+      <section className="py-12 lg:py-18 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -988,7 +1066,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 9. TESTIMONIALS SECTION */}
-      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
+      <section className="py-12 lg:py-18 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1048,7 +1126,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 10. FAQ ACCORDION SECTION WITH DIRECT CONSULTANT CARD */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
+      <section className="py-12 lg:py-18 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1130,7 +1208,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 11. LATEST INSIGHTS / BLOG CARDS WITH PHOTOGRAPHY */}
-      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
+      <section className="py-12 lg:py-18 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

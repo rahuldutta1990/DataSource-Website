@@ -226,6 +226,23 @@ export interface SEOKeywordTarget {
   notes?: string;
 }
 
+export interface BusinessProblemItem {
+  id: string;
+  category: 'data_reporting' | 'operations_workflow' | 'software_cloud' | 'cost_strategy';
+  iconName?: string;
+  title: string;
+  symptomQuote: string;
+  businessImpact: string;
+  consultingSolution: string;
+  deliverables: string[];
+  serviceSlug: string;
+  serviceName: string;
+  whoFeelsIt: string;
+  badge: string;
+  sortOrder?: number;
+  status?: 'published' | 'draft';
+}
+
 export interface SiteSettings {
   companyName: string;
   fullName: string;
@@ -260,7 +277,13 @@ export interface SiteSettings {
   googleMapsSubtitle?: string;
   officeLocations?: OfficeLocation[];
   seoKeywords?: SEOKeywordTarget[];
+  businessProblemsEnabled?: boolean;
+  businessProblemsTitle?: string;
+  businessProblemsSubtitle?: string;
+  businessProblems?: BusinessProblemItem[];
+  conversionEvents?: any[];
   localBusinessSchemaEnabled?: boolean;
+  footerQrCodeUrl?: string;
 }
 
 export interface DashboardStats {

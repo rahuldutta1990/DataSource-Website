@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
 import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
+import { ReadingProgressBar } from '../components/ReadingProgressBar.js';
 import { api } from '../services/api.js';
 import { ServiceItem } from '../types.js';
 
@@ -47,6 +48,7 @@ export const ServiceDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+      <ReadingProgressBar />
       {/* Breadcrumbs */}
       <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-2 px-4">
         <div className="max-w-7xl mx-auto">

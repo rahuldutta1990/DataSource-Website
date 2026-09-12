@@ -11,7 +11,9 @@ import {
   Moon,
 } from 'lucide-react';
 import { DataSourceLogo } from './DataSourceLogo.js';
-import { ServiceCategory } from '../types.js';
+import { DynamicIcon } from './DynamicIcon.js';
+import { AutoSearch } from './AutoSearch.js';
+import { ServiceCategory, ServiceItem } from '../types.js';
 import { api } from '../services/api.js';
 import { useTheme } from '../context/ThemeContext.js';
 
@@ -21,7 +23,9 @@ export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
+  const [services, setServices] = useState<ServiceItem[]>([]);
   const location = useLocation();
 
   useEffect(() => {
@@ -35,10 +39,12 @@ export const Header: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesDropdownOpen(false);
+    setMobileServicesOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
     api.getServiceCategories().then(setCategories).catch(() => {});
+    api.getServices().then(setServices).catch(() => {});
   }, []);
 
   const navLinks = [
@@ -89,9 +95,9 @@ export const Header: React.FC = () => {
 
       {/* Main Sticky Header */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'bg-white/95 dark:bg-[#080E1A]/95 backdrop-blur-md shadow-sm dark:shadow-slate-950/40 border-b border-slate-200/80 dark:border-slate-800/90 py-3.5'
+            ? 'bg-white/95 dark:bg-[#080E1A]/95 backdrop-blur-md shadow-md dark:shadow-slate-950/50 border-b border-slate-200/80 dark:border-slate-800/90 py-2.5 lg:py-3'
             : 'bg-white dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/60 py-4 lg:py-5'
         }`}
       >
@@ -100,7 +106,7 @@ export const Header: React.FC = () => {
           <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="DataSource Home">
             <DataSourceLogo
               variant={isDark ? 'white-horizontal' : 'horizontal'}
-              className="h-8 sm:h-9 md:h-9.5 lg:h-10 w-auto"
+              className={`w-auto transition-all duration-300 ${isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 md:h-9.5 lg:h-10'}`}
               showTagline={false}
             />
           </Link>
@@ -130,29 +136,38 @@ export const Header: React.FC = () => {
 
                     {/* Dropdown Menu */}
                     {servicesDropdownOpen && (
-                      <div className="absolute top-full left-0 w-80 bg-white dark:bg-[#0F1A2C] rounded-xl shadow-xl dark:shadow-2xl border border-slate-200/90 dark:border-slate-800 py-3 mt-1 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
-                        <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800/80">
-                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Our Pillars</p>
+                      <div className="absolute top-full left-0 w-96 bg-white dark:bg-[#0F1A2C] rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 py-3 mt-1 animate-in fade-in slide-in-from-top-2 duration-150 z-50 max-h-[520px] overflow-y-auto">
+                        <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">All Individual Service Pages</p>
+                          <Link to="/services" className="text-xs text-[#0066FF] dark:text-[#38BDF8] font-semibold hover:underline">
+                            View Hub
+                          </Link>
                         </div>
-                        <div className="p-2">
-                          {categories.map((cat) => (
+                        <div className="p-2 space-y-1">
+                          {services.map((svc) => (
                             <Link
-                              key={cat.id}
-                              to={`/services?category=${cat.id}`}
-                              className="block p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                              key={svc.id || svc.slug}
+                              to={`/services/${svc.slug}`}
+                              className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/70 transition-colors group"
                             >
-                              <div className="text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#0066FF] dark:group-hover:text-[#38BDF8] transition-colors">
-                                {cat.name}
+                              <div className="p-2 rounded-lg bg-[#0066FF]/10 dark:bg-[#38BDF8]/15 text-[#0066FF] dark:text-[#38BDF8] shrink-0 group-hover:bg-[#0066FF] group-hover:text-white transition-colors">
+                                <DynamicIcon name={svc.iconName || 'Layers'} className="w-4 h-4" />
                               </div>
-                              <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">{cat.description}</p>
+                              <div>
+                                <div className="text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#0066FF] dark:group-hover:text-[#38BDF8] transition-colors leading-snug">
+                                  {svc.title}
+                                </div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">{svc.excerpt}</p>
+                              </div>
                             </Link>
                           ))}
                           <div className="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 px-2">
                             <Link
                               to="/services"
-                              className="text-xs font-bold text-[#0066FF] dark:text-[#38BDF8] hover:underline flex items-center gap-1"
+                              className="w-full text-center py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-[#0066FF] hover:text-white transition-colors flex items-center justify-center gap-1.5"
                             >
-                              View All 8+ Technology Services <ArrowRight className="w-3 h-3" />
+                              <span>Explore All Services & Categories</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
                           </div>
                         </div>
@@ -180,6 +195,9 @@ export const Header: React.FC = () => {
 
           {/* Header Action & Theme Switcher (Sign-in removed per user specification) */}
           <div className="hidden lg:flex items-center gap-4">
+            {/* Auto Search Bar */}
+            <AutoSearch />
+
             {/* Dark Mode Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -231,20 +249,58 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#09101C] px-4 pt-3 pb-6 space-y-2 shadow-lg dark:shadow-2xl animate-in slide-in-from-top-4 duration-200">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`block px-4 py-3 rounded-lg text-base font-semibold ${
-                  isActive(link.path)
-                    ? 'bg-[#0077FF]/10 dark:bg-[#38BDF8]/15 text-[#0066FF] dark:text-[#38BDF8]'
-                    : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+          <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#09101C] px-4 pt-3 pb-6 space-y-2 shadow-lg dark:shadow-2xl animate-in slide-in-from-top-4 duration-200 max-h-[80vh] overflow-y-auto">
+            {/* Mobile Auto Search */}
+            <AutoSearch isMobile onSelectMobile={() => setMobileMenuOpen(false)} />
+
+            {navLinks.map((link) => {
+              if (link.hasDropdown) {
+                return (
+                  <div key={link.name} className="space-y-1">
+                    <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800/60">
+                      <Link
+                        to={link.path}
+                        className="text-base font-semibold text-[#0066FF] dark:text-[#38BDF8]"
+                      >
+                        {link.name} (Hub)
+                      </Link>
+                      <button
+                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                        className="p-1.5 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                      >
+                        <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <div className="pl-4 space-y-1 py-1 border-l-2 border-[#0066FF]/30 ml-2">
+                        {services.map((svc) => (
+                          <Link
+                            key={svc.slug}
+                            to={`/services/${svc.slug}`}
+                            className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                          >
+                            • {svc.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`block px-4 py-3 rounded-lg text-base font-semibold ${
+                    isActive(link.path)
+                      ? 'bg-[#0077FF]/10 dark:bg-[#38BDF8]/15 text-[#0066FF] dark:text-[#38BDF8]'
+                      : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
 
             {/* Mobile Appearance row */}
             <div className="pt-2 pb-2 px-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80">

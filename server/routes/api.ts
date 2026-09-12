@@ -940,3 +940,194 @@ apiRouter.post('/gemini/chat', async (req: Request, res: Response) => {
   }
 });
 
+// ==========================================
+// AI LEAD GENERATION & DIAGNOSTIC ENDPOINTS
+// ==========================================
+
+// 1. Tell Us Your Business Problem AI Analyzer
+apiRouter.post('/ai/analyze-problem', async (req: Request, res: Response) => {
+  const { problemText } = req.body;
+  if (!problemText || typeof problemText !== 'string') {
+    res.status(400).json({ error: 'Problem description text is required.' });
+    return;
+  }
+
+  try {
+    const { getGenAI } = await import('../services/geminiService.js');
+    const ai = getGenAI();
+
+    const prompt = `You are the Lead IT Consulting & Data Architecture Advisor at DataSource. A prospective enterprise client has described their business problem in plain language:
+"${problemText}"
+
+Analyze this problem and return a JSON object with EXACTLY the following structure (do not include markdown ticks around JSON if possible, or valid JSON only):
+{
+  "gap": "One clear sentence identifying the core technology or data gap",
+  "solutionAreas": ["Solution 1", "Solution 2", "Solution 3"],
+  "followUpQuestions": ["Question 1?", "Question 2?", "Question 3?"],
+  "preliminaryAssessment": "A professional 3-4 sentence preliminary assessment explaining the root cause and recommended path forward, stating clearly that this assessment is preliminary and should be validated by a consultant.",
+  "qualificationStatus": "High Priority" | "Potential Opportunity" | "Early Stage",
+  "urgencyReason": "Brief rationale for qualification category"
+}`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: prompt,
+      config: {
+        temperature: 0.4,
+      },
+    });
+
+    const text = response.text || '';
+    let parsed: any = null;
+    try {
+      const cleanJson = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(cleanJson);
+    } catch {
+      parsed = {
+        gap: 'Fragmented data systems and manual reporting workflows causing operational latency.',
+        solutionAreas: ['Power BI Dashboards', 'Data Engineering Pipelines', 'IT Strategy Consulting'],
+        followUpQuestions: [
+          'What software systems or databases currently store your key operational data?',
+          'How many hours per week does your team spend manually compiling reports?',
+          'What is your target timeline for implementing automated KPI visibility?',
+        ],
+        preliminaryAssessment:
+          'Based on your description, your organization is experiencing friction between siloed data sources and executive decision-making. Implementing an automated data pipeline and unified executive dashboard will eliminate manual spreadsheets and give you real-time visibility. Note: This assessment is preliminary and should be validated by a consultant.',
+        qualificationStatus: 'Potential Opportunity',
+        urgencyReason: 'Moderate urgency due to manual reporting overhead.',
+      };
+    }
+
+    res.json({ success: true, data: parsed });
+  } catch (err: any) {
+    console.error('[AI Analyze Problem Error]:', err);
+    res.status(500).json({
+      success: true,
+      data: {
+        gap: 'Operational data silos and manual reporting bottlenecks.',
+        solutionAreas: ['Power BI Dashboards', 'Data Engineering Pipelines', 'Workflow Automation'],
+        followUpQuestions: [
+          'What primary database or software systems currently store your data?',
+          'How many team members spend hours compiling manual reports?',
+          'What is your target timeline to achieve automated visibility?',
+        ],
+        preliminaryAssessment:
+          'Based on your description, your organization is experiencing friction between fragmented data sources and strategic decision-making. Implementing automated data pipelines will eliminate manual spreadsheets. Note: This assessment is preliminary and should be validated by a consultant.',
+        qualificationStatus: 'Potential Opportunity',
+        urgencyReason: 'Moderate urgency.',
+      },
+    });
+  }
+});
+
+// 2. AI Data & Analytics Health Check Evaluation
+apiRouter.post('/ai/health-check', async (req: Request, res: Response) => {
+  const scores = req.body;
+  try {
+    const values = Object.values(scores) as number[];
+    const avg = values.reduce((a, b) => a + b, 0) / (values.length || 1);
+    const maturityScore = Math.round((avg / 5) * 100);
+
+    let maturityStage = 'Developing Data Maturity';
+    if (maturityScore >= 80) maturityStage = 'Optimized Data-Driven Enterprise';
+    else if (maturityScore >= 60) maturityStage = 'Structured Operational Analytics';
+    else if (maturityScore >= 40) maturityStage = 'Emerging Data Pipelines';
+
+    res.json({
+      success: true,
+      data: {
+        maturityScore,
+        maturityStage,
+        summary: `Your organization scored ${maturityScore}/100 on the Data & Analytics Health Index. This places your infrastructure in the "${maturityStage}" stage. While foundational reporting exists, significant efficiency gains can be unlocked through automated ETL pipelines, data governance, and real-time Power BI gateways.`,
+        recommendations: [
+          'Consolidate isolated spreadsheets and legacy databases into a centralized cloud data warehouse (BigQuery / Snowflake).',
+          'Automate manual monthly report compilation with scheduled Power BI dataflows and semantic models.',
+          'Implement rigorous data validation checks to elevate data quality scores across all departments.',
+        ],
+      },
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: err?.message || 'Failed to evaluate health check' });
+  }
+});
+
+// 3. AI Solution Finder
+apiRouter.post('/ai/solution-finder', async (req: Request, res: Response) => {
+  const { requirement } = req.body;
+  try {
+    const { getGenAI } = await import('../services/geminiService.js');
+    const ai = getGenAI();
+
+    const prompt = `A prospective enterprise client has the following technical requirement:
+"${requirement}"
+
+Recommend the most relevant core practice from: Data Analytics, BI, IT Consulting, Automation, Data Engineering, Integration, or AI.
+Return a JSON object:
+{
+  "recommendedService": "Name of service",
+  "category": "Category name",
+  "rationale": "2 sentence rationale",
+  "implementationSteps": ["Step 1", "Step 2", "Step 3"],
+  "estimatedTimeline": "e.g. 3-6 Weeks"
+}`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: prompt,
+      config: { temperature: 0.3 },
+    });
+
+    let parsed = null;
+    try {
+      const clean = response.text?.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch {
+      parsed = {
+        recommendedService: 'Power BI & Executive Dashboards',
+        category: 'Data & Business Intelligence',
+        rationale: 'Your requirement aligns with executive KPI reporting and interactive BI dashboards to eliminate manual spreadsheet collation.',
+        implementationSteps: [
+          'Source data audit and schema mapping',
+          'DAX metric calculations and dimensional modeling',
+          'Interactive Power BI executive dashboard deployment',
+        ],
+        estimatedTimeline: '3 to 6 Weeks',
+      };
+    }
+
+    res.json({ success: true, data: parsed });
+  } catch {
+    res.json({
+      success: true,
+      data: {
+        recommendedService: 'Custom Web & Cloud Applications',
+        category: 'Digital Product Development',
+        rationale: 'Your requirement calls for robust full-stack engineering and cloud scalability.',
+        implementationSteps: [
+          'Technical architecture and system design review',
+          'Full-stack TypeScript / React / Node development',
+          'Automated CI/CD deployment and security hardening',
+        ],
+        estimatedTimeline: '4 to 8 Weeks',
+      },
+    });
+  }
+});
+
+// 4. Analytics Conversion Tracking Event
+apiRouter.post('/analytics/events', (req: Request, res: Response) => {
+  const event = req.body;
+  const db = loadDb();
+  if (!db.settings.conversionEvents) {
+    db.settings.conversionEvents = [];
+  }
+  db.settings.conversionEvents.push({
+    ...event,
+    id: 'evt-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+    recordedAt: new Date().toISOString(),
+  });
+  saveDb(db);
+  res.json({ success: true });
+});
+
+
