@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2, Search, Filter } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
 import { SEOHead } from '../components/SEOHead.js';
+import { ServiceCardSkeleton, Spinner } from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import { ServiceItem, ServiceCategory } from '../types.js';
 
@@ -139,7 +140,17 @@ export const Services: React.FC = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-20 text-slate-400 font-medium">Loading services...</div>
+            <div className="space-y-8">
+              <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#0077FF] dark:text-[#38BDF8] py-2">
+                <Spinner size="sm" />
+                <span>Loading consulting practices...</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {Array.from({ length: 6 }).map((_, idx) => (
+                  <ServiceCardSkeleton key={idx} />
+                ))}
+              </div>
+            </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20 bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200 dark:border-slate-800 p-8">
               <p className="text-slate-600 dark:text-slate-300 text-lg">No services matched your filter criteria.</p>

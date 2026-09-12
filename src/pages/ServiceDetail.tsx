@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, ChevronRight, ArrowLeft } from 'lucide-react'
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
+import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import { ServiceItem } from '../types.js';
 
@@ -25,11 +26,7 @@ export const ServiceDetail: React.FC = () => {
   }, [slug]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen py-32 text-center text-slate-400 font-medium">
-        Loading service specifications...
-      </div>
-    );
+    return <DetailPageSkeleton variant="service" />;
   }
 
   if (error || !service) {

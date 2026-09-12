@@ -29,6 +29,11 @@ import {
   FloatingDataHologram,
   HolographicDataCube,
 } from '../components/TechDecorations.js';
+import {
+  ServiceCardSkeleton,
+  CaseStudyCardSkeleton,
+  InsightCardSkeleton,
+} from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import {
   ServiceItem,
@@ -633,70 +638,76 @@ export const Home: React.FC = () => {
 
           {/* Service Cards Grid with Photographic Header & Hover Wow Animations */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {filteredServices.map((service, index) => {
-              const cardImage = serviceImages[service.slug] || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop';
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-30px' }}
-                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
-                >
-                  <div>
-                    {/* Photographic Service Image Banner */}
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
-                      <img
-                        src={cardImage}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-[#0E1726]/30 to-transparent" />
-                      
-                      {/* Overlaid Category Tag & Dynamic Icon */}
-                      <div className="absolute top-3 left-3 bg-white/90 dark:bg-[#0B1B2B]/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-bold text-[#0077FF] dark:text-[#38BDF8] border border-white/20">
-                        {service.categoryName || 'Consulting'}
+            {loading ? (
+              Array.from({ length: 6 }).map((_, idx) => (
+                <ServiceCardSkeleton key={idx} />
+              ))
+            ) : (
+              filteredServices.map((service, index) => {
+                const cardImage = serviceImages[service.slug] || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop';
+                return (
+                  <motion.div
+                    key={service.id}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-30px' }}
+                    transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                    className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
+                  >
+                    <div>
+                      {/* Photographic Service Image Banner */}
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                        <img
+                          src={cardImage}
+                          alt={service.title}
+                          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-[#0E1726]/30 to-transparent" />
+                        
+                        {/* Overlaid Category Tag & Dynamic Icon */}
+                        <div className="absolute top-3 left-3 bg-white/90 dark:bg-[#0B1B2B]/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-bold text-[#0077FF] dark:text-[#38BDF8] border border-white/20">
+                          {service.categoryName || 'Consulting'}
+                        </div>
+                        
+                        <div className="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/95 dark:bg-[#0B1B2B]/95 backdrop-blur-md text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shadow-lg border border-slate-200/60 dark:border-slate-700">
+                          <DynamicIcon name={service.iconName} className="w-5 h-5" />
+                        </div>
                       </div>
-                      
-                      <div className="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/95 dark:bg-[#0B1B2B]/95 backdrop-blur-md text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shadow-lg border border-slate-200/60 dark:border-slate-700">
-                        <DynamicIcon name={service.iconName} className="w-5 h-5" />
+
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2.5 font-heading group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors leading-snug">
+                          <Link to={`/services/${service.slug}`}>{service.title}</Link>
+                        </h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5 font-body">
+                          {service.excerpt}
+                        </p>
+
+                        <div className="space-y-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Key Capabilities:</p>
+                          {service.keyCapabilities.slice(0, 3).map((cap, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#0077FF] dark:text-[#38BDF8] shrink-0 mt-0.5" />
+                              <span>{cap}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2.5 font-heading group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors leading-snug">
-                        <Link to={`/services/${service.slug}`}>{service.title}</Link>
-                      </h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5 font-body">
-                        {service.excerpt}
-                      </p>
-
-                      <div className="space-y-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Key Capabilities:</p>
-                        {service.keyCapabilities.slice(0, 3).map((cap, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#0077FF] dark:text-[#38BDF8] shrink-0 mt-0.5" />
-                            <span>{cap}</span>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="px-6 pb-6 pt-2">
+                      <Link
+                        to={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#0077FF] dark:text-[#38BDF8] hover:text-[#0052CC] dark:hover:text-cyan-300 pt-2 group-hover:translate-x-1 transition-all"
+                      >
+                        <span>Service Details &amp; Scope</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
                     </div>
-                  </div>
-
-                  <div className="px-6 pb-6 pt-2">
-                    <Link
-                      to={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-[#0077FF] dark:text-[#38BDF8] hover:text-[#0052CC] dark:hover:text-cyan-300 pt-2 group-hover:translate-x-1 transition-all"
-                    >
-                      <span>Service Details &amp; Scope</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })
+            )}
           </div>
         </div>
       </section>
@@ -721,15 +732,20 @@ export const Home: React.FC = () => {
           </motion.div>
 
           <div className="space-y-12">
-            {caseStudies.slice(0, 2).map((cs, index) => (
-              <motion.div
-                key={cs.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: index * 0.12 }}
-                className="bg-slate-50 dark:bg-[#0E1726] rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center hover:border-[#0077FF]/30 transition-all"
-              >
+            {loading ? (
+              Array.from({ length: 2 }).map((_, idx) => (
+                <CaseStudyCardSkeleton key={idx} />
+              ))
+            ) : (
+              caseStudies.slice(0, 2).map((cs, index) => (
+                <motion.div
+                  key={cs.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: index * 0.12 }}
+                  className="bg-slate-50 dark:bg-[#0E1726] rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center hover:border-[#0077FF]/30 transition-all"
+                >
                 {/* Left Column: Image & Client Metadata */}
                 <div className="lg:col-span-5 space-y-4">
                   <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 shadow-md group relative">
@@ -810,8 +826,9 @@ export const Home: React.FC = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
+            ))
+          )}
+        </div>
 
           <div className="text-center mt-12">
             <Link
@@ -1141,49 +1158,55 @@ export const Home: React.FC = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.slice(0, 3).map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-30px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
-              >
-                <div>
-                  <div className="aspect-[16/9] overflow-hidden bg-slate-900">
-                    <img
-                      src={post.coverImage}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500 mb-3">
-                      <span className="font-bold text-[#0077FF] dark:text-[#38BDF8] uppercase tracking-wider">{post.category}</span>
-                      <span>•</span>
-                      <span>{post.readTime}</span>
+            {loading ? (
+              Array.from({ length: 3 }).map((_, idx) => (
+                <InsightCardSkeleton key={idx} />
+              ))
+            ) : (
+              posts.slice(0, 3).map((post, index) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
+                >
+                  <div>
+                    <div className="aspect-[16/9] overflow-hidden bg-slate-900">
+                      <img
+                        src={post.coverImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
+                      />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white font-heading leading-snug group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors mb-3">
-                      <Link to={`/insights/${post.slug}`}>{post.title}</Link>
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-body">{post.excerpt}</p>
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500 mb-3">
+                        <span className="font-bold text-[#0077FF] dark:text-[#38BDF8] uppercase tracking-wider">{post.category}</span>
+                        <span>•</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white font-heading leading-snug group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors mb-3">
+                        <Link to={`/insights/${post.slug}`}>{post.title}</Link>
+                      </h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-body">{post.excerpt}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{post.author}</span>
-                  <Link
-                    to={`/insights/${post.slug}`}
-                    className="text-xs font-bold text-[#0077FF] dark:text-[#38BDF8] hover:underline inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                  >
-                    <span>Read Article</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </div>
-              </motion.article>
-            ))}
+                  <div className="px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{post.author}</span>
+                    <Link
+                      to={`/insights/${post.slug}`}
+                      className="text-xs font-bold text-[#0077FF] dark:text-[#38BDF8] hover:underline inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform"
+                    >
+                      <span>Read Article</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </motion.article>
+              ))
+            )}
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header.js';
 import { Footer } from './Footer.js';
+import { GoogleMapsSection } from './GoogleMapsSection.js';
 import { AmbientTechBackground } from './AmbientTechBackground.js';
 import { WhatsAppChatbot } from './WhatsAppChatbot.js';
 import { GeminiChatbot } from './GeminiChatbot.js';
@@ -17,6 +18,7 @@ export const Layout: React.FC = () => {
         <main className="flex-grow">
           <Outlet />
         </main>
+        <GoogleMapsSection />
         <Footer />
         <GeminiChatbot />
         <WhatsAppChatbot />

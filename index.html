@@ -40,19 +40,46 @@
       gtag('config', 'G-DTSOURCE2026', { send_page_view: true });
     </script>
 
-    <!-- Base JSON-LD Structured Data Schema -->
+    <!-- Base JSON-LD Structured Data Schema & Local Business Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": ["Organization", "ProfessionalService", "LocalBusiness", "ITService"],
           "@id": "https://datasource.tech/#organization",
           "name": "DataSource Technology & Solutions",
+          "alternateName": "DataSource Tech India",
           "url": "https://datasource.tech",
           "logo": "https://datasource.tech/datasource-icon.svg",
+          "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop",
           "email": "contact@datasource.tech",
-          "description": "Technology and data consulting partner helping businesses solve technical problems, build digital products, and turn data into business decisions."
+          "telephone": "+91 9038417437",
+          "priceRange": "₹₹₹",
+          "currenciesAccepted": "INR, USD, EUR, GBP",
+          "paymentAccepted": "Bank Wire, NEFT, UPI, Corporate Cards",
+          "description": "Technology and data consulting partner in India helping businesses solve technical problems, build digital products, Power BI dashboards and automated data pipelines.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Outer Ring Rd, Bellandur Tech Corridor",
+            "addressLocality": "Bengaluru",
+            "addressRegion": "Karnataka",
+            "postalCode": "560103",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 12.9260,
+            "longitude": 77.6762
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "09:30",
+              "closes": "18:30"
+            }
+          ]
         },
         {
           "@type": "WebSite",

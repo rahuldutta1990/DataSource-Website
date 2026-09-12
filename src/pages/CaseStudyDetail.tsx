@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ArrowLeft, CheckCircle2, Quote } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
+import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import { CaseStudy } from '../types.js';
 
@@ -24,11 +25,7 @@ export const CaseStudyDetail: React.FC = () => {
   }, [slug]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen py-32 text-center text-slate-400 font-medium">
-        Loading case study...
-      </div>
-    );
+    return <DetailPageSkeleton variant="case-study" />;
   }
 
   if (error || !caseStudy) {

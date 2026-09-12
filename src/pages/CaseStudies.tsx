@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Award } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
+import { CaseStudyCardSkeleton, Spinner } from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import { CaseStudy } from '../types.js';
 
@@ -79,7 +80,17 @@ export const CaseStudies: React.FC = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-20 text-slate-400">Loading case studies...</div>
+            <div className="space-y-8">
+              <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#0077FF] dark:text-[#38BDF8] py-2">
+                <Spinner size="sm" />
+                <span>Loading case studies & architecture outcomes...</span>
+              </div>
+              <div className="space-y-8">
+                {Array.from({ length: 3 }).map((_, idx) => (
+                  <CaseStudyCardSkeleton key={idx} />
+                ))}
+              </div>
+            </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20 text-slate-500 dark:text-slate-400">No case studies found for this sector.</div>
           ) : (

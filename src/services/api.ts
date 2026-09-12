@@ -375,6 +375,10 @@ export const api = {
     return this.saveInsight({ ...data, id });
   },
 
+  async getSiteSettings() {
+    return this.getSettings();
+  },
+
   async updateSettings(settings: Partial<SiteSettings>) {
     return this.updateSiteSettings(settings);
   },

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
+import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
 import { api } from '../services/api.js';
 import { BlogPost } from '../types.js';
 
@@ -33,7 +34,7 @@ export const InsightDetail: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen py-32 text-center text-slate-400">Loading insight...</div>;
+    return <DetailPageSkeleton variant="insight" />;
   }
 
   if (error || !post) {

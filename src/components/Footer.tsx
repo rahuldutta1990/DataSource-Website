@@ -199,12 +199,6 @@ export const Footer: React.FC = () => {
                   Contact &amp; Inquiries
                 </Link>
               </li>
-              <li>
-                <Link to="/contact" className="text-cyan-400 hover:text-cyan-300 transition-colors inline-flex items-center gap-1">
-                  <span>📍 Office &amp; Maps Finder</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold">AI</span>
-                </Link>
-              </li>
             </ul>
           </div>
 

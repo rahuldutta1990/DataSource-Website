@@ -772,32 +772,32 @@
   "enquiries": [
     {
       "id": "enq-1",
-      "name": "Robert Vance (Demo)",
-      "company": "Vance International Logistics",
-      "email": "robert@vance-intl.demo",
-      "phone": "+1 (555) 234-8901",
+      "name": "Rajesh Sharma (Demo)",
+      "company": "Apex Logistics & Supply Chain Pvt Ltd",
+      "email": "rajesh.sharma@apexlogistics.in.demo",
+      "phone": "+91 98301 45678",
       "serviceRequired": "Power BI & Executive Dashboards",
-      "budgetRange": "$25k - $50k",
-      "projectType": "Data & Analytics",
-      "requirement": "We need to centralize operational reporting from 8 different warehouse hubs into a live Power BI executive dashboard with automated daily refreshes.",
+      "budgetRange": "₹15 Lakh - ₹35 Lakh",
+      "projectType": "Data & Analytics Modernization",
+      "requirement": "We need to centralize operational logistics data from 12 warehouse hubs across Mumbai, Bengaluru and Kolkata into a real-time Power BI executive dashboard with automated daily refreshes and SMS KPI alerts.",
       "preferredContact": "email",
       "status": "in_review",
-      "notes": "Demonstration lead entered for CMS evaluation.",
+      "notes": "High intent enterprise client demo lead. Scheduled architecture call.",
       "createdAt": "2026-09-10T12:36:09.709Z"
     },
     {
       "id": "enq-2",
-      "name": "Katherine Miller (Demo)",
-      "company": "Miller & Sterling Legal",
-      "email": "kmiller@millersterling.demo",
-      "phone": "+1 (555) 890-1234",
+      "name": "Ananya Sengupta (Demo)",
+      "company": "Kolkata FinServ Tech Solutions",
+      "email": "ananya.s@kolkatafinserv.demo",
+      "phone": "+91 90384 17437",
       "serviceRequired": "Custom Web & Cloud Applications",
-      "budgetRange": "$50k - $100k",
-      "projectType": "Web Portal Modernization",
-      "requirement": "Looking to replace our legacy customer portal with a modern, responsive web application for client document sharing and billing.",
+      "budgetRange": "₹25 Lakh - ₹60 Lakh",
+      "projectType": "Fintech Client Portal",
+      "requirement": "Looking to engineer a secure customer portal and loan origination dashboard using React, TypeScript, and microservices with automated KYC integration.",
       "preferredContact": "phone",
       "status": "new",
-      "notes": "Urgent timeline requested for Q2 rollout.",
+      "notes": "Urgent timeline requested for RBI compliance & Q3 product launch.",
       "createdAt": "2026-09-11T12:36:09.709Z"
     }
   ],
@@ -844,53 +844,319 @@
     "fullName": "DataSource Technology & Solutions",
     "tagline": "Technology That Solves. Data That Drives.",
     "heroHeadline": "Turning Technology and Data Into Business Solutions",
-    "heroSubheadline": "DataSource helps businesses design, develop, analyse and improve digital solutions through technology, data and practical problem solving.",
+    "heroSubheadline": "DataSource helps businesses across India and worldwide design, develop, analyse and improve digital solutions through technology, data and practical engineering.",
     "brandPhilosophy": "We start with the problem, not the technology.",
     "brandMessage": "You bring the challenge. DataSource builds the right solution.",
     "email": "contact@datasource.tech",
-    "phone": "+1 (800) 512-3282",
-    "address": "DataSource Technology & Solutions, Innovation Quarter, Tech Park Plaza",
-    "businessHours": "Monday – Friday: 9:00 AM – 6:00 PM EST",
+    "phone": "+91 9038417437",
+    "address": "Outer Ring Rd, Bellandur Tech Corridor, Bengaluru, Karnataka 560103, India",
+    "businessHours": "Monday – Friday: 9:30 AM – 6:30 PM IST (Global Client Delivery 24/7)",
     "socialLinks": {
       "linkedin": "https://linkedin.com/company/datasource-tech",
       "twitter": "https://x.com/datasourcetech",
       "github": "https://github.com/datasource-tech"
     },
-    "ctaHeadline": "Have a Technology or Data Problem?",
-    "ctaSubheadline": "Let's understand the challenge first and find the right solution together.",
-    "ctaButtonText": "Book a Consultation",
-    "footerText": "DataSource is a technology and data consulting partner helping forward-thinking companies solve technical hurdles, engineer modern digital products, and unlock the true commercial value of their business data.",
+    "ctaHeadline": "Have a Technology or Data Challenge?",
+    "ctaSubheadline": "Schedule an architecture consultation with our principal technical team in India or globally.",
+    "ctaButtonText": "Book Technical Consultation",
+    "footerText": "DataSource is an enterprise technology and data consulting partner headquartered in Bengaluru with development hubs in Mumbai, Kolkata, Delhi NCR and Hyderabad, helping businesses solve complex challenges, build high-scale software, and unlock the commercial power of data.",
     "copyright": "© 2026 DataSource Technology & Solutions. All rights reserved.",
     "stats": [
       {
         "value": "10+",
-        "label": "Years of Combined Expertise",
-        "sublabel": "Sample demo stat - editable in CMS",
+        "label": "Years of Engineering Expertise",
+        "sublabel": "Enterprise software & data platforms",
         "editableNote": "CMS Editable"
       },
       {
         "value": "50+",
         "label": "Projects Delivered",
-        "sublabel": "Sample demo stat - editable in CMS",
+        "sublabel": "Across India & global clients",
         "editableNote": "CMS Editable"
       },
       {
         "value": "20+",
-        "label": "Technology Capabilities",
-        "sublabel": "Across cloud, data & code",
+        "label": "Technology Stacks",
+        "sublabel": "Cloud, AI, Power BI & Modern Web",
         "editableNote": "CMS Editable"
       },
       {
-        "value": "90%+",
-        "label": "Repeat & Referral Engagements",
-        "sublabel": "Long-term client partnerships",
+        "value": "92%+",
+        "label": "Client Retention & Referrals",
+        "sublabel": "Long-term partnership engagements",
         "editableNote": "CMS Editable"
       }
     ],
-    "analyticsIdPlaceholder": "G-MEASUREMENT-ID",
+    "analyticsIdPlaceholder": "G-DTSOURCE2026",
     "whatsappNumber": "+91 9038417437",
     "whatsappEnabled": true,
-    "whatsappGreeting": "👋 Hi there! Welcome to DataSource Technology & Solutions. How can our technical architects assist you today?",
-    "whatsappConsultantName": "DataSource Solutions Architect"
+    "whatsappGreeting": "👋 Namaste! Welcome to DataSource Technology & Solutions. How can our technical architects assist your enterprise today?",
+    "whatsappConsultantName": "DataSource Principal Architect",
+    "googleMapsEnabled": true,
+    "googleMapsTitle": "Our Technology Hubs & Consultation Offices Across India",
+    "googleMapsSubtitle": "Schedule an on-site architecture workshop or visit our consultation centers in Bengaluru, Mumbai, Kolkata, Delhi NCR, and Hyderabad. Access live Google Maps routes, transit connections, and direct office contacts below.",
+    "localBusinessSchemaEnabled": true,
+    "officeLocations": [
+      {
+        "id": "bengaluru",
+        "name": "Bengaluru Global Technology HQ",
+        "badge": "Global Engineering HQ & AI Lab",
+        "city": "Bengaluru, Karnataka",
+        "country": "India",
+        "address": "Outer Ring Rd, Bellandur Tech Corridor, Bengaluru, Karnataka 560103",
+        "phone": "+91 9038417437",
+        "email": "india@datasource.tech",
+        "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
+        "transit": "Bellandur Outer Ring Road Metro & Tech Park Expressway",
+        "focus": [
+          "Enterprise AI & Cloud Systems",
+          "Data Lakehouse Architecture",
+          "Power BI Executive Dashboards"
+        ],
+        "mapQuery": "Bellandur Outer Ring Road, Bengaluru, Karnataka 560103",
+        "coordinates": {
+          "lat": 12.926,
+          "lng": 77.6762
+        }
+      },
+      {
+        "id": "mumbai",
+        "name": "Mumbai Financial & Enterprise Center",
+        "badge": "FinTech & BFSI Consulting Hub",
+        "city": "Mumbai, Maharashtra",
+        "country": "India",
+        "address": "Bandra Kurla Complex (BKC), G Block, Bandra East, Mumbai, Maharashtra 400051",
+        "phone": "+91 9038417437",
+        "email": "mumbai@datasource.tech",
+        "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
+        "transit": "BKC Metro Line 3 • 15 min from Bandra Terminus",
+        "focus": [
+          "Financial Data Analytics",
+          "Real-Time Transaction Pipelines",
+          "Enterprise Cloud Modernization"
+        ],
+        "mapQuery": "Bandra Kurla Complex, Mumbai, Maharashtra 400051",
+        "coordinates": {
+          "lat": 19.0657,
+          "lng": 72.8687
+        }
+      },
+      {
+        "id": "kolkata",
+        "name": "Kolkata Eastern Innovation Lab",
+        "badge": "Software Engineering & Analytics Lab",
+        "city": "Kolkata, West Bengal",
+        "country": "India",
+        "address": "Salt Lake Sector V, Bidhannagar, Kolkata, West Bengal 700091",
+        "phone": "+91 9038417437",
+        "email": "kolkata@datasource.tech",
+        "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
+        "transit": "Karunamoyee / Sector V Metro Station (East-West Metro Line)",
+        "focus": [
+          "Full-Stack React & Node Engineering",
+          "ETL Data Pipeline Automation",
+          "UI/UX Design Systems"
+        ],
+        "mapQuery": "Sector V, Salt Lake, Kolkata, West Bengal 700091",
+        "coordinates": {
+          "lat": 22.5801,
+          "lng": 88.4312
+        }
+      },
+      {
+        "id": "delhi-ncr",
+        "name": "Delhi NCR Technology Hub",
+        "badge": "Enterprise & Cloud Center",
+        "city": "Gurugram, Haryana (Delhi NCR)",
+        "country": "India",
+        "address": "DLF Cyber City, Building 10, DLF Phase 2, Gurugram, Haryana 122002",
+        "phone": "+91 9038417437",
+        "email": "delhi@datasource.tech",
+        "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
+        "transit": "IndusInd Bank Cyber City Rapid Metro Station",
+        "focus": [
+          "Supply Chain Analytics",
+          "Enterprise Cloud Migration",
+          "Microservices Architecture"
+        ],
+        "mapQuery": "DLF Cyber City, Gurugram, Haryana 122002",
+        "coordinates": {
+          "lat": 28.4908,
+          "lng": 77.0898
+        }
+      },
+      {
+        "id": "hyderabad",
+        "name": "Hyderabad Cyberabad Tech Lab",
+        "badge": "High-Scale Data & AI Center",
+        "city": "Hyderabad, Telangana",
+        "country": "India",
+        "address": "HITEC City, Madhapur, Hyderabad, Telangana 500081",
+        "phone": "+91 9038417437",
+        "email": "hyderabad@datasource.tech",
+        "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
+        "transit": "HITEC City / Raidurg Metro Station (Blue Line)",
+        "focus": [
+          "Distributed Data Pipelines",
+          "BigQuery & Snowflake Warehouses",
+          "DevOps & MLOps Governance"
+        ],
+        "mapQuery": "HITEC City, Madhapur, Hyderabad, Telangana 500081",
+        "coordinates": {
+          "lat": 17.4474,
+          "lng": 78.3762
+        }
+      },
+      {
+        "id": "global-desk",
+        "name": "Global Client Delivery Desk",
+        "badge": "International Client Engagements",
+        "city": "Bengaluru (Worldwide Remote & Onsite)",
+        "country": "India & Worldwide",
+        "address": "DataSource Global Delivery, Bengaluru, Karnataka 560103, India",
+        "phone": "+91 9038417437",
+        "email": "international@datasource.tech",
+        "hours": "24/7 Global Timezone Coverage (IST / EST / GMT)",
+        "transit": "Global Remote Architecture Engagements & Executive Workshops",
+        "focus": [
+          "Offshore Tech Teams",
+          "Enterprise Software Scaling",
+          "Cross-Border Data Compliance"
+        ],
+        "mapQuery": "Bengaluru, Karnataka, India",
+        "coordinates": {
+          "lat": 12.9716,
+          "lng": 77.5946
+        }
+      }
+    ],
+    "seoKeywords": [
+      {
+        "id": "seo-1",
+        "pageRoute": "/",
+        "pageName": "Home - Enterprise Technology & Data",
+        "primaryKeyword": "Technology Consulting Company Bangalore India",
+        "secondaryKeywords": [
+          "Data engineering consultants India",
+          "Enterprise cloud software Bangalore",
+          "Power BI consulting company India",
+          "Full stack web development India"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "India & Global",
+        "metaTitle": "DataSource Technology & Solutions | Enterprise Software, Cloud & Data Consulting",
+        "metaDescription": "DataSource is an enterprise technology and data consulting partner in India helping companies design custom web apps, scalable cloud architectures, Power BI dashboards and automated data pipelines.",
+        "priority": "high",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "4,200/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "Primary brand homepage targeting high-intent technology and data consulting searches in India and global clients."
+      },
+      {
+        "id": "seo-2",
+        "pageRoute": "/services/power-bi-executive-dashboards",
+        "pageName": "Power BI & Executive Dashboards",
+        "primaryKeyword": "Power BI Consulting Services India",
+        "secondaryKeywords": [
+          "Power BI dashboard developers Bangalore",
+          "Executive KPI reporting consultants Mumbai",
+          "Power BI automated refresh setup India",
+          "DAX modeling and Star Schema consulting"
+        ],
+        "searchIntent": "transactional",
+        "targetLocation": "Pan-India & Overseas",
+        "metaTitle": "Power BI Consulting & Executive Dashboards India | DataSource",
+        "metaDescription": "Custom Power BI dashboard engineering, DAX star schema modeling, automated data gateway configuration, and executive KPI scorecards by DataSource in India.",
+        "priority": "high",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "3,100/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "Targeting decision-makers looking to hire Power BI consultants and automate executive reporting."
+      },
+      {
+        "id": "seo-3",
+        "pageRoute": "/services/data-engineering-pipeline-automation",
+        "pageName": "Data Engineering & Pipeline Automation",
+        "primaryKeyword": "Data Engineering Company in Bangalore",
+        "secondaryKeywords": [
+          "ETL data pipeline developers India",
+          "Snowflake BigQuery migration consultants",
+          "Airflow data pipeline architecture India",
+          "Lakehouse modernization services India"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "Bengaluru / Pan-India",
+        "metaTitle": "Data Engineering & Pipeline Automation Services India | DataSource",
+        "metaDescription": "Fault-tolerant ETL/ELT pipelines, Snowflake and BigQuery data warehousing, Airflow workflow orchestration, and Lakehouse engineering by DataSource.",
+        "priority": "high",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "2,800/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "High commercial intent for mid-market and enterprise data warehouse migrations."
+      },
+      {
+        "id": "seo-4",
+        "pageRoute": "/services/custom-web-cloud-applications",
+        "pageName": "Custom Web & Cloud Applications",
+        "primaryKeyword": "Custom Software Development Company India",
+        "secondaryKeywords": [
+          "Enterprise React TypeScript developers India",
+          "Cloud web application engineers Bangalore",
+          "Node.js API and microservices architecture",
+          "SaaS application development India"
+        ],
+        "searchIntent": "transactional",
+        "targetLocation": "India & Global Export",
+        "metaTitle": "Custom Web & Cloud Application Development India | DataSource",
+        "metaDescription": "Production-grade custom web application design and cloud software engineering with React, TypeScript, Node.js, and AWS/GCP cloud architectures.",
+        "priority": "high",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "5,400/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "Attracts domestic and global clients looking for premium full-stack engineering teams."
+      },
+      {
+        "id": "seo-5",
+        "pageRoute": "/services",
+        "pageName": "All Technology & Data Services",
+        "primaryKeyword": "IT Consulting and Data Solutions India",
+        "secondaryKeywords": [
+          "Digital product development services India",
+          "Enterprise data consulting firms Bangalore",
+          "Software architecture audit India",
+          "UI UX product design consulting"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "India & Global",
+        "metaTitle": "Technology & Data Consulting Services India | DataSource",
+        "metaDescription": "Explore DataSource's full range of enterprise services: digital product development, Power BI dashboards, data pipeline engineering, and IT consulting.",
+        "priority": "medium",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "1,900/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "Overview hub page for all service categories."
+      },
+      {
+        "id": "seo-6",
+        "pageRoute": "/contact",
+        "pageName": "Contact & Office Locations",
+        "primaryKeyword": "Contact Technology Consultants Bangalore",
+        "secondaryKeywords": [
+          "DataSource office locations India",
+          "Book IT architecture consultation India",
+          "Hire data engineering consultants India",
+          "Bangalore tech consulting contact number"
+        ],
+        "searchIntent": "navigational",
+        "targetLocation": "Bengaluru, Mumbai, Kolkata, Delhi NCR, Hyderabad",
+        "metaTitle": "Contact DataSource Technology & Solutions | Bangalore, Mumbai, Kolkata, Delhi, Hyderabad",
+        "metaDescription": "Connect with DataSource technical architects across our India hubs in Bengaluru, Mumbai, Kolkata, Delhi NCR, and Hyderabad. Call +91 9038417437 or book a consultation.",
+        "priority": "high",
+        "rankingStatus": "active_target",
+        "targetMonthlySearches": "1,200/mo",
+        "lastAudited": "2026-09-12",
+        "notes": "Local search and direct conversion hub for enquiries and office visits."
+      }
+    ]
   }
 }

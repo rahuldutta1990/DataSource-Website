@@ -29,9 +29,13 @@ import {
   Palette,
   MessageCircle,
   Smartphone,
+  MapPin,
+  Tag,
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
+import { OfficeLocationsManager } from '../../components/admin/OfficeLocationsManager.js';
+import { TargetKeywordManager } from '../../components/admin/TargetKeywordManager.js';
 import { api } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.js';
 import {
@@ -57,6 +61,8 @@ export const AdminDashboard: React.FC = () => {
     | 'casestudies'
     | 'insights'
     | 'faq-testimonials'
+    | 'maps-locations'
+    | 'keywords'
     | 'settings'
     | 'contrast'
   >('overview');
@@ -661,6 +667,40 @@ export const AdminDashboard: React.FC = () => {
             >
               <HelpCircle className="w-4 h-4" />
               <span>Reviews &amp; FAQs</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('maps-locations')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'maps-locations'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <MapPin className="w-4 h-4 text-emerald-400" />
+                <span>Google Maps &amp; Hubs</span>
+              </div>
+              <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">
+                {settings?.officeLocations?.length || 6}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('keywords')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'keywords'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Tag className="w-4 h-4 text-amber-400" />
+                <span>Target Keywords &amp; SEO</span>
+              </div>
+              <span className="text-xs bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                {settings?.seoKeywords?.length || 6}
+              </span>
             </button>
 
             <button
@@ -1641,7 +1681,25 @@ export const AdminDashboard: React.FC = () => {
           </div>
         )}
 
-        {/* 8. WCAG CONTRAST & ACCESSIBILITY TOOL */}
+        {/* 8. GOOGLE MAPS & GLOBAL OFFICE HUBS MANAGER */}
+        {activeTab === 'maps-locations' && (
+          <OfficeLocationsManager
+            settings={settings}
+            onUpdateSettings={setSettings}
+            showNotification={showNotification}
+          />
+        )}
+
+        {/* 9. GOOGLE SEARCH & TARGET KEYWORDS MANAGER */}
+        {activeTab === 'keywords' && (
+          <TargetKeywordManager
+            settings={settings}
+            onUpdateSettings={setSettings}
+            showNotification={showNotification}
+          />
+        )}
+
+        {/* 10. WCAG CONTRAST & ACCESSIBILITY TOOL */}
         {activeTab === 'contrast' && <ContrastChecker />}
       </main>
 

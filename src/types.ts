@@ -193,6 +193,39 @@ export interface StatItem {
   editableNote?: string;
 }
 
+export interface OfficeLocation {
+  id: string;
+  name: string;
+  badge: string;
+  city: string;
+  country: string;
+  address: string;
+  phone: string;
+  email: string;
+  hours: string;
+  transit: string;
+  focus: string[];
+  mapQuery: string;
+  coordinates: { lat: number; lng: number };
+}
+
+export interface SEOKeywordTarget {
+  id: string;
+  pageRoute: string;
+  pageName: string;
+  primaryKeyword: string;
+  secondaryKeywords: string[];
+  searchIntent: 'commercial' | 'transactional' | 'informational' | 'navigational';
+  targetLocation: string;
+  metaTitle: string;
+  metaDescription: string;
+  priority: 'high' | 'medium' | 'low';
+  rankingStatus: 'ranking_top_10' | 'optimizing' | 'active_target' | 'planned';
+  targetMonthlySearches?: string;
+  lastAudited?: string;
+  notes?: string;
+}
+
 export interface SiteSettings {
   companyName: string;
   fullName: string;
@@ -222,6 +255,12 @@ export interface SiteSettings {
   whatsappEnabled?: boolean;
   whatsappGreeting?: string;
   whatsappConsultantName?: string;
+  googleMapsEnabled?: boolean;
+  googleMapsTitle?: string;
+  googleMapsSubtitle?: string;
+  officeLocations?: OfficeLocation[];
+  seoKeywords?: SEOKeywordTarget[];
+  localBusinessSchemaEnabled?: boolean;
 }
 
 export interface DashboardStats {
