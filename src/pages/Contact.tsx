@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon, AlertCircle } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
 import { trackEvent, AnalyticsEvents } from '../utils/analytics.js';
@@ -10,6 +10,7 @@ import { createFirestoreInquiry } from '../services/firestoreService.js';
 
 export const Contact: React.FC = () => {
   const { user, profile, signInWithGoogle, refreshInquiries } = useAuth();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,6 +21,20 @@ export const Contact: React.FC = () => {
     budgetRange: '$25k - $50k',
     message: '',
   });
+
+  const [touched, setTouched] = useState<{
+    name?: boolean;
+    email?: boolean;
+    phone?: boolean;
+    message?: boolean;
+  }>({});
+
+  const [formErrors, setFormErrors] = useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+    message?: string;
+  }>({});
 
   useEffect(() => {
     if (user) {
@@ -37,28 +52,100 @@ export const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const validateField = (field: 'name' | 'email' | 'phone' | 'message', value: string): string => {
+    const trimmed = value.trim();
+    if (field === 'name') {
+      if (!trimmed) return 'Full name is required.';
+      if (trimmed.length < 2) return 'Full name must be at least 2 characters.';
+      return '';
+    }
+
+    if (field === 'email') {
+      if (!trimmed) return 'Email is required.';
+      if (!trimmed.includes('@')) return 'Email must contain an "@" symbol.';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(trimmed)) return 'Please enter a valid email address (e.g. name@example.com).';
+      return '';
+    }
+
+    if (field === 'phone') {
+      if (!trimmed) return 'Phone number is required.';
+      if (/[a-zA-Z]/.test(trimmed)) {
+        return 'Phone number must contain only numbers.';
+      }
+      const digitsOnly = trimmed.replace(/\D/g, '');
+      if (digitsOnly.length !== 10) {
+        return `Phone number must be exactly 10 digits (${digitsOnly.length}/10 entered).`;
+      }
+      return '';
+    }
+
+    if (field === 'message') {
+      if (!trimmed) return 'Please describe your problem or project objective.';
+      if (trimmed.length < 10) return 'Please provide at least 10 characters explaining your requirement.';
+      return '';
+    }
+
+    return '';
+  };
+
+  const handleBlur = (field: 'name' | 'email' | 'phone' | 'message') => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const err = validateField(field, formData[field]);
+    setFormErrors((prev) => ({ ...prev, [field]: err }));
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (touched[name as keyof typeof touched]) {
+      const err = validateField(name as any, value);
+      setFormErrors((prev) => ({ ...prev, [name]: err }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Mark all required fields touched
+    const allTouched = { name: true, email: true, phone: true, message: true };
+    setTouched(allTouched);
+
+    const nameErr = validateField('name', formData.name);
+    const emailErr = validateField('email', formData.email);
+    const phoneErr = validateField('phone', formData.phone);
+    const msgErr = validateField('message', formData.message);
+
+    const errors = {
+      name: nameErr,
+      email: emailErr,
+      phone: phoneErr,
+      message: msgErr,
+    };
+    setFormErrors(errors);
+
+    if (nameErr || emailErr || phoneErr || msgErr) {
+      setErrorMessage('Please correct the highlighted fields before submitting.');
+      return;
+    }
+
     setSubmitting(true);
     setErrorMessage('');
 
     try {
       // 1. Submit to Firestore with client auth binding
       await createFirestoreInquiry({
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        phone: formData.phone,
+        name: formData.name.trim(),
+        company: formData.company.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
         serviceRequired: formData.serviceInterest,
         budgetRange: formData.budgetRange,
         projectType: formData.projectType,
-        requirement: formData.message,
+        requirement: formData.message.trim(),
         preferredContact: 'either',
         userId: user?.uid,
         userEmail: user?.email || undefined,
@@ -67,6 +154,11 @@ export const Contact: React.FC = () => {
       // 2. Also submit to backend API for dual persistence
       await api.submitEnquiry({
         ...formData,
+        name: formData.name.trim(),
+        company: formData.company.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim(),
         userId: user?.uid,
       });
 
@@ -84,7 +176,6 @@ export const Contact: React.FC = () => {
       setSubmitted(true);
     } catch (err: any) {
       console.error('Submission error:', err);
-      // If Firestore or API had an issue, provide clear messaging
       setErrorMessage(err.message || 'Failed to submit inquiry. Please try again.');
     } finally {
       setSubmitting(false);
@@ -157,7 +248,7 @@ export const Contact: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-6">
                     <div>
                       <h2 className="text-2xl font-bold text-[#0B1B2B] dark:text-white font-heading mb-1">
                         Book a Technical Consultation
@@ -206,32 +297,54 @@ export const Contact: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                          Full Name *
+                          Full Name <span className="text-rose-500">*</span>
                         </label>
                         <input
                           type="text"
                           name="name"
-                          required
                           value={formData.name}
                           onChange={handleChange}
+                          onBlur={() => handleBlur('name')}
                           placeholder="e.g. Sarah Jenkins"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]"
+                          aria-invalid={touched.name && !!formErrors.name}
+                          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] transition-colors ${
+                            touched.name && formErrors.name
+                              ? 'border-2 border-rose-500 focus:border-rose-500'
+                              : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
+                          }`}
                         />
+                        {touched.name && formErrors.name && (
+                          <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                            <span>{formErrors.name}</span>
+                          </p>
+                        )}
                       </div>
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                          Work Email *
+                          Email <span className="text-rose-500">*</span>
                         </label>
                         <input
                           type="email"
                           name="email"
-                          required
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="e.g. sarah@company.com"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]"
+                          onBlur={() => handleBlur('email')}
+                          placeholder="e.g. sarah@example.com"
+                          aria-invalid={touched.email && !!formErrors.email}
+                          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] transition-colors ${
+                            touched.email && formErrors.email
+                              ? 'border-2 border-rose-500 focus:border-rose-500'
+                              : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
+                          }`}
                         />
+                        {touched.email && formErrors.email && (
+                          <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                            <span>{formErrors.email}</span>
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -252,16 +365,29 @@ export const Contact: React.FC = () => {
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                          Phone Number
+                          Phone Number <span className="text-rose-500">*</span> <span className="text-[11px] font-normal text-slate-500 dark:text-slate-400 lowercase">(10 digits)</span>
                         </label>
                         <input
                           type="tel"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="e.g. +1 (555) 019-2834"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]"
+                          onBlur={() => handleBlur('phone')}
+                          placeholder="e.g. 5550192834"
+                          maxLength={14}
+                          aria-invalid={touched.phone && !!formErrors.phone}
+                          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] transition-colors ${
+                            touched.phone && formErrors.phone
+                              ? 'border-2 border-rose-500 focus:border-rose-500'
+                              : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
+                          }`}
                         />
+                        {touched.phone && formErrors.phone && (
+                          <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                            <span>{formErrors.phone}</span>
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -309,17 +435,28 @@ export const Contact: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                        Describe the Problem or Objective *
+                        Describe the Problem or Objective <span className="text-rose-500">*</span>
                       </label>
                       <textarea
                         name="message"
-                        required
                         rows={4}
                         value={formData.message}
                         onChange={handleChange}
+                        onBlur={() => handleBlur('message')}
                         placeholder="Please describe the core bottleneck, current system constraints, and target timeline..."
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] resize-none font-body"
+                        aria-invalid={touched.message && !!formErrors.message}
+                        className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] resize-none font-body transition-colors ${
+                          touched.message && formErrors.message
+                            ? 'border-2 border-rose-500 focus:border-rose-500'
+                            : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
+                        }`}
                       />
+                      {touched.message && formErrors.message && (
+                        <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                          <span>{formErrors.message}</span>
+                        </p>
+                      )}
                     </div>
 
                     <button

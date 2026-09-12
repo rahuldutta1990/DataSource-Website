@@ -23,28 +23,60 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
 }) => {
   const [email, setEmail] = useState('');
   const [selectedInterest, setSelectedInterest] = useState('All Insights');
+  const [touched, setTouched] = useState(false);
+  const [validationError, setValidationError] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
+  const validateEmail = (val: string): string => {
+    const trimmed = val.trim();
+    if (!trimmed) {
+      return 'Please enter your email address.';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmed)) {
+      return 'Please enter a valid work or corporate email address.';
+    }
+    return '';
+  };
+
+  const handleBlur = () => {
+    setTouched(true);
+    const err = validateEmail(email);
+    setValidationError(err);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setEmail(val);
+    if (status === 'error') {
+      setStatus('idle');
+      setFeedbackMessage('');
+    }
+    if (touched) {
+      setValidationError(validateEmail(val));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched(true);
+
+    const err = validateEmail(email);
+    setValidationError(err);
+
+    if (err) {
+      setStatus('error');
+      setFeedbackMessage(err);
+      return;
+    }
 
     const trimmed = email.trim();
-    if (!trimmed) {
-      setStatus('error');
-      setFeedbackMessage('Please enter your email address.');
-      return;
-    }
-
-    if (!trimmed.includes('@') || !trimmed.includes('.')) {
-      setStatus('error');
-      setFeedbackMessage('Please enter a valid work or corporate email address.');
-      return;
-    }
 
     try {
       setStatus('loading');
       setFeedbackMessage('');
+      setValidationError('');
 
       const res = await api.subscribeNewsletter(trimmed, selectedInterest, source);
 
@@ -61,6 +93,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
             : "Thank you for subscribing! You've been added to our executive mailing list."
         );
         setEmail('');
+        setTouched(false);
       } else {
         setStatus('error');
         setFeedbackMessage(res.message || 'Unable to subscribe at this time. Please try again.');
@@ -71,6 +104,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
       setStatus('success');
       setFeedbackMessage("Thank you for subscribing! You've been added to our executive mailing list.");
       setEmail('');
+      setTouched(false);
     }
   };
 
@@ -145,16 +179,19 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
               id="newsletter-email-input"
               type="email"
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (status === 'error') setStatus('idle');
-              }}
+              onChange={handleEmailChange}
+              onBlur={handleBlur}
               placeholder="Enter your corporate or work email..."
-              className="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all shadow-inner"
+              aria-invalid={(touched && !!validationError) || status === 'error'}
+              aria-describedby={(touched && validationError) || (status === 'error' && feedbackMessage) ? 'newsletter-error-msg' : undefined}
+              className={`w-full pl-10 pr-4 py-3 bg-slate-900/90 text-white placeholder-slate-500 rounded-xl text-sm focus:outline-none transition-all shadow-inner ${
+                (touched && validationError) || status === 'error'
+                  ? 'border-2 border-rose-500 focus:ring-2 focus:ring-rose-400'
+                  : 'border border-slate-700 focus:ring-2 focus:ring-cyan-400 focus:border-transparent'
+              }`}
               disabled={status === 'loading'}
               autoComplete="email"
               aria-label="Email address for newsletter sign-up"
-              required
             />
           </div>
 
@@ -179,13 +216,13 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
         </div>
 
         {/* Error message */}
-        {status === 'error' && (
+        {((touched && validationError) || status === 'error') && (
           <div
             id="newsletter-error-msg"
             className="flex items-center gap-2 text-rose-400 text-xs font-medium pt-1 animate-in fade-in duration-200"
           >
             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>{feedbackMessage}</span>
+            <span>{validationError || feedbackMessage}</span>
           </div>
         )}
 

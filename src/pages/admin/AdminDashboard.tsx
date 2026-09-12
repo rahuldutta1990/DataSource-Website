@@ -23,6 +23,7 @@ import {
   Download,
   Copy,
   Check,
+  AlertCircle,
   Users,
   ShieldCheck,
   Palette,
@@ -78,6 +79,164 @@ export const AdminDashboard: React.FC = () => {
   const [editingInsight, setEditingInsight] = useState<Partial<BlogPost> | null>(null);
   const [editingFaq, setEditingFaq] = useState<Partial<FAQ> | null>(null);
   const [viewingInquiry, setViewingInquiry] = useState<ContactEnquiry | null>(null);
+
+  // Form Validation States
+  const [serviceErrors, setServiceErrors] = useState<Record<string, string>>({});
+  const [serviceTouched, setServiceTouched] = useState<Record<string, boolean>>({});
+
+  const [caseStudyErrors, setCaseStudyErrors] = useState<Record<string, string>>({});
+  const [caseStudyTouched, setCaseStudyTouched] = useState<Record<string, boolean>>({});
+
+  const [insightErrors, setInsightErrors] = useState<Record<string, string>>({});
+  const [insightTouched, setInsightTouched] = useState<Record<string, boolean>>({});
+
+  const [settingsErrors, setSettingsErrors] = useState<Record<string, string>>({});
+  const [settingsTouched, setSettingsTouched] = useState<Record<string, boolean>>({});
+
+  // Validation Logic
+  const validateServiceField = (field: string, val: any): string => {
+    switch (field) {
+      case 'title':
+        if (!val || !val.trim()) return 'Service title is required.';
+        if (val.trim().length < 3) return 'Title must be at least 3 characters.';
+        return '';
+      case 'slug':
+        if (!val || !val.trim()) return 'URL slug is required.';
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val.trim())) {
+          return 'Valid slug format: lowercase letters, numbers, and hyphens (e.g. data-analytics).';
+        }
+        return '';
+      case 'excerpt':
+        if (!val || !val.trim()) return 'Short excerpt is required.';
+        if (val.trim().length < 10) return 'Excerpt must be at least 10 characters.';
+        return '';
+      case 'description':
+        if (!val || !val.trim()) return 'Detailed description is required.';
+        if (val.trim().length < 20) return 'Description must be at least 20 characters.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const validateAllServiceFields = (service: Partial<ServiceItem>): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    const titleErr = validateServiceField('title', service.title);
+    if (titleErr) errs.title = titleErr;
+    const slugErr = validateServiceField('slug', service.slug);
+    if (slugErr) errs.slug = slugErr;
+    const excerptErr = validateServiceField('excerpt', service.excerpt);
+    if (excerptErr) errs.excerpt = excerptErr;
+    const descErr = validateServiceField('description', service.description);
+    if (descErr) errs.description = descErr;
+    return errs;
+  };
+
+  const validateCaseStudyField = (field: string, val: any): string => {
+    switch (field) {
+      case 'client':
+        if (!val || !val.trim()) return 'Client name is required.';
+        if (val.trim().length < 2) return 'Client name must be at least 2 characters.';
+        return '';
+      case 'industry':
+        if (!val || !val.trim()) return 'Industry is required.';
+        if (val.trim().length < 2) return 'Industry must be at least 2 characters.';
+        return '';
+      case 'title':
+        if (!val || !val.trim()) return 'Project headline is required.';
+        if (val.trim().length < 3) return 'Headline must be at least 3 characters.';
+        return '';
+      case 'challenge':
+        if (!val || !val.trim()) return 'Challenge statement is required.';
+        if (val.trim().length < 10) return 'Challenge statement must be at least 10 characters.';
+        return '';
+      case 'solution':
+        if (!val || !val.trim()) return 'Solution details are required.';
+        if (val.trim().length < 10) return 'Solution details must be at least 10 characters.';
+        return '';
+      case 'result':
+        if (!val || !val.trim()) return 'Result & impact summary is required.';
+        if (val.trim().length < 5) return 'Result summary must be at least 5 characters.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const validateAllCaseStudyFields = (cs: Partial<CaseStudy>): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    ['client', 'industry', 'title', 'challenge', 'solution', 'result'].forEach((f) => {
+      const err = validateCaseStudyField(f, (cs as any)[f]);
+      if (err) errs[f] = err;
+    });
+    return errs;
+  };
+
+  const validateInsightField = (field: string, val: any): string => {
+    switch (field) {
+      case 'title':
+        if (!val || !val.trim()) return 'Article title is required.';
+        if (val.trim().length < 3) return 'Title must be at least 3 characters.';
+        return '';
+      case 'category':
+        if (!val || !val.trim()) return 'Category is required.';
+        return '';
+      case 'readTime':
+        if (!val || !val.trim()) return 'Read time is required (e.g. 5 min read).';
+        return '';
+      case 'excerpt':
+        if (!val || !val.trim()) return 'Article excerpt is required.';
+        if (val.trim().length < 10) return 'Excerpt must be at least 10 characters.';
+        return '';
+      case 'content':
+        if (!val || !val.trim()) return 'Full content is required.';
+        if (val.trim().length < 20) return 'Article content must be at least 20 characters.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const validateAllInsightFields = (ins: Partial<BlogPost>): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    ['title', 'category', 'readTime', 'excerpt', 'content'].forEach((f) => {
+      const err = validateInsightField(f, (ins as any)[f]);
+      if (err) errs[f] = err;
+    });
+    return errs;
+  };
+
+  const validateSettingsField = (field: string, val: any): string => {
+    switch (field) {
+      case 'tagline':
+        if (!val || !val.trim()) return 'Brand tagline is required.';
+        if (val.trim().length < 3) return 'Tagline must be at least 3 characters.';
+        return '';
+      case 'philosophy':
+        if (!val || !val.trim()) return 'Core brand philosophy is required.';
+        if (val.trim().length < 10) return 'Philosophy must be at least 10 characters.';
+        return '';
+      case 'email':
+        if (!val || !val.trim()) return 'Contact email is required.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return 'Please enter a valid email address.';
+        return '';
+      case 'phone':
+        if (!val || !val.trim()) return 'Phone number is required.';
+        if (val.trim().length < 7) return 'Phone number must be at least 7 characters.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const validateAllSettingsFields = (st: SiteSettings): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    ['tagline', 'philosophy', 'email', 'phone'].forEach((f) => {
+      const err = validateSettingsField(f, (st as any)[f]);
+      if (err) errs[f] = err;
+    });
+    return errs;
+  };
 
   const checkAuthAndLoad = async () => {
     // If authenticated via Google OAuth with admin rights, ensure api auth token is set
@@ -174,6 +333,15 @@ export const AdminDashboard: React.FC = () => {
     e.preventDefault();
     if (!editingService) return;
 
+    const errors = validateAllServiceFields(editingService);
+    setServiceErrors(errors);
+    setServiceTouched({ title: true, slug: true, excerpt: true, description: true });
+
+    if (Object.keys(errors).length > 0) {
+      showNotification('Please correct the validation errors in the form');
+      return;
+    }
+
     try {
       if (editingService.id) {
         const updated = await api.updateService(editingService.id, editingService);
@@ -185,6 +353,8 @@ export const AdminDashboard: React.FC = () => {
         showNotification('New service added');
       }
       setEditingService(null);
+      setServiceErrors({});
+      setServiceTouched({});
     } catch (err: any) {
       alert('Error saving service: ' + err.message);
     }
@@ -207,6 +377,15 @@ export const AdminDashboard: React.FC = () => {
     e.preventDefault();
     if (!editingCaseStudy) return;
 
+    const errors = validateAllCaseStudyFields(editingCaseStudy);
+    setCaseStudyErrors(errors);
+    setCaseStudyTouched({ client: true, industry: true, title: true, challenge: true, solution: true, result: true });
+
+    if (Object.keys(errors).length > 0) {
+      showNotification('Please correct the validation errors in the form');
+      return;
+    }
+
     try {
       if (editingCaseStudy.id) {
         const updated = await api.updateCaseStudy(editingCaseStudy.id, editingCaseStudy);
@@ -218,6 +397,8 @@ export const AdminDashboard: React.FC = () => {
         showNotification('New case study created');
       }
       setEditingCaseStudy(null);
+      setCaseStudyErrors({});
+      setCaseStudyTouched({});
     } catch (err: any) {
       alert('Error saving case study: ' + err.message);
     }
@@ -240,6 +421,15 @@ export const AdminDashboard: React.FC = () => {
     e.preventDefault();
     if (!editingInsight) return;
 
+    const errors = validateAllInsightFields(editingInsight);
+    setInsightErrors(errors);
+    setInsightTouched({ title: true, category: true, readTime: true, excerpt: true, content: true });
+
+    if (Object.keys(errors).length > 0) {
+      showNotification('Please correct the validation errors in the form');
+      return;
+    }
+
     try {
       if (editingInsight.id) {
         const updated = await api.updateInsight(editingInsight.id, editingInsight);
@@ -251,6 +441,8 @@ export const AdminDashboard: React.FC = () => {
         showNotification('New insight article published');
       }
       setEditingInsight(null);
+      setInsightErrors({});
+      setInsightTouched({});
     } catch (err: any) {
       alert('Error saving article: ' + err.message);
     }
@@ -273,9 +465,20 @@ export const AdminDashboard: React.FC = () => {
     e.preventDefault();
     if (!settings) return;
 
+    const errors = validateAllSettingsFields(settings);
+    setSettingsErrors(errors);
+    setSettingsTouched({ tagline: true, philosophy: true, email: true, phone: true });
+
+    if (Object.keys(errors).length > 0) {
+      showNotification('Please correct the validation errors in settings');
+      return;
+    }
+
     try {
       const updated = await api.updateSettings(settings);
       setSettings(updated);
+      setSettingsErrors({});
+      setSettingsTouched({});
       showNotification('Site settings and statistics updated');
     } catch (err: any) {
       alert('Error updating settings: ' + err.message);
@@ -1164,54 +1367,134 @@ export const AdminDashboard: React.FC = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSaveSettings} className="bg-slate-950 p-8 rounded-3xl border border-slate-800 space-y-6">
+            <form onSubmit={handleSaveSettings} noValidate className="bg-slate-950 p-8 rounded-3xl border border-slate-800 space-y-6">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                  Official Brand Tagline
+                  Official Brand Tagline <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={settings.tagline}
-                  onChange={(e) => setSettings({ ...settings, tagline: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    setSettings({ ...settings, tagline: e.target.value });
+                    if (settingsTouched.tagline) {
+                      setSettingsErrors((prev) => ({ ...prev, tagline: validateSettingsField('tagline', e.target.value) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setSettingsTouched((prev) => ({ ...prev, tagline: true }));
+                    setSettingsErrors((prev) => ({ ...prev, tagline: validateSettingsField('tagline', settings.tagline) }));
+                  }}
+                  aria-invalid={settingsTouched.tagline && !!settingsErrors.tagline}
+                  className={`w-full px-4 py-2.5 rounded-xl bg-slate-900 border text-white text-sm focus:outline-none transition-colors ${
+                    settingsTouched.tagline && settingsErrors.tagline
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {settingsTouched.tagline && settingsErrors.tagline && (
+                  <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{settingsErrors.tagline}</span>
+                  </p>
+                )}
               </div>
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                  Core Brand Philosophy
+                  Core Brand Philosophy <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows={2}
                   value={settings.philosophy}
-                  onChange={(e) => setSettings({ ...settings, philosophy: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm resize-none"
+                  onChange={(e) => {
+                    setSettings({ ...settings, philosophy: e.target.value });
+                    if (settingsTouched.philosophy) {
+                      setSettingsErrors((prev) => ({ ...prev, philosophy: validateSettingsField('philosophy', e.target.value) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setSettingsTouched((prev) => ({ ...prev, philosophy: true }));
+                    setSettingsErrors((prev) => ({ ...prev, philosophy: validateSettingsField('philosophy', settings.philosophy) }));
+                  }}
+                  aria-invalid={settingsTouched.philosophy && !!settingsErrors.philosophy}
+                  className={`w-full px-4 py-2.5 rounded-xl bg-slate-900 border text-white text-sm resize-none focus:outline-none transition-colors ${
+                    settingsTouched.philosophy && settingsErrors.philosophy
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {settingsTouched.philosophy && settingsErrors.philosophy && (
+                  <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{settingsErrors.philosophy}</span>
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                    Contact Email
+                    Contact Email <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="email"
                     value={settings.email}
-                    onChange={(e) => setSettings({ ...settings, email: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      setSettings({ ...settings, email: e.target.value });
+                      if (settingsTouched.email) {
+                        setSettingsErrors((prev) => ({ ...prev, email: validateSettingsField('email', e.target.value) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setSettingsTouched((prev) => ({ ...prev, email: true }));
+                      setSettingsErrors((prev) => ({ ...prev, email: validateSettingsField('email', settings.email) }));
+                    }}
+                    aria-invalid={settingsTouched.email && !!settingsErrors.email}
+                    className={`w-full px-4 py-2.5 rounded-xl bg-slate-900 border text-white text-sm focus:outline-none transition-colors ${
+                      settingsTouched.email && settingsErrors.email
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {settingsTouched.email && settingsErrors.email && (
+                    <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{settingsErrors.email}</span>
+                    </p>
+                  )}
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                    Phone Number
+                    Phone Number <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
                     value={settings.phone}
-                    onChange={(e) => setSettings({ ...settings, phone: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      setSettings({ ...settings, phone: e.target.value });
+                      if (settingsTouched.phone) {
+                        setSettingsErrors((prev) => ({ ...prev, phone: validateSettingsField('phone', e.target.value) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setSettingsTouched((prev) => ({ ...prev, phone: true }));
+                      setSettingsErrors((prev) => ({ ...prev, phone: validateSettingsField('phone', settings.phone) }));
+                    }}
+                    aria-invalid={settingsTouched.phone && !!settingsErrors.phone}
+                    className={`w-full px-4 py-2.5 rounded-xl bg-slate-900 border text-white text-sm focus:outline-none transition-colors ${
+                      settingsTouched.phone && settingsErrors.phone
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {settingsTouched.phone && settingsErrors.phone && (
+                    <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{settingsErrors.phone}</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -1294,33 +1577,72 @@ export const AdminDashboard: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveService} className="space-y-4">
+            <form onSubmit={handleSaveService} noValidate className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Service Title</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Service Title <span className="text-rose-500">*</span>
+                </label>
                 <input
                   type="text"
-                  required
                   value={editingService.title || ''}
-                  onChange={(e) =>
-                    setEditingService({
-                      ...editingService,
-                      title: e.target.value,
-                      slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-                    })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const title = e.target.value;
+                    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                    setEditingService({ ...editingService, title, slug });
+                    if (serviceTouched.title) {
+                      setServiceErrors((prev) => ({ ...prev, title: validateServiceField('title', title) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setServiceTouched((prev) => ({ ...prev, title: true }));
+                    setServiceErrors((prev) => ({ ...prev, title: validateServiceField('title', editingService.title) }));
+                  }}
+                  aria-invalid={serviceTouched.title && !!serviceErrors.title}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    serviceTouched.title && serviceErrors.title
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {serviceTouched.title && serviceErrors.title && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{serviceErrors.title}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">URL Slug</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  URL Slug <span className="text-rose-500">*</span>
+                </label>
                 <input
                   type="text"
-                  required
                   value={editingService.slug || ''}
-                  onChange={(e) => setEditingService({ ...editingService, slug: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm font-mono"
+                  onChange={(e) => {
+                    const slug = e.target.value;
+                    setEditingService({ ...editingService, slug });
+                    if (serviceTouched.slug) {
+                      setServiceErrors((prev) => ({ ...prev, slug: validateServiceField('slug', slug) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setServiceTouched((prev) => ({ ...prev, slug: true }));
+                    setServiceErrors((prev) => ({ ...prev, slug: validateServiceField('slug', editingService.slug) }));
+                  }}
+                  aria-invalid={serviceTouched.slug && !!serviceErrors.slug}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm font-mono focus:outline-none transition-colors ${
+                    serviceTouched.slug && serviceErrors.slug
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {serviceTouched.slug && serviceErrors.slug && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{serviceErrors.slug}</span>
+                  </p>
+                )}
               </div>
 
               <div>
@@ -1346,27 +1668,69 @@ export const AdminDashboard: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Short Excerpt</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Short Excerpt <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={2}
-                  required
                   value={editingService.excerpt || ''}
-                  onChange={(e) => setEditingService({ ...editingService, excerpt: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const excerpt = e.target.value;
+                    setEditingService({ ...editingService, excerpt });
+                    if (serviceTouched.excerpt) {
+                      setServiceErrors((prev) => ({ ...prev, excerpt: validateServiceField('excerpt', excerpt) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setServiceTouched((prev) => ({ ...prev, excerpt: true }));
+                    setServiceErrors((prev) => ({ ...prev, excerpt: validateServiceField('excerpt', editingService.excerpt) }));
+                  }}
+                  aria-invalid={serviceTouched.excerpt && !!serviceErrors.excerpt}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    serviceTouched.excerpt && serviceErrors.excerpt
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {serviceTouched.excerpt && serviceErrors.excerpt && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{serviceErrors.excerpt}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Detailed Description</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Detailed Description <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={4}
-                  required
                   value={editingService.description || ''}
-                  onChange={(e) =>
-                    setEditingService({ ...editingService, description: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const description = e.target.value;
+                    setEditingService({ ...editingService, description });
+                    if (serviceTouched.description) {
+                      setServiceErrors((prev) => ({ ...prev, description: validateServiceField('description', description) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setServiceTouched((prev) => ({ ...prev, description: true }));
+                    setServiceErrors((prev) => ({ ...prev, description: validateServiceField('description', editingService.description) }));
+                  }}
+                  aria-invalid={serviceTouched.description && !!serviceErrors.description}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    serviceTouched.description && serviceErrors.description
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {serviceTouched.description && serviceErrors.description && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{serviceErrors.description}</span>
+                  </p>
+                )}
               </div>
 
               <div>
@@ -1422,88 +1786,205 @@ export const AdminDashboard: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveCaseStudy} className="space-y-4">
+            <form onSubmit={handleSaveCaseStudy} noValidate className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Client Name</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">
+                    Client Name <span className="text-rose-500">*</span>
+                  </label>
                   <input
                     type="text"
-                    required
                     value={editingCaseStudy.client || ''}
-                    onChange={(e) =>
-                      setEditingCaseStudy({ ...editingCaseStudy, client: e.target.value })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      const client = e.target.value;
+                      setEditingCaseStudy({ ...editingCaseStudy, client });
+                      if (caseStudyTouched.client) {
+                        setCaseStudyErrors((prev) => ({ ...prev, client: validateCaseStudyField('client', client) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setCaseStudyTouched((prev) => ({ ...prev, client: true }));
+                      setCaseStudyErrors((prev) => ({ ...prev, client: validateCaseStudyField('client', editingCaseStudy.client) }));
+                    }}
+                    aria-invalid={caseStudyTouched.client && !!caseStudyErrors.client}
+                    className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                      caseStudyTouched.client && caseStudyErrors.client
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {caseStudyTouched.client && caseStudyErrors.client && (
+                    <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{caseStudyErrors.client}</span>
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Industry</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">
+                    Industry <span className="text-rose-500">*</span>
+                  </label>
                   <input
                     type="text"
-                    required
                     value={editingCaseStudy.industry || ''}
-                    onChange={(e) =>
-                      setEditingCaseStudy({ ...editingCaseStudy, industry: e.target.value })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      const industry = e.target.value;
+                      setEditingCaseStudy({ ...editingCaseStudy, industry });
+                      if (caseStudyTouched.industry) {
+                        setCaseStudyErrors((prev) => ({ ...prev, industry: validateCaseStudyField('industry', industry) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setCaseStudyTouched((prev) => ({ ...prev, industry: true }));
+                      setCaseStudyErrors((prev) => ({ ...prev, industry: validateCaseStudyField('industry', editingCaseStudy.industry) }));
+                    }}
+                    aria-invalid={caseStudyTouched.industry && !!caseStudyErrors.industry}
+                    className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                      caseStudyTouched.industry && caseStudyErrors.industry
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {caseStudyTouched.industry && caseStudyErrors.industry && (
+                    <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{caseStudyErrors.industry}</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Project Headline</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Project Headline <span className="text-rose-500">*</span>
+                </label>
                 <input
                   type="text"
-                  required
                   value={editingCaseStudy.title || ''}
-                  onChange={(e) =>
-                    setEditingCaseStudy({
-                      ...editingCaseStudy,
-                      title: e.target.value,
-                      slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-                    })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const title = e.target.value;
+                    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                    setEditingCaseStudy({ ...editingCaseStudy, title, slug });
+                    if (caseStudyTouched.title) {
+                      setCaseStudyErrors((prev) => ({ ...prev, title: validateCaseStudyField('title', title) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setCaseStudyTouched((prev) => ({ ...prev, title: true }));
+                    setCaseStudyErrors((prev) => ({ ...prev, title: validateCaseStudyField('title', editingCaseStudy.title) }));
+                  }}
+                  aria-invalid={caseStudyTouched.title && !!caseStudyErrors.title}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    caseStudyTouched.title && caseStudyErrors.title
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {caseStudyTouched.title && caseStudyErrors.title && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{caseStudyErrors.title}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Challenge Statement</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Challenge Statement <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={2}
-                  required
                   value={editingCaseStudy.challenge || ''}
-                  onChange={(e) =>
-                    setEditingCaseStudy({ ...editingCaseStudy, challenge: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const challenge = e.target.value;
+                    setEditingCaseStudy({ ...editingCaseStudy, challenge });
+                    if (caseStudyTouched.challenge) {
+                      setCaseStudyErrors((prev) => ({ ...prev, challenge: validateCaseStudyField('challenge', challenge) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setCaseStudyTouched((prev) => ({ ...prev, challenge: true }));
+                    setCaseStudyErrors((prev) => ({ ...prev, challenge: validateCaseStudyField('challenge', editingCaseStudy.challenge) }));
+                  }}
+                  aria-invalid={caseStudyTouched.challenge && !!caseStudyErrors.challenge}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    caseStudyTouched.challenge && caseStudyErrors.challenge
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {caseStudyTouched.challenge && caseStudyErrors.challenge && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{caseStudyErrors.challenge}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Solution Provided</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Solution Provided <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={2}
-                  required
                   value={editingCaseStudy.solution || ''}
-                  onChange={(e) =>
-                    setEditingCaseStudy({ ...editingCaseStudy, solution: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const solution = e.target.value;
+                    setEditingCaseStudy({ ...editingCaseStudy, solution });
+                    if (caseStudyTouched.solution) {
+                      setCaseStudyErrors((prev) => ({ ...prev, solution: validateCaseStudyField('solution', solution) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setCaseStudyTouched((prev) => ({ ...prev, solution: true }));
+                    setCaseStudyErrors((prev) => ({ ...prev, solution: validateCaseStudyField('solution', editingCaseStudy.solution) }));
+                  }}
+                  aria-invalid={caseStudyTouched.solution && !!caseStudyErrors.solution}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    caseStudyTouched.solution && caseStudyErrors.solution
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {caseStudyTouched.solution && caseStudyErrors.solution && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{caseStudyErrors.solution}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Result &amp; Impact</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Result &amp; Impact <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={2}
-                  required
                   value={editingCaseStudy.result || ''}
-                  onChange={(e) =>
-                    setEditingCaseStudy({ ...editingCaseStudy, result: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const result = e.target.value;
+                    setEditingCaseStudy({ ...editingCaseStudy, result });
+                    if (caseStudyTouched.result) {
+                      setCaseStudyErrors((prev) => ({ ...prev, result: validateCaseStudyField('result', result) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setCaseStudyTouched((prev) => ({ ...prev, result: true }));
+                    setCaseStudyErrors((prev) => ({ ...prev, result: validateCaseStudyField('result', editingCaseStudy.result) }));
+                  }}
+                  aria-invalid={caseStudyTouched.result && !!caseStudyErrors.result}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    caseStudyTouched.result && caseStudyErrors.result
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {caseStudyTouched.result && caseStudyErrors.result && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{caseStudyErrors.result}</span>
+                  </p>
+                )}
               </div>
 
               <div className="pt-3 flex justify-end gap-3">
@@ -1542,75 +2023,173 @@ export const AdminDashboard: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveInsight} className="space-y-4">
+            <form onSubmit={handleSaveInsight} noValidate className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Article Title</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Article Title <span className="text-rose-500">*</span>
+                </label>
                 <input
                   type="text"
-                  required
                   value={editingInsight.title || ''}
-                  onChange={(e) =>
-                    setEditingInsight({
-                      ...editingInsight,
-                      title: e.target.value,
-                      slug: e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-                    })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const title = e.target.value;
+                    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                    setEditingInsight({ ...editingInsight, title, slug });
+                    if (insightTouched.title) {
+                      setInsightErrors((prev) => ({ ...prev, title: validateInsightField('title', title) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setInsightTouched((prev) => ({ ...prev, title: true }));
+                    setInsightErrors((prev) => ({ ...prev, title: validateInsightField('title', editingInsight.title) }));
+                  }}
+                  aria-invalid={insightTouched.title && !!insightErrors.title}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    insightTouched.title && insightErrors.title
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {insightTouched.title && insightErrors.title && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{insightErrors.title}</span>
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Category</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">
+                    Category <span className="text-rose-500">*</span>
+                  </label>
                   <input
                     type="text"
-                    required
                     value={editingInsight.category || ''}
-                    onChange={(e) =>
-                      setEditingInsight({ ...editingInsight, category: e.target.value })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      const category = e.target.value;
+                      setEditingInsight({ ...editingInsight, category });
+                      if (insightTouched.category) {
+                        setInsightErrors((prev) => ({ ...prev, category: validateInsightField('category', category) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setInsightTouched((prev) => ({ ...prev, category: true }));
+                      setInsightErrors((prev) => ({ ...prev, category: validateInsightField('category', editingInsight.category) }));
+                    }}
+                    aria-invalid={insightTouched.category && !!insightErrors.category}
+                    className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                      insightTouched.category && insightErrors.category
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {insightTouched.category && insightErrors.category && (
+                    <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{insightErrors.category}</span>
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Read Time</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">
+                    Read Time <span className="text-rose-500">*</span>
+                  </label>
                   <input
                     type="text"
-                    required
+                    placeholder="e.g. 5 min read"
                     value={editingInsight.readTime || ''}
-                    onChange={(e) =>
-                      setEditingInsight({ ...editingInsight, readTime: e.target.value })
-                    }
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                    onChange={(e) => {
+                      const readTime = e.target.value;
+                      setEditingInsight({ ...editingInsight, readTime });
+                      if (insightTouched.readTime) {
+                        setInsightErrors((prev) => ({ ...prev, readTime: validateInsightField('readTime', readTime) }));
+                      }
+                    }}
+                    onBlur={() => {
+                      setInsightTouched((prev) => ({ ...prev, readTime: true }));
+                      setInsightErrors((prev) => ({ ...prev, readTime: validateInsightField('readTime', editingInsight.readTime) }));
+                    }}
+                    aria-invalid={insightTouched.readTime && !!insightErrors.readTime}
+                    className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                      insightTouched.readTime && insightErrors.readTime
+                        ? 'border-rose-500 focus:border-rose-500'
+                        : 'border-slate-700 focus:border-[#0077FF]'
+                    }`}
                   />
+                  {insightTouched.readTime && insightErrors.readTime && (
+                    <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      <span>{insightErrors.readTime}</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Article Excerpt</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Article Excerpt <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={2}
-                  required
                   value={editingInsight.excerpt || ''}
-                  onChange={(e) =>
-                    setEditingInsight({ ...editingInsight, excerpt: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"
+                  onChange={(e) => {
+                    const excerpt = e.target.value;
+                    setEditingInsight({ ...editingInsight, excerpt });
+                    if (insightTouched.excerpt) {
+                      setInsightErrors((prev) => ({ ...prev, excerpt: validateInsightField('excerpt', excerpt) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setInsightTouched((prev) => ({ ...prev, excerpt: true }));
+                    setInsightErrors((prev) => ({ ...prev, excerpt: validateInsightField('excerpt', editingInsight.excerpt) }));
+                  }}
+                  aria-invalid={insightTouched.excerpt && !!insightErrors.excerpt}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none transition-colors ${
+                    insightTouched.excerpt && insightErrors.excerpt
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {insightTouched.excerpt && insightErrors.excerpt && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{insightErrors.excerpt}</span>
+                  </p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Full Content</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">
+                  Full Content <span className="text-rose-500">*</span>
+                </label>
                 <textarea
                   rows={5}
-                  required
                   value={editingInsight.content || ''}
-                  onChange={(e) =>
-                    setEditingInsight({ ...editingInsight, content: e.target.value })
-                  }
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm font-mono text-xs"
+                  onChange={(e) => {
+                    const content = e.target.value;
+                    setEditingInsight({ ...editingInsight, content });
+                    if (insightTouched.content) {
+                      setInsightErrors((prev) => ({ ...prev, content: validateInsightField('content', content) }));
+                    }
+                  }}
+                  onBlur={() => {
+                    setInsightTouched((prev) => ({ ...prev, content: true }));
+                    setInsightErrors((prev) => ({ ...prev, content: validateInsightField('content', editingInsight.content) }));
+                  }}
+                  aria-invalid={insightTouched.content && !!insightErrors.content}
+                  className={`w-full px-3.5 py-2 rounded-xl bg-slate-950 border text-white text-sm font-mono text-xs focus:outline-none transition-colors ${
+                    insightTouched.content && insightErrors.content
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-700 focus:border-[#0077FF]'
+                  }`}
                 />
+                {insightTouched.content && insightErrors.content && (
+                  <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{insightErrors.content}</span>
+                  </p>
+                )}
               </div>
 
               <div className="pt-3 flex justify-end gap-3">
