@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon, AlertCircle, ExternalLink, QrCode, Copy, Check } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
 import { trackEvent, AnalyticsEvents } from '../utils/analytics.js';
 import { api } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.js';
 import { createFirestoreInquiry } from '../services/firestoreService.js';
+import { GoogleMapsLocationFinder } from '../components/GoogleMapsLocationFinder.js';
+import { WhatsAppIcon, cleanWhatsAppDigits } from '../components/WhatsAppChatbot.js';
 
 export const Contact: React.FC = () => {
   const { user, profile, signInWithGoogle, refreshInquiries } = useAuth();
@@ -51,6 +53,32 @@ export const Contact: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [lastSubmittedLead, setLastSubmittedLead] = useState<typeof formData | null>(null);
+  const [copiedLead, setCopiedLead] = useState(false);
+
+  const targetWhatsAppPhone = '+91 9038417437';
+  const targetWhatsAppDigits = '919038417437';
+
+  const generateWhatsAppLeadMessage = (lead: typeof formData) => {
+    return `🚀 *New Consultation Request (DataSource Website)*
+━━━━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${lead.name || 'Client'}
+🏢 *Company:* ${lead.company || 'Not Specified'}
+📧 *Email:* ${lead.email}
+📱 *Phone:* ${lead.phone || 'Not Specified'}
+🛠️ *Service:* ${lead.serviceInterest}
+📋 *Project Type:* ${lead.projectType}
+💰 *Budget:* ${lead.budgetRange}
+📝 *Requirement:*
+${lead.message || 'Architecture consultation requested'}
+━━━━━━━━━━━━━━━━━━━━━
+🕒 *Timestamp:* ${new Date().toLocaleString()}`;
+  };
+
+  const generateWhatsAppLeadUrl = (lead: typeof formData) => {
+    const text = generateWhatsAppLeadMessage(lead);
+    return `https://wa.me/${targetWhatsAppDigits}?text=${encodeURIComponent(text)}`;
+  };
 
   const validateField = (field: 'name' | 'email' | 'phone' | 'message', value: string): string => {
     const trimmed = value.trim();
@@ -173,6 +201,7 @@ export const Contact: React.FC = () => {
         budget_range: formData.budgetRange,
       });
 
+      setLastSubmittedLead({ ...formData });
       setSubmitted(true);
     } catch (err: any) {
       console.error('Submission error:', err);
@@ -180,6 +209,14 @@ export const Contact: React.FC = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleCopyLeadDetails = () => {
+    if (!lastSubmittedLead) return;
+    const msg = generateWhatsAppLeadMessage(lastSubmittedLead);
+    navigator.clipboard.writeText(msg);
+    setCopiedLead(true);
+    setTimeout(() => setCopiedLead(false), 2000);
   };
 
   return (
@@ -216,20 +253,91 @@ export const Contact: React.FC = () => {
             <div className="lg:col-span-7">
               <div className="bg-white dark:bg-[#0E1726] rounded-3xl p-8 sm:p-10 border border-slate-200/90 dark:border-slate-800 shadow-sm">
                 {submitted ? (
-                  <div className="text-center py-12 space-y-4 animate-in fade-in duration-300">
-                    <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+                  <div className="text-center py-10 space-y-6 animate-in fade-in duration-300">
+                    <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-sm">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">
-                      Consultation Request Received
-                    </h2>
-                    <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
-                      Thank you for reaching out. A DataSource principal consultant will review your challenge details and follow up within one business day.
-                    </p>
-                    <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
+
+                    <div className="space-y-2">
+                      <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white font-heading">
+                        Consultation Request Submitted
+                      </h2>
+                      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
+                        Thank you for reaching out! Your inquiry has been recorded and dispatched through our priority notification channels.
+                      </p>
+                    </div>
+
+                    {/* Dual Lead Routing Status Badges */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-left">
+                      <div className="p-3.5 rounded-2xl bg-blue-50/90 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/60 flex items-start gap-3">
+                        <div className="w-7 h-7 rounded-lg bg-blue-500/20 text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shrink-0 mt-0.5">
+                          <Mail className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-slate-900 dark:text-white">Email Dispatch</p>
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight mt-0.5">
+                            Sent to <strong className="text-blue-600 dark:text-blue-400 font-mono">shimadutta62@gmail.com</strong>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-emerald-50/90 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 flex items-start gap-3">
+                        <div className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                          <WhatsAppIcon className="w-4 h-4 text-emerald-500" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-slate-900 dark:text-white">WhatsApp Route</p>
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight mt-0.5">
+                            Target: <strong className="text-emerald-600 dark:text-emerald-400 font-mono">{targetWhatsAppPhone}</strong>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* WhatsApp Priority Action Box */}
+                    {lastSubmittedLead && (
+                      <div className="max-w-lg mx-auto p-4 rounded-2xl bg-[#075E54]/10 dark:bg-emerald-950/50 border border-emerald-500/30 text-left space-y-3 shadow-sm">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                            <WhatsAppIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                            <span>Instant WhatsApp Confirmation</span>
+                          </span>
+                          <span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full">
+                            Fastest Response
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                          Want an immediate response? Click below to send your structured project requirements directly to our principal consultant on WhatsApp.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                          <a
+                            href={generateWhatsAppLeadUrl(lastSubmittedLead)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-md shadow-emerald-900/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-98"
+                          >
+                            <WhatsAppIcon className="w-4 h-4 text-white" />
+                            <span>Send Lead on WhatsApp ({targetWhatsAppPhone})</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+
+                          <button
+                            onClick={handleCopyLeadDetails}
+                            className="px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                            title="Copy formatted lead text"
+                          >
+                            {copiedLead ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                            <span>{copiedLead ? 'Copied' : 'Copy'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
                       <button
                         onClick={() => {
                           setSubmitted(false);
+                          setLastSubmittedLead(null);
                           setFormData({
                             name: user?.displayName || '',
                             email: user?.email || '',
@@ -535,6 +643,40 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
+              {/* Dedicated WhatsApp Direct Chat Card */}
+              <div className="bg-gradient-to-br from-emerald-900/90 to-teal-950 text-white rounded-3xl p-6 sm:p-8 space-y-5 border border-emerald-500/40 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 rounded-full bg-[#25D366]/20 blur-2xl pointer-events-none" />
+                <div className="flex items-center justify-between relative z-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold uppercase tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Instant WhatsApp Chat</span>
+                  </div>
+                  <WhatsAppIcon className="w-6 h-6 text-emerald-400" />
+                </div>
+
+                <div className="space-y-2 relative z-10">
+                  <h4 className="text-xl font-bold font-heading">
+                    Chat with a Solutions Architect
+                  </h4>
+                  <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+                    Skip email delays. Message our senior technical team on WhatsApp at <strong className="text-emerald-300">{targetWhatsAppPhone}</strong> for rapid scoping, quote estimates, or architecture feedback.
+                  </p>
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row gap-3 relative z-10">
+                  <a
+                    href={`https://wa.me/${targetWhatsAppDigits}?text=Hello%20DataSource%20team%2C%20I%20would%20like%20to%20discuss%20a%20technical%20project%20consultation.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-98"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 text-white" />
+                    <span>Open WhatsApp Chat ({targetWhatsAppPhone})</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+
               {/* Tagline Box */}
               <div className="p-6 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">
@@ -549,6 +691,13 @@ export const Contact: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Google Maps Grounding Office & Tech Hub Section */}
+      <section className="pb-20 pt-4 bg-slate-50/60 dark:bg-[#080E18]/60 border-t border-slate-100 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GoogleMapsLocationFinder />
         </div>
       </section>
     </div>

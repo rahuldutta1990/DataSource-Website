@@ -218,6 +218,10 @@ export interface SiteSettings {
   copyright: string;
   stats: StatItem[];
   analyticsIdPlaceholder?: string;
+  whatsappNumber?: string;
+  whatsappEnabled?: boolean;
+  whatsappGreeting?: string;
+  whatsappConsultantName?: string;
 }
 
 export interface DashboardStats {

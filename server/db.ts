@@ -842,6 +842,10 @@ Before investing in complex models, ensure your data foundations—collection, n
         { value: '90%+', label: 'Repeat & Referral Engagements', sublabel: 'Long-term client partnerships', editableNote: 'CMS Editable' },
       ],
       analyticsIdPlaceholder: 'G-MEASUREMENT-ID',
+      whatsappNumber: '+91 9038417437',
+      whatsappEnabled: true,
+      whatsappGreeting: '👋 Hi there! Welcome to DataSource Technology & Solutions. How can our technical architects assist you today?',
+      whatsappConsultantName: 'DataSource Solutions Architect',
     },
   };
 }

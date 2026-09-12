@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
+import { Breadcrumbs } from '../components/Breadcrumbs.js';
 import { api } from '../services/api.js';
 import { ServiceItem } from '../types.js';
 
@@ -50,13 +51,15 @@ export const ServiceDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
       {/* Breadcrumbs */}
-      <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-3.5 px-4">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-          <Link to="/" className="hover:text-[#0077FF] dark:hover:text-[#38BDF8]">Home</Link>
-          <ChevronRight className="w-3 h-3" />
-          <Link to="/services" className="hover:text-[#0077FF] dark:hover:text-[#38BDF8]">Services</Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-slate-900 dark:text-white font-semibold truncate">{service.title}</span>
+      <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-2 px-4">
+        <div className="max-w-7xl mx-auto">
+          <Breadcrumbs
+            items={[
+              { name: 'Home', url: '/' },
+              { name: 'Services', url: '/services' },
+              { name: service.title },
+            ]}
+          />
         </div>
       </div>
 

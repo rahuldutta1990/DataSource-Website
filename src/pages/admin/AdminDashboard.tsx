@@ -27,6 +27,8 @@ import {
   Users,
   ShieldCheck,
   Palette,
+  MessageCircle,
+  Smartphone,
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
@@ -1495,6 +1497,88 @@ export const AdminDashboard: React.FC = () => {
                       <span>{settingsErrors.phone}</span>
                     </p>
                   )}
+                </div>
+              </div>
+
+              {/* WhatsApp Chatbot Integration Settings Panel */}
+              <div className="pt-6 border-t border-slate-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                      <MessageCircle className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-400 font-heading">
+                        WhatsApp Chatbot Integration
+                      </h3>
+                      <p className="text-xs text-slate-400">
+                        Configure the live floating WhatsApp chat widget, number, advisor profile, and welcome greeting.
+                      </p>
+                    </div>
+                  </div>
+
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={settings.whatsappEnabled !== false}
+                      onChange={(e) => setSettings({ ...settings, whatsappEnabled: e.target.checked })}
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                    <span className="ml-2.5 text-xs font-bold text-slate-300">
+                      {settings.whatsappEnabled !== false ? 'Enabled' : 'Disabled'}
+                    </span>
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                      WhatsApp Business Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.whatsappNumber || settings.phone || ''}
+                      onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
+                      placeholder="e.g. +91 9038417437 or 9038417437"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                    <p className="text-[11px] text-slate-500 mt-1">
+                      Include country code (e.g. +1 for US/Canada, +44 for UK).
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                      Advisor / Consultant Display Name
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.whatsappConsultantName || ''}
+                      onChange={(e) => setSettings({ ...settings, whatsappConsultantName: e.target.value })}
+                      placeholder="e.g. DataSource Solutions Architect"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                    <p className="text-[11px] text-slate-500 mt-1">
+                      Displays in widget header with verified business badge.
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                    Automated Initial Greeting
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={settings.whatsappGreeting || ''}
+                    onChange={(e) => setSettings({ ...settings, whatsappGreeting: e.target.value })}
+                    placeholder="👋 Hi there! Welcome to DataSource Technology & Solutions. How can our technical architects assist you today?"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm resize-none focus:outline-none focus:border-emerald-500 transition-colors"
+                  />
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    First welcome message displayed to visitors opening the WhatsApp chat widget.
+                  </p>
                 </div>
               </div>
 

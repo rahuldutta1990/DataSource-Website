@@ -378,4 +378,55 @@ export const api = {
   async updateSettings(settings: Partial<SiteSettings>) {
     return this.updateSiteSettings(settings);
   },
+
+  async queryMapsGrounding(params: { prompt: string; latitude?: number; longitude?: number }) {
+    const res = await fetch('/api/gemini/maps-grounding', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.error || 'Failed to fetch Maps Grounded information');
+    }
+    return json.data as {
+      text: string;
+      mapsChunks: Array<{
+        title: string;
+        uri: string;
+        address?: string;
+        placeAnswerSources?: {
+          reviewSnippets?: Array<{
+            snippet?: string;
+            authorAttribution?: {
+              displayName?: string;
+              uri?: string;
+              photoUri?: string;
+            };
+          }>;
+        };
+      }>;
+      groundingMetadata?: any;
+    };
+  },
+
+  async sendGeminiChat(params: {
+    messages: Array<{ role: 'user' | 'model'; content: string }>;
+    model?: string;
+    roleMode?: 'architect' | 'data' | 'fast_estimator';
+  }) {
+    const res = await fetch('/api/gemini/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.error || 'Failed to get Gemini response');
+    }
+    return json.data as {
+      text: string;
+      modelUsed: string;
+    };
+  },
 };

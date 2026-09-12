@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './Header.js';
 import { Footer } from './Footer.js';
 import { AmbientTechBackground } from './AmbientTechBackground.js';
+import { WhatsAppChatbot } from './WhatsAppChatbot.js';
+import { GeminiChatbot } from './GeminiChatbot.js';
 
 export const Layout: React.FC = () => {
   return (
@@ -16,6 +18,8 @@ export const Layout: React.FC = () => {
           <Outlet />
         </main>
         <Footer />
+        <GeminiChatbot />
+        <WhatsAppChatbot />
       </div>
     </div>
   );

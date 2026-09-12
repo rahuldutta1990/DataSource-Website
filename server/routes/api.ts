@@ -19,6 +19,7 @@ import {
   sendAdminNewsletterNotification,
   getMailLogs,
 } from '../services/mailService.js';
+import { queryWithGoogleMaps, chatWithGemini } from '../services/geminiService.js';
 
 export const apiRouter = Router();
 
@@ -831,3 +832,111 @@ apiRouter.delete('/admin/users/:id', requireAuth, async (req: AuthenticatedReque
   await saveDb(db);
   res.json({ success: true, message: 'User deleted' });
 });
+
+// ==========================================
+// 6. GEMINI AI WITH GOOGLE MAPS GROUNDING
+// ==========================================
+
+apiRouter.post('/gemini/maps-grounding', async (req: Request, res: Response) => {
+  const ip = req.ip || req.socket.remoteAddress || 'client';
+  const allowed = checkRateLimit(`gemini-maps-${ip}`, 25, 60 * 1000);
+  if (!allowed) {
+    res.status(429).json({ error: 'Rate limit exceeded. Please wait a moment before asking another question.' });
+    return;
+  }
+
+  const { prompt, latitude, longitude } = req.body;
+
+  if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
+    res.status(400).json({ error: 'A prompt is required for Maps Grounded exploration.' });
+    return;
+  }
+
+  try {
+    const lat = typeof latitude === 'number' ? latitude : undefined;
+    const lng = typeof longitude === 'number' ? longitude : undefined;
+
+    const result = await queryWithGoogleMaps({
+      prompt: prompt.trim(),
+      latitude: lat,
+      longitude: lng,
+    });
+
+    res.json({
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    console.error('[Gemini Maps Grounding Error]:', err);
+    const errorMessage = err?.message || 'Failed to process Google Maps grounded request';
+
+    if (err?.status === 403 || errorMessage.includes('PERMISSION_DENIED') || errorMessage.includes('API_KEY_INVALID')) {
+      res.status(403).json({
+        error: 'Gemini API authentication failed. Please check your API key in Settings > Secrets.',
+        details: errorMessage,
+      });
+      return;
+    }
+
+    if (err?.status === 429 || errorMessage.includes('RESOURCE_EXHAUSTED')) {
+      res.status(429).json({
+        error: 'Gemini API quota exceeded. Please try again later or check your billing plan in Settings > Secrets.',
+        details: errorMessage,
+      });
+      return;
+    }
+
+    res.status(500).json({
+      error: errorMessage,
+      details: err?.toString(),
+    });
+  }
+});
+
+// Gemini Multi-turn Chat Endpoint with conversation history & system instruction
+apiRouter.post('/gemini/chat', async (req: Request, res: Response) => {
+  const { messages, model, roleMode } = req.body;
+
+  if (!Array.isArray(messages) || messages.length === 0) {
+    res.status(400).json({ error: 'Messages array is required for conversation.' });
+    return;
+  }
+
+  try {
+    const result = await chatWithGemini({
+      messages,
+      model,
+      roleMode,
+    });
+
+    res.json({
+      success: true,
+      data: result,
+    });
+  } catch (err: any) {
+    console.error('[Gemini Multi-turn Chat Error]:', err);
+    const errorMessage = err?.message || 'Failed to process Gemini chat request';
+
+    if (err?.status === 403 || errorMessage.includes('PERMISSION_DENIED') || errorMessage.includes('API_KEY_INVALID')) {
+      res.status(403).json({
+        error: 'Gemini API authentication failed. Please ensure GEMINI_API_KEY is configured in Settings > Secrets.',
+        details: errorMessage,
+      });
+      return;
+    }
+
+    if (err?.status === 429 || errorMessage.includes('RESOURCE_EXHAUSTED')) {
+      res.status(429).json({
+        error: 'Gemini API quota reached. Please retry in a moment.',
+        details: errorMessage,
+      });
+      return;
+    }
+
+    res.status(500).json({
+      error: errorMessage,
+      details: err?.toString(),
+    });
+  }
+});
+
