@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" fill="none">
+  <!-- Left Brand Mark -->
+  <g transform="translate(10, 20)">
+    <!-- Data node grid matrix -->
+    <rect x="20" y="90" width="18" height="18" rx="4" fill="#A5F3FC" fill-opacity="0.85" />
+    <rect x="44" y="65" width="18" height="18" rx="4" fill="#67E8F9" />
+    <rect x="44" y="90" width="18" height="18" rx="4" fill="#67E8F9" />
+    <rect x="44" y="115" width="18" height="18" rx="4" fill="#67E8F9" />
+    
+    <rect x="68" y="40" width="18" height="18" rx="4" fill="#38BDF8" />
+    <rect x="68" y="65" width="18" height="18" rx="4" fill="#38BDF8" />
+    <rect x="68" y="90" width="18" height="18" rx="4" fill="#38BDF8" />
+    <rect x="68" y="115" width="18" height="18" rx="4" fill="#38BDF8" />
+    <rect x="68" y="140" width="18" height="18" rx="4" fill="#38BDF8" />
+
+    <rect x="92" y="65" width="18" height="18" rx="4" fill="#00A3FF" />
+    <rect x="92" y="90" width="18" height="18" rx="4" fill="#00A3FF" />
+    <rect x="92" y="115" width="18" height="18" rx="4" fill="#00A3FF" />
+
+    <!-- Arrow Shaft -->
+    <rect x="110" y="86" width="60" height="28" rx="14" fill="url(#arrow-grad-horiz)" />
+
+    <!-- Arrow Chevron Head Outer -->
+    <path d="M148 45 C152 41 158 41 162 45 L215 94 C218 97 218 103 215 106 L162 155 C158 159 152 159 148 155 C144 151 144 145 148 141 L195 100 L148 59 C144 55 144 49 148 45 Z" fill="#0077FF" />
+    
+    <!-- Arrow Chevron Inset Core -->
+    <path d="M168 65 C170 63 173 63 175 65 L208 97 C210 99 210 101 208 103 L175 135 C173 137 170 137 168 135 C166 133 166 129 168 127 L197 100 L168 73 C166 71 166 67 168 65 Z" fill="#0A387E" />
+  </g>
+
+  <!-- Right Typography Section -->
+  <g transform="translate(320, 20)">
+    <!-- Primary Title: DataSource -->
+    <text x="0" y="75" font-family="'Outfit', -apple-system, sans-serif" font-weight="700" font-size="76" letter-spacing="-0.03em" fill="#0B1B2B">Data<tspan fill="#0077FF">Source</tspan></text>
+    
+    <!-- Subtitle: TECHNOLOGY & SOLUTIONS -->
+    <text x="4" y="125" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="21" letter-spacing="0.28em" fill="#1E293B">TECHNOLOGY &amp; SOLUTIONS</text>
+    
+    <!-- Divider Line -->
+    <line x1="4" y1="145" x2="490" y2="145" stroke="#CBD5E1" stroke-width="2" />
+    
+    <!-- Tagline: Technology That Solves. Data That Drives. -->
+    <text x="4" y="180" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="22" letter-spacing="-0.01em" fill="#64748B">Technology That Solves. Data That Drives.</text>
+  </g>
+
+  <defs>
+    <linearGradient id="arrow-grad-horiz" x1="110" y1="100" x2="170" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A3FF" />
+      <stop offset="1" stop-color="#0077FF" />
+    </linearGradient>
+  </defs>
+</svg>

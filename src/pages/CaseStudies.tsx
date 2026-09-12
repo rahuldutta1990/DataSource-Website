@@ -1,0 +1,160 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2, Award } from 'lucide-react';
+import { Eyebrow } from '../components/Eyebrow.js';
+import { api } from '../services/api.js';
+import { CaseStudy } from '../types.js';
+
+export const CaseStudies: React.FC = () => {
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [selectedIndustry, setSelectedIndustry] = useState('all');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.getCaseStudies().then(setCaseStudies).finally(() => setLoading(false));
+  }, []);
+
+  const industries = Array.from(new Set(caseStudies.map((c) => c.industry)));
+
+  const filtered =
+    selectedIndustry === 'all'
+      ? caseStudies
+      : caseStudies.filter((c) => c.industry === selectedIndustry);
+
+  return (
+    <div className="min-h-screen bg-[#FAFCFF]">
+      {/* Header */}
+      <section className="pt-12 pb-16 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl space-y-4">
+            <Eyebrow text="Portfolio &amp; Outcomes" variant="blue" />
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] font-heading">
+              Real Impact, Proven Results
+            </h1>
+            <p className="text-lg text-slate-600 font-body">
+              Explore how DataSource partners with businesses to eliminate technical bottlenecks, modernize web applications, and engineer high-performance data analytics platforms.
+            </p>
+          </div>
+
+          {/* Industry Filter Tabs */}
+          <div className="mt-8 flex items-center gap-2 overflow-x-auto pb-2">
+            <button
+              onClick={() => setSelectedIndustry('all')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                selectedIndustry === 'all'
+                  ? 'bg-[#0077FF] text-white shadow-sm'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              All Sectors ({caseStudies.length})
+            </button>
+            {industries.map((ind) => (
+              <button
+                key={ind}
+                onClick={() => setSelectedIndustry(ind)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                  selectedIndustry === ind
+                    ? 'bg-[#0077FF] text-white shadow-sm'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                {ind}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies List */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {loading ? (
+            <div className="text-center py-20 text-slate-400">Loading case studies...</div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-20 text-slate-500">No case studies found for this sector.</div>
+          ) : (
+            <div className="space-y-12">
+              {filtered.map((cs) => (
+                <div
+                  key={cs.id}
+                  className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                >
+                  {/* Left Column Image & Meta */}
+                  <div className="lg:col-span-5 space-y-4">
+                    <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100">
+                      <img
+                        src={cs.coverImage}
+                        alt={cs.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-md bg-slate-100 text-slate-700">
+                        {cs.industry}
+                      </span>
+                      <span className="text-xs font-semibold px-3 py-1 rounded-md bg-slate-100 text-slate-700">
+                        {cs.year}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column Content */}
+                  <div className="lg:col-span-7 space-y-5">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                      {cs.client}
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B1B2B] font-heading leading-tight hover:text-[#0077FF] transition-colors">
+                      <Link to={`/case-studies/${cs.slug}`}>{cs.title}</Link>
+                    </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                        <p className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">Challenge</p>
+                        <p className="text-xs text-slate-600 line-clamp-3">{cs.challenge}</p>
+                      </div>
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                        <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] mb-1">Solution</p>
+                        <p className="text-xs text-slate-600 line-clamp-3">{cs.solution}</p>
+                      </div>
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                        <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Result</p>
+                        <p className="text-xs text-slate-600 line-clamp-3">{cs.result}</p>
+                      </div>
+                    </div>
+
+                    {/* Metrics */}
+                    <div className="grid grid-cols-3 gap-3 pt-2">
+                      {cs.metrics.map((m, i) => (
+                        <div key={i} className="text-center p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+                          <div className="text-base sm:text-lg font-black text-[#0077FF] font-heading">{m.value}</div>
+                          <div className="text-[11px] text-slate-500 font-medium truncate">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-2 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1.5">
+                        {cs.technologies.slice(0, 4).map((tech, i) => (
+                          <span key={i} className="text-[11px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        to={`/case-studies/${cs.slug}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0077FF] hover:underline"
+                      >
+                        <span>Full Case Study</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+};

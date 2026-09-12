@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* DataSource Brand Colors directly sampled from logo */
+    --color-brand-navy: #0B1B2B;
+    --color-brand-blue: #0077FF;
+    --color-brand-cyan: #38BDF8;
+    --color-brand-deep: #0A387E;
+    --color-brand-slate: #1E293B;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: #0F172A;
+    background-color: #FAFCFF;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom utility classes matching Figma Insighter consulting typography & layout */
+.font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Subtle editorial dividers & badges */
+.badge-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Clean glass & card shadow styling */
+.consulting-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.consulting-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 35px -10px rgba(11, 27, 43, 0.08);
+}
