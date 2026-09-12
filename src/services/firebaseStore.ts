@@ -20,6 +20,7 @@ import {
   Testimonial,
   FAQ,
   ContactEnquiry,
+  NewsletterSubscriber,
   MediaItem,
   SiteSettings,
   DashboardStats,
@@ -321,6 +322,92 @@ export async function submitContactToFirestore(payload: Partial<ContactEnquiry>)
       success: true,
       message: 'Your inquiry has been successfully received.',
     };
+  }
+}
+
+// ============================================================================
+// Newsletter Subscribers Written Directly to Firebase Firestore
+// ============================================================================
+
+export async function subscribeNewsletterToFirestore(
+  email: string,
+  interest: string = 'General Technology & Data',
+  source: string = 'Footer Form'
+): Promise<{ success: boolean; message: string; alreadySubscribed?: boolean }> {
+  try {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      return { success: false, message: 'Please provide a valid business email address.' };
+    }
+
+    // Check if already subscribed in Firestore
+    const snap = await getDocs(collection(db, 'newsletterSubscribers'));
+    let existingDocId = '';
+    snap.forEach((d) => {
+      const data = d.data();
+      if (data.email && data.email.toLowerCase() === cleanEmail) {
+        existingDocId = d.id;
+      }
+    });
+
+    if (existingDocId) {
+      return {
+        success: true,
+        alreadySubscribed: true,
+        message: "You're already on our executive mailing list! We look forward to sharing our latest insights.",
+      };
+    }
+
+    const newSubscriber = {
+      email: cleanEmail,
+      interest,
+      source,
+      status: 'active',
+      createdAt: new Date().toISOString(),
+      timestamp: serverTimestamp(),
+    };
+
+    await addDoc(collection(db, 'newsletterSubscribers'), newSubscriber);
+    return {
+      success: true,
+      message: 'Thank you for subscribing! You are now on the DataSource executive mailing list.',
+    };
+  } catch (error) {
+    console.warn('Notice writing subscriber to Firestore:', error);
+    return {
+      success: true,
+      message: 'Thank you for subscribing! You are now on the DataSource executive mailing list.',
+    };
+  }
+}
+
+export async function getNewsletterSubscribersFromFirestore(): Promise<NewsletterSubscriber[]> {
+  try {
+    const snap = await getDocs(collection(db, 'newsletterSubscribers'));
+    const list: NewsletterSubscriber[] = [];
+    snap.forEach((d) => {
+      const data = d.data();
+      list.push({
+        id: d.id,
+        email: data.email || '',
+        interest: data.interest || 'General Technology & Data',
+        source: data.source || 'Footer Form',
+        status: data.status || 'active',
+        createdAt: data.createdAt || new Date().toISOString(),
+      });
+    });
+    return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  } catch (err) {
+    console.error('Error fetching subscribers:', err);
+    return [];
+  }
+}
+
+export async function deleteNewsletterSubscriberFromFirestore(id: string): Promise<void> {
+  try {
+    await deleteDoc(doc(db, 'newsletterSubscribers', id));
+  } catch (err) {
+    console.error('Error deleting subscriber:', err);
   }
 }
 

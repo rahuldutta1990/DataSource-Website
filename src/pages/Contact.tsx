@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ShieldCheck, ArrowRight, Sparkles, User as UserIcon } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
+import { SEOHead } from '../components/SEOHead.js';
+import { trackEvent, AnalyticsEvents } from '../utils/analytics.js';
 import { api } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.js';
 import { createFirestoreInquiry } from '../services/firestoreService.js';
@@ -73,6 +75,12 @@ export const Contact: React.FC = () => {
         await refreshInquiries();
       }
 
+      // Track Google Analytics conversion event
+      trackEvent(AnalyticsEvents.LEAD_SUBMITTED, {
+        service_interest: formData.serviceInterest,
+        budget_range: formData.budgetRange,
+      });
+
       setSubmitted(true);
     } catch (err: any) {
       console.error('Submission error:', err);
@@ -84,7 +92,16 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+    <div className="min-h-screen transition-colors duration-200">
+      <SEOHead
+        title="Schedule a Technical Consultation"
+        description="Connect with DataSource principal consultants. Request an independent architectural evaluation, digital product roadmap, or data engineering consultation."
+        keywords="hire software consultants, data engineering consultation, power bi dashboard audit, contact datasource"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Contact', url: '/contact' },
+        ]}
+      />
       {/* Header */}
       <section className="pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

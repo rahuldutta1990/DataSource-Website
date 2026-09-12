@@ -144,6 +144,15 @@ export interface ContactEnquiry {
   createdAt: string;
 }
 
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  interest?: string;
+  source?: string;
+  status: 'active' | 'unsubscribed';
+  createdAt: string;
+}
+
 export interface UserProfile {
   uid: string;
   email: string;

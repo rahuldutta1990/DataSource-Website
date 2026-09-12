@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, ShieldCheck, Target, Users, CheckCircle2, Award, Sparkles, Building2, Terminal } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
+import { SEOHead } from '../components/SEOHead.js';
 
 export const About: React.FC = () => {
   const values = [
@@ -60,7 +61,16 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200 overflow-x-hidden">
+    <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
+      <SEOHead
+        title="About Our Practice, Leadership & Philosophy"
+        description="Learn about DataSource Technology & Solutions. We are an enterprise technology and data consulting firm pairing principal engineers with commercial leaders to build scalable software and data assets."
+        keywords="about datasource, technology consulting firm, data architects, enterprise software engineers, IT consulting leadership"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'About', url: '/about' },
+        ]}
+      />
       {/* Hero Section with Background Professional Image & Animation */}
       <section className="relative pt-14 pb-20 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 overflow-hidden">
         {/* Ambient background architectural photo */}

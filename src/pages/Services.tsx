@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Search, Filter } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
+import { SEOHead } from '../components/SEOHead.js';
 import { api } from '../services/api.js';
 import { ServiceItem, ServiceCategory } from '../types.js';
 
@@ -53,7 +54,16 @@ export const Services: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200 overflow-x-hidden">
+    <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
+      <SEOHead
+        title="Enterprise Technology & Data Consulting Services"
+        description="Explore DataSource consulting services: Custom Web & Cloud Applications, Power BI Executive Dashboards, High-Throughput Data Engineering, and Technology Strategy Audits."
+        keywords="cloud application development, data engineering services, power bi consulting, it architecture assessment, enterprise database migration"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
+        ]}
+      />
       {/* Header with Professional Background & Entrance Animations */}
       <section className="relative pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

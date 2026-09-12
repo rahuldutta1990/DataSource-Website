@@ -164,6 +164,40 @@
         }
       },
       "required": ["name", "email", "requirement", "status", "createdAt"]
+    },
+    "newsletterSubscribers": {
+      "title": "newsletterSubscribers",
+      "description": "Subscribers to the DataSource newsletter and technical insights mailing list",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique subscriber ID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Subscriber email address"
+        },
+        "interest": {
+          "type": "string",
+          "description": "Area of interest or technical domain"
+        },
+        "source": {
+          "type": "string",
+          "description": "Origin of signup, e.g. footer"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "unsubscribed"],
+          "description": "Subscription status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of subscription"
+        }
+      },
+      "required": ["email", "status", "createdAt"]
     }
   },
   "firestore": {
@@ -190,6 +224,10 @@
     "/inquiries/{inquiryId}": {
       "schema": "inquiries",
       "description": "Consultation and project requests submitted by clients"
+    },
+    "/newsletterSubscribers/{subscriberId}": {
+      "schema": "newsletterSubscribers",
+      "description": "Newsletter mailing list subscribers captured from website"
     }
   }
 }

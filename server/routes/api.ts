@@ -14,6 +14,11 @@ import {
   SiteSettings,
   AdminUser,
 } from '../../src/types.js';
+import {
+  sendAdminLeadNotification,
+  sendAdminNewsletterNotification,
+  getMailLogs,
+} from '../services/mailService.js';
 
 export const apiRouter = Router();
 
@@ -196,11 +201,104 @@ apiRouter.post('/contact', async (req: Request, res: Response) => {
   db.enquiries.unshift(newEnquiry);
   await saveDb(db);
 
+  // Trigger admin email alert
+  sendAdminLeadNotification(newEnquiry).catch((err) => {
+    console.error('[API] Failed to trigger admin email notification:', err);
+  });
+
   res.status(201).json({
     success: true,
     message: 'Thank you for contacting DataSource. Our technology leadership will review your requirements and reach out promptly.',
     data: { id: newEnquiry.id },
   });
+});
+
+// Explicit endpoint to trigger lead notification email (used by client-side Firestore submission)
+apiRouter.post('/notify-admin-lead', async (req: Request, res: Response) => {
+  try {
+    const lead = req.body;
+    if (!lead || (!lead.email && !lead.name)) {
+      res.status(400).json({ error: 'Lead information is required' });
+      return;
+    }
+
+    // Also mirror into local database if not already present
+    const db = loadDb();
+    const exists = db.enquiries.some((e) => e.email === lead.email && e.requirement === lead.requirement);
+    if (!exists) {
+      db.enquiries.unshift({
+        id: lead.id || `enq-${Date.now()}`,
+        name: lead.name || 'Anonymous Client',
+        company: lead.company || '',
+        email: lead.email || '',
+        phone: lead.phone || '',
+        serviceRequired: lead.serviceRequired || 'Consultation',
+        budgetRange: lead.budgetRange || 'Flexible',
+        projectType: lead.projectType || 'Consultation',
+        requirement: lead.requirement || '',
+        preferredContact: lead.preferredContact || 'email',
+        status: 'new',
+        createdAt: lead.createdAt || new Date().toISOString(),
+      });
+      await saveDb(db);
+    }
+
+    const mailResult = await sendAdminLeadNotification(lead);
+    res.json({
+      success: true,
+      message: 'Admin notification dispatched successfully',
+      mailResult,
+    });
+  } catch (err: any) {
+    console.error('[API] /notify-admin-lead error:', err);
+    res.status(500).json({ error: 'Failed to dispatch notification', details: err.message });
+  }
+});
+
+// Trigger newsletter subscription notification email
+apiRouter.post('/notify-newsletter-lead', async (req: Request, res: Response) => {
+  try {
+    const { email, interest, source } = req.body;
+    if (!email) {
+      res.status(400).json({ error: 'Email is required' });
+      return;
+    }
+
+    const mailResult = await sendAdminNewsletterNotification({ email, interest, source });
+    res.json({
+      success: true,
+      message: 'Admin newsletter notification dispatched',
+      mailResult,
+    });
+  } catch (err: any) {
+    console.error('[API] /notify-newsletter-lead error:', err);
+    res.status(500).json({ error: 'Failed to dispatch newsletter notification' });
+  }
+});
+
+// View mail dispatch history (for admin panel)
+apiRouter.get('/admin/mail-logs', (_req: Request, res: Response) => {
+  res.json({ data: getMailLogs() });
+});
+
+// Trigger a test admin mail
+apiRouter.post('/admin/test-mail', async (req: Request, res: Response) => {
+  try {
+    const mailResult = await sendAdminLeadNotification({
+      id: `test-${Date.now()}`,
+      name: 'Test Executive Inquiry',
+      company: 'Fortune 500 Enterprise',
+      email: 'executive@example.com',
+      phone: '+1 (555) 019-2834',
+      serviceRequired: 'Data Engineering & Cloud Migration',
+      budgetRange: '$50k - $100k',
+      requirement: 'This is a test notification confirming your DataSource admin lead alerts are fully configured and functioning.',
+      createdAt: new Date().toISOString(),
+    });
+    res.json({ success: true, mailResult });
+  } catch (err: any) {
+    res.status(500).json({ error: 'Failed to send test mail', details: err.message });
+  }
 });
 
 // ==========================================

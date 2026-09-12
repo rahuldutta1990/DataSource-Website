@@ -8,6 +8,7 @@ import {
   Testimonial,
   FAQ,
   ContactEnquiry,
+  NewsletterSubscriber,
   MediaItem,
   SiteSettings,
   DashboardStats,
@@ -70,7 +71,79 @@ export const api = {
   },
 
   async submitContact(payload: Partial<ContactEnquiry>): Promise<{ success: boolean; message: string }> {
-    return firestoreStore.submitContactToFirestore(payload);
+    const res = await firestoreStore.submitContactToFirestore(payload);
+    
+    // Automatically trigger admin email notification
+    try {
+      fetch('/api/notify-admin-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch((err) => console.warn('[Client] Lead email trigger notice:', err));
+    } catch (e) {
+      console.warn('[Client] Notice triggering admin mail:', e);
+    }
+
+    return res;
+  },
+
+  async subscribeNewsletter(
+    email: string,
+    interest?: string,
+    source?: string
+  ): Promise<{ success: boolean; message: string; alreadySubscribed?: boolean }> {
+    const res = await firestoreStore.subscribeNewsletterToFirestore(email, interest, source);
+
+    // Automatically trigger admin email notification
+    try {
+      fetch('/api/notify-newsletter-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, interest, source }),
+      }).catch((err) => console.warn('[Client] Newsletter lead email trigger notice:', err));
+    } catch (e) {
+      console.warn('[Client] Notice triggering newsletter mail:', e);
+    }
+
+    return res;
+  },
+
+  async getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return firestoreStore.getNewsletterSubscribersFromFirestore();
+  },
+
+  async deleteNewsletterSubscriber(id: string): Promise<void> {
+    return firestoreStore.deleteNewsletterSubscriberFromFirestore(id);
+  },
+
+  async getMailLogs(): Promise<any[]> {
+    try {
+      const res = await fetch('/api/admin/mail-logs');
+      if (res.ok) {
+        const json = await res.json();
+        return json.data || [];
+      }
+    } catch (e) {
+      console.warn('Notice loading mail logs:', e);
+    }
+    return [];
+  },
+
+  async sendTestMail(): Promise<{ success: boolean; mailResult: any }> {
+    const res = await fetch('/api/admin/test-mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return res.json();
+  },
+
+  async triggerLeadEmail(lead: Partial<ContactEnquiry>): Promise<{ success: boolean; message: string }> {
+    const res = await fetch('/api/notify-admin-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead),
+    });
+    return res.json();
   },
 
   // ==========================================

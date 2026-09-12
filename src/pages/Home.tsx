@@ -23,6 +23,12 @@ import {
 } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
+import { SEOHead } from '../components/SEOHead.js';
+import {
+  CyberCircuitTrace,
+  FloatingDataHologram,
+  HolographicDataCube,
+} from '../components/TechDecorations.js';
 import { api } from '../services/api.js';
 import {
   ServiceItem,
@@ -150,24 +156,42 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200 overflow-x-hidden">
+    <div className="min-h-screen transition-colors duration-200 overflow-x-hidden relative">
+      {/* On-Page SEO Meta Tags & Schema */}
+      <SEOHead
+        title="Technology That Solves. Data That Drives."
+        description="DataSource helps enterprises design custom cloud software, automated Power BI dashboards, high-throughput data engineering pipelines and strategic IT architecture."
+        keywords="enterprise technology consulting, power bi dashboards, cloud applications, data engineering, database migration, IT assessment"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'DataSource Technology & Solutions',
+          url: 'https://datasource.tech',
+        }}
+      />
+
       {/* 1. HERO BANNER: Turning Technology and Data Into Business Solutions */}
       <section className="relative pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
-        {/* Background Professional Image for Hero Banner */}
+        {/* Background Professional Image for Hero Banner with Cyber Glow */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
             alt="DataSource Professional Technology & Data Headquarters"
-            className="w-full h-full object-cover object-center opacity-15 dark:opacity-20 mix-blend-luminosity scale-105"
+            className="w-full h-full object-cover object-center opacity-10 dark:opacity-15 mix-blend-luminosity scale-105"
           />
-          {/* Multi-layered soft gradients ensuring high contrast and pristine readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FAFCFF] via-[#FAFCFF]/95 to-[#FAFCFF]/80 dark:from-[#070D18] dark:via-[#070D18]/95 dark:to-[#070D18]/85" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0077FF]/[0.02] to-[#FAFCFF] dark:to-[#070D18]" />
-          {/* Subtle ambient tech grid dots */}
-          <div className="absolute inset-0 bg-[radial-gradient(#0077FF_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.06] dark:opacity-[0.10]" />
+          {/* Multi-layered soft gradients allowing constellation particles through */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAFCFF]/90 via-[#FAFCFF]/85 to-transparent dark:from-[#070D18]/90 dark:via-[#070D18]/85 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0077FF]/[0.03] to-[#FAFCFF]/90 dark:to-[#070D18]/90" />
+          {/* Cybernetic schematic circuit overlay */}
+          <CyberCircuitTrace className="absolute top-10 right-0 w-[500px] h-[250px] opacity-40 dark:opacity-60 hidden xl:block" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Floating imaginary holographic data cube in top right */}
+          <div className="hidden lg:block absolute -top-8 right-12 z-20">
+            <HolographicDataCube />
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
             {/* Left Column: Confident Editorial Typography with Scroll & Entrance Wow Animations */}
             <motion.div
@@ -176,8 +200,12 @@ export const Home: React.FC = () => {
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-7 space-y-6"
             >
-              <div className="inline-block">
+              <div className="flex flex-wrap items-center gap-3">
                 <Eyebrow text="Professional Technology & Data Consulting" variant="blue" />
+                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  REAL-TIME PIPELINE ACTIVE
+                </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight leading-[1.12] font-heading">
@@ -191,6 +219,22 @@ export const Home: React.FC = () => {
               <p className="text-lg sm:text-xl text-[#475569] dark:text-slate-300 leading-relaxed max-w-2xl font-body">
                 DataSource helps businesses design, develop, analyse and improve digital solutions through technology, data and practical problem solving.
               </p>
+
+              {/* Floating Holographic Telemetry Cards */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <FloatingDataHologram
+                  icon="cpu"
+                  label="Architecture"
+                  value="Zero-Downtime Microservices"
+                  delay={0.1}
+                />
+                <FloatingDataHologram
+                  icon="activity"
+                  label="Data Telemetry"
+                  value="Sub-Second ETL Sync"
+                  delay={0.2}
+                />
+              </div>
 
               {/* Core Brand Philosophy Callout */}
               <div className="p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-[#0E1726]/90 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-start gap-3.5 max-w-xl">
@@ -1141,6 +1185,78 @@ export const Home: React.FC = () => {
               </motion.article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 12. FUTURISTIC COMMAND-CENTER CTA BANNER */}
+      <section className="py-20 lg:py-28 relative overflow-hidden bg-gradient-to-b from-transparent via-[#0077FF]/[0.03] to-slate-900 dark:to-[#050A14]">
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Cybernetic schematic and glowing energy lines */}
+          <CyberCircuitTrace className="absolute -top-12 left-1/4 w-[600px] h-[300px] opacity-30 dark:opacity-50" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-r from-[#0077FF]/20 via-[#38BDF8]/20 to-[#6366F1]/20 rounded-full blur-[140px] pointer-events-none" />
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/90 dark:border-cyan-500/30 shadow-2xl shadow-cyan-950/20 relative overflow-hidden"
+          >
+            {/* Top imaginary tech telemetry status bar */}
+            <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-200/70 dark:border-slate-800 text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-cyan-400/80">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>DIRECT CONSULTANT ENGAGEMENT PROTOCOL</span>
+              </div>
+              <div className="hidden sm:block">
+                <span>ENCRYPTION: 4096-BIT · SLA GUARANTEED</span>
+              </div>
+            </div>
+
+            <Eyebrow text="Ready to Elevate Your Technology?" variant="blue" />
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mt-4 font-heading tracking-tight leading-tight max-w-2xl mx-auto">
+              Transform Your Architecture &amp; Unlock Business Data Value
+            </h2>
+
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg mt-4 max-w-2xl mx-auto leading-relaxed font-body">
+              Whether you are architecting a mission-critical web application, automating high-throughput data pipelines, or designing executive Power BI dashboards, our senior consultants deliver results.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#0077FF] to-[#00A3FF] hover:from-[#0066EE] hover:to-[#0088EE] text-white px-8 py-4 rounded-xl text-base font-bold shadow-xl shadow-blue-500/25 transition-all hover:translate-y-[-2px] active:translate-y-0"
+              >
+                <span>Book Strategic Consultation</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/case-studies"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 px-7 py-4 rounded-xl text-base font-bold transition-all shadow-sm"
+              >
+                <span>Review Proven Case Studies</span>
+              </Link>
+            </div>
+
+            {/* Micro assurance guarantees */}
+            <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs text-slate-500 dark:text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                Direct Senior Engineering Access
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                Transparent Milestone Pricing
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                Zero Obligation Discovery Call
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

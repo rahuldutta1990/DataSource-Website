@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search, Clock, Tag } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
+import { SEOHead } from '../components/SEOHead.js';
 import { api } from '../services/api.js';
 import { BlogPost } from '../types.js';
 
@@ -45,7 +46,16 @@ export const Insights: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+    <div className="min-h-screen transition-colors duration-200">
+      <SEOHead
+        title="Engineering & Strategy Insights | Technical Publications"
+        description="Explore in-depth technical analysis, architecture patterns, and data engineering best practices published by DataSource practitioners."
+        keywords="data analytics blog, software architecture articles, power bi best practices, it strategy insights"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Insights', url: '/insights' },
+        ]}
+      />
       {/* Header */}
       <section className="pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

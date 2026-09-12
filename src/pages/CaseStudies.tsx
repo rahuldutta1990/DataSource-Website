@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Award } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
+import { SEOHead } from '../components/SEOHead.js';
 import { api } from '../services/api.js';
 import { CaseStudy } from '../types.js';
 
@@ -22,7 +23,16 @@ export const CaseStudies: React.FC = () => {
       : caseStudies.filter((c) => c.industry === selectedIndustry);
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+    <div className="min-h-screen transition-colors duration-200">
+      <SEOHead
+        title="Enterprise Case Studies & Architecture Outcomes"
+        description="Discover how DataSource has solved mission-critical engineering, Power BI dashboard automation, and cloud migration challenges across retail, healthcare, finance, and logistics."
+        keywords="technology consulting case studies, power bi implementation results, data engineering success stories"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Case Studies', url: '/case-studies' },
+        ]}
+      />
       {/* Header */}
       <section className="pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

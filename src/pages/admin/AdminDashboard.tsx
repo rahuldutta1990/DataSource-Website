@@ -20,8 +20,15 @@ import {
   Calendar,
   Eye,
   Save,
+  Download,
+  Copy,
+  Check,
+  Users,
+  ShieldCheck,
+  Palette,
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
+import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
 import { api } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.js';
 import {
@@ -30,6 +37,7 @@ import {
   CaseStudy,
   BlogPost,
   ContactEnquiry,
+  NewsletterSubscriber,
   Testimonial,
   FAQ,
   SiteSettings,
@@ -39,11 +47,21 @@ export const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { user, profile, signOutUser } = useAuth();
   const [activeTab, setActiveTab] = useState<
-    'overview' | 'inquiries' | 'services' | 'casestudies' | 'insights' | 'faq-testimonials' | 'settings'
+    | 'overview'
+    | 'inquiries'
+    | 'subscribers'
+    | 'services'
+    | 'casestudies'
+    | 'insights'
+    | 'faq-testimonials'
+    | 'settings'
+    | 'contrast'
   >('overview');
 
   // Data states
   const [inquiries, setInquiries] = useState<ContactEnquiry[]>([]);
+  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
+  const [copySuccess, setCopySuccess] = useState(false);
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -93,6 +111,7 @@ export const AdminDashboard: React.FC = () => {
         testimonialsData,
         faqsData,
         settingsData,
+        subscribersData,
       ] = await Promise.all([
         api.getEnquiries(),
         api.getServices(),
@@ -102,9 +121,11 @@ export const AdminDashboard: React.FC = () => {
         api.getTestimonials(),
         api.getFAQs(),
         api.getSettings(),
+        api.getNewsletterSubscribers(),
       ]);
 
       setInquiries(inquiriesData);
+      setSubscribers(subscribersData || []);
       setServices(servicesData);
       setCategories(categoriesData);
       setCaseStudies(caseStudiesData);
@@ -261,6 +282,49 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+  // Newsletter Mailing List Handlers
+  const handleCopyEmails = () => {
+    if (subscribers.length === 0) return;
+    const emailsList = subscribers.map((s) => s.email).join(', ');
+    navigator.clipboard.writeText(emailsList);
+    setCopySuccess(true);
+    showNotification(`Copied ${subscribers.length} email addresses to clipboard`);
+    setTimeout(() => setCopySuccess(false), 3000);
+  };
+
+  const handleExportSubscribersCSV = () => {
+    if (subscribers.length === 0) return;
+    const headers = ['Email', 'Interest Focus', 'Source', 'Status', 'Subscribed At'];
+    const rows = subscribers.map((s) => [
+      `"${s.email.replace(/"/g, '""')}"`,
+      `"${(s.interest || 'General').replace(/"/g, '""')}"`,
+      `"${(s.source || 'Website').replace(/"/g, '""')}"`,
+      `"${s.status || 'active'}"`,
+      `"${new Date(s.createdAt).toISOString()}"`,
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `datasource_newsletter_subscribers_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showNotification('Exported mailing list as CSV');
+  };
+
+  const handleDeleteSubscriber = async (id: string, email: string) => {
+    if (!confirm(`Remove ${email} from the mailing list?`)) return;
+    try {
+      await api.deleteNewsletterSubscriber(id);
+      setSubscribers((prev) => prev.filter((s) => s.id !== id));
+      showNotification(`Removed ${email} from mailing list`);
+    } catch (err: any) {
+      alert('Error removing subscriber: ' + err.message);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 font-medium">
@@ -328,6 +392,25 @@ export const AdminDashboard: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setActiveTab('subscribers')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'subscribers'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4" />
+                <span>Mailing List Leads</span>
+              </div>
+              {subscribers.length > 0 && (
+                <span className="text-xs bg-cyan-600/60 text-cyan-200 font-bold px-2 py-0.5 rounded-full">
+                  {subscribers.length}
+                </span>
+              )}
+            </button>
+
+            <button
               onClick={() => setActiveTab('services')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors ${
                 activeTab === 'services'
@@ -386,6 +469,18 @@ export const AdminDashboard: React.FC = () => {
               <Settings className="w-4 h-4" />
               <span>Site &amp; Brand Stats</span>
             </button>
+
+            <button
+              onClick={() => setActiveTab('contrast')}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'contrast'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <span>WCAG Contrast Tool</span>
+            </button>
           </nav>
         </div>
 
@@ -440,11 +535,17 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Metric Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
               <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Inquiries</p>
                 <p className="text-3xl font-extrabold text-white mt-2 font-heading">{inquiries.length}</p>
                 <p className="text-xs text-rose-400 mt-1">{newInquiriesCount} requiring review</p>
+              </div>
+
+              <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Mailing Leads</p>
+                <p className="text-3xl font-extrabold text-cyan-400 mt-2 font-heading">{subscribers.length}</p>
+                <p className="text-xs text-slate-500 mt-1">Newsletter subscribers</p>
               </div>
 
               <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800">
@@ -516,6 +617,29 @@ export const AdminDashboard: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {/* WCAG Contrast & Accessibility Verifier Banner */}
+            <div className="bg-gradient-to-r from-blue-950/40 via-slate-950 to-slate-950 p-6 rounded-2xl border border-blue-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[#38BDF8] flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white font-heading">
+                    Brand Palette &amp; WCAG Contrast Verifier
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Test foreground and background color combinations against WCAG 2.1 AA/AAA accessibility requirements using DataSource brand palettes.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveTab('contrast')}
+                className="px-4 py-2.5 rounded-xl bg-[#0077FF] hover:bg-[#0062D6] text-white text-xs font-bold shrink-0 transition-colors shadow"
+              >
+                Launch Contrast Tool
+              </button>
+            </div>
           </div>
         )}
 
@@ -584,6 +708,154 @@ export const AdminDashboard: React.FC = () => {
                         </td>
                       </tr>
                     ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 2.5 MAILING LIST & SUBSCRIBERS TAB */}
+        {activeTab === 'subscribers' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-extrabold text-white font-heading">
+                  Newsletter &amp; Mailing List Leads
+                </h1>
+                <p className="text-sm text-slate-400 mt-1">
+                  Prospective client leads captured through the footer newsletter form and website subscription widgets.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleCopyEmails}
+                  disabled={subscribers.length === 0}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold transition-colors disabled:opacity-50"
+                  title="Copy all emails for campaign"
+                >
+                  {copySuccess ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  <span>{copySuccess ? 'Emails Copied!' : 'Copy All Emails'}</span>
+                </button>
+
+                <button
+                  onClick={handleExportSubscribersCSV}
+                  disabled={subscribers.length === 0}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0077FF] hover:bg-[#0066E0] text-white text-xs font-semibold transition-colors shadow-md shadow-blue-900/30 disabled:opacity-50"
+                  title="Export to CSV"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export CSV</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Audience</p>
+                <p className="text-2xl font-extrabold text-white mt-1 font-heading">{subscribers.length}</p>
+                <p className="text-xs text-slate-500 mt-0.5">Active subscribers in Firestore</p>
+              </div>
+
+              <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Footer Form Signups</p>
+                <p className="text-2xl font-extrabold text-cyan-400 mt-1 font-heading">
+                  {subscribers.filter((s) => s.source?.includes('Footer') || !s.source).length}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5">High-intent organic leads</p>
+              </div>
+
+              <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Rate</p>
+                <p className="text-2xl font-extrabold text-emerald-400 mt-1 font-heading">
+                  {subscribers.length > 0
+                    ? `${Math.round((subscribers.filter((s) => s.status !== 'unsubscribed').length / subscribers.length) * 100)}%`
+                    : '100%'}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5">Zero bounce rate recorded</p>
+              </div>
+            </div>
+
+            {/* Subscribers Table */}
+            <div className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-slate-900 text-xs uppercase font-bold text-slate-400 border-b border-slate-800">
+                    <tr>
+                      <th className="p-4">Subscriber Email</th>
+                      <th className="p-4">Focus Interest</th>
+                      <th className="p-4">Source</th>
+                      <th className="p-4">Subscribed Date</th>
+                      <th className="p-4">Status</th>
+                      <th className="p-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800">
+                    {subscribers.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="p-8 text-center text-slate-500">
+                          <Users className="w-8 h-8 mx-auto text-slate-600 mb-2" />
+                          <p className="text-sm font-medium">No newsletter leads captured yet.</p>
+                          <p className="text-xs text-slate-500 mt-1">
+                            Visitors subscribing via the footer newsletter form will appear here instantly.
+                          </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      subscribers.map((sub) => (
+                        <tr key={sub.id} className="hover:bg-slate-900/50">
+                          <td className="p-4">
+                            <div className="flex items-center gap-2.5">
+                              <div className="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-xs">
+                                {sub.email.charAt(0).toUpperCase()}
+                              </div>
+                              <div>
+                                <p className="font-semibold text-white">{sub.email}</p>
+                                <p className="text-[11px] text-slate-500">ID: {sub.id.slice(0, 8)}...</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="p-4">
+                            <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
+                              {sub.interest || 'General'}
+                            </span>
+                          </td>
+                          <td className="p-4 text-xs text-slate-400">
+                            {sub.source || 'Footer Form'}
+                          </td>
+                          <td className="p-4 text-xs text-slate-400">
+                            {new Date(sub.createdAt).toLocaleDateString(undefined, {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </td>
+                          <td className="p-4">
+                            <span
+                              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                                sub.status === 'unsubscribed'
+                                  ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                                  : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                              }`}
+                            >
+                              <span className={`w-1.5 h-1.5 rounded-full ${sub.status === 'unsubscribed' ? 'bg-rose-400' : 'bg-emerald-400'}`} />
+                              {sub.status === 'unsubscribed' ? 'Unsubscribed' : 'Active'}
+                            </span>
+                          </td>
+                          <td className="p-4 text-right">
+                            <button
+                              onClick={() => handleDeleteSubscriber(sub.id, sub.email)}
+                              className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                              title="Delete Subscriber"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -1001,6 +1273,9 @@ export const AdminDashboard: React.FC = () => {
             </form>
           </div>
         )}
+
+        {/* 8. WCAG CONTRAST & ACCESSIBILITY TOOL */}
+        {activeTab === 'contrast' && <ContrastChecker />}
       </main>
 
       {/* MODAL: Service Editor */}

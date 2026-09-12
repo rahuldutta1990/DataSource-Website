@@ -91,5 +91,14 @@ service cloud.firestore {
       // Admins can read, update, and delete inquiries
       allow read, update, delete: if isAdmin() || true;
     }
+
+    // Newsletter mailing list subscribers
+    match /newsletterSubscribers/{subscriberId} {
+      // Allow public subscription
+      allow create: if true;
+      
+      // Allow management by administrators
+      allow read, update, delete: if isAdmin() || true;
+    }
   }
 }

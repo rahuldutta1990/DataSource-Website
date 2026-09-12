@@ -96,12 +96,12 @@ export const Header: React.FC = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo - Prominent & Increased Size */}
-          <Link to="/" className="flex items-center gap-2 group focus:outline-none" aria-label="DataSource Home">
+          {/* Brand Logo - Proportional & Cleanly Scaled */}
+          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="DataSource Home">
             <DataSourceLogo
               variant={isDark ? 'white-horizontal' : 'horizontal'}
-              className="h-11 sm:h-13 md:h-14 lg:h-16 w-auto max-w-[320px] sm:max-w-[420px]"
-              showTagline={!isScrolled}
+              className="h-8 sm:h-9 md:h-9.5 lg:h-10 w-auto"
+              showTagline={false}
             />
           </Link>
 

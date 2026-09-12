@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, Phone, MapPin, Clock, Linkedin, Twitter, Github } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Clock, Linkedin, Twitter, Github, Newspaper } from 'lucide-react';
 import { DataSourceLogo } from './DataSourceLogo.js';
+import { NewsletterForm } from './NewsletterForm.js';
 
 export const Footer: React.FC = () => {
   return (
@@ -53,6 +54,32 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
+      {/* Newsletter & Lead Capture Section */}
+      <div id="footer-newsletter-section" className="border-b border-slate-800/80 bg-[#07121E]/60 py-12 lg:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Newsletter Copy */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-semibold tracking-wide">
+                <Newspaper className="w-3.5 h-3.5 text-cyan-400" />
+                <span>DataSource Tech Briefing</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-heading">
+                Subscribe for Tech &amp; Data Insights
+              </h3>
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                Bi-weekly executive briefings on enterprise data engineering, cloud platforms, AI strategy, and modern digital products. Written by practitioners, never AI slop or marketing spam.
+              </p>
+            </div>
+
+            {/* Newsletter Form */}
+            <div className="lg:col-span-7 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl backdrop-blur-sm">
+              <NewsletterForm source="Footer Newsletter Section" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Footer Links Columns */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
@@ -61,7 +88,7 @@ export const Footer: React.FC = () => {
             <Link to="/" className="inline-block focus:outline-none" aria-label="DataSource Home">
               <DataSourceLogo
                 variant="white-horizontal"
-                className="h-14 sm:h-16 md:h-18 w-auto max-w-[340px] sm:max-w-[420px]"
+                className="h-11 sm:h-12 md:h-13 w-auto max-w-[320px] sm:max-w-[360px]"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
@@ -217,6 +244,12 @@ export const Footer: React.FC = () => {
             <Link to="/terms-and-conditions" className="hover:text-slate-300 transition-colors">
               Terms &amp; Conditions
             </Link>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+              Sitemap.xml
+            </a>
+            <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+              Robots.txt
+            </a>
           </div>
         </div>
       </div>

@@ -58,7 +58,8 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
   }
 
   const isWhite = variant === 'white-horizontal';
-  const viewBox = showTagline ? '0 0 920 220' : '0 0 920 155';
+  const viewBox = showTagline ? '0 0 780 190' : '0 0 740 160';
+  const iconTransform = showTagline ? 'translate(10, 0)' : 'translate(10, -12)';
 
   return (
     <svg
@@ -66,10 +67,11 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={{ overflow: 'visible' }}
       aria-label="DataSource Technology & Solutions Logo"
     >
       {/* Left Brand Mark */}
-      <g transform="translate(10, 20)">
+      <g transform={iconTransform}>
         <rect x="20" y="90" width="18" height="18" rx="4" fill="#A5F3FC" fillOpacity="0.85" />
         <rect x="44" y="65" width="18" height="18" rx="4" fill="#67E8F9" />
         <rect x="44" y="90" width="18" height="18" rx="4" fill="#67E8F9" />
@@ -99,13 +101,13 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
       </g>
 
       {/* Right Typography Section */}
-      <g transform="translate(320, 20)">
+      <g transform="translate(256, 0)">
         <text
           x="0"
-          y="75"
+          y={showTagline ? '78' : '82'}
           fontFamily="'Outfit', -apple-system, sans-serif"
           fontWeight="700"
-          fontSize="76"
+          fontSize={showTagline ? '70' : '68'}
           letterSpacing="-0.03em"
           fill={isWhite ? '#FFFFFF' : '#0B1B2B'}
         >
@@ -113,12 +115,12 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
         </text>
         
         <text
-          x="4"
-          y="125"
+          x="2"
+          y={showTagline ? '116' : '122'}
           fontFamily="'Plus Jakarta Sans', sans-serif"
           fontWeight="700"
-          fontSize="21"
-          letterSpacing="0.28em"
+          fontSize={showTagline ? '19' : '18'}
+          letterSpacing="0.26em"
           fill={isWhite ? '#94A3B8' : '#1E293B'}
         >
           TECHNOLOGY &amp; SOLUTIONS
@@ -127,19 +129,19 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
         {showTagline && (
           <>
             <line
-              x1="4"
-              y1="145"
-              x2="490"
-              y2="145"
+              x1="2"
+              y1="134"
+              x2="480"
+              y2="134"
               stroke={isWhite ? '#334155' : '#CBD5E1'}
               strokeWidth="2"
             />
             <text
-              x="4"
-              y="180"
+              x="2"
+              y="162"
               fontFamily="'Plus Jakarta Sans', sans-serif"
               fontWeight="500"
-              fontSize="22"
+              fontSize="20"
               letterSpacing="-0.01em"
               fill={isWhite ? '#CBD5E1' : '#64748B'}
             >
