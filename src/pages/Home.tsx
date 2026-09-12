@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import {
   ArrowRight,
   CheckCircle2,
@@ -14,6 +15,11 @@ import {
   BarChart3,
   Star,
   Quote,
+  Clock,
+  Award,
+  Users,
+  Building2,
+  FileCheck,
 } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { DynamicIcon } from '../components/DynamicIcon.js';
@@ -28,6 +34,27 @@ import {
   FAQ,
   SiteSettings,
 } from '../types.js';
+
+// Section-specific high-resolution photography mappings
+const serviceImages: Record<string, string> = {
+  'custom-web-cloud-applications': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop',
+  'power-bi-executive-dashboards': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
+  'data-engineering-pipeline-automation': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop',
+  'it-consulting-technology-assessment': 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
+  'ui-ux-digital-product-design': 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop',
+  'data-analytics-predictive-insights': 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop',
+  'database-architecture-migration': 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop',
+  'workflow-automation-system-integration': 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop',
+};
+
+const industryFallbackImages: Record<string, string> = {
+  'saas-technology': 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop',
+  'finance-banking': 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop',
+  'healthcare-life-sciences': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop',
+  'retail-e-commerce': 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&auto=format&fit=crop',
+  'manufacturing-logistics': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop',
+  'professional-services': 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
+};
 
 export const Home: React.FC = () => {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -67,18 +94,22 @@ export const Home: React.FC = () => {
     {
       title: 'Design experiences people understand',
       desc: 'Intuitive user workflows that eliminate cognitive fatigue and reduce human operational error.',
+      icon: Users,
     },
     {
       title: 'Build reliable web and mobile applications',
       desc: 'Robust full-stack systems engineered with modern TypeScript, modular APIs, and zero-downtime reliability.',
+      icon: Code2,
     },
     {
       title: 'Turn business data into useful insight',
       desc: 'Automated Power BI dashboards and predictive scorecards that give executives daily decision clarity.',
+      icon: BarChart3,
     },
     {
       title: 'Engineer scalable data and technology systems',
       desc: 'Fault-tolerant data pipelines, database tuning, and high-concurrency cloud architectures.',
+      icon: Database,
     },
   ];
 
@@ -87,21 +118,25 @@ export const Home: React.FC = () => {
       num: '01',
       title: 'Understand the Problem',
       desc: 'We start with your operational bottlenecks and commercial objectives. We interview stakeholders and audit workflows before recommending any tech.',
+      img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop',
     },
     {
       num: '02',
       title: 'Design the Right Solution',
       desc: 'We architect intuitive prototypes, data schemas, and integration roadmaps that fit your budget and team capacity—avoiding bloated vendor dependencies.',
+      img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=600&auto=format&fit=crop',
     },
     {
       num: '03',
       title: 'Build and Implement',
       desc: 'Our senior engineers construct production-ready code with continuous testing, incremental rollouts, and zero business interruption.',
+      img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop',
     },
     {
       num: '04',
       title: 'Improve and Support',
       desc: 'We train your staff, monitor performance telemetry, tune database queries, and provide dedicated engineering support for long-term compounding returns.',
+      img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop',
     },
   ];
 
@@ -115,35 +150,56 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF]">
-      {/* 1. HERO SECTION (Figma Insighter Composition) */}
-      <section className="relative pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Column: Confident Editorial Typography */}
-            <div className="lg:col-span-7 space-y-6">
-              <Eyebrow text="Technology & Data Consulting" variant="blue" />
+    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200 overflow-x-hidden">
+      {/* 1. HERO BANNER: Turning Technology and Data Into Business Solutions */}
+      <section className="relative pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+        {/* Background Professional Image for Hero Banner */}
+        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+          <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+            alt="DataSource Professional Technology & Data Headquarters"
+            className="w-full h-full object-cover object-center opacity-15 dark:opacity-20 mix-blend-luminosity scale-105"
+          />
+          {/* Multi-layered soft gradients ensuring high contrast and pristine readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAFCFF] via-[#FAFCFF]/95 to-[#FAFCFF]/80 dark:from-[#070D18] dark:via-[#070D18]/95 dark:to-[#070D18]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0077FF]/[0.02] to-[#FAFCFF] dark:to-[#070D18]" />
+          {/* Subtle ambient tech grid dots */}
+          <div className="absolute inset-0 bg-[radial-gradient(#0077FF_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.06] dark:opacity-[0.10]" />
+        </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] tracking-tight leading-[1.12] font-heading">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Left Column: Confident Editorial Typography with Scroll & Entrance Wow Animations */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 space-y-6"
+            >
+              <div className="inline-block">
+                <Eyebrow text="Professional Technology & Data Consulting" variant="blue" />
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight leading-[1.12] font-heading">
                 Turning Technology and Data Into{' '}
-                <span className="text-[#0077FF] inline-block relative">
+                <span className="text-[#0077FF] dark:text-[#38BDF8] inline-block relative">
                   Business Solutions
                   <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#38BDF8] rounded-full opacity-60" />
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-[#475569] leading-relaxed max-w-2xl font-body">
+              <p className="text-lg sm:text-xl text-[#475569] dark:text-slate-300 leading-relaxed max-w-2xl font-body">
                 DataSource helps businesses design, develop, analyse and improve digital solutions through technology, data and practical problem solving.
               </p>
 
               {/* Core Brand Philosophy Callout */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-start gap-3.5 max-w-xl">
-                <div className="w-9 h-9 rounded-xl bg-[#0077FF]/10 text-[#0077FF] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-[#0E1726]/90 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-start gap-3.5 max-w-xl">
+                <div className="w-9 h-9 rounded-xl bg-[#0077FF]/10 dark:bg-[#0077FF]/20 text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shrink-0 mt-0.5">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF]">Our Philosophy</p>
-                  <p className="text-sm font-semibold text-slate-800 mt-0.5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Our Philosophy</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-0.5">
                     &ldquo;We start with the problem, understand the business need and build the solution that actually fits.&rdquo;
                   </p>
                 </div>
@@ -153,211 +209,356 @@ export const Home: React.FC = () => {
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-7 py-4 rounded-xl text-base font-bold shadow-md shadow-blue-600/20 transition-all hover:translate-y-[-2px] active:translate-y-0"
+                  className="inline-flex items-center justify-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] dark:bg-[#0077FF] dark:hover:bg-[#0066EE] text-white px-7 py-4 rounded-xl text-base font-bold shadow-lg shadow-blue-600/25 transition-all hover:translate-y-[-2px] active:translate-y-0"
                 >
                   <span>Book a Consultation</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to="/services"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 px-6 py-4 rounded-xl text-base font-bold transition-colors"
+                  className="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300/90 dark:border-slate-700 px-6 py-4 rounded-xl text-base font-bold transition-all hover:border-[#0077FF]/40 shadow-sm"
                 >
                   <span>Explore Our Services</span>
                 </Link>
               </div>
 
-              <div className="pt-4 flex items-center gap-6 text-xs text-slate-500">
+              <div className="pt-3 flex flex-wrap items-center gap-6 text-xs text-slate-500 dark:text-slate-400">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#0077FF]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0077FF] dark:text-[#38BDF8]" />
                   <span>No vendor lock-in</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#0077FF]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0077FF] dark:text-[#38BDF8]" />
                   <span>Transparent delivery milestones</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#0077FF]" />
-                  <span>Senior engineers only</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#0077FF] dark:text-[#38BDF8]" />
+                  <span>Senior engineers &amp; consultants only</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Column: Visual Technology & Data Panel */}
-            <div className="lg:col-span-5 relative">
+            {/* Right Column: Professional Consultancy Visual Hero Banner */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 relative"
+            >
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Background decorative glow */}
-                <div className="absolute -top-10 -right-10 w-72 h-72 bg-[#38BDF8]/20 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#0077FF]/15 rounded-full blur-3xl pointer-events-none" />
+                {/* Background decorative ambient glow */}
+                <div className="absolute -top-10 -right-10 w-72 h-72 bg-[#38BDF8]/20 dark:bg-[#38BDF8]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#0077FF]/15 dark:bg-[#0077FF]/10 rounded-full blur-3xl pointer-events-none" />
 
                 {/* Main Hero Card Composition */}
-                <div className="relative bg-white rounded-3xl p-4 sm:p-5 shadow-2xl border border-slate-200/90 overflow-hidden">
-                  <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900">
+                <div className="relative bg-white dark:bg-[#0E1726] rounded-3xl p-4 sm:p-5 shadow-2xl dark:shadow-slate-950/60 border border-slate-200/90 dark:border-slate-800 overflow-hidden">
+                  {/* Primary Professional Consultancy Image */}
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 group">
                     <img
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
-                      alt="Data Intelligence Dashboard Visual"
-                      className="w-full h-full object-cover object-center opacity-85 hover:scale-105 transition-transform duration-700"
+                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
+                      alt="DataSource Professional Technology and Data Consultants in Advisory Session"
+                      className="w-full h-full object-cover object-center opacity-90 group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B] via-transparent to-transparent opacity-90" />
+                    
+                    {/* Image caption badge */}
                     <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-[#38BDF8] bg-black/40 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                        Live Analytics Engine
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-[#38BDF8] bg-black/60 px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Strategic Technology Advisory
                       </span>
-                      <p className="text-base font-bold mt-1.5">Executive Data Cockpit &amp; Cloud Systems</p>
+                      <p className="text-base font-bold mt-1.5 leading-snug">
+                        Executive Boardroom Strategy &amp; Architecture Delivery
+                      </p>
                     </div>
                   </div>
+
+                  {/* Overlaid Floating Consultant Badge with Wow Idle Motion */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
+                    className="absolute top-7 left-7 bg-white/95 dark:bg-[#0B1B2B]/95 backdrop-blur-md rounded-2xl p-2.5 pr-4 shadow-lg border border-slate-200/80 dark:border-slate-700 flex items-center gap-3"
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=160&auto=format&fit=crop"
+                      alt="Senior Solutions Architect"
+                      className="w-10 h-10 rounded-xl object-cover border border-[#0077FF]/30"
+                    />
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Senior Advisory</span>
+                      </div>
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">Principal Technology Consultants</p>
+                    </div>
+                  </motion.div>
 
                   {/* Overlaid Floating Metrics Card */}
                   <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                        <TrendingUp className="w-3.5 h-3.5 text-[#0077FF]" />
+                    <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#132034] border border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        <TrendingUp className="w-3.5 h-3.5 text-[#0077FF] dark:text-[#38BDF8]" />
                         <span>Reporting Latency</span>
                       </div>
-                      <p className="text-lg font-extrabold text-[#0B1B2B] mt-1 font-heading">Sub-second</p>
-                      <p className="text-[11px] text-emerald-600 font-medium mt-0.5">Real-time sync</p>
+                      <p className="text-lg font-extrabold text-[#0B1B2B] dark:text-white mt-1 font-heading">Sub-second</p>
+                      <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">Real-time sync</p>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                        <Zap className="w-3.5 h-3.5 text-amber-500" />
-                        <span>System Uptime</span>
+                    <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#132034] border border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
+                        <span>System Reliability</span>
                       </div>
-                      <p className="text-lg font-extrabold text-[#0B1B2B] mt-1 font-heading">99.98%</p>
-                      <p className="text-[11px] text-slate-500 font-medium mt-0.5">Continuous SLA</p>
+                      <p className="text-lg font-extrabold text-[#0B1B2B] dark:text-white mt-1 font-heading">99.98%</p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">Continuous SLA</p>
                     </div>
                   </div>
 
-                  {/* Small tag line badge */}
-                  <div className="mt-3 py-2 px-3 rounded-lg bg-[#0077FF]/5 border border-[#0077FF]/15 flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-700">You bring the challenge.</span>
-                    <span className="font-bold text-[#0077FF]">DataSource builds the solution.</span>
+                  {/* Brand Promise Line */}
+                  <div className="mt-3 py-2 px-3 rounded-lg bg-[#0077FF]/5 dark:bg-[#0077FF]/15 border border-[#0077FF]/15 dark:border-[#0077FF]/30 flex items-center justify-between text-xs">
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">You bring the challenge.</span>
+                    <span className="font-bold text-[#0077FF] dark:text-[#38BDF8]">DataSource builds the solution.</span>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
+
+          {/* Consultancy Practice Pillars Strip with Section Images */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
+          >
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/70 dark:border-slate-800 flex items-center gap-4 shadow-sm hover:border-[#0077FF]/40 transition-all group">
+              <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-slate-900">
+                <img
+                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=300&auto=format&fit=crop"
+                  alt="Architecture & IT Consulting"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Advisory Practice</p>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Problem-First Discovery &amp; IT Audits</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Independent architecture evaluations &amp; roadmaps</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/70 dark:border-slate-800 flex items-center gap-4 shadow-sm hover:border-[#0077FF]/40 transition-all group">
+              <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-slate-900">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=300&auto=format&fit=crop"
+                  alt="Enterprise Data Engineering"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Data &amp; BI Practice</p>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Modern Data Pipelines &amp; Analytics</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">High-throughput ETL, warehousing &amp; Power BI</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/70 dark:border-slate-800 flex items-center gap-4 shadow-sm hover:border-[#0077FF]/40 transition-all group">
+              <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-slate-900">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=300&auto=format&fit=crop"
+                  alt="Full Stack Engineering"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">Engineering Practice</p>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Production Web &amp; Cloud Platforms</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Scalable TypeScript, microservices &amp; UI/UX</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 2. TRUST / VALUE CATEGORIES STRIP (Figma Inspired) */}
-      <section className="py-10 bg-white border-b border-slate-200/80">
+      {/* 2. TRUST / VALUE CATEGORIES STRIP */}
+      <section className="py-10 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
               Trusted Technology &amp; Data Partner Across Sectors
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             {clientCategories.map((cat, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="py-3 px-3 rounded-xl bg-slate-50 hover:bg-white border border-slate-200/60 hover:border-[#0077FF]/40 text-center transition-all shadow-none hover:shadow-sm group cursor-default"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="py-3 px-3 rounded-xl bg-slate-50 dark:bg-[#111C2E] hover:bg-white dark:hover:bg-[#162338] border border-slate-200/60 dark:border-slate-800 hover:border-[#0077FF]/40 text-center transition-all shadow-none hover:shadow-sm cursor-default"
               >
-                <p className="text-xs font-bold text-slate-700 group-hover:text-[#0077FF] transition-colors">
+                <p className="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors">
                   {cat}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. ABOUT / EXPERTISE ASYMMETRIC SECTION */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] border-b border-slate-100">
+      {/* 3. ABOUT / EXPERTISE ASYMMETRIC SECTION WITH SECTION IMAGERY */}
+      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Column */}
-            <div className="lg:col-span-5 space-y-5">
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 space-y-6"
+            >
               <Eyebrow text="About DataSource" variant="blue" />
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] tracking-tight font-heading leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight font-heading leading-tight">
                 Solving Complexity With Technology and Data Clarity
               </h2>
-              <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
+              <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-body">
                 From digital products and web applications to analytics, dashboards and data engineering, DataSource helps businesses turn complex requirements into practical technology solutions.
               </p>
-              <div className="pt-2">
+              
+              {/* Professional consultancy advisory team visual */}
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-md group">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop"
+                  alt="DataSource Senior Technology Consulting Team"
+                  className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B]/90 via-[#0B1B2B]/40 to-transparent flex items-end p-4">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#38BDF8] bg-black/50 px-2 py-0.5 rounded">
+                      DataSource Advisory Guild
+                    </span>
+                    <p className="text-white text-xs font-semibold mt-1">
+                      Hands-on architecture reviews, zero-fluff audits, and pragmatic problem-solving
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-1">
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 text-[#0077FF] font-bold hover:text-[#0052CC] transition-colors group"
+                  className="inline-flex items-center gap-2 text-[#0077FF] dark:text-[#38BDF8] font-bold hover:text-[#0052CC] dark:hover:text-cyan-300 transition-colors group"
                 >
                   <span>Explore DataSource Story &amp; Leadership</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Column: 4 Capability Cards */}
+            {/* Right Column: 4 Capability Cards with Scroll Entrance */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {capabilities.map((cap, i) => (
-                <div
-                  key={i}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#0077FF]/30 transition-all group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#0077FF]/10 text-[#0077FF] flex items-center justify-center font-bold text-sm mb-4 group-hover:bg-[#0077FF] group-hover:text-white transition-colors">
-                    0{i + 1}
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 font-heading group-hover:text-[#0077FF] transition-colors">
-                    {cap.title}
-                  </h3>
-                  <p className="text-sm text-slate-500 mt-2 leading-relaxed font-body">{cap.desc}</p>
-                </div>
-              ))}
+              {capabilities.map((cap, i) => {
+                const IconComponent = cap.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                    className="p-6 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-[#0077FF]/30 dark:hover:border-[#0077FF]/50 transition-all group flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="w-11 h-11 rounded-xl bg-[#0077FF]/10 dark:bg-[#0077FF]/20 text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center font-bold text-sm mb-4 group-hover:bg-[#0077FF] group-hover:text-white transition-colors">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white font-heading group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors">
+                        {cap.title}
+                      </h3>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed font-body">{cap.desc}</p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                      Capability Pillar 0{i + 1}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. BUSINESS RESULTS / STATS SECTION (CMS Editable) */}
-      <section className="py-14 bg-white border-b border-slate-200/80">
+      {/* 4. BUSINESS RESULTS / STATS SECTION */}
+      <section className="py-14 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-10"
+          >
             <Eyebrow text="Demonstrated Experience" variant="cyan" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
               Measurable Technical &amp; Operational Impact
             </h2>
-            <p className="text-xs text-slate-400 mt-1 italic">
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 italic">
               *Sample performance indicators — fully manageable and customizable via the DataSource CMS
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {settings?.stats.map((stat, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 text-center hover:bg-white hover:border-[#0077FF]/30 transition-all hover:shadow-sm"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="p-6 rounded-2xl bg-slate-50 dark:bg-[#111C2E] border border-slate-200/80 dark:border-slate-800 text-center hover:bg-white dark:hover:bg-[#162338] hover:border-[#0077FF]/30 dark:hover:border-[#0077FF]/40 transition-all hover:shadow-md"
               >
-                <div className="text-4xl sm:text-5xl font-black text-[#0077FF] font-heading tracking-tight">
+                <div className="text-4xl sm:text-5xl font-black text-[#0077FF] dark:text-[#38BDF8] font-heading tracking-tight">
                   {stat.value}
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mt-2">{stat.label}</h3>
-                <p className="text-xs text-slate-500 mt-1">{stat.sublabel}</p>
-              </div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">{stat.label}</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{stat.sublabel}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. SERVICES SECTION (Structured Cards & Filtering) */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] border-b border-slate-100">
+      {/* 5. SERVICES SECTION WITH HIGH-RESOLUTION SECTION IMAGERY & SCROLL ANIMATIONS */}
+      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+          >
             <div>
               <Eyebrow text="Practice Areas" variant="blue" />
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
                 Structured Technology &amp; Data Services
               </h2>
-              <p className="text-slate-600 text-base mt-2 max-w-xl">
+              <p className="text-slate-600 dark:text-slate-300 text-base mt-2 max-w-xl">
                 We organize our engineering capabilities into four focused consulting pillars designed to solve specific operational challenges.
               </p>
             </div>
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-[#0077FF] border border-[#0077FF]/30 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
+              className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-[#0077FF] dark:text-[#38BDF8] border border-[#0077FF]/30 dark:border-[#0077FF]/50 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shrink-0 shadow-sm"
             >
-              <span>View All Services</span>
+              <span>View All 8+ Practice Services</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Category Filter Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8">
@@ -366,7 +567,7 @@ export const Home: React.FC = () => {
               className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shrink-0 ${
                 activeCategory === 'all'
                   ? 'bg-[#0077FF] text-white shadow-sm'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
               }`}
             >
               All Capabilities
@@ -378,7 +579,7 @@ export const Home: React.FC = () => {
                 className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shrink-0 ${
                   activeCategory === cat.id
                     ? 'bg-[#0077FF] text-white shadow-sm'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {cat.name}
@@ -386,85 +587,128 @@ export const Home: React.FC = () => {
             ))}
           </div>
 
-          {/* Service Cards Grid */}
+          {/* Service Cards Grid with Photographic Header & Hover Wow Animations */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {filteredServices.map((service) => (
-              <div
-                key={service.id}
-                className="consulting-card bg-white rounded-2xl p-7 border border-slate-200/90 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#0077FF]/10 text-[#0077FF] flex items-center justify-center mb-5">
-                    <DynamicIcon name={service.iconName} className="w-6 h-6" />
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                    {service.categoryName || 'Consulting'}
-                  </span>
-                  <h3 className="text-xl font-bold text-slate-900 mt-1 mb-3 font-heading hover:text-[#0077FF] transition-colors">
-                    <Link to={`/services/${service.slug}`}>{service.title}</Link>
-                  </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-5">{service.excerpt}</p>
-
-                  <div className="space-y-2 border-t border-slate-100 pt-4 mb-6">
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Key Capabilities:</p>
-                    {service.keyCapabilities.slice(0, 3).map((cap, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-slate-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#0077FF] shrink-0 mt-0.5" />
-                        <span>{cap}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Link
-                  to={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#0077FF] hover:text-[#0052CC] pt-2 group"
+            {filteredServices.map((service, index) => {
+              const cardImage = serviceImages[service.slug] || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop';
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
                 >
-                  <span>Service Details &amp; Scope</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            ))}
+                  <div>
+                    {/* Photographic Service Image Banner */}
+                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                      <img
+                        src={cardImage}
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-[#0E1726]/30 to-transparent" />
+                      
+                      {/* Overlaid Category Tag & Dynamic Icon */}
+                      <div className="absolute top-3 left-3 bg-white/90 dark:bg-[#0B1B2B]/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-bold text-[#0077FF] dark:text-[#38BDF8] border border-white/20">
+                        {service.categoryName || 'Consulting'}
+                      </div>
+                      
+                      <div className="absolute bottom-3 right-3 w-10 h-10 rounded-xl bg-white/95 dark:bg-[#0B1B2B]/95 backdrop-blur-md text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shadow-lg border border-slate-200/60 dark:border-slate-700">
+                        <DynamicIcon name={service.iconName} className="w-5 h-5" />
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2.5 font-heading group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors leading-snug">
+                        <Link to={`/services/${service.slug}`}>{service.title}</Link>
+                      </h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5 font-body">
+                        {service.excerpt}
+                      </p>
+
+                      <div className="space-y-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Key Capabilities:</p>
+                        {service.keyCapabilities.slice(0, 3).map((cap, i) => (
+                          <div key={i} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#0077FF] dark:text-[#38BDF8] shrink-0 mt-0.5" />
+                            <span>{cap}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="px-6 pb-6 pt-2">
+                    <Link
+                      to={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-[#0077FF] dark:text-[#38BDF8] hover:text-[#0052CC] dark:hover:text-cyan-300 pt-2 group-hover:translate-x-1 transition-all"
+                    >
+                      <span>Service Details &amp; Scope</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 6. CASE STUDIES (Real Impact, Proven Results with Challenge, Solution, Result) */}
-      <section className="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+      {/* 6. CASE STUDIES WITH VERIFIED BEFORE/AFTER PHOTOGRAPHY */}
+      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-14"
+          >
             <Eyebrow text="Case Studies" variant="blue" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
               Real Impact, Proven Results
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-600 dark:text-slate-300 text-base mt-2">
               Explore how DataSource solves engineering bottlenecks and turns raw business records into measurable operational advantages.
             </p>
-          </div>
+          </motion.div>
 
           <div className="space-y-12">
-            {caseStudies.slice(0, 2).map((cs, idx) => (
-              <div
+            {caseStudies.slice(0, 2).map((cs, index) => (
+              <motion.div
                 key={cs.id}
-                className="bg-slate-50 rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: index * 0.12 }}
+                className="bg-slate-50 dark:bg-[#0E1726] rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center hover:border-[#0077FF]/30 transition-all"
               >
                 {/* Left Column: Image & Client Metadata */}
                 <div className="lg:col-span-5 space-y-4">
-                  <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md">
+                  <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 shadow-md group relative">
                     <img
                       src={cs.coverImage}
                       alt={cs.title}
-                      className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-3 text-white">
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-[#0077FF] px-2 py-0.5 rounded">
+                        {cs.client}
+                      </span>
+                    </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
                       {cs.industry}
                     </span>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
                       {cs.year}
                     </span>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#0077FF]/10 text-[#0077FF]">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#0077FF]/10 dark:bg-[#0077FF]/25 text-[#0077FF] dark:text-[#38BDF8]">
                       Verified Case
                     </span>
                   </div>
@@ -472,34 +716,34 @@ export const Home: React.FC = () => {
 
                 {/* Right Column: Challenge, Solution, Result */}
                 <div className="lg:col-span-7 space-y-5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">{cs.client}</p>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B1B2B] font-heading leading-tight">
-                    <Link to={`/case-studies/${cs.slug}`} className="hover:text-[#0077FF] transition-colors">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">{cs.client}</p>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B1B2B] dark:text-white font-heading leading-tight">
+                    <Link to={`/case-studies/${cs.slug}`} className="hover:text-[#0077FF] dark:hover:text-[#38BDF8] transition-colors">
                       {cs.title}
                     </Link>
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <div className="bg-white p-4 rounded-xl border border-slate-200/80">
-                      <p className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">Challenge</p>
-                      <p className="text-xs text-slate-600 line-clamp-4">{cs.challenge}</p>
+                    <div className="bg-white dark:bg-[#132034] p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                      <p className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 mb-1">Challenge</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-4">{cs.challenge}</p>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-slate-200/80">
-                      <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] mb-1">Solution</p>
-                      <p className="text-xs text-slate-600 line-clamp-4">{cs.solution}</p>
+                    <div className="bg-white dark:bg-[#132034] p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8] mb-1">Solution</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-4">{cs.solution}</p>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-slate-200/80">
-                      <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Result</p>
-                      <p className="text-xs text-slate-600 line-clamp-4">{cs.result}</p>
+                    <div className="bg-white dark:bg-[#132034] p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                      <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">Result</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-4">{cs.result}</p>
                     </div>
                   </div>
 
                   {/* Highlight Metrics */}
                   <div className="grid grid-cols-3 gap-3 pt-2">
                     {cs.metrics.map((m, i) => (
-                      <div key={i} className="text-center p-3 rounded-xl bg-white border border-slate-200/70">
-                        <div className="text-base sm:text-lg font-black text-[#0077FF] font-heading">{m.value}</div>
-                        <div className="text-[11px] text-slate-500 font-medium truncate">{m.label}</div>
+                      <div key={i} className="text-center p-3 rounded-xl bg-white dark:bg-[#132034] border border-slate-200/70 dark:border-slate-700/80">
+                        <div className="text-base sm:text-lg font-black text-[#0077FF] dark:text-[#38BDF8] font-heading">{m.value}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">{m.label}</div>
                       </div>
                     ))}
                   </div>
@@ -507,28 +751,28 @@ export const Home: React.FC = () => {
                   <div className="pt-2 flex items-center justify-between">
                     <div className="flex flex-wrap gap-1.5">
                       {cs.technologies.slice(0, 4).map((tech, i) => (
-                        <span key={i} className="text-[11px] bg-slate-200/70 text-slate-700 px-2 py-0.5 rounded font-mono">
+                        <span key={i} className="text-[11px] bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-mono">
                           {tech}
                         </span>
                       ))}
                     </div>
                     <Link
                       to={`/case-studies/${cs.slug}`}
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0077FF] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0077FF] dark:text-[#38BDF8] hover:underline group"
                     >
-                      <span>Read Case Study</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span>Read Full Study</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           <div className="text-center mt-12">
             <Link
               to="/case-studies"
-              className="inline-flex items-center gap-2 bg-[#0077FF] text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow hover:bg-[#0062D6] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow transition-colors"
             >
               <span>Explore All Case Studies &amp; Outcomes</span>
               <ArrowRight className="w-4 h-4" />
@@ -537,10 +781,26 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. PROCESS SECTION: THE DATASOURCE WAY (4 Steps) */}
+      {/* 7. METHODOLOGY: THE DATASOURCE WAY (With High-Tech Delivery Center Background & Phase Images) */}
       <section className="py-16 lg:py-24 bg-[#0B1B2B] text-white relative overflow-hidden">
+        {/* Background Delivery Center Image Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop"
+            alt="DataSource Engineering Framework Center"
+            className="w-full h-full object-cover opacity-15 mix-blend-luminosity scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1B2B]/95 via-[#0B1B2B]/90 to-[#0B1B2B]/95" />
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-2xl mx-auto text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl mx-auto text-center mb-16"
+          >
             <Eyebrow text="Our Methodology" variant="white" />
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-heading">
               The DataSource Way
@@ -551,92 +811,150 @@ export const Home: React.FC = () => {
             <div className="mt-4 inline-block bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
               &ldquo;We start with the problem, not the technology.&rdquo;
             </div>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="bg-slate-900/80 p-7 rounded-2xl border border-slate-800 hover:border-cyan-400/50 transition-all group flex flex-col justify-between relative"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="bg-slate-900/90 rounded-2xl border border-slate-800 hover:border-cyan-400/50 transition-all group flex flex-col justify-between overflow-hidden shadow-lg"
               >
-                <div>
-                  <div className="text-3xl font-black text-cyan-400 font-heading mb-4 group-hover:scale-105 transition-transform">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
+                  <img
+                    src={step.img}
+                    alt={step.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                  <div className="absolute bottom-3 left-4 text-2xl font-black text-cyan-400 font-heading">
                     {step.num}
                   </div>
-                  <h3 className="text-xl font-bold text-white font-heading mb-3">{step.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed font-body">{step.desc}</p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-1.5 text-xs text-cyan-400 font-semibold">
-                  <span>Phase {step.num} Delivery</span>
+
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-white font-heading mb-2">{step.title}</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed font-body">{step.desc}</p>
+                  
+                  <div className="mt-4 pt-3 border-t border-slate-800 flex items-center gap-1.5 text-xs text-cyan-400 font-semibold">
+                    <span>Phase {step.num} Delivery</span>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 8. INDUSTRIES SECTION */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] border-b border-slate-100">
+      {/* 8. INDUSTRIES SECTION WITH DEDICATED PHOTOGRAPHY ON EVERY CARD */}
+      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-14"
+          >
             <Eyebrow text="Industry Alignment" variant="blue" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
               Domain Expertise Built For Your Sector
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-600 dark:text-slate-300 text-base mt-2">
               Every industry has distinct regulatory requirements, operational tempos, and data structures. We bring proven domain frameworks to each engagement.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industries.slice(0, 6).map((ind) => (
-              <div
-                key={ind.id}
-                className="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md hover:border-[#0077FF]/40 transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#0077FF]/10 text-[#0077FF] flex items-center justify-center mb-5">
-                    <DynamicIcon name={ind.iconName} className="w-6 h-6" />
+            {industries.slice(0, 6).map((ind, index) => {
+              const indImg = ind.imageUrl || industryFallbackImages[ind.slug] || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop';
+              return (
+                <motion.div
+                  key={ind.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 dark:hover:border-[#0077FF]/50 transition-all flex flex-col justify-between overflow-hidden group"
+                >
+                  <div>
+                    {/* Industry Photographic Banner */}
+                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                      <img
+                        src={indImg}
+                        alt={ind.name}
+                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E1726] via-[#0E1726]/30 to-transparent" />
+                      
+                      <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl bg-white/95 dark:bg-[#0B1B2B]/95 backdrop-blur-md text-[#0077FF] dark:text-[#38BDF8] flex items-center justify-center shadow-md border border-slate-200/60 dark:border-slate-700">
+                        <DynamicIcon name={ind.iconName} className="w-5 h-5" />
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white font-heading mb-2 group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors">
+                        {ind.name}
+                      </h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 font-body">
+                        {ind.description}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 font-heading mb-2">{ind.name}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-4 font-body">{ind.description}</p>
-                </div>
-                <div className="pt-4 border-t border-slate-100">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
-                    Common Solutions:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {ind.relatedServices.map((svc, idx) => (
-                      <span key={idx} className="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-medium">
-                        {svc}
-                      </span>
-                    ))}
+
+                  <div className="px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2">
+                      Common Solutions:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {ind.relatedServices.map((svc, idx) => (
+                        <span key={idx} className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-md font-medium">
+                          {svc}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 9. TESTIMONIALS SECTION */}
-      <section className="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-14"
+          >
             <Eyebrow text="Client Feedback" variant="cyan" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
               What Technology Leaders Say
             </h2>
-            <p className="text-xs text-slate-400 mt-1 italic">
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 italic">
               *Sample demonstration reviews provided for evaluation — easily manageable and editable in CMS
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.slice(0, 3).map((t) => (
-              <div
+            {testimonials.slice(0, 3).map((t, index) => (
+              <motion.div
                 key={t.id}
-                className="p-7 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm flex flex-col justify-between"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.45, delay: index * 0.1 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="p-7 rounded-2xl bg-slate-50 dark:bg-[#0E1726] border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between hover:border-[#0077FF]/30 transition-all"
               >
                 <div>
                   <div className="flex items-center gap-1 text-amber-400 mb-4">
@@ -644,42 +962,48 @@ export const Home: React.FC = () => {
                       <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <Quote className="w-8 h-8 text-[#0077FF]/20 mb-2" />
-                  <p className="text-sm text-slate-700 italic leading-relaxed mb-6 font-body">
+                  <Quote className="w-8 h-8 text-[#0077FF]/20 dark:text-[#38BDF8]/20 mb-2" />
+                  <p className="text-sm text-slate-700 dark:text-slate-300 italic leading-relaxed mb-6 font-body">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
-                <div className="pt-4 border-t border-slate-200/80 flex items-center gap-3">
+                <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800 flex items-center gap-3">
                   {t.photoUrl ? (
-                    <img src={t.photoUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                    <img src={t.photoUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover border border-[#0077FF]/30" />
                   ) : (
-                    <div className="w-10 h-10 rounded-full bg-[#0077FF]/10 text-[#0077FF] font-bold flex items-center justify-center text-sm">
+                    <div className="w-10 h-10 rounded-full bg-[#0077FF]/10 dark:bg-[#0077FF]/20 text-[#0077FF] dark:text-[#38BDF8] font-bold flex items-center justify-center text-sm">
                       {t.name[0]}
                     </div>
                   )}
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">{t.name}</h4>
-                    <p className="text-xs text-slate-500">{t.designation} • {t.company}</p>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.name}</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{t.designation} • {t.company}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 10. FAQ ACCORDION SECTION */}
-      <section className="py-16 lg:py-24 bg-[#FAFCFF] border-b border-slate-100">
+      {/* 10. FAQ ACCORDION SECTION WITH DIRECT CONSULTANT CARD */}
+      <section className="py-16 lg:py-24 bg-[#FAFCFF] dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
             <Eyebrow text="Common Questions" variant="blue" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
               Frequently Asked Questions
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-600 dark:text-slate-300 text-base mt-2">
               Everything you need to know about working with DataSource Technology &amp; Solutions.
             </p>
-          </div>
+          </motion.div>
 
           <div className="space-y-4">
             {faqs.map((faq) => {
@@ -687,24 +1011,24 @@ export const Home: React.FC = () => {
               return (
                 <div
                   key={faq.id}
-                  className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden transition-colors"
+                  className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition-colors"
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : faq.id)}
                     className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-base sm:text-lg font-bold text-slate-900 font-heading">
+                    <span className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-heading">
                       {faq.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-[#0077FF] shrink-0 transition-transform duration-200 ${
+                      className={`w-5 h-5 text-[#0077FF] dark:text-[#38BDF8] shrink-0 transition-transform duration-200 ${
                         isOpen ? 'rotate-180' : ''
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 font-body">
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-100 dark:border-slate-800/80 font-body">
                       {faq.answer}
                     </div>
                   )}
@@ -713,75 +1037,108 @@ export const Home: React.FC = () => {
             })}
           </div>
 
-          <div className="text-center mt-8 text-sm text-slate-500">
-            Have a different question?{' '}
-            <Link to="/contact" className="text-[#0077FF] font-bold hover:underline">
-              Speak directly with our engineering team
+          {/* Direct Consultant Advisory Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-20px' }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 p-5 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm"
+          >
+            <div className="flex items-center gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
+                alt="Principal Consultant"
+                className="w-12 h-12 rounded-full object-cover border-2 border-[#0077FF]/40 shrink-0"
+              />
+              <div>
+                <p className="text-xs font-bold text-[#0077FF] dark:text-[#38BDF8] uppercase tracking-wider">Direct Advisory Access</p>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Have a specific architectural question?</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Speak directly with our senior consulting engineers with zero sales pressure.</p>
+              </div>
+            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-1.5 bg-[#0077FF] hover:bg-[#0062D6] text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0 transition-colors"
+            >
+              <span>Schedule Architecture Call</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 11. LATEST INSIGHTS / BLOG CARDS */}
-      <section className="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+      {/* 11. LATEST INSIGHTS / BLOG CARDS WITH PHOTOGRAPHY */}
+      <section className="py-16 lg:py-24 bg-white dark:bg-[#0A1220] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+          >
             <div>
               <Eyebrow text="Knowledge &amp; Perspectives" variant="blue" />
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] mt-2 font-heading">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white mt-2 font-heading">
                 Insights from Our Practice
               </h2>
-              <p className="text-slate-600 text-base mt-2 max-w-xl">
+              <p className="text-slate-600 dark:text-slate-300 text-base mt-2 max-w-xl">
                 Practical articles on enterprise data modeling, web architecture, and avoiding tech debt traps.
               </p>
             </div>
             <Link
               to="/insights"
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-[#0077FF] border border-[#0077FF]/30 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
+              className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-[#0077FF] dark:text-[#38BDF8] border border-[#0077FF]/30 dark:border-[#0077FF]/50 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shrink-0 shadow-sm"
             >
               <span>View All Articles</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.slice(0, 3).map((post) => (
-              <article
+            {posts.slice(0, 3).map((post, index) => (
+              <motion.article
                 key={post.id}
-                className="consulting-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden flex flex-col justify-between"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-[#0077FF]/40 transition-all group"
               >
                 <div>
-                  <div className="aspect-[16/9] overflow-hidden bg-slate-100">
+                  <div className="aspect-[16/9] overflow-hidden bg-slate-900">
                     <img
                       src={post.coverImage}
                       alt={post.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 opacity-90"
                     />
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-3 text-xs text-slate-400 mb-3">
-                      <span className="font-bold text-[#0077FF] uppercase tracking-wider">{post.category}</span>
+                    <div className="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500 mb-3">
+                      <span className="font-bold text-[#0077FF] dark:text-[#38BDF8] uppercase tracking-wider">{post.category}</span>
                       <span>•</span>
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 font-heading leading-snug hover:text-[#0077FF] transition-colors mb-3">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white font-heading leading-snug group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors mb-3">
                       <Link to={`/insights/${post.slug}`}>{post.title}</Link>
                     </h3>
-                    <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed font-body">{post.excerpt}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-body">{post.excerpt}</p>
                   </div>
                 </div>
 
-                <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs text-slate-500 font-medium">{post.author}</span>
+                <div className="px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{post.author}</span>
                   <Link
                     to={`/insights/${post.slug}`}
-                    className="text-xs font-bold text-[#0077FF] hover:underline inline-flex items-center gap-1"
+                    className="text-xs font-bold text-[#0077FF] dark:text-[#38BDF8] hover:underline inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
         </div>

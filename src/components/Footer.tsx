@@ -5,13 +5,23 @@ import { DataSourceLogo } from './DataSourceLogo.js';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0B1B2B] text-slate-300 border-t border-slate-800">
+    <footer className="bg-[#0B1B2B] dark:bg-[#060D17] text-slate-300 border-t border-slate-800 dark:border-slate-800/80 transition-colors duration-200">
       {/* Upper CTA Consultation Banner */}
       <div className="border-b border-slate-800/80 py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-[#0E2439] to-[#0A387E] rounded-3xl p-8 sm:p-12 lg:p-16 border border-slate-700/60 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          <div className="bg-gradient-to-r from-[#0E2439] to-[#0A387E] dark:from-[#0B1E32] dark:to-[#082855] rounded-3xl p-8 sm:p-12 lg:p-16 border border-slate-700/60 dark:border-slate-700/40 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            {/* Background professional boardroom/technology advisory image */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <img
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop"
+                alt="Executive Strategy Consultation"
+                className="w-full h-full object-cover opacity-20 mix-blend-luminosity"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B1E32]/95 via-[#0E2A4A]/90 to-[#0A387E]/85" />
+            </div>
+
             {/* Background graphic glow */}
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[#0077FF]/15 blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[#0077FF]/20 blur-3xl pointer-events-none" />
             <div className="relative z-10 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-300 border border-cyan-400/20 text-xs font-bold uppercase tracking-wider mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
@@ -49,7 +59,10 @@ export const Footer: React.FC = () => {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
             <Link to="/" className="inline-block focus:outline-none" aria-label="DataSource Home">
-              <DataSourceLogo variant="white-horizontal" className="h-10 w-auto" />
+              <DataSourceLogo
+                variant="white-horizontal"
+                className="h-14 sm:h-16 md:h-18 w-auto max-w-[340px] sm:max-w-[420px]"
+              />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
               DataSource is a technology and data consulting partner helping businesses solve technical problems, build digital products, improve operations, and turn data into useful business decisions.
@@ -203,9 +216,6 @@ export const Footer: React.FC = () => {
             </Link>
             <Link to="/terms-and-conditions" className="hover:text-slate-300 transition-colors">
               Terms &amp; Conditions
-            </Link>
-            <Link to="/admin/login" className="text-slate-600 hover:text-cyan-400 transition-colors font-medium">
-              CMS Admin Portal
             </Link>
           </div>
         </div>

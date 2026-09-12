@@ -128,6 +128,8 @@ export interface FAQ {
 
 export interface ContactEnquiry {
   id: string;
+  userId?: string;
+  userEmail?: string;
   name: string;
   company: string;
   email: string;
@@ -140,6 +142,29 @@ export interface ContactEnquiry {
   status: 'new' | 'in_review' | 'contacted' | 'resolved';
   notes?: string;
   createdAt: string;
+}
+
+export interface UserProfile {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+  role: 'client' | 'admin';
+  company?: string;
+  phone?: string;
+  createdAt: string;
+  lastLoginAt: string;
+}
+
+export interface UserBookmark {
+  id: string;
+  userId: string;
+  itemType: 'casestudy' | 'insight' | 'service';
+  itemId: string;
+  title: string;
+  slug: string;
+  savedAt: string;
+  excerpt?: string;
 }
 
 export interface MediaItem {

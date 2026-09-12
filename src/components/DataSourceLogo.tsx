@@ -58,10 +58,11 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
   }
 
   const isWhite = variant === 'white-horizontal';
+  const viewBox = showTagline ? '0 0 920 220' : '0 0 920 155';
 
   return (
     <svg
-      viewBox="0 0 900 240"
+      viewBox={viewBox}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

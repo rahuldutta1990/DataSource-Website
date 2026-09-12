@@ -48,33 +48,33 @@ export const ServiceDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF]">
+    <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-100 py-3.5 px-4">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs text-slate-500">
-          <Link to="/" className="hover:text-[#0077FF]">Home</Link>
+      <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-3.5 px-4">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <Link to="/" className="hover:text-[#0077FF] dark:hover:text-[#38BDF8]">Home</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link to="/services" className="hover:text-[#0077FF]">Services</Link>
+          <Link to="/services" className="hover:text-[#0077FF] dark:hover:text-[#38BDF8]">Services</Link>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-slate-900 font-semibold truncate">{service.title}</span>
+          <span className="text-slate-900 dark:text-white font-semibold truncate">{service.title}</span>
         </div>
       </div>
 
       {/* Hero */}
-      <section className="pt-12 pb-16 bg-white border-b border-slate-100">
+      <section className="pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <Eyebrow text={service.categoryName || 'Practice'} variant="blue" />
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] font-heading leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] dark:text-white font-heading leading-tight">
               {service.title}
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 font-body leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-body leading-relaxed">
               {service.excerpt}
             </p>
             <div className="pt-2 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-[#0077FF] text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow hover:bg-[#0062D6] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow transition-colors"
               >
                 <span>Consult On This Service</span>
                 <ArrowRight className="w-4 h-4" />
@@ -90,35 +90,35 @@ export const ServiceDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Left: Detailed Overview */}
             <div className="lg:col-span-8 space-y-10">
-              <div className="bg-white rounded-2xl p-8 border border-slate-200/90 shadow-sm space-y-6">
-                <h2 className="text-2xl font-bold text-[#0B1B2B] font-heading">
+              <div className="bg-white dark:bg-[#0E1726] rounded-2xl p-8 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-6">
+                <h2 className="text-2xl font-bold text-[#0B1B2B] dark:text-white font-heading">
                   Overview &amp; Approach
                 </h2>
-                <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed font-body">
+                <div className="prose prose-slate max-w-none text-slate-700 dark:text-slate-300 leading-relaxed font-body">
                   <p className="text-base sm:text-lg">{service.description}</p>
                 </div>
               </div>
 
               {/* Key Capabilities */}
-              <div className="bg-white rounded-2xl p-8 border border-slate-200/90 shadow-sm space-y-6">
-                <h2 className="text-2xl font-bold text-[#0B1B2B] font-heading">
+              <div className="bg-white dark:bg-[#0E1726] rounded-2xl p-8 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-6">
+                <h2 className="text-2xl font-bold text-[#0B1B2B] dark:text-white font-heading">
                   Key Capabilities &amp; Deliverables
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {service.keyCapabilities.map((cap, i) => (
                     <div
                       key={i}
-                      className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3"
+                      className="p-4 rounded-xl bg-slate-50 dark:bg-[#132034] border border-slate-200/80 dark:border-slate-700/80 flex items-start gap-3"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-[#0077FF] shrink-0 mt-0.5" />
-                      <span className="text-sm font-semibold text-slate-800">{cap}</span>
+                      <CheckCircle2 className="w-5 h-5 text-[#0077FF] dark:text-[#38BDF8] shrink-0 mt-0.5" />
+                      <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{cap}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Engagement Model */}
-              <div className="bg-slate-900 text-white rounded-2xl p-8 space-y-4">
+              <div className="bg-slate-900 dark:bg-[#0A1220] border border-slate-800 text-white rounded-2xl p-8 space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#38BDF8]">
                   How We Engage
                 </span>
@@ -131,22 +131,22 @@ export const ServiceDetail: React.FC = () => {
 
             {/* Right: Sidebar & Related Services */}
             <div className="lg:col-span-4 space-y-6">
-              <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm space-y-4">
-                <h3 className="text-base font-bold text-slate-900 font-heading">Ready to Discuss?</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
+              <div className="bg-white dark:bg-[#0E1726] rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-4">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white font-heading">Ready to Discuss?</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                   Speak directly with a DataSource practice lead to scope your timeline, architecture requirements, and budget.
                 </p>
                 <Link
                   to="/contact"
-                  className="w-full text-center bg-[#0077FF] text-white py-3 rounded-xl font-bold text-sm block hover:bg-[#0062D6] transition-colors"
+                  className="w-full text-center bg-[#0077FF] hover:bg-[#0062D6] text-white py-3 rounded-xl font-bold text-sm block transition-colors"
                 >
                   Book Free Consultation
                 </Link>
               </div>
 
               {service.relatedServices && service.relatedServices.length > 0 && (
-                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm space-y-4">
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400">
+                <div className="bg-white dark:bg-[#0E1726] rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-4">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     Complementary Services
                   </h3>
                   <div className="space-y-3">
@@ -154,12 +154,12 @@ export const ServiceDetail: React.FC = () => {
                       <Link
                         key={rel.id}
                         to={`/services/${rel.slug}`}
-                        className="block p-3 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-100 transition-colors group"
+                        className="block p-3 rounded-xl bg-slate-50 dark:bg-[#132034] hover:bg-blue-50/50 dark:hover:bg-[#182740] border border-slate-100 dark:border-slate-700/80 transition-colors group"
                       >
-                        <p className="text-sm font-bold text-slate-800 group-hover:text-[#0077FF] transition-colors">
+                        <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-[#0077FF] dark:group-hover:text-[#38BDF8] transition-colors">
                           {rel.title}
                         </p>
-                        <p className="text-xs text-slate-500 line-clamp-1 mt-1">{rel.excerpt}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-1">{rel.excerpt}</p>
                       </Link>
                     ))}
                   </div>

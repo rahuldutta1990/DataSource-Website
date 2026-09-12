@@ -1,0 +1,195 @@
+{
+  "entities": {
+    "users": {
+      "title": "users",
+      "description": "User profiles created upon Google Sign-In authentication",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth unique user identifier"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User Google email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar photo URL from Google"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["client", "admin"],
+          "description": "User permission role"
+        },
+        "company": {
+          "type": "string",
+          "description": "Company or organization name"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "description": "ISO timestamp of latest login"
+        }
+      },
+      "required": ["uid", "email", "displayName", "role"]
+    },
+    "services": {
+      "title": "services",
+      "description": "Technology and data consulting services",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "title": { "type": "string" },
+        "shortDescription": { "type": "string" },
+        "problemSolved": { "type": "string" },
+        "solution": { "type": "string" },
+        "deliverables": { "type": "array", "items": { "type": "string" } },
+        "businessOutcomes": { "type": "array", "items": { "type": "string" } },
+        "technologies": { "type": "array", "items": { "type": "string" } },
+        "icon": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "draft"] }
+      },
+      "required": ["title", "slug", "categoryId", "shortDescription"]
+    },
+    "caseStudies": {
+      "title": "caseStudies",
+      "description": "Client case studies, technical challenges, and verified results",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "title": { "type": "string" },
+        "client": { "type": "string" },
+        "industry": { "type": "string" },
+        "challenge": { "type": "string" },
+        "solution": { "type": "string" },
+        "results": { "type": "array", "items": { "type": "string" } },
+        "technologies": { "type": "array", "items": { "type": "string" } },
+        "featured": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "draft"] }
+      },
+      "required": ["title", "slug", "client", "challenge", "solution"]
+    },
+    "insights": {
+      "title": "insights",
+      "description": "Engineering blog posts and executive advisory articles",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "author": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "readTime": { "type": "string" },
+        "publishedAt": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "draft"] }
+      },
+      "required": ["title", "slug", "category", "content"]
+    },
+    "siteSettings": {
+      "title": "siteSettings",
+      "description": "Global website configurations, hero copy, and contact data",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "primaryEmail": { "type": "string" },
+        "primaryPhone": { "type": "string" }
+      }
+    },
+    "inquiries": {
+      "title": "inquiries",
+      "description": "Consultation inquiry or project request",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique inquiry identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Contact person name"
+        },
+        "company": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Business email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "serviceRequired": {
+          "type": "string",
+          "description": "Requested consulting service or pillar"
+        },
+        "requirement": {
+          "type": "string",
+          "description": "Detailed problem statement or project requirements"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "in_review", "contacted", "resolved"],
+          "description": "Processing status of the inquiry"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of inquiry submission"
+        }
+      },
+      "required": ["name", "email", "requirement", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "User profile documents keyed by Firebase Auth UID"
+    },
+    "/services/{serviceId}": {
+      "schema": "services",
+      "description": "Technology and data consulting services collection"
+    },
+    "/caseStudies/{caseStudyId}": {
+      "schema": "caseStudies",
+      "description": "Case studies and portfolio results collection"
+    },
+    "/insights/{insightId}": {
+      "schema": "insights",
+      "description": "Technical insights and blog posts collection"
+    },
+    "/siteSettings/global": {
+      "schema": "siteSettings",
+      "description": "Global website settings and content"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "inquiries",
+      "description": "Consultation and project requests submitted by clients"
+    }
+  }
+}

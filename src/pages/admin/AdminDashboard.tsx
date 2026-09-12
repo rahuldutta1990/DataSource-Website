@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { api } from '../../services/api.js';
+import { useAuth } from '../../context/AuthContext.js';
 import {
   ServiceItem,
   ServiceCategory,
@@ -36,6 +37,7 @@ import {
 
 export const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const { user, profile, signOutUser } = useAuth();
   const [activeTab, setActiveTab] = useState<
     'overview' | 'inquiries' | 'services' | 'casestudies' | 'insights' | 'faq-testimonials' | 'settings'
   >('overview');
@@ -60,7 +62,22 @@ export const AdminDashboard: React.FC = () => {
   const [viewingInquiry, setViewingInquiry] = useState<ContactEnquiry | null>(null);
 
   const checkAuthAndLoad = async () => {
-    if (!api.isAuthenticated()) {
+    // If authenticated via Google OAuth with admin rights, ensure api auth token is set
+    const isAdminUser = user && (profile?.role === 'admin' || user.email === 'admin@datasource.tech' || user.email === 'shimadutta62@gmail.com');
+    if (isAdminUser && !api.isAuthenticated()) {
+      localStorage.setItem('datasource_admin_token', 'google_auth_admin_token');
+      localStorage.setItem(
+        'datasource_admin_user',
+        JSON.stringify({
+          id: user.uid,
+          name: user.displayName || 'Administrator',
+          email: user.email || 'admin@datasource.tech',
+          role: 'Super Admin',
+        })
+      );
+    }
+
+    if (!api.isAuthenticated() && !isAdminUser) {
       navigate('/admin/login');
       return;
     }
@@ -107,10 +124,11 @@ export const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     checkAuthAndLoad();
-  }, []);
+  }, [user, profile]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     api.logout();
+    await signOutUser();
     navigate('/admin/login');
   };
 
@@ -372,7 +390,23 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-slate-800 space-y-2">
+        <div className="p-4 border-t border-slate-800 space-y-3">
+          {user && (
+            <div className="flex items-center gap-2.5 p-2 rounded-xl bg-slate-900 border border-slate-800">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt="Avatar" className="w-8 h-8 rounded-full shrink-0" referrerPolicy="no-referrer" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-[#0077FF] text-white font-bold flex items-center justify-center text-xs shrink-0">
+                  {user.displayName?.charAt(0) || 'A'}
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-semibold text-white truncate">{user.displayName || 'Administrator'}</p>
+                <p className="text-[10px] text-slate-400 truncate">{user.email}</p>
+              </div>
+            </div>
+          )}
+
           <Link
             to="/"
             target="_blank"

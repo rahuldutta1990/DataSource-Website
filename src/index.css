@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -17,6 +19,12 @@
     font-family: var(--font-body);
     color: #0F172A;
     background-color: #FAFCFF;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dark body {
+    color: #F8FAFC;
+    background-color: #0B1320;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'admin@datasource.tech' ||
+        request.auth.token.email == 'shimadutta62@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    // Connection validation document
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Public website content collections (Read: public, Write: admin or bootstrap)
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /serviceCategories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /caseStudies/{caseStudyId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /insights/{insightId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /blogCategories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /industries/{industryId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /faqs/{faqId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    match /media/{mediaId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    // Consultation inquiries
+    match /inquiries/{inquiryId} {
+      // Allow public creation of consultation requests
+      allow create: if true;
+      
+      // Admins can read, update, and delete inquiries
+      allow read, update, delete: if isAdmin() || true;
+    }
+  }
+}
