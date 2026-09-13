@@ -43,6 +43,8 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsConditions />} />
+              <Route path="/terms-conditions" element={<TermsConditions />} />
+              <Route path="/terms" element={<TermsConditions />} />
             </Route>
 
             {/* Admin & CMS Portal (Dedicated separate URL) */}

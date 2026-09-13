@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Sparkles,
@@ -469,13 +470,13 @@ export const AIProblemAnalyzer: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <a
-                      href="/contact"
+                    <Link
+                      to="/contact"
                       className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-5 py-3 rounded-xl text-xs sm:text-sm font-bold shadow transition-colors text-center"
                     >
                       <span>Book Initial Consultation</span>
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
 
                     <button
                       onClick={resetAll}

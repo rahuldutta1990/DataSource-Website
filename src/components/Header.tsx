@@ -114,7 +114,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0 whitespace-nowrap">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0 whitespace-nowrap">
             {navLinks.map((link) => {
               if (link.hasDropdown) {
                 return (
@@ -126,14 +126,14 @@ export const Header: React.FC = () => {
                   >
                     <Link
                       to={link.path}
-                      className={`whitespace-nowrap inline-flex items-center gap-1.5 px-3 xl:px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors shrink-0 ${
+                      className={`whitespace-nowrap inline-flex items-center gap-1 px-2.5 xl:px-3.5 py-1.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-lg transition-colors shrink-0 ${
                         isActive(link.path)
                           ? 'text-[#0066FF] dark:text-[#38BDF8] bg-[#0066FF]/5 dark:bg-[#38BDF8]/10'
                           : 'text-[#1E293B] dark:text-slate-200 hover:text-[#0066FF] dark:hover:text-[#38BDF8] hover:bg-slate-50 dark:hover:bg-slate-800/60'
                       }`}
                     >
                       <span className="whitespace-nowrap">{link.name}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-3.5 h-3.5 xl:w-4 xl:h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
                     </Link>
 
                     {/* Dropdown Menu */}
@@ -183,7 +183,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`whitespace-nowrap shrink-0 px-3 xl:px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                  className={`whitespace-nowrap shrink-0 px-2.5 xl:px-3.5 py-1.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-lg transition-colors ${
                     isActive(link.path)
                       ? 'text-[#0066FF] dark:text-[#38BDF8] bg-[#0066FF]/5 dark:bg-[#38BDF8]/10'
                       : 'text-[#1E293B] dark:text-slate-200 hover:text-[#0066FF] dark:hover:text-[#38BDF8] hover:bg-slate-50 dark:hover:bg-slate-800/60'
@@ -196,14 +196,14 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Header Action & Theme Switcher (Sign-in removed per user specification) */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3.5 shrink-0">
             {/* Auto Search Bar */}
             <AutoSearch />
 
             {/* Dark Mode Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="relative p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#0077FF] dark:hover:text-[#38BDF8] hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-[#0077FF]/30"
+              className="relative p-2 xl:p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#0077FF] dark:hover:text-[#38BDF8] hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-[#0077FF]/30 shrink-0"
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
@@ -216,22 +216,22 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="relative inline-flex items-center gap-2 bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:via-[#0066EE] hover:to-[#0090EE] text-white px-5 py-2.5 rounded-full text-xs xl:text-sm font-bold tracking-wide shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 group shrink-0 whitespace-nowrap active:scale-[0.98] overflow-hidden"
+              className="relative inline-flex items-center gap-1.5 xl:gap-2 bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:via-[#0066EE] hover:to-[#0090EE] text-white px-3.5 xl:px-5 py-2 xl:py-2.5 rounded-full text-xs xl:text-sm font-bold tracking-tight xl:tracking-wide shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 group shrink-0 whitespace-nowrap active:scale-[0.98] overflow-hidden"
               id="header-book-consultant-btn"
             >
               {/* Subtle hover shine sweep */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
-              <Calendar className="w-4 h-4 text-cyan-200 shrink-0 group-hover:scale-110 transition-transform duration-200" />
+              <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-cyan-200 shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <span className="whitespace-nowrap font-bold">Book a Consultant</span>
-              <ArrowRight className="w-3.5 h-3.5 text-white/90 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-white/90 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </div>
 
-          {/* Mobile Actions: Theme Toggle & Menu Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile & Tablet Actions: Theme Toggle, Book Button & Menu Button */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 lg:hidden shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+              className="p-1.5 sm:p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shrink-0"
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
@@ -239,18 +239,19 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm shadow-blue-500/25 border border-blue-400/30 shrink-0 whitespace-nowrap active:scale-95 transition-all"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] hover:from-[#0055EE] hover:to-[#0090EE] text-white text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm shadow-blue-500/25 border border-blue-400/30 shrink-0 whitespace-nowrap active:scale-95 transition-all"
               id="mobile-book-consultant-btn"
             >
-              <Calendar className="w-3 h-3 text-cyan-200 shrink-0" />
-              <span>Book</span>
+              <Calendar className="w-3.5 h-3.5 text-cyan-200 shrink-0" />
+              <span className="hidden sm:inline">Book a Consultant</span>
+              <span className="sm:hidden">Book</span>
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+              className="p-1.5 sm:p-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none shrink-0"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Activity,
@@ -197,13 +198,13 @@ export const AIHealthCheck: React.FC = () => {
               </div>
 
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-700">
-                <a
-                  href="/contact?service=Data%20Analytics%20Health%20Check"
+                <Link
+                  to="/contact?service=Data%20Analytics%20Health%20Check"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-6 py-3 rounded-xl text-xs sm:text-sm font-bold shadow transition-colors"
                 >
                   <span>Discuss Your Assessment With an Architect</span>
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
 
                 <button
                   onClick={() => setResult(null)}

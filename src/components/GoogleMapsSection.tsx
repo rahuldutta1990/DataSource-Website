@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Navigation, Phone, Mail, Clock, ExternalLink, ShieldCheck, Building2, Sparkles, Compass } from 'lucide-react';
 import { OfficeLocation, SiteSettings } from '../types.js';
 import { api } from '../services/api.js';
@@ -300,12 +301,12 @@ export const GoogleMapsSection: React.FC<GoogleMapsSectionProps> = ({
                 </p>
               </div>
 
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="px-4 py-2 rounded-xl bg-[#0077FF] hover:bg-[#0066DD] text-white text-xs font-bold shadow-sm transition-transform active:scale-95 shrink-0"
               >
                 Schedule Visit
-              </a>
+              </Link>
             </div>
           </div>
         </div>

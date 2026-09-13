@@ -188,8 +188,8 @@ export const AutoSearch: React.FC<AutoSearchProps> = ({ isMobile = false, onSele
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Search services, insights..."
-          className="w-48 xl:w-60 pl-10 pr-8 py-2 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0077FF]/50 dark:focus:ring-[#38BDF8]/50 transition-all"
+          placeholder="Search..."
+          className="w-28 lg:w-32 xl:w-52 2xl:w-60 focus:w-44 xl:focus:w-60 pl-9 pr-7 py-2 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0077FF]/50 dark:focus:ring-[#38BDF8]/50 transition-all"
         />
         {query && (
           <button

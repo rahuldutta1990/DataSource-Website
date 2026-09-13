@@ -9,11 +9,11 @@ import { GeminiChatbot } from './GeminiChatbot.js';
 
 export const Layout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] text-slate-900 dark:text-slate-100 selection:bg-[#0077FF] selection:text-white transition-colors duration-200 relative">
+    <div className="flex flex-col min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] text-slate-900 dark:text-slate-100 selection:bg-[#0077FF] selection:text-white transition-colors duration-200 relative overflow-x-clip">
       {/* Global Ambient Interactive Tech Canvas & Glowing Auroras */}
       <AmbientTechBackground />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-screen overflow-x-clip">
         <Header />
         <main className="flex-grow">
           <Outlet />
