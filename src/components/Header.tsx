@@ -78,18 +78,18 @@ export const Header: React.FC = () => {
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:contact@datasource.tech"
+              href="mailto:rd14190@gmail.com"
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-cyan-400" />
-              <span>contact@datasource.tech</span>
+              <span>rd14190@gmail.com</span>
             </a>
             <a
-              href="tel:+18005123282"
+              href="tel:+919038417437"
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors font-medium"
             >
               <Phone className="w-3.5 h-3.5 text-cyan-400" />
-              <span>+1 (800) 512-3282</span>
+              <span>+91 9038417437</span>
             </a>
           </div>
         </div>
@@ -344,7 +344,7 @@ export const Header: React.FC = () => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <div className="text-center text-xs text-slate-500 dark:text-slate-400">
-                <span>Direct: contact@datasource.tech • +1 (800) 512-3282</span>
+                <span>Direct: rd14190@gmail.com • +91 9038417437</span>
               </div>
             </div>
           </div>

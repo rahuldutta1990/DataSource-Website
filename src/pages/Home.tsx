@@ -139,55 +139,91 @@ export const Home: React.FC = () => {
       ? services.slice(0, 6)
       : services.filter((s) => s.categoryId === activeCategory);
 
-  const capabilities = [
+  const defaultWhatWeDo = [
     {
-      title: 'Design experiences people understand',
-      desc: 'Intuitive user workflows that eliminate cognitive fatigue and reduce human operational error.',
-      icon: Users,
-    },
-    {
-      title: 'Build reliable web and mobile applications',
-      desc: 'Robust full-stack systems engineered with modern TypeScript, modular APIs, and zero-downtime reliability.',
-      icon: Code2,
-    },
-    {
-      title: 'Turn business data into useful insight',
-      desc: 'Automated Power BI dashboards and predictive scorecards that give executives daily decision clarity.',
+      id: 'wwd-1',
+      title: 'Data & Analytics',
+      description: 'Transform your business data into actionable insights for informed decisions.',
       icon: BarChart3,
     },
     {
-      title: 'Engineer scalable data and technology systems',
-      desc: 'Fault-tolerant data pipelines, database tuning, and high-concurrency cloud architectures.',
-      icon: Database,
+      id: 'wwd-2',
+      title: 'Technology Solutions',
+      description: 'Develop and optimize digital systems that align with your processes and growth goals.',
+      icon: Code2,
+    },
+    {
+      id: 'wwd-3',
+      title: 'Automation & Integration',
+      description: 'Streamline repetitive tasks and unify your existing tools for seamless teamwork.',
+      icon: Zap,
+    },
+    {
+      id: 'wwd-4',
+      title: 'Digital Transformation',
+      description: 'Evolve your operations step-by-step with practical, sustainable technology adoption.',
+      icon: Layers,
     },
   ];
 
-  const processSteps = [
+  const whatWeDoList = (settings?.whatWeDoItems && settings.whatWeDoItems.length > 0)
+    ? settings.whatWeDoItems.map((item, idx) => {
+        const iconMap: Record<string, React.ElementType> = {
+          BarChart3,
+          Code2,
+          Zap,
+          Layers,
+          Database,
+          Users,
+        };
+        const resolvedIcon = item.iconName ? (iconMap[item.iconName] || defaultWhatWeDo[idx % defaultWhatWeDo.length]?.icon || BarChart3) : (defaultWhatWeDo[idx % defaultWhatWeDo.length]?.icon || BarChart3);
+        return {
+          title: item.title,
+          desc: item.description,
+          icon: resolvedIcon,
+        };
+      })
+    : defaultWhatWeDo.map((item) => ({
+        title: item.title,
+        desc: item.description,
+        icon: item.icon,
+      }));
+
+  const defaultProcessSteps = [
     {
-      num: '01',
-      title: 'Understand the Problem',
-      desc: 'We start with your operational bottlenecks and commercial objectives. We interview stakeholders and audit workflows before recommending any tech.',
+      num: '1',
+      title: 'Understand',
+      desc: 'Identify core business workflows and gaps.',
       img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop',
     },
     {
-      num: '02',
-      title: 'Design the Right Solution',
-      desc: 'We architect intuitive prototypes, data schemas, and integration roadmaps that fit your budget and team capacity—avoiding bloated vendor dependencies.',
+      num: '2',
+      title: 'Plan',
+      desc: 'Define solutions, priorities, and measurable goals.',
       img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=600&auto=format&fit=crop',
     },
     {
-      num: '03',
-      title: 'Build and Implement',
-      desc: 'Our senior engineers construct production-ready code with continuous testing, incremental rollouts, and zero business interruption.',
+      num: '3',
+      title: 'Build',
+      desc: 'Develop and integrate the right technology.',
       img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop',
     },
     {
-      num: '04',
-      title: 'Improve and Support',
-      desc: 'We train your staff, monitor performance telemetry, tune database queries, and provide dedicated engineering support for long-term compounding returns.',
+      num: '4',
+      title: 'Improve',
+      desc: 'Continuously refine based on performance and evolving needs.',
       img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop',
     },
   ];
+
+  const activeProcessSteps = (settings?.processSteps && settings.processSteps.length > 0)
+    ? settings.processSteps.map((s, idx) => ({
+        num: s.step || String(idx + 1),
+        title: s.title,
+        desc: s.description,
+        img: s.img || defaultProcessSteps[idx % defaultProcessSteps.length]?.img || 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop',
+      }))
+    : defaultProcessSteps;
 
   const clientCategories = [
     'Software & Technology',
@@ -252,15 +288,36 @@ export const Home: React.FC = () => {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight leading-[1.12] font-heading">
-                We Solve the Business and Data Problems{' '}
-                <span className="text-[#0077FF] dark:text-[#38BDF8] inline-block relative">
-                  Holding Your Growth Back
-                  <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#38BDF8] rounded-full opacity-60" />
-                </span>
+                {settings?.heroHeadline ? (
+                  <>
+                    {settings.heroHeadline.includes('.') ? (
+                      <>
+                        {settings.heroHeadline.split('.')[0]}.{' '}
+                        <span className="text-[#0077FF] dark:text-[#38BDF8] inline-block relative">
+                          {settings.heroHeadline.split('.').slice(1).join('.').trim()}
+                          <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#38BDF8] rounded-full opacity-60" />
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-[#0077FF] dark:text-[#38BDF8]">
+                        {settings.heroHeadline}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    Technology That Solves.{' '}
+                    <span className="text-[#0077FF] dark:text-[#38BDF8] inline-block relative">
+                      Data That Drives.
+                      <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#38BDF8] rounded-full opacity-60" />
+                    </span>
+                  </>
+                )}
               </h1>
 
               <p className="text-lg sm:text-xl text-[#475569] dark:text-slate-300 leading-relaxed max-w-2xl font-body">
-                DataSource is a practical IT consulting and data analytics partner. We diagnose operational bottlenecks first—then engineer automated Power BI dashboards, unified data pipelines, and scalable cloud systems.
+                {settings?.heroSubheadline ||
+                  'Empower your business with smarter operations through innovative technology, actionable data, and practical digital solutions tailored to your unique workflow.'}
               </p>
 
               {/* Floating Holographic Telemetry Cards */}
@@ -515,12 +572,13 @@ export const Home: React.FC = () => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 space-y-6"
             >
-              <Eyebrow text="About DataSource" variant="blue" />
+              <Eyebrow text="What We Do" variant="blue" />
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight font-heading leading-tight">
-                Solving Complexity With Technology and Data Clarity
+                {settings?.whatWeDoTitle || 'What We Do'}
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-body">
-                From digital products and web applications to analytics, dashboards and data engineering, DataSource helps businesses turn complex requirements into practical technology solutions.
+                {settings?.whyChooseUsDescription ||
+                  'Our approach centers on understanding your business challenges before recommending technology. We prioritize practical solutions that remain valuable and easy to use.'}
               </p>
               
               {/* Professional consultancy advisory team visual */}
@@ -555,7 +613,7 @@ export const Home: React.FC = () => {
 
             {/* Right Column: 4 Capability Cards with Scroll Entrance */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {capabilities.map((cap, i) => {
+              {whatWeDoList.map((cap, i) => {
                 const IconComponent = cap.icon;
                 return (
                   <motion.div
@@ -910,12 +968,13 @@ export const Home: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="max-w-2xl text-left"
             >
-              <Eyebrow text="Our Methodology" variant="white" />
+              <Eyebrow text="Our Process" variant="white" />
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-heading">
-                The DataSource Way
+                {settings?.processTitle || 'Our Process'}
               </h2>
               <p className="text-slate-300 text-base mt-2">
-                A structured four-phase delivery framework that guarantees alignment with your business problem from discovery through deployment.
+                {settings?.whyChooseUsDescription ||
+                  'Our approach centers on understanding your business challenges before recommending technology. We prioritize practical solutions that remain valuable and easy to use.'}
               </p>
               <div className="mt-3 inline-block bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
                 &ldquo;We start with the problem, not the technology.&rdquo;
@@ -952,7 +1011,7 @@ export const Home: React.FC = () => {
             className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scrollbar-none focus:outline-none focus:ring-2 focus:ring-cyan-500/30 rounded-2xl"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {processSteps.map((step, i) => (
+            {activeProcessSteps.map((step, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 24 }}
@@ -980,7 +1039,7 @@ export const Home: React.FC = () => {
                   
                   <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-cyan-400 font-semibold">
                     <span>Phase {step.num} Delivery</span>
-                    <span className="text-[10px] uppercase tracking-wider text-slate-400 bg-slate-800 px-2 py-0.5 rounded">Carousel Item</span>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 bg-slate-800 px-2 py-0.5 rounded">Process Step</span>
                   </div>
                 </div>
               </motion.div>
@@ -1319,11 +1378,11 @@ export const Home: React.FC = () => {
             <Eyebrow text="Ready to Elevate Your Technology?" variant="blue" />
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mt-4 font-heading tracking-tight leading-tight max-w-2xl mx-auto">
-              Transform Your Architecture &amp; Unlock Business Data Value
+              {settings?.ctaHeadline || 'Facing a business challenge that technology can solve?'}
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg mt-4 max-w-2xl mx-auto leading-relaxed font-body">
-              Whether you are architecting a mission-critical web application, automating high-throughput data pipelines, or designing executive Power BI dashboards, our senior consultants deliver results.
+              {settings?.ctaSubheadline || 'Share your pain points and let us guide you toward practical solutions.'}
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1331,7 +1390,7 @@ export const Home: React.FC = () => {
                 to="/contact"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#0077FF] to-[#00A3FF] hover:from-[#0066EE] hover:to-[#0088EE] text-white px-8 py-4 rounded-xl text-base font-bold shadow-xl shadow-blue-500/25 transition-all hover:translate-y-[-2px] active:translate-y-0"
               >
-                <span>Book Strategic Consultation</span>
+                <span>{settings?.ctaButtonText || 'Start a Conversation'}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link

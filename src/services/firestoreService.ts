@@ -16,7 +16,7 @@ import { User } from 'firebase/auth';
 import { db } from '../firebase.js';
 import { UserProfile, UserBookmark, ContactEnquiry } from '../types.js';
 
-const ADMIN_EMAILS = ['admin@datasource.tech', 'shimadutta62@gmail.com'];
+const ADMIN_EMAILS = ['admin@datasource.tech', 'shimadutta62@gmail.com', 'rd14190@gmail.com'];
 
 /**
  * Synchronize Google Authenticated user with Firestore users collection

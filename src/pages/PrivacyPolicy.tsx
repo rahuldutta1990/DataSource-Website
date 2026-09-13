@@ -37,8 +37,8 @@ export const PrivacyPolicy: React.FC = () => {
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">5. Contact Us</h2>
             <p>
               For questions regarding our privacy practices, please contact us at{' '}
-              <a href="mailto:privacy@datasource.tech" className="text-[#0077FF] dark:text-[#38BDF8] font-semibold underline">
-                privacy@datasource.tech
+              <a href="mailto:rd14190@gmail.com" className="text-[#0077FF] dark:text-[#38BDF8] font-semibold underline">
+                rd14190@gmail.com
               </a>
               .
             </p>

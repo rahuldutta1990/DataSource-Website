@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, ShieldCheck, Target, Users, CheckCircle2, Award, Sparkles, Building2, Terminal } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
+import { api } from '../services/api.js';
+import { SiteSettings } from '../types.js';
 
 export const About: React.FC = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    api.getSettings().then(setSettings).catch(() => {});
+  }, []);
+
   const values = [
     {
       icon: Target,
@@ -33,32 +41,41 @@ export const About: React.FC = () => {
     },
   ];
 
-  const processSteps = [
+  const defaultProcessSteps = [
     {
-      step: '01',
-      title: 'Understand the Problem',
-      desc: 'We interview operational leaders, audit legacy workflows, and identify exact root causes before proposing any technical intervention.',
+      step: '1',
+      title: 'Understand',
+      desc: 'Identify core business workflows and gaps.',
       img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop',
     },
     {
-      step: '02',
-      title: 'Design the Right Solution',
-      desc: 'We build interactive prototypes, validate database schemas, and align on timeline milestones with clear budget boundaries.',
+      step: '2',
+      title: 'Plan',
+      desc: 'Define solutions, priorities, and measurable goals.',
       img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=600&auto=format&fit=crop',
     },
     {
-      step: '03',
-      title: 'Build and Implement',
-      desc: 'Our engineers execute with continuous automated testing, modular architecture, and incremental deployments that avoid business disruption.',
+      step: '3',
+      title: 'Build',
+      desc: 'Develop and integrate the right technology.',
       img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop',
     },
     {
-      step: '04',
-      title: 'Improve and Support',
-      desc: 'We empower your team through knowledge transfer, performance tuning, and ongoing support agreements.',
+      step: '4',
+      title: 'Improve',
+      desc: 'Continuously refine based on performance and evolving needs.',
       img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop',
     },
   ];
+
+  const processSteps = (settings?.processSteps && settings.processSteps.length > 0)
+    ? settings.processSteps.map((s, idx) => ({
+        step: s.step || String(idx + 1),
+        title: s.title,
+        desc: s.description,
+        img: s.img || defaultProcessSteps[idx % defaultProcessSteps.length]?.img || 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop',
+      }))
+    : defaultProcessSteps;
 
   return (
     <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
@@ -92,11 +109,11 @@ export const About: React.FC = () => {
           >
             <Eyebrow text="About DataSource" variant="blue" />
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight font-heading leading-tight">
-              Technology That Solves.{' '}
-              <span className="text-[#0077FF] dark:text-[#38BDF8] block">Data That Drives.</span>
+              {settings?.aboutHeroTitle || 'Technology with a Business-First Approach'}
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-body">
-              DataSource is a technology and data consulting partner helping businesses solve technical problems, build digital products, improve operations, and turn data into useful business decisions.
+              {settings?.aboutHeroSubtitle ||
+                'At DataSource Technology & Solutions, we help businesses leverage technology and data in ways that are practical, connected, and productive.'}
             </p>
             <div className="p-4 rounded-xl bg-[#0077FF]/5 dark:bg-[#0077FF]/15 border border-[#0077FF]/15 dark:border-[#0077FF]/30 text-sm font-semibold text-slate-800 dark:text-slate-200">
               Brand Philosophy: &ldquo;We start with the problem, not the technology.&rdquo;

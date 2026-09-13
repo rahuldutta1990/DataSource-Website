@@ -105,7 +105,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       image: DEFAULT_OG_IMAGE,
       description: DEFAULT_DESC,
       telephone: '+91 9038417437',
-      email: 'contact@datasource.tech',
+      email: 'rd14190@gmail.com',
       priceRange: '₹₹₹',
       currenciesAccepted: 'INR, USD, EUR, GBP',
       paymentAccepted: 'Bank Wire, NEFT/RTGS, UPI, Corporate Credit Card',

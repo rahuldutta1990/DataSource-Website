@@ -821,7 +821,7 @@ Before investing in complex models, ensure your data foundations—collection, n
       heroSubheadline: 'DataSource helps businesses design, develop, analyse and improve digital solutions through technology, data and practical problem solving.',
       brandPhilosophy: 'We start with the problem, not the technology.',
       brandMessage: 'You bring the challenge. DataSource builds the right solution.',
-      email: 'contact@datasource.tech',
+      email: 'rd14190@gmail.com',
       phone: '+1 (800) 512-3282',
       address: 'DataSource Technology & Solutions, Innovation Quarter, Tech Park Plaza',
       businessHours: 'Monday – Friday: 9:00 AM – 6:00 PM EST',

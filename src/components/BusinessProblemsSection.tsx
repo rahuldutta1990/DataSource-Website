@@ -72,11 +72,11 @@ export const BusinessProblemsSection: React.FC<BusinessProblemsSectionProps> = (
     initialProblems || DEFAULT_BUSINESS_PROBLEMS
   );
   const [headline, setHeadline] = useState<string>(
-    customTitle || 'What Business Problem Are You Trying to Solve?'
+    customTitle || 'Business Challenges'
   );
   const [description, setDescription] = useState<string>(
     customSubtitle ||
-      'Most IT projects fail when software is purchased before diagnosing operational bottlenecks. Select your challenge below to review our diagnostic approach, technical deliverables, and business outcomes.'
+      'Simplify complexity with technology that truly supports your business. Eliminate data silos, reduce manual workloads, and enhance visibility, efficiency, and decision-making with integrated, user-focused solutions.'
   );
   const [isEnabled, setIsEnabled] = useState<boolean>(true);
 
@@ -91,11 +91,15 @@ export const BusinessProblemsSection: React.FC<BusinessProblemsSectionProps> = (
             if (settings.businessProblems && settings.businessProblems.length > 0) {
               setProblemsList(settings.businessProblems);
             }
-            if (settings.businessProblemsTitle) {
-              setHeadline(settings.businessProblemsTitle);
+            if (settings.businessChallengesTitle || settings.businessProblemsTitle) {
+              setHeadline(settings.businessChallengesTitle || settings.businessProblemsTitle || 'Business Challenges');
             }
-            if (settings.businessProblemsSubtitle) {
-              setDescription(settings.businessProblemsSubtitle);
+            if (settings.businessChallengesDescription || settings.businessProblemsSubtitle) {
+              setDescription(
+                settings.businessChallengesDescription ||
+                  settings.businessProblemsSubtitle ||
+                  'Simplify complexity with technology that truly supports your business. Eliminate data silos, reduce manual workloads, and enhance visibility, efficiency, and decision-making with integrated, user-focused solutions.'
+              );
             }
             if (settings.businessProblemsEnabled !== undefined) {
               setIsEnabled(settings.businessProblemsEnabled);

@@ -401,7 +401,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
           url: 'https://datasource.tech',
           logo: 'https://datasource.tech/datasource-icon.svg',
           telephone: settings?.phone || '+91 9038417437',
-          email: settings?.email || 'contact@datasource.tech',
+          email: settings?.email || 'rd14190@gmail.com',
           priceRange: '₹₹₹',
           currenciesAccepted: 'INR, USD, EUR, GBP',
           address: {

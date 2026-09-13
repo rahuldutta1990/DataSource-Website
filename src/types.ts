@@ -243,6 +243,21 @@ export interface BusinessProblemItem {
   status?: 'published' | 'draft';
 }
 
+export interface WhatWeDoItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName?: string;
+}
+
+export interface ProcessStepItem {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  img?: string;
+}
+
 export interface SiteSettings {
   companyName: string;
   fullName: string;
@@ -284,6 +299,22 @@ export interface SiteSettings {
   conversionEvents?: any[];
   localBusinessSchemaEnabled?: boolean;
   footerQrCodeUrl?: string;
+
+  // Dedicated Page & Section Content (Editable via CMS)
+  businessChallengesTitle?: string;
+  businessChallengesDescription?: string;
+  whatWeDoTitle?: string;
+  whatWeDoSubtitle?: string;
+  whatWeDoItems?: WhatWeDoItem[];
+  whyChooseUsTitle?: string;
+  whyChooseUsSubtitle?: string;
+  whyChooseUsDescription?: string;
+  processTitle?: string;
+  processSubtitle?: string;
+  processSteps?: ProcessStepItem[];
+  aboutHeroTitle?: string;
+  aboutHeroSubtitle?: string;
+  aboutHeroPhilosophy?: string;
 }
 
 export interface DashboardStats {

@@ -123,35 +123,57 @@ seedFirestoreIfEmpty();
 // ============================================================================
 
 export async function getSiteSettingsFromFirestore(): Promise<SiteSettings> {
+  const defaults = initialDbData.settings as unknown as SiteSettings;
   try {
     const d = await getDoc(doc(db, 'siteSettings', 'global'));
     if (d.exists()) {
-      const data = d.data() as SiteSettings;
-      // If Firestore still has the old address or previous multiple office locations, synchronize with latest configured Kolkata location
-      if (
-        !data.officeLocations ||
-        data.officeLocations.length > 1 ||
-        data.address?.includes('Bellandur') ||
-        (data.officeLocations.length === 1 && data.officeLocations[0].id !== 'kolkata') ||
-        (data.officeLocations[0]?.address && !data.officeLocations[0].address.includes('Sanhita Simoco'))
-      ) {
-        const synced: SiteSettings = {
-          ...data,
-          address: initialDbData.settings.address,
-          googleMapsTitle: initialDbData.settings.googleMapsTitle || data.googleMapsTitle,
-          googleMapsSubtitle: initialDbData.settings.googleMapsSubtitle || data.googleMapsSubtitle,
-          officeLocations: initialDbData.settings.officeLocations as unknown as SiteSettings['officeLocations'],
-        };
-        // Update in background
-        setDoc(doc(db, 'siteSettings', 'global'), synced, { merge: true }).catch(() => {});
-        return synced;
-      }
-      return data;
+      const data = d.data() as Partial<SiteSettings>;
+      
+      const merged: SiteSettings = {
+        ...defaults,
+        ...data,
+        tagline: data.tagline || defaults.tagline,
+        heroHeadline: data.heroHeadline && data.heroHeadline !== 'Turning Technology and Data Into Business Solutions' 
+          ? data.heroHeadline 
+          : defaults.heroHeadline,
+        heroSubheadline: data.heroSubheadline && !data.heroSubheadline.includes('across India and worldwide') 
+          ? data.heroSubheadline 
+          : defaults.heroSubheadline,
+        businessChallengesTitle: data.businessChallengesTitle || defaults.businessChallengesTitle,
+        businessChallengesDescription: data.businessChallengesDescription || defaults.businessChallengesDescription,
+        whatWeDoTitle: data.whatWeDoTitle || defaults.whatWeDoTitle,
+        whatWeDoSubtitle: data.whatWeDoSubtitle || defaults.whatWeDoSubtitle,
+        whatWeDoItems: data.whatWeDoItems && data.whatWeDoItems.length > 0 ? data.whatWeDoItems : defaults.whatWeDoItems,
+        whyChooseUsTitle: data.whyChooseUsTitle || defaults.whyChooseUsTitle,
+        whyChooseUsSubtitle: data.whyChooseUsSubtitle || defaults.whyChooseUsSubtitle,
+        whyChooseUsDescription: data.whyChooseUsDescription || defaults.whyChooseUsDescription,
+        processTitle: data.processTitle || defaults.processTitle,
+        processSubtitle: data.processSubtitle || defaults.processSubtitle,
+        processSteps: data.processSteps && data.processSteps.length > 0 ? data.processSteps : defaults.processSteps,
+        ctaHeadline: data.ctaHeadline && data.ctaHeadline !== 'Have a Technology or Data Challenge?'
+          ? data.ctaHeadline
+          : defaults.ctaHeadline,
+        ctaSubheadline: data.ctaSubheadline && !data.ctaSubheadline.includes('Schedule a consulting session')
+          ? data.ctaSubheadline
+          : defaults.ctaSubheadline,
+        ctaButtonText: data.ctaButtonText && data.ctaButtonText !== 'Book Technical Consultation'
+          ? data.ctaButtonText
+          : defaults.ctaButtonText,
+        aboutHeroTitle: data.aboutHeroTitle || defaults.aboutHeroTitle,
+        aboutHeroSubtitle: data.aboutHeroSubtitle || defaults.aboutHeroSubtitle,
+        aboutHeroPhilosophy: data.aboutHeroPhilosophy || defaults.aboutHeroPhilosophy,
+        address: defaults.address,
+        officeLocations: defaults.officeLocations,
+      };
+
+      // Background sync to keep Firestore persisted with latest clean structured copy
+      setDoc(doc(db, 'siteSettings', 'global'), merged, { merge: true }).catch(() => {});
+      return merged;
     }
     await seedFirestoreIfEmpty();
-    return initialDbData.settings as unknown as SiteSettings;
+    return defaults;
   } catch {
-    return initialDbData.settings as unknown as SiteSettings;
+    return defaults;
   }
 }
 

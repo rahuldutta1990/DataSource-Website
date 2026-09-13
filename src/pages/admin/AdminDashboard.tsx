@@ -250,7 +250,7 @@ export const AdminDashboard: React.FC = () => {
 
   const checkAuthAndLoad = async () => {
     // If authenticated via Google OAuth with admin rights, ensure api auth token is set
-    const isAdminUser = user && (profile?.role === 'admin' || user.email === 'admin@datasource.tech' || user.email === 'shimadutta62@gmail.com');
+    const isAdminUser = user && (profile?.role === 'admin' || user.email === 'admin@datasource.tech' || user.email === 'shimadutta62@gmail.com' || user.email === 'rd14190@gmail.com');
     if (isAdminUser && !api.isAuthenticated()) {
       localStorage.setItem('datasource_admin_token', 'google_auth_admin_token');
       localStorage.setItem(

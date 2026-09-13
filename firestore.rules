@@ -14,6 +14,7 @@ service cloud.firestore {
       return isSignedIn() && (
         request.auth.token.email == 'admin@datasource.tech' ||
         request.auth.token.email == 'shimadutta62@gmail.com' ||
+        request.auth.token.email == 'rd14190@gmail.com' ||
         (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
       );

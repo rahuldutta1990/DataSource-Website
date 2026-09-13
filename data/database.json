@@ -843,11 +843,11 @@
     "companyName": "DataSource",
     "fullName": "DataSource Technology & Solutions",
     "tagline": "Technology That Solves. Data That Drives.",
-    "heroHeadline": "Turning Technology and Data Into Business Solutions",
-    "heroSubheadline": "DataSource helps businesses across India and worldwide design, develop, analyse and improve digital solutions through technology, data and practical engineering.",
+    "heroHeadline": "Technology That Solves. Data That Drives.",
+    "heroSubheadline": "Empower your business with smarter operations through innovative technology, actionable data, and practical digital solutions tailored to your unique workflow.",
     "brandPhilosophy": "We start with the problem, not the technology.",
     "brandMessage": "You bring the challenge. DataSource builds the right solution.",
-    "email": "contact@datasource.tech",
+    "email": "rd14190@gmail.com",
     "phone": "+91 9038417437",
     "address": "3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India",
     "businessHours": "Monday – Friday: 9:30 AM – 6:30 PM IST (Consultation by Appointment)",
@@ -856,9 +856,77 @@
       "twitter": "https://x.com/datasourcetech",
       "github": "https://github.com/datasource-tech"
     },
-    "ctaHeadline": "Have a Technology or Data Challenge?",
-    "ctaSubheadline": "Schedule a consulting session with our principal technical team in Kolkata or virtually worldwide.",
-    "ctaButtonText": "Book Technical Consultation",
+    "businessChallengesTitle": "Business Challenges",
+    "businessChallengesDescription": "Simplify complexity with technology that truly supports your business. Eliminate data silos, reduce manual workloads, and enhance visibility, efficiency, and decision-making with integrated, user-focused solutions.",
+    "whatWeDoTitle": "What We Do",
+    "whatWeDoSubtitle": "We organize our engineering and data capabilities into pragmatic pillars designed to solve real operational bottlenecks.",
+    "whatWeDoItems": [
+      {
+        "id": "wwd-1",
+        "title": "Data & Analytics",
+        "description": "Transform your business data into actionable insights for informed decisions.",
+        "iconName": "BarChart3"
+      },
+      {
+        "id": "wwd-2",
+        "title": "Technology Solutions",
+        "description": "Develop and optimize digital systems that align with your processes and growth goals.",
+        "iconName": "Code2"
+      },
+      {
+        "id": "wwd-3",
+        "title": "Automation & Integration",
+        "description": "Streamline repetitive tasks and unify your existing tools for seamless teamwork.",
+        "iconName": "Zap"
+      },
+      {
+        "id": "wwd-4",
+        "title": "Digital Transformation",
+        "description": "Evolve your operations step-by-step with practical, sustainable technology adoption.",
+        "iconName": "Layers"
+      }
+    ],
+    "whyChooseUsTitle": "Why Choose Us",
+    "whyChooseUsSubtitle": "Our Value Commitment",
+    "whyChooseUsDescription": "Our approach centers on understanding your business challenges before recommending technology. We prioritize practical solutions that remain valuable and easy to use.",
+    "processTitle": "Our Process",
+    "processSubtitle": "A practical step-by-step methodology to identify, plan, engineer, and continuously refine your digital solutions.",
+    "processSteps": [
+      {
+        "id": "proc-1",
+        "step": "1",
+        "title": "Understand",
+        "description": "Identify core business workflows and gaps.",
+        "img": "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop"
+      },
+      {
+        "id": "proc-2",
+        "step": "2",
+        "title": "Plan",
+        "description": "Define solutions, priorities, and measurable goals.",
+        "img": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=600&auto=format&fit=crop"
+      },
+      {
+        "id": "proc-3",
+        "step": "3",
+        "title": "Build",
+        "description": "Develop and integrate the right technology.",
+        "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop"
+      },
+      {
+        "id": "proc-4",
+        "step": "4",
+        "title": "Improve",
+        "description": "Continuously refine based on performance and evolving needs.",
+        "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
+      }
+    ],
+    "ctaHeadline": "Facing a business challenge that technology can solve?",
+    "ctaSubheadline": "Share your pain points and let us guide you toward practical solutions.",
+    "ctaButtonText": "Start a Conversation",
+    "aboutHeroTitle": "Technology with a Business-First Approach",
+    "aboutHeroSubtitle": "At DataSource Technology & Solutions, we help businesses leverage technology and data in ways that are practical, connected, and productive.",
+    "aboutHeroPhilosophy": "We start with the problem, not the technology.",
     "footerText": "DataSource is an enterprise technology and data consulting partner headquartered in Kolkata, West Bengal, helping businesses solve complex challenges, build high-scale software, and unlock the commercial power of data.",
     "copyright": "© 2026 DataSource Technology & Solutions. All rights reserved.",
     "stats": [
@@ -905,7 +973,7 @@
         "country": "India",
         "address": "3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India",
         "phone": "+91 9038417437",
-        "email": "contact@datasource.tech",
+        "email": "rd14190@gmail.com",
         "hours": "Mon – Fri: 9:30 AM – 6:30 PM IST (Consultation by Appointment)",
         "transit": "Near Hatisala Six Lane, New Town Action Area 3 • 25 min from Biswa Bangla Gate & Major IT Corridors",
         "focus": [

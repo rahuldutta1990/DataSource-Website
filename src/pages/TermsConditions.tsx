@@ -31,8 +31,8 @@ export const TermsConditions: React.FC = () => {
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">4. Contact Information</h2>
             <p>
               For legal inquiries, contact{' '}
-              <a href="mailto:legal@datasource.tech" className="text-[#0077FF] dark:text-[#38BDF8] font-semibold underline">
-                legal@datasource.tech
+              <a href="mailto:rd14190@gmail.com" className="text-[#0077FF] dark:text-[#38BDF8] font-semibold underline">
+                rd14190@gmail.com
               </a>
               .
             </p>

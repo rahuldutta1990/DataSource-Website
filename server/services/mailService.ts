@@ -49,7 +49,7 @@ export async function sendAdminLeadNotification(inquiry: Partial<ContactEnquiry>
   recipient: string;
   mode: 'smtp' | 'simulated';
 }> {
-  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'shimadutta62@gmail.com';
+  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'rd14190@gmail.com';
   const from = process.env.SMTP_FROM || 'DataSource Alerts <no-reply@datasource.tech>';
   const subject = `🚨 New High-Intent Lead: ${inquiry.name || 'Client'} (${inquiry.company || 'Enterprise'})`;
 
@@ -180,7 +180,7 @@ export async function sendAdminNewsletterNotification(subscriber: {
   recipient: string;
   mode: 'smtp' | 'simulated';
 }> {
-  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'shimadutta62@gmail.com';
+  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'rd14190@gmail.com';
   const from = process.env.SMTP_FROM || 'DataSource Alerts <no-reply@datasource.tech>';
   const subject = `📰 New Newsletter Subscriber: ${subscriber.email}`;
 

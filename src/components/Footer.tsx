@@ -224,8 +224,8 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                <a href="mailto:contact@datasource.tech" className="hover:text-cyan-400 transition-colors">
-                  contact@datasource.tech
+                <a href="mailto:rd14190@gmail.com" className="hover:text-cyan-400 transition-colors">
+                  rd14190@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">

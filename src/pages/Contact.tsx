@@ -647,8 +647,8 @@ ${lead.message || 'Architecture consultation requested'}
                     <Mail className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-slate-400">Email</p>
-                      <a href="mailto:contact@datasource.tech" className="text-white font-bold hover:text-cyan-400">
-                        contact@datasource.tech
+                      <a href="mailto:rd14190@gmail.com" className="text-white font-bold hover:text-cyan-400">
+                        rd14190@gmail.com
                       </a>
                     </div>
                   </div>
