@@ -9,6 +9,8 @@ import {
   Phone,
   Sun,
   Moon,
+  Calendar,
+  Sparkles,
 } from 'lucide-react';
 import { DataSourceLogo } from './DataSourceLogo.js';
 import { DynamicIcon } from './DynamicIcon.js';
@@ -214,10 +216,14 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] dark:bg-[#0077FF] dark:hover:bg-[#0066EE] text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:shadow transition-all group active:scale-98"
+              className="relative inline-flex items-center gap-2 bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:via-[#0066EE] hover:to-[#0090EE] text-white px-5 py-2.5 rounded-full text-xs xl:text-sm font-bold tracking-wide shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 group shrink-0 whitespace-nowrap active:scale-[0.98] overflow-hidden"
+              id="header-book-consultant-btn"
             >
-              <span>Book a Consultation</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              {/* Subtle hover shine sweep */}
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+              <Calendar className="w-4 h-4 text-cyan-200 shrink-0 group-hover:scale-110 transition-transform duration-200" />
+              <span className="whitespace-nowrap font-bold">Book a Consultant</span>
+              <ArrowRight className="w-3.5 h-3.5 text-white/90 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </div>
 
@@ -233,9 +239,11 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="bg-[#0077FF] text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm shadow-blue-500/25 border border-blue-400/30 shrink-0 whitespace-nowrap active:scale-95 transition-all"
+              id="mobile-book-consultant-btn"
             >
-              Consult
+              <Calendar className="w-3 h-3 text-cyan-200 shrink-0" />
+              <span>Book</span>
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -326,10 +334,13 @@ export const Header: React.FC = () => {
             <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex flex-col gap-3">
               <Link
                 to="/contact"
-                className="w-full text-center bg-[#0077FF] text-white py-3 rounded-xl font-semibold text-sm shadow flex items-center justify-center gap-2"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:to-[#0090EE] text-white py-3 px-4 rounded-xl font-bold text-sm shadow-md shadow-blue-500/25 flex items-center justify-center gap-2 group transition-all"
+                id="drawer-book-consultant-btn"
               >
-                <span>Book a Consultation</span>
-                <ArrowRight className="w-4 h-4" />
+                <Calendar className="w-4 h-4 text-cyan-200 shrink-0" />
+                <span className="whitespace-nowrap">Book a Consultant</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <div className="text-center text-xs text-slate-500 dark:text-slate-400">
                 <span>Direct: contact@datasource.tech • +1 (800) 512-3282</span>
