@@ -31,12 +31,17 @@ import {
   Smartphone,
   MapPin,
   Tag,
+  BarChart3,
+  Activity,
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
 import { OfficeLocationsManager } from '../../components/admin/OfficeLocationsManager.js';
 import { TargetKeywordManager } from '../../components/admin/TargetKeywordManager.js';
 import { BusinessProblemsManager } from '../../components/admin/BusinessProblemsManager.js';
+import { FAQSchemaManager } from '../../components/admin/FAQSchemaManager.js';
+import { InsightsCommunityManager } from '../../components/admin/InsightsCommunityManager.js';
+import { GoogleAnalyticsManager } from '../../components/admin/GoogleAnalyticsManager.js';
 import { api } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.js';
 import {
@@ -58,6 +63,7 @@ export const AdminDashboard: React.FC = () => {
     | 'overview'
     | 'inquiries'
     | 'subscribers'
+    | 'insights-community'
     | 'services'
     | 'casestudies'
     | 'insights'
@@ -65,6 +71,7 @@ export const AdminDashboard: React.FC = () => {
     | 'problems'
     | 'maps-locations'
     | 'keywords'
+    | 'google-tag'
     | 'settings'
     | 'contrast'
   >('overview');
@@ -538,6 +545,34 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleSaveFAQ = async (faqData: Partial<FAQ>) => {
+    try {
+      const saved = await api.saveFAQ(faqData);
+      setFaqs((prev) => {
+        const idx = prev.findIndex((f) => f.id === saved.id);
+        if (idx >= 0) {
+          const next = [...prev];
+          next[idx] = saved;
+          return next;
+        }
+        return [...prev, saved];
+      });
+      showNotification('FAQ item & schema updated successfully');
+    } catch (err: any) {
+      alert('Error saving FAQ: ' + err.message);
+    }
+  };
+
+  const handleDeleteFAQ = async (id: string) => {
+    try {
+      await api.deleteFAQ(id);
+      setFaqs((prev) => prev.filter((f) => f.id !== id));
+      showNotification('FAQ item removed');
+    } catch (err: any) {
+      alert('Error deleting FAQ: ' + err.message);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 font-medium">
@@ -660,15 +695,37 @@ export const AdminDashboard: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setActiveTab('insights-community')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'insights-community'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <MessageCircle className="w-4 h-4 text-cyan-400" />
+                <span>Comments, Likes &amp; Leads</span>
+              </div>
+              <span className="text-[10px] bg-cyan-500/20 text-cyan-300 font-bold px-2 py-0.5 rounded-full border border-cyan-500/30">
+                Hub
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('faq-testimonials')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
                 activeTab === 'faq-testimonials'
                   ? 'bg-[#0077FF] text-white'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
               }`}
             >
-              <HelpCircle className="w-4 h-4" />
-              <span>Reviews &amp; FAQs</span>
+              <div className="flex items-center gap-3">
+                <HelpCircle className="w-4 h-4 text-amber-400" />
+                <span>FAQ &amp; Schema Manager</span>
+              </div>
+              <span className="text-xs bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                {faqs.length}
+              </span>
             </button>
 
             <button
@@ -701,7 +758,7 @@ export const AdminDashboard: React.FC = () => {
                 <span>Google Maps &amp; Hubs</span>
               </div>
               <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">
-                {settings?.officeLocations?.length || 6}
+                {settings?.officeLocations?.length || 1}
               </span>
             </button>
 
@@ -719,6 +776,23 @@ export const AdminDashboard: React.FC = () => {
               </div>
               <span className="text-xs bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
                 {settings?.seoKeywords?.length || 6}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('google-tag')}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors ${
+                activeTab === 'google-tag'
+                  ? 'bg-[#0077FF] text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <BarChart3 className="w-4 h-4 text-emerald-400" />
+                <span>Google Tag &amp; GA4</span>
+              </div>
+              <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-500/30 font-mono">
+                {settings?.googleTagId || 'G-TMDMCRC1C7'}
               </span>
             </button>
 
@@ -883,6 +957,35 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Business Problems Diagnostic Manager Banner */}
+            {/* Google Tag & GA4 Real-Time Analytics Banner */}
+            <div className="bg-gradient-to-r from-emerald-950/40 via-slate-950 to-slate-950 p-6 rounded-2xl border border-emerald-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                  <BarChart3 className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base font-bold text-white font-heading">
+                      Google Tag (gtag.js) &amp; GA4 Analytics Suite
+                    </h3>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-mono font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      {settings?.googleTagId || 'G-TMDMCRC1C7'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Live telemetry, event dispatch monitor, custom head/body scripts, and Google Search Console verification.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveTab('google-tag')}
+                className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shrink-0 transition-colors shadow"
+              >
+                Open Analytics Console
+              </button>
+            </div>
+
+            {/* Diagnostic Diagnostic Manager */}
             <div className="bg-gradient-to-r from-cyan-950/40 via-slate-950 to-slate-950 p-6 rounded-2xl border border-cyan-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-[#38BDF8] flex items-center justify-center shrink-0">
@@ -1394,24 +1497,33 @@ export const AdminDashboard: React.FC = () => {
           </div>
         )}
 
-        {/* 6. TESTIMONIALS & FAQ TAB */}
-        {activeTab === 'faq-testimonials' && (
-          <div className="space-y-10">
-            <div>
-              <h1 className="text-3xl font-extrabold text-white font-heading">
-                Reviews &amp; FAQs
-              </h1>
-              <p className="text-sm text-slate-400 mt-1">
-                Maintain client feedback testimonials and public FAQ accordion answers.
-              </p>
-            </div>
+        {/* 5.5 INSIGHTS COMMUNITY, COMMENTS & LEADS TAB */}
+        {activeTab === 'insights-community' && (
+          <InsightsCommunityManager onNotification={showNotification} />
+        )}
 
-            {/* Testimonials */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white font-heading">Client Reviews</h2>
+        {/* 6. TESTIMONIALS & FAQ SCHEMA MANAGER TAB */}
+        {activeTab === 'faq-testimonials' && (
+          <div className="space-y-12">
+            {/* Full FAQ & JSON-LD Schema Manager Component */}
+            <FAQSchemaManager
+              faqs={faqs}
+              onSaveFAQ={handleSaveFAQ}
+              onDeleteFAQ={handleDeleteFAQ}
+            />
+
+            {/* Client Testimonials Section */}
+            <div className="space-y-4 pt-10 border-t border-slate-800">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-white font-heading">Client Reviews &amp; Testimonials</h2>
+                  <p className="text-xs text-slate-400 mt-0.5">Verified feedback from enterprise clients and stakeholders.</p>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {testimonials.map((t) => (
-                  <div key={t.id} className="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+                  <div key={t.id} className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
                     <p className="text-xs italic text-slate-300 leading-relaxed mb-4">
                       &ldquo;{t.quote}&rdquo;
                     </p>
@@ -1419,19 +1531,6 @@ export const AdminDashboard: React.FC = () => {
                       <p className="text-sm font-bold text-white">{t.name}</p>
                       <p className="text-xs text-slate-500">{t.designation} • {t.company}</p>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* FAQs */}
-            <div className="space-y-4 pt-6 border-t border-slate-800">
-              <h2 className="text-xl font-bold text-white font-heading">Frequently Asked Questions</h2>
-              <div className="space-y-3">
-                {faqs.map((faq) => (
-                  <div key={faq.id} className="bg-slate-950 p-5 rounded-2xl border border-slate-800">
-                    <h3 className="text-sm font-bold text-white">{faq.question}</h3>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{faq.answer}</p>
                   </div>
                 ))}
               </div>
@@ -1779,6 +1878,130 @@ export const AdminDashboard: React.FC = () => {
                 </div>
               </div>
 
+              {/* AI Studio & Page Content Editor */}
+              <div className="pt-6 border-t border-slate-800 space-y-6">
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-heading">
+                    AI Studio &amp; Page Copy Architecture
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Manage the main headlines, engineering genesis narrative, and custom AI Studio workbench features.
+                  </p>
+                </div>
+
+                <div className="space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#38BDF8]">
+                    Homepage Hero Headings
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Hero Headline (H1)
+                      </label>
+                      <input
+                        type="text"
+                        value={settings.heroTitle || ''}
+                        onChange={(e) => setSettings({ ...settings, heroTitle: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Hero Sub-headline
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={settings.heroSubtitle || ''}
+                        onChange={(e) => setSettings({ ...settings, heroSubtitle: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-slate-200"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#38BDF8]">
+                    About Page Copy &amp; Narrative
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        About Hero Headline (H1)
+                      </label>
+                      <input
+                        type="text"
+                        value={settings.aboutHeroTitle || ''}
+                        onChange={(e) => setSettings({ ...settings, aboutHeroTitle: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        About Hero Subtitle
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={settings.aboutHeroSubtitle || ''}
+                        onChange={(e) => setSettings({ ...settings, aboutHeroSubtitle: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-slate-200"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Genesis and Mission Text
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={settings.aboutGenesisParagraph || ''}
+                        onChange={(e) => setSettings({ ...settings, aboutGenesisParagraph: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-slate-200"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Architects Behind the Intelligence Text
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={settings.aboutArchitectsParagraph || ''}
+                        onChange={(e) => setSettings({ ...settings, aboutArchitectsParagraph: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-slate-200"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#38BDF8]">
+                    Call-to-Action (CTA) Banners
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        CTA Headline
+                      </label>
+                      <input
+                        type="text"
+                        value={settings.ctaHeadline || ''}
+                        onChange={(e) => setSettings({ ...settings, ctaHeadline: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        CTA Sub-headline
+                      </label>
+                      <input
+                        type="text"
+                        value={settings.ctaSubheadline || ''}
+                        onChange={(e) => setSettings({ ...settings, ctaSubheadline: e.target.value })}
+                        className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-slate-200"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-6 py-3 rounded-xl font-bold text-sm shadow"
@@ -1814,6 +2037,23 @@ export const AdminDashboard: React.FC = () => {
             settings={settings}
             onUpdateSettings={setSettings}
             showNotification={showNotification}
+          />
+        )}
+
+        {/* 10.5 GOOGLE TAG & GA4 ANALYTICS MANAGER */}
+        {activeTab === 'google-tag' && (
+          <GoogleAnalyticsManager
+            settings={settings}
+            onUpdateSettings={async (updatedFields) => {
+              try {
+                const res = await api.updateSettings({ ...settings, ...updatedFields });
+                setSettings(res);
+              } catch (err: any) {
+                console.error('Error updating Google Tag settings:', err);
+                throw err;
+              }
+            }}
+            onNotification={showNotification}
           />
         )}
 

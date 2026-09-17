@@ -9,6 +9,8 @@ import { useAuth } from '../context/AuthContext.js';
 import { createFirestoreInquiry } from '../services/firestoreService.js';
 import { GoogleMapsLocationFinder } from '../components/GoogleMapsLocationFinder.js';
 import { WhatsAppIcon, cleanWhatsAppDigits } from '../components/WhatsAppChatbot.js';
+import { InquirySuccessModal, InquirySuccessData } from '../components/InquirySuccessModal.js';
+import { ToastNotification } from '../components/ToastNotification.js';
 
 export const Contact: React.FC = () => {
   const { user, profile, signInWithGoogle, refreshInquiries } = useAuth();
@@ -83,6 +85,9 @@ export const Contact: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [lastSubmittedLead, setLastSubmittedLead] = useState<typeof formData | null>(null);
   const [copiedLead, setCopiedLead] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [inquiryReceipt, setInquiryReceipt] = useState<InquirySuccessData | null>(null);
 
   const targetWhatsAppPhone = '+91 9038417437';
   const targetWhatsAppDigits = '919038417437';
@@ -113,14 +118,24 @@ ${lead.message || 'Architecture consultation requested'}
     if (field === 'name') {
       if (!trimmed) return 'Full name is required.';
       if (trimmed.length < 2) return 'Full name must be at least 2 characters.';
+      if (!/^[a-zA-Z\s.'-]+$/.test(trimmed)) {
+        return 'Full name should only contain letters, spaces, or hyphens.';
+      }
       return '';
     }
 
     if (field === 'email') {
-      if (!trimmed) return 'Email is required.';
-      if (!trimmed.includes('@')) return 'Email must contain an "@" symbol.';
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(trimmed)) return 'Please enter a valid email address (e.g. name@example.com).';
+      if (!trimmed) return 'Email address is required.';
+      if (/\s/.test(trimmed)) return 'Email address cannot contain spaces.';
+      if (!trimmed.includes('@')) return 'Email must include an "@" symbol (e.g. name@company.com).';
+      const parts = trimmed.split('@');
+      if (parts.length !== 2 || !parts[0] || !parts[1]) {
+        return 'Please enter a complete email prefix and domain.';
+      }
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(trimmed)) {
+        return 'Please enter a valid email format (e.g. name@example.com).';
+      }
       return '';
     }
 
@@ -157,10 +172,12 @@ ${lead.message || 'Architecture consultation requested'}
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    if (touched[name as keyof typeof touched]) {
-      const err = validateField(name as any, value);
-      setFormErrors((prev) => ({ ...prev, [name]: err }));
-    }
+    // Mark as touched on input to provide immediate real-time feedback
+    setTouched((prev) => ({ ...prev, [name]: true }));
+
+    // Validate in real-time
+    const err = validateField(name as any, value);
+    setFormErrors((prev) => ({ ...prev, [name]: err }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -229,8 +246,18 @@ ${lead.message || 'Architecture consultation requested'}
         budget_range: formData.budgetRange,
       });
 
+      const refId = `DST-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+      const receipt: InquirySuccessData = {
+        ...formData,
+        referenceId: refId,
+        submittedAt: new Date().toLocaleString(),
+      };
+
+      setInquiryReceipt(receipt);
       setLastSubmittedLead({ ...formData });
       setSubmitted(true);
+      setShowSuccessModal(true);
+      setShowSuccessToast(true);
     } catch (err: any) {
       console.error('Submission error:', err);
       setErrorMessage(err.message || 'Failed to submit inquiry. Please try again.');
@@ -250,9 +277,10 @@ ${lead.message || 'Architecture consultation requested'}
   return (
     <div className="min-h-screen transition-colors duration-200">
       <SEOHead
-        title="Schedule a Technical Consultation"
-        description="Connect with DataSource principal consultants. Request an independent architectural evaluation, digital product roadmap, or data engineering consultation."
-        keywords="hire software consultants, data engineering consultation, power bi dashboard audit, contact datasource"
+        title="Contact Our AI Research & Engineering Studio | DataSource Tech"
+        description="Initiate a technical consultation with DataSource Technology AI Studio. Engage directly with our senior machine learning engineers and AI systems architects."
+        keywords="contact AI studio, enterprise AI consultation, hire machine learning engineers, AI partnership, technical AI scoping"
+        canonical="https://datasourcerechnology.ai.studio/contact"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: 'Contact', url: '/contact' },
@@ -264,10 +292,10 @@ ${lead.message || 'Architecture consultation requested'}
           <div className="max-w-3xl space-y-4">
             <Eyebrow text="Start a Conversation" variant="blue" />
             <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] dark:text-white font-heading">
-              Have a Technology or Data Problem?
+              Schedule an AI Architecture Consultation
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-body leading-relaxed">
-              Let&apos;s understand the challenge first and find the right solution together. We start with your business goals, not pre-packaged software licenses.
+              Initiate a confidential technical consultation with our senior machine learning engineers and systems architects. We evaluate your data readiness, technical feasibility, and deployment roadmap.
             </p>
           </div>
         </div>
@@ -304,7 +332,7 @@ ${lead.message || 'Architecture consultation requested'}
                         <div>
                           <p className="text-xs font-bold text-slate-900 dark:text-white">Email Dispatch</p>
                           <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight mt-0.5">
-                            Sent to <strong className="text-blue-600 dark:text-blue-400 font-mono">shimadutta62@gmail.com</strong>
+                            Sent to <strong className="text-blue-600 dark:text-blue-400 font-mono">rd14190@gmail.com</strong>
                           </p>
                         </div>
                       </div>
@@ -361,23 +389,33 @@ ${lead.message || 'Architecture consultation requested'}
                       </div>
                     )}
 
-                    <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+                    <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setShowSuccessModal(true)}
+                        className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition-all hover:scale-[1.02]"
+                      >
+                        <Sparkles className="w-4 h-4" />
+                        <span>View Confirmation Receipt &amp; Summary</span>
+                      </button>
+
                       <button
                         onClick={() => {
                           setSubmitted(false);
                           setLastSubmittedLead(null);
+                          setInquiryReceipt(null);
                           setFormData({
                             name: user?.displayName || '',
                             email: user?.email || '',
                             phone: '',
                             company: '',
-                            serviceInterest: 'Custom Web & Cloud Applications',
+                            serviceInterest: 'Custom Model Engineering',
                             projectType: 'New Product Development',
                             budgetRange: '$25k - $50k',
                             message: '',
                           });
                         }}
-                        className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow transition-colors"
+                        className="inline-flex items-center gap-2 bg-[#0077FF] hover:bg-[#0062D6] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow transition-colors"
                       >
                         <span>Submit another consultation request</span>
                       </button>
@@ -431,52 +469,96 @@ ${lead.message || 'Architecture consultation requested'}
                     )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Name Input with Real-Time Validation */}
                       <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                          Full Name <span className="text-rose-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          onBlur={() => handleBlur('name')}
-                          placeholder="e.g. Sarah Jenkins"
-                          aria-invalid={touched.name && !!formErrors.name}
-                          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] transition-colors ${
-                            touched.name && formErrors.name
-                              ? 'border-2 border-rose-500 focus:border-rose-500'
-                              : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
-                          }`}
-                        />
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label htmlFor="contact-form-name" className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Full Name <span className="text-rose-500">*</span>
+                          </label>
+                          {touched.name && !formErrors.name && formData.name.trim().length >= 2 && (
+                            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                              <Check className="w-3 h-3" />
+                              <span>Valid</span>
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="relative">
+                          <input
+                            id="contact-form-name"
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            onBlur={() => handleBlur('name')}
+                            placeholder="e.g. Sarah Jenkins"
+                            aria-invalid={touched.name && !!formErrors.name}
+                            aria-describedby={touched.name && formErrors.name ? 'contact-name-error' : undefined}
+                            className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none transition-colors pr-10 ${
+                              touched.name && formErrors.name
+                                ? 'border-rose-500 focus:border-rose-500 bg-rose-50/40 dark:bg-rose-950/20 text-slate-900 dark:text-white'
+                                : touched.name && !formErrors.name && formData.name.trim().length >= 2
+                                ? 'border-emerald-500/80 focus:border-emerald-500 bg-white dark:bg-[#0F1A2C] text-slate-900 dark:text-slate-100'
+                                : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]'
+                            }`}
+                          />
+                          {touched.name && !formErrors.name && formData.name.trim().length >= 2 && (
+                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none">
+                              <Check className="w-4 h-4" />
+                            </div>
+                          )}
+                        </div>
+
                         {touched.name && formErrors.name && (
-                          <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                          <p id="contact-name-error" className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1.5 font-medium animate-in fade-in slide-in-from-top-1 duration-150">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>{formErrors.name}</span>
                           </p>
                         )}
                       </div>
 
+                      {/* Email Input with Real-Time Validation */}
                       <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
-                          Email <span className="text-rose-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          onBlur={() => handleBlur('email')}
-                          placeholder="e.g. sarah@example.com"
-                          aria-invalid={touched.email && !!formErrors.email}
-                          className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C] transition-colors ${
-                            touched.email && formErrors.email
-                              ? 'border-2 border-rose-500 focus:border-rose-500'
-                              : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8]'
-                          }`}
-                        />
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label htmlFor="contact-form-email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Email <span className="text-rose-500">*</span>
+                          </label>
+                          {touched.email && !formErrors.email && formData.email.trim().length > 0 && (
+                            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                              <Check className="w-3 h-3" />
+                              <span>Valid Format</span>
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="relative">
+                          <input
+                            id="contact-form-email"
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            onBlur={() => handleBlur('email')}
+                            placeholder="e.g. sarah@example.com"
+                            aria-invalid={touched.email && !!formErrors.email}
+                            aria-describedby={touched.email && formErrors.email ? 'contact-email-error' : undefined}
+                            className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none transition-colors pr-10 ${
+                              touched.email && formErrors.email
+                                ? 'border-rose-500 focus:border-rose-500 bg-rose-50/40 dark:bg-rose-950/20 text-slate-900 dark:text-white'
+                                : touched.email && !formErrors.email && formData.email.trim().length > 0
+                                ? 'border-emerald-500/80 focus:border-emerald-500 bg-white dark:bg-[#0F1A2C] text-slate-900 dark:text-slate-100'
+                                : 'border-slate-200 dark:border-slate-700 focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]'
+                            }`}
+                          />
+                          {touched.email && !formErrors.email && formData.email.trim().length > 0 && (
+                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none">
+                              <Check className="w-4 h-4" />
+                            </div>
+                          )}
+                        </div>
+
                         {touched.email && formErrors.email && (
-                          <p className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1">
+                          <p id="contact-email-error" className="text-xs text-rose-500 dark:text-rose-400 mt-1.5 flex items-center gap-1.5 font-medium animate-in fade-in slide-in-from-top-1 duration-150">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>{formErrors.email}</span>
                           </p>
@@ -730,6 +812,26 @@ ${lead.message || 'Architecture consultation requested'}
           <GoogleMapsLocationFinder />
         </div>
       </section>
+
+      {/* Interactive Success Modal */}
+      <InquirySuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        data={inquiryReceipt}
+        targetWhatsAppPhone={targetWhatsAppPhone}
+      />
+
+      {/* Floating Success Toast Notification with 5-second auto-dismiss */}
+      <ToastNotification
+        isVisible={showSuccessToast}
+        onClose={() => setShowSuccessToast(false)}
+        onActionClick={() => setShowSuccessModal(true)}
+        title="Message Sent Successfully"
+        message="Your consultation request has been received and routed to our principal engineering team. Confirmation sent to rd14190@gmail.com."
+        referenceId={inquiryReceipt?.referenceId}
+        duration={5000}
+        actionLabel="View Receipt"
+      />
     </div>
   );
 };

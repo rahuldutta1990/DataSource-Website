@@ -4,28 +4,34 @@ import { ArrowRight, Search, Clock, Tag } from 'lucide-react';
 import { Eyebrow } from '../components/Eyebrow.js';
 import { SEOHead } from '../components/SEOHead.js';
 import { InsightCardSkeleton, Spinner } from '../components/SkeletonLoader.js';
+import { InsightsCommunitySection } from '../components/insights/InsightsCommunitySection.js';
 import { api } from '../services/api.js';
-import { BlogPost } from '../types.js';
+import { BlogPost, BlogCategory } from '../types.js';
 
 export const Insights: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState<BlogCategory[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   const selectedCategory = searchParams.get('category') || 'all';
 
   useEffect(() => {
-    api.getInsights().then(setPosts).finally(() => setLoading(false));
+    Promise.all([
+      api.getInsights().then(setPosts),
+      api.getBlogCategories().then(setCategories).catch(() => []),
+    ]).finally(() => setLoading(false));
   }, []);
 
-  const categories = [
-    'Data Analytics',
-    'Power BI',
-    'Data Engineering',
-    'Software Architecture',
-    'IT Strategy',
+  const defaultCategories = [
+    'Model Architecture & Fine-Tuning',
+    'Agentic Frameworks',
+    'Enterprise Strategy',
   ];
+
+  const categoryNames =
+    categories.length > 0 ? categories.map((c) => c.name) : defaultCategories;
 
   const handleCategoryChange = (cat: string) => {
     if (cat === 'all') {
@@ -48,25 +54,28 @@ export const Insights: React.FC = () => {
 
   return (
     <div className="min-h-screen transition-colors duration-200">
+      {/* On-Page SEO Meta Data */}
       <SEOHead
-        title="Engineering & Strategy Insights | Technical Publications"
-        description="Explore in-depth technical analysis, architecture patterns, and data engineering best practices published by DataSource practitioners."
-        keywords="data analytics blog, software architecture articles, power bi best practices, it strategy insights"
+        title="AI Engineering Insights & Research Blog | DataSource Tech"
+        description="Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at DataSource Technology."
+        keywords="AI engineering blog, machine learning research articles, enterprise AI insights, custom LLM tutorials, MLOps best practices"
+        canonical="https://datasourcerechnology.ai.studio/insights"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: 'Insights', url: '/insights' },
         ]}
       />
+
       {/* Header */}
       <section className="pt-12 pb-16 bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-4">
             <Eyebrow text="Engineering &amp; Strategy Blog" variant="blue" />
             <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] dark:text-white font-heading">
-              DataSource Insights
+              AI Engineering Insights &amp; Research Ledger
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 font-body">
-              Pragmatic articles, architectural patterns, and data engineering case studies written by our practicing consultants.
+              Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at DataSource Technology.
             </p>
           </div>
 
@@ -81,9 +90,9 @@ export const Insights: React.FC = () => {
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
-                All Articles ({posts.length})
+                All Publications ({posts.length})
               </button>
-              {categories.map((c) => (
+              {categoryNames.map((c) => (
                 <button
                   key={c}
                   onClick={() => handleCategoryChange(c)}
@@ -98,86 +107,101 @@ export const Insights: React.FC = () => {
               ))}
             </div>
 
-            <div className="relative w-full md:w-72">
-              <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <div className="relative min-w-[260px]">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
+                placeholder="Search research topics or papers..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search articles..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-[#0077FF] dark:focus:border-[#38BDF8] bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-[#0F1A2C]"
+                className="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0077FF]"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Articles Grid */}
+      {/* Posts List */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#0077FF] dark:text-[#38BDF8] py-2">
                 <Spinner size="sm" />
-                <span>Loading engineering & strategy publications...</span>
+                <span>Loading engineering insights...</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {Array.from({ length: 6 }).map((_, idx) => (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {Array.from({ length: 3 }).map((_, idx) => (
                   <InsightCardSkeleton key={idx} />
                 ))}
               </div>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-20 text-slate-500 dark:text-slate-400">No articles matched your criteria.</div>
+            <div className="text-center py-20 text-slate-500 dark:text-slate-400">
+              No insights found for this topic.
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((post) => (
                 <article
                   key={post.id}
-                  className="consulting-card bg-white dark:bg-[#0E1726] rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm"
+                  className="bg-white dark:bg-[#0E1726] rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl dark:hover:border-cyan-500/30 transition-all flex flex-col group"
                 >
-                  <div>
-                    <div className="aspect-[16/9] overflow-hidden bg-slate-100 dark:bg-slate-800">
-                      <img
-                        src={post.coverImage}
-                        alt={post.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      />
+                  <div className="relative aspect-[16/9] overflow-hidden bg-slate-900">
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-black/70 text-white backdrop-blur-sm border border-white/10">
+                        {post.category}
+                      </span>
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500 mb-3">
-                        <span className="font-bold text-[#0077FF] dark:text-[#38BDF8] uppercase tracking-wider">
-                          {post.category}
-                        </span>
-                        <span>•</span>
+                  </div>
+
+                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 text-xs text-slate-400">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5" />
                           {post.readTime}
                         </span>
+                        <span>•</span>
+                        <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
                       </div>
-                      <h2 className="text-lg font-bold text-slate-900 dark:text-white font-heading leading-snug hover:text-[#0077FF] dark:hover:text-[#38BDF8] transition-colors mb-3">
-                        <Link to={`/insights/${post.slug}`}>{post.title}</Link>
+                      <h2 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#0077FF] dark:group-hover:text-cyan-400 transition-colors line-clamp-2">
+                        {post.title}
                       </h2>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-body">
+                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-body line-clamp-3">
                         {post.excerpt}
                       </p>
                     </div>
-                  </div>
 
-                  <div className="px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{post.author}</span>
-                    <Link
-                      to={`/insights/${post.slug}`}
-                      className="text-xs font-bold text-[#0077FF] dark:text-[#38BDF8] hover:underline inline-flex items-center gap-1"
-                    >
-                      <span>Read Article</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
+                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        By {post.author}
+                      </span>
+                      <Link
+                        to={`/insights/${post.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0077FF] dark:text-cyan-400 group-hover:translate-x-1 transition-transform"
+                      >
+                        <span>Read Technical Paper</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
           )}
+
+          {/* Interactive Comments, Like, Share & Newsletter Signup Community Section */}
+          <InsightsCommunitySection
+            insightId="general"
+            insightTitle="AI Engineering & Research Ledger Hub"
+            category="Enterprise AI & Data Architecture"
+          />
         </div>
       </section>
     </div>

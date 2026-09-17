@@ -124,6 +124,8 @@ export interface FAQ {
   category: string;
   sortOrder: number;
   status: 'published' | 'draft';
+  targetPages?: string[]; // e.g. ['services', 'about', 'home']
+  updatedAt?: string;
 }
 
 export interface ContactEnquiry {
@@ -151,6 +153,42 @@ export interface NewsletterSubscriber {
   source?: string;
   status: 'active' | 'unsubscribed';
   createdAt: string;
+}
+
+export interface InsightComment {
+  id: string;
+  insightId?: string; // 'general' or specific insight slug/id
+  insightTitle?: string;
+  authorName: string;
+  authorEmail: string;
+  authorAvatar?: string;
+  content: string;
+  topic?: string;
+  rating?: number;
+  likesCount: number;
+  status: 'approved' | 'pending' | 'rejected' | 'spam';
+  createdAt: string;
+  adminReply?: string;
+  adminRepliedAt?: string;
+  adminReplierName?: string;
+}
+
+export interface InsightEngagement {
+  id: string;
+  likesCount: number;
+  sharesCount: number;
+  commentsCount: number;
+  updatedAt: string;
+}
+
+export interface CommunityEngagementSummary {
+  totalSubscribers: number;
+  activeSubscribers: number;
+  totalComments: number;
+  approvedComments: number;
+  pendingComments: number;
+  totalLikes: number;
+  totalShares: number;
 }
 
 export interface UserProfile {
@@ -258,6 +296,35 @@ export interface ProcessStepItem {
   img?: string;
 }
 
+export interface PillarItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName?: string;
+}
+
+export interface TechnologicalVerticalItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName?: string;
+}
+
+export interface EngineeringManifestoItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName?: string;
+}
+
+export interface StudioWorkbenchFeature {
+  id: string;
+  title: string;
+  description: string;
+  iconName?: string;
+  badge?: string;
+}
+
 export interface SiteSettings {
   companyName: string;
   fullName: string;
@@ -279,10 +346,17 @@ export interface SiteSettings {
   ctaHeadline: string;
   ctaSubheadline: string;
   ctaButtonText: string;
+  secondaryCtaText?: string;
   footerText: string;
   copyright: string;
   stats: StatItem[];
   analyticsIdPlaceholder?: string;
+  googleTagId?: string;
+  googleTagEnabled?: boolean;
+  gtmContainerId?: string;
+  googleSearchConsoleVerification?: string;
+  customHeadScripts?: string;
+  customBodyScripts?: string;
   whatsappNumber?: string;
   whatsappEnabled?: boolean;
   whatsappGreeting?: string;
@@ -300,6 +374,31 @@ export interface SiteSettings {
   localBusinessSchemaEnabled?: boolean;
   footerQrCodeUrl?: string;
 
+  // AI Studio Core Architecture & Pillars (Editable via CMS)
+  pillarsTitle?: string;
+  pillarsSubtitle?: string;
+  pillars?: PillarItem[];
+  technologicalVerticalsTitle?: string;
+  technologicalVerticalsSubtitle?: string;
+  technologicalVerticals?: TechnologicalVerticalItem[];
+
+  // About Page AI Studio Content (Editable via CMS)
+  aboutHeroTitle?: string;
+  aboutHeroSubtitle?: string;
+  aboutHeroPhilosophy?: string;
+  aboutGenesisTitle?: string;
+  aboutGenesisParagraph?: string;
+  aboutArchitectsTitle?: string;
+  aboutArchitectsParagraph?: string;
+  aboutManifestoTitle?: string;
+  aboutManifestoSubtitle?: string;
+  aboutManifestoItems?: EngineeringManifestoItem[];
+
+  // AI Studio Workbench Features (Editable via CMS)
+  studioWorkbenchTitle?: string;
+  studioWorkbenchSubtitle?: string;
+  studioWorkbenchFeatures?: StudioWorkbenchFeature[];
+
   // Dedicated Page & Section Content (Editable via CMS)
   businessChallengesTitle?: string;
   businessChallengesDescription?: string;
@@ -312,9 +411,6 @@ export interface SiteSettings {
   processTitle?: string;
   processSubtitle?: string;
   processSteps?: ProcessStepItem[];
-  aboutHeroTitle?: string;
-  aboutHeroSubtitle?: string;
-  aboutHeroPhilosophy?: string;
 }
 
 export interface DashboardStats {

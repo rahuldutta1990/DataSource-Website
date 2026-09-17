@@ -18,6 +18,7 @@ import { CaseStudyDetail } from './pages/CaseStudyDetail.js';
 import { Insights } from './pages/Insights.js';
 import { InsightDetail } from './pages/InsightDetail.js';
 import { Contact } from './pages/Contact.js';
+import { Studio } from './pages/Studio.js';
 import { PrivacyPolicy } from './pages/PrivacyPolicy.js';
 import { TermsConditions } from './pages/TermsConditions.js';
 import { AdminLogin } from './pages/admin/AdminLogin.js';
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightDetail />} />
+              <Route path="/studio" element={<Studio />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsConditions />} />

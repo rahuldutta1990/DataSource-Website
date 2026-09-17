@@ -6,6 +6,7 @@ import { DynamicIcon } from '../components/DynamicIcon.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
 import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
 import { ReadingProgressBar } from '../components/ReadingProgressBar.js';
+import { SEOHead } from '../components/SEOHead.js';
 import { api } from '../services/api.js';
 import { ServiceItem } from '../types.js';
 
@@ -48,6 +49,16 @@ export const ServiceDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+      <SEOHead
+        title={service.seoTitle || `${service.title} | DataSource Tech`}
+        description={service.seoDescription || service.excerpt}
+        canonical={`https://datasourcerechnology.ai.studio/services/${service.slug}`}
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
+          { name: service.title },
+        ]}
+      />
       <ReadingProgressBar />
       {/* Breadcrumbs */}
       <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-2 px-4">

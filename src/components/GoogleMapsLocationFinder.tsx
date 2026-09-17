@@ -448,7 +448,7 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
                   <span>Planning an in-person or hybrid architecture session?</span>
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-300">
-                  Our team can host executive design workshops at our Boston, New York, London, or Bengaluru hubs, or on-site at your headquarters.
+                  Our team can host executive design workshops at our Kolkata Technology Hub or on-site at your headquarters.
                 </p>
               </div>
 

@@ -91,19 +91,19 @@ export const OfficeLocationsManager: React.FC<OfficeLocationsManagerProps> = ({
   const handleOpenAddModal = () => {
     setEditingLocation({
       name: '',
-      badge: 'Regional Consulting Hub',
-      city: '',
-      country: 'United States',
+      badge: 'Technology Hub & Consultation Office',
+      city: 'Kolkata',
+      country: 'India',
       address: '',
       phone: '+91 9038417437',
       email: 'rd14190@gmail.com',
       hours: 'Mon – Fri: 9:30 AM – 6:30 PM IST',
       transit: 'Public transit & parking nearby',
-      focus: ['Cloud Architecture', 'Data Engineering'],
+      focus: ['Data Engineering', 'Power BI Dashboards', 'Web & Cloud Architecture'],
       mapQuery: '',
-      coordinates: { lat: 37.7749, lng: -122.4194 },
+      coordinates: { lat: 22.5292, lng: 88.5085 },
     });
-    setFocusInput('Cloud Architecture, Data Engineering');
+    setFocusInput('Data Engineering, Power BI Dashboards, Web & Cloud Architecture');
     setErrors({});
     setTouched({});
   };
@@ -301,7 +301,7 @@ export const OfficeLocationsManager: React.FC<OfficeLocationsManagerProps> = ({
             type="button"
             onClick={handleResetToDefaults}
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors border border-slate-700"
-            title="Reset to 4 flagship global hubs"
+            title="Reset to default Kolkata Technology Hub"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Defaults</span>

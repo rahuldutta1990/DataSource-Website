@@ -1,6 +1,6 @@
 {
-  "name": "DataSource Technology & Solutions",
-  "description": "Technology and data consulting company website with complete dynamic CMS content management system, portfolio, services, insights, and client engagement.",
+  "name": "DataSource Technology AI Studio",
+  "description": "Transform your enterprise with DataSource Technology AI Studio. We engineer custom machine learning models, autonomous workflows, and proprietary generative AI.",
   "requestFramePermissions": ["geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

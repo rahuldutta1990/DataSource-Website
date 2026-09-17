@@ -5,6 +5,8 @@ import { Eyebrow } from '../components/Eyebrow.js';
 import { Breadcrumbs } from '../components/Breadcrumbs.js';
 import { DetailPageSkeleton } from '../components/SkeletonLoader.js';
 import { ReadingProgressBar } from '../components/ReadingProgressBar.js';
+import { SEOHead } from '../components/SEOHead.js';
+import { InsightsCommunitySection } from '../components/insights/InsightsCommunitySection.js';
 import { api } from '../services/api.js';
 import { BlogPost } from '../types.js';
 
@@ -55,6 +57,16 @@ export const InsightDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
+      <SEOHead
+        title={post.seoTitle || `${post.title} | DataSource Tech`}
+        description={post.seoDescription || post.excerpt}
+        canonical={`https://datasourcerechnology.ai.studio/insights/${post.slug}`}
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Insights', url: '/insights' },
+          { name: post.title },
+        ]}
+      />
       <ReadingProgressBar />
       {/* Breadcrumbs */}
       <div className="bg-white dark:bg-[#0A1220] border-b border-slate-100 dark:border-slate-800 py-2 px-4">
@@ -152,6 +164,13 @@ export const InsightDetail: React.FC = () => {
                 Talk to an Architect
               </Link>
             </div>
+
+            {/* Interactive Comments, Like, Share & Newsletter Subscription Hub */}
+            <InsightsCommunitySection
+              insightId={post.slug}
+              insightTitle={post.title}
+              category={post.category}
+            />
           </div>
         </div>
       </article>

@@ -140,37 +140,32 @@ export const Footer: React.FC = () => {
           {/* Services Column */}
           <div>
             <h3 className="text-white text-sm font-bold uppercase tracking-wider mb-4 font-heading">
-              Technology Services
+              AI &amp; Tech Practices
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/services/custom-web-cloud-applications" className="hover:text-cyan-400 transition-colors">
-                  Web &amp; Cloud Applications
+                <Link to="/services/custom-model-engineering" className="hover:text-cyan-400 transition-colors">
+                  Custom Model Engineering
                 </Link>
               </li>
               <li>
-                <Link to="/services/ui-ux-product-design" className="hover:text-cyan-400 transition-colors">
-                  UI/UX &amp; Product Design
+                <Link to="/services/ai-transformation-strategy" className="hover:text-cyan-400 transition-colors">
+                  AI Transformation Strategy
                 </Link>
               </li>
               <li>
-                <Link to="/services/power-bi-executive-dashboards" className="hover:text-cyan-400 transition-colors">
-                  Power BI &amp; Dashboards
+                <Link to="/services/intelligent-data-pipelines" className="hover:text-cyan-400 transition-colors">
+                  Intelligent Data Pipelines
                 </Link>
               </li>
               <li>
-                <Link to="/services/data-analytics-predictive-insights" className="hover:text-cyan-400 transition-colors">
-                  Data Analytics &amp; Modeling
+                <Link to="/services/autonomous-agentic-workflows" className="hover:text-cyan-400 transition-colors">
+                  Autonomous Workflows
                 </Link>
               </li>
               <li>
-                <Link to="/services/data-engineering-pipeline-automation" className="hover:text-cyan-400 transition-colors">
-                  Data Pipelines &amp; ETL
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/it-consulting-technology-assessment" className="hover:text-cyan-400 transition-colors">
-                  IT Strategy &amp; Assessment
+                <Link to="/studio" className="hover:text-cyan-400 transition-colors font-semibold text-cyan-300">
+                  AI Studio Platform
                 </Link>
               </li>
             </ul>

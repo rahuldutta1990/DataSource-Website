@@ -37,10 +37,10 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     id: 'seo-1',
     pageRoute: '/',
     pageName: 'Home - Enterprise Technology & Data',
-    primaryKeyword: 'Technology Consulting Company Bangalore India',
+    primaryKeyword: 'Technology Consulting Company Kolkata India',
     secondaryKeywords: [
       'Data engineering consultants India',
-      'Enterprise cloud software Bangalore',
+      'Enterprise cloud software Kolkata',
       'Power BI consulting company India',
       'Full stack web development India',
     ],
@@ -61,8 +61,8 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     pageName: 'Power BI & Executive Dashboards',
     primaryKeyword: 'Power BI Consulting Services India',
     secondaryKeywords: [
-      'Power BI dashboard developers Bangalore',
-      'Executive KPI reporting consultants Mumbai',
+      'Power BI dashboard developers Kolkata',
+      'Executive KPI reporting consultants Kolkata',
       'Power BI automated refresh setup India',
       'DAX modeling and Star Schema consulting',
     ],
@@ -81,7 +81,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     id: 'seo-3',
     pageRoute: '/services/data-engineering-pipeline-automation',
     pageName: 'Data Engineering & Pipeline Automation',
-    primaryKeyword: 'Data Engineering Company in Bangalore',
+    primaryKeyword: 'Data Engineering Company in Kolkata India',
     secondaryKeywords: [
       'ETL data pipeline developers India',
       'Snowflake BigQuery migration consultants',
@@ -89,7 +89,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
       'Lakehouse modernization services India',
     ],
     searchIntent: 'commercial',
-    targetLocation: 'Bengaluru / Pan-India',
+    targetLocation: 'Kolkata / Pan-India',
     metaTitle: 'Data Engineering & Pipeline Automation Services India | DataSource',
     metaDescription:
       'Fault-tolerant ETL/ELT pipelines, Snowflake and BigQuery data warehousing, Airflow workflow orchestration, and Lakehouse engineering by DataSource.',
@@ -106,7 +106,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     primaryKeyword: 'Custom Software Development Company India',
     secondaryKeywords: [
       'Enterprise React TypeScript developers India',
-      'Cloud web application engineers Bangalore',
+      'Cloud web application engineers Kolkata',
       'Node.js API and microservices architecture',
       'SaaS application development India',
     ],
@@ -128,7 +128,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     primaryKeyword: 'IT Consulting and Data Solutions India',
     secondaryKeywords: [
       'Digital product development services India',
-      'Enterprise data consulting firms Bangalore',
+      'Enterprise data consulting firms Kolkata',
       'Software architecture audit India',
       'UI UX product design consulting',
     ],
@@ -147,18 +147,18 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     id: 'seo-6',
     pageRoute: '/contact',
     pageName: 'Contact & Office Locations',
-    primaryKeyword: 'Contact Technology Consultants Bangalore',
+    primaryKeyword: 'Contact Technology Consultants Kolkata',
     secondaryKeywords: [
       'DataSource office locations India',
       'Book IT architecture consultation India',
       'Hire data engineering consultants India',
-      'Bangalore tech consulting contact number',
+      'Kolkata tech consulting contact number',
     ],
     searchIntent: 'navigational',
-    targetLocation: 'Bengaluru, Mumbai, Kolkata, Delhi NCR, Hyderabad',
-    metaTitle: 'Contact DataSource Technology & Solutions | Bangalore, Mumbai, Kolkata, Delhi, Hyderabad',
+    targetLocation: 'Kolkata, West Bengal, India',
+    metaTitle: 'Contact DataSource Technology & Solutions | Kolkata, West Bengal, India',
     metaDescription:
-      'Connect with DataSource technical architects across our India hubs in Bengaluru, Mumbai, Kolkata, Delhi NCR, and Hyderabad. Call +91 9038417437 or book a consultation.',
+      'Connect with DataSource technical architects at our Kolkata Technology Hub. Call +91 9038417437 or book a consultation.',
     priority: 'high',
     rankingStatus: 'active_target',
     targetMonthlySearches: '1,200/mo',
@@ -169,10 +169,10 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
 
 const PRESET_SUGGESTIONS = [
   {
-    keyword: 'Power BI Developers Bangalore',
+    keyword: 'Power BI Developers Kolkata',
     intent: 'transactional' as const,
     route: '/services/power-bi-executive-dashboards',
-    location: 'Bengaluru / India',
+    location: 'Kolkata / India',
   },
   {
     keyword: 'Cloud Lakehouse Architecture India',
@@ -353,7 +353,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
   const handleResetDefaults = async () => {
     if (
       !window.confirm(
-        'Reset all target keywords to the curated India-wise default keywords set (Bangalore HQ, Power BI India, Data Pipelines, etc.)?'
+        'Reset all target keywords to the curated India-wise default keywords set (Kolkata Technology Hub, Power BI India, Data Pipelines, etc.)?'
       )
     ) {
       return;
@@ -406,16 +406,16 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
           currenciesAccepted: 'INR, USD, EUR, GBP',
           address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Outer Ring Rd, Bellandur Tech Corridor',
-            addressLocality: 'Bengaluru',
-            addressRegion: 'Karnataka',
-            postalCode: '560103',
+            streetAddress: '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3',
+            addressLocality: 'Kolkata',
+            addressRegion: 'West Bengal',
+            postalCode: '700135',
             addressCountry: 'IN',
           },
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: 12.926,
-            longitude: 77.6762,
+            latitude: 22.5292,
+            longitude: 88.5085,
           },
           openingHoursSpecification: [
             {
@@ -791,7 +791,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                       {/* Rich snippets tag in preview */}
                       <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center gap-3 text-[11px] text-[#0f5132]">
                         <span className="bg-emerald-50 px-1.5 py-0.5 rounded font-medium border border-emerald-200">
-                          ★ 4.9 · IT Consulting · Bengaluru HQ
+                          ★ 4.9 · IT Consulting · Kolkata Tech Hub
                         </span>
                         <span className="text-slate-500">
                           Verified Local Business
@@ -890,7 +890,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                 Claim Free Google Business Profiles
               </div>
               <p className="text-slate-300 text-xs leading-relaxed">
-                Create a verified profile at <a href="https://www.google.com/business/" target="_blank" rel="noreferrer" className="text-amber-400 underline">Google Business Profile</a> for your Bengaluru HQ and other hubs. This activates local Google Maps rankings for searches like <em>"Power BI consultants near me"</em>.
+                Create a verified profile at <a href="https://www.google.com/business/" target="_blank" rel="noreferrer" className="text-amber-400 underline">Google Business Profile</a> for your Kolkata Technology Hub. This activates local Google Maps rankings for searches like <em>"Power BI consultants near me"</em>.
               </p>
             </div>
 
@@ -981,7 +981,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                   type="text"
                   value={formSecondaryKeywords}
                   onChange={(e) => setFormSecondaryKeywords(e.target.value)}
-                  placeholder="e.g. Power BI dashboard developers Bangalore, DAX modeling consulting, Executive KPI reporting"
+                  placeholder="e.g. Power BI dashboard developers Kolkata, DAX modeling consulting, Executive KPI reporting"
                   className="w-full bg-slate-950 text-white px-3 py-2 rounded-xl text-xs border border-slate-800 focus:outline-none focus:border-blue-500"
                 />
               </div>
@@ -1026,7 +1026,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                     type="text"
                     value={formTargetLocation}
                     onChange={(e) => setFormTargetLocation(e.target.value)}
-                    placeholder="e.g. India & Global / Bengaluru"
+                    placeholder="e.g. India & Global / Kolkata"
                     className="w-full bg-slate-950 text-white px-3 py-2 rounded-xl text-xs border border-slate-800 focus:outline-none focus:border-blue-500"
                   />
                 </div>

@@ -198,6 +198,41 @@
         }
       },
       "required": ["email", "status", "createdAt"]
+    },
+    "comments": {
+      "title": "comments",
+      "description": "Reader comments and technical discussions on insights articles and engineering ledger",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "insightId": { "type": "string" },
+        "insightTitle": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorEmail": { "type": "string", "format": "email" },
+        "authorAvatar": { "type": "string" },
+        "content": { "type": "string" },
+        "topic": { "type": "string" },
+        "rating": { "type": "number" },
+        "likesCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["approved", "pending", "rejected", "spam"] },
+        "createdAt": { "type": "string" },
+        "adminReply": { "type": "string" },
+        "adminRepliedAt": { "type": "string" },
+        "adminReplierName": { "type": "string" }
+      },
+      "required": ["authorName", "authorEmail", "content", "status", "createdAt"]
+    },
+    "insightEngagement": {
+      "title": "insightEngagement",
+      "description": "Like, share, and interaction metrics for insights and engineering content",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "likesCount": { "type": "number" },
+        "sharesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
     }
   },
   "firestore": {
@@ -228,6 +263,14 @@
     "/newsletterSubscribers/{subscriberId}": {
       "schema": "newsletterSubscribers",
       "description": "Newsletter mailing list subscribers captured from website"
+    },
+    "/comments/{commentId}": {
+      "schema": "comments",
+      "description": "Reader comments and community questions"
+    },
+    "/insightEngagement/{engagementId}": {
+      "schema": "insightEngagement",
+      "description": "Aggregate engagement likes and shares"
     }
   }
 }

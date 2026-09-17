@@ -28,6 +28,7 @@ import { DynamicIcon } from '../components/DynamicIcon.js';
 import { SEOHead } from '../components/SEOHead.js';
 import { BusinessProblemsSection } from '../components/BusinessProblemsSection.js';
 import { AIProblemAnalyzer } from '../components/AIProblemAnalyzer.js';
+import { generateFAQPageSchema } from '../utils/schemaGenerator.js';
 import { AIHealthCheck } from '../components/AIHealthCheck.js';
 import { AISolutionFinder } from '../components/AISolutionFinder.js';
 import {
@@ -234,6 +235,16 @@ export const Home: React.FC = () => {
     'Retail & E-commerce',
   ];
 
+  const homeFaqSchema = generateFAQPageSchema(faqs, 'home');
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'DataSource Technology & Solutions',
+    url: 'https://datasource.tech',
+  };
+
+  const combinedHomeSchema = homeFaqSchema ? [websiteSchema, homeFaqSchema] : websiteSchema;
+
   return (
     <div className="min-h-screen transition-colors duration-200 overflow-x-hidden relative">
       {/* On-Page SEO Meta Tags & Schema */}
@@ -241,12 +252,7 @@ export const Home: React.FC = () => {
         title="Technology That Solves. Data That Drives."
         description="DataSource helps enterprises design custom cloud software, automated Power BI dashboards, high-throughput data engineering pipelines and strategic IT architecture."
         keywords="enterprise technology consulting, power bi dashboards, cloud applications, data engineering, database migration, IT assessment"
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: 'DataSource Technology & Solutions',
-          url: 'https://datasource.tech',
-        }}
+        schema={combinedHomeSchema}
       />
 
       {/* 1. HERO BANNER: Turning Technology and Data Into Business Solutions */}

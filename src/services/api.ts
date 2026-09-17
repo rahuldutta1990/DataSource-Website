@@ -9,6 +9,9 @@ import {
   FAQ,
   ContactEnquiry,
   NewsletterSubscriber,
+  InsightComment,
+  InsightEngagement,
+  CommunityEngagementSummary,
   MediaItem,
   SiteSettings,
   DashboardStats,
@@ -112,8 +115,80 @@ export const api = {
     return firestoreStore.getNewsletterSubscribersFromFirestore();
   },
 
+  async updateNewsletterSubscriber(id: string, patch: Partial<NewsletterSubscriber>): Promise<void> {
+    return firestoreStore.updateNewsletterSubscriberInFirestore(id, patch);
+  },
+
+  async addNewsletterSubscriber(
+    email: string,
+    interest?: string,
+    source?: string,
+    status?: 'active' | 'unsubscribed'
+  ): Promise<NewsletterSubscriber> {
+    return firestoreStore.addNewsletterSubscriberManual(email, interest, source, status);
+  },
+
   async deleteNewsletterSubscriber(id: string): Promise<void> {
     return firestoreStore.deleteNewsletterSubscriberFromFirestore(id);
+  },
+
+  // ==========================================
+  // Comments & Insights Community Engagement
+  // ==========================================
+
+  async getComments(insightId?: string, status?: string): Promise<InsightComment[]> {
+    return firestoreStore.getCommentsFromFirestore(insightId, status);
+  },
+
+  async submitComment(payload: {
+    insightId?: string;
+    insightTitle?: string;
+    authorName: string;
+    authorEmail: string;
+    authorAvatar?: string;
+    content: string;
+    topic?: string;
+    rating?: number;
+  }): Promise<{ success: boolean; comment: InsightComment; message: string }> {
+    return firestoreStore.submitCommentToFirestore(payload);
+  },
+
+  async likeComment(commentId: string): Promise<{ success: boolean; likesCount: number }> {
+    return firestoreStore.likeCommentInFirestore(commentId);
+  },
+
+  async updateCommentStatus(
+    commentId: string,
+    status: 'approved' | 'pending' | 'rejected' | 'spam'
+  ): Promise<void> {
+    return firestoreStore.updateCommentStatusInFirestore(commentId, status);
+  },
+
+  async replyToComment(
+    commentId: string,
+    replyText: string,
+    adminReplierName?: string
+  ): Promise<void> {
+    return firestoreStore.replyToCommentInFirestore(commentId, replyText, adminReplierName);
+  },
+
+  async deleteComment(commentId: string): Promise<void> {
+    return firestoreStore.deleteCommentFromFirestore(commentId);
+  },
+
+  async getEngagementStats(insightId: string = 'global'): Promise<InsightEngagement> {
+    return firestoreStore.getEngagementStatsFromFirestore(insightId);
+  },
+
+  async recordEngagementAction(
+    action: 'like' | 'share' | 'comment',
+    insightId: string = 'global'
+  ): Promise<{ success: boolean; newCount: number }> {
+    return firestoreStore.recordEngagementActionInFirestore(action, insightId);
+  },
+
+  async getCommunitySummary(): Promise<CommunityEngagementSummary> {
+    return firestoreStore.getCommunityEngagementSummaryFromFirestore();
   },
 
   async getMailLogs(): Promise<any[]> {

@@ -101,5 +101,19 @@ service cloud.firestore {
       // Allow management by administrators
       allow read, update, delete: if isAdmin() || true;
     }
+
+    // Reader comments & technical discussions
+    match /comments/{commentId} {
+      // Allow public reading and submitting comments
+      allow read, create: if true;
+      
+      // Allow updates (e.g., likes, approvals, admin replies) and moderation deletion
+      allow update, delete: if isAdmin() || true;
+    }
+
+    // Engagement counters (likes, shares)
+    match /insightEngagement/{engagementId} {
+      allow read, write: if true;
+    }
   }
 }

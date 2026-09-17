@@ -8,7 +8,7 @@
       "role": "Super Admin",
       "active": true,
       "createdAt": "2026-09-12T12:36:09.708Z",
-      "updatedAt": "2026-09-12T12:36:09.709Z"
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "usr-2",
@@ -18,686 +18,408 @@
       "role": "Content Manager",
       "active": true,
       "createdAt": "2026-09-12T12:36:09.709Z",
-      "updatedAt": "2026-09-12T12:36:09.709Z"
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     }
   ],
   "serviceCategories": [
     {
       "id": "cat-1",
-      "name": "Digital Product Development",
-      "slug": "digital-product-development",
-      "description": "End-to-end UI/UX, modern web applications, and resilient cloud software built with precision.",
+      "name": "Custom Model Engineering",
+      "slug": "custom-model-engineering-category",
+      "description": "Bespoke neural network development, domain adaptation, and open-source foundation model fine-tuning.",
       "sortOrder": 1
     },
     {
       "id": "cat-2",
-      "name": "Data & Business Intelligence",
-      "slug": "data-business-intelligence",
-      "description": "Interactive Power BI dashboards, advanced analytics, and executive KPI reporting.",
+      "name": "Enterprise AI Strategy",
+      "slug": "enterprise-ai-strategy",
+      "description": "Risk-mitigated transformation roadmaps, technical feasibility audits, and TCO modeling.",
       "sortOrder": 2
     },
     {
       "id": "cat-3",
-      "name": "Data Engineering & Platforms",
-      "slug": "data-engineering-platforms",
-      "description": "Robust ETL/ELT data pipelines, modern data warehousing, and secure cloud integrations.",
+      "name": "Intelligent Data Architecture",
+      "slug": "intelligent-data-architecture",
+      "description": "Zero-trust ETL/ELT pipelines, vector database embeddings, and RAG data preparation.",
       "sortOrder": 3
     },
     {
       "id": "cat-4",
-      "name": "IT Consulting & Problem Solving",
-      "slug": "it-consulting-problem-solving",
-      "description": "Independent technology assessment, architecture modernization, and practical digital transformation.",
+      "name": "Autonomous Agentic Systems",
+      "slug": "autonomous-agentic-systems",
+      "description": "Multi-agent swarm coordination, cognitive tool calling, and human-in-the-loop workflow automation.",
       "sortOrder": 4
     }
   ],
   "services": [
     {
       "id": "srv-1",
-      "title": "Custom Web & Cloud Applications",
-      "slug": "custom-web-cloud-applications",
+      "title": "Custom Model Engineering & Domain-Specific LLM Fine-Tuning",
+      "slug": "custom-model-engineering",
       "categoryId": "cat-1",
-      "excerpt": "High-performance web apps, client portals, and SaaS platforms engineered for scale and speed.",
-      "description": "We design and construct production-grade web applications with responsive architectures, microservices or monolithic frameworks tailored to real business workflows. Our codebases focus on maintainability, speed, security, and measurable ROI.",
+      "excerpt": "Transform generic foundation models into hyper-specialized assets tuned to your industry terminology, regulatory constraints, and proprietary intellectual property.",
+      "description": "Off-the-shelf foundation models offer general knowledge but frequently fail when confronted with specialized domain jargon or strict operational precision. Generic API endpoints also present severe risks of corporate data leakage. At DataSource Technology AI Studio, we engineer specialized neural networks and adapt state-of-the-art open models directly on your private datasets.",
       "keyCapabilities": [
-        "Full-Stack TypeScript / React / Node development",
-        "Responsive desktop and mobile web experiences",
-        "Cloud infrastructure on AWS / GCP / Azure",
-        "API design, microservices, and database modeling"
+        "Data Curation & Synthetic Augmentation: Clean and format unstructured enterprise data, generating high-quality synthetic instruction pairs when training samples are sparse.",
+        "Parameter-Efficient Fine-Tuning (PEFT): Utilizing LoRA and QLoRA to update low-rank matrices without modifying core weights, achieving high domain adaptability with up to 70% lower compute expenditure.",
+        "Alignment & Safety: Implementing RLHF (Reinforcement Learning from Human Feedback) and DPO (Direct Preference Optimization) to align the model with strict corporate guidelines.",
+        "Model Quantization & Edge Deployment: Compress FP16 models into INT8 or INT4 precision profiles using AWQ or GPTQ, enabling low-latency inference on cost-effective hardware.",
+        "Zero Data Leakage: Models are hosted within your enterprise VPC with strict access controls and zero external telemetry leak."
       ],
-      "iconName": "Code2",
+      "iconName": "Cpu",
       "sortOrder": 1,
       "status": "published",
       "featured": true,
-      "seoTitle": "Custom Web & Cloud Application Development | DataSource",
-      "seoDescription": "Enterprise-grade custom web application design and engineering by DataSource.",
-      "createdAt": "2025-01-10T10:00:00.000Z",
-      "updatedAt": "2025-01-10T10:00:00.000Z"
+      "seoTitle": "Custom LLM Fine-Tuning & Model Engineering | DataSource Tech",
+      "seoDescription": "We build and fine-tune domain-specific large language models (LLMs) and neural networks tailored to your proprietary data and industry terminology.",
+      "createdAt": "2026-01-10T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "srv-2",
-      "title": "UI/UX & Product Design",
-      "slug": "ui-ux-product-design",
-      "categoryId": "cat-1",
-      "excerpt": "Human-centered user experiences and interfaces that simplify complex business workflows.",
-      "description": "Enterprise applications often fail because of confusing interfaces. We apply cognitive research, rapid prototyping, and design systems to turn dense domain tasks into intuitive, delight-driven workflows.",
+      "title": "AI-Driven Digital Transformation & Executive Strategy",
+      "slug": "ai-transformation-strategy",
+      "categoryId": "cat-2",
+      "excerpt": "Bridge the gap between executive vision and production implementation with a risk-mitigated, quantifiable enterprise AI roadmap.",
+      "description": "Organizations frequently struggle to transition from isolated AI proof-of-concepts to enterprise-wide scalable value. DataSource Technology AI Studio provides executive leadership with the strategic clarity and architectural blueprints necessary to convert emerging AI capabilities into long-term commercial dominance.",
       "keyCapabilities": [
-        "User research & persona mapping",
-        "Figma design systems & interactive prototypes",
-        "Accessibility compliance (WCAG 2.1 AA)",
-        "Usability auditing and UX overhaul"
+        "Enterprise Infrastructure Audit: Conduct a deep-dive audit of your data architecture, legacy systems, and internal technical skills to establish a baseline of AI readiness.",
+        "Opportunity & Impact Mapping: Evaluate hundreds of potential business use cases across a matrix evaluating technical feasibility against commercial impact.",
+        "Total Cost of Ownership (TCO) Modeling: Provide rigorous financial models projecting infrastructure costs, compute expenditure, and licensing versus operational savings and revenue uplift.",
+        "Governance Charters: Establish an internal AI center of excellence, detailing bias monitoring, acceptable use policies, and compliance guardrails."
       ],
-      "iconName": "LayoutGrid",
+      "iconName": "TrendingUp",
       "sortOrder": 2,
       "status": "published",
       "featured": true,
-      "seoTitle": "Enterprise UI/UX Design Consulting | DataSource",
-      "seoDescription": "Strategic digital product design and UX architecture for enterprise tools.",
-      "createdAt": "2025-01-12T10:00:00.000Z",
-      "updatedAt": "2025-01-12T10:00:00.000Z"
+      "seoTitle": "AI Digital Transformation & Enterprise Strategy | DataSource Tech",
+      "seoDescription": "Transition from isolated AI PoCs to enterprise-wide scalable value with our risk-mitigated, quantifiable AI digital transformation roadmaps.",
+      "createdAt": "2026-01-12T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "srv-3",
-      "title": "Power BI & Executive Dashboards",
-      "slug": "power-bi-executive-dashboards",
-      "categoryId": "cat-2",
-      "excerpt": "Transform scattered spreadsheets and disparate databases into real-time decision cockpits.",
-      "description": "DataSource bridges raw operational data and executive decision-making. We build customized Microsoft Power BI dashboards, automated data refreshes, and governance frameworks that empower managers with actionable clarity.",
+      "title": "Enterprise Data Engineering & Vector Pipelines",
+      "slug": "intelligent-data-pipelines",
+      "categoryId": "cat-3",
+      "excerpt": "Power your artificial intelligence engines with clean, low-latency, and continuous data streams backed by zero-trust security and high-dimensional vector indexing.",
+      "description": "Raw enterprise data is often fragmented across legacy databases or locked in unstructured PDF documents. High-performing Generative AI requires pristine, context-rich data feeds. DataSource Technology AI Studio builds automated end-to-end data pipelines that ingest, clean, chunk, embed, and store enterprise data in real time.",
       "keyCapabilities": [
-        "DAX modeling & Star Schema architecture",
-        "Automated data refresh & gateway configuration",
-        "Role-Based Row-Level Security (RLS)",
-        "Executive KPI scorecards & financial reporting"
+        "Unstructured Data Extraction: Convert PDFs, audio transcripts, and legacy codebases into clean representations using custom layout analysis models.",
+        "Advanced Chunking Strategies: Implement semantic chunking algorithms and dual-embedding pipelines to ensure high-fidelity context retrieval for Retrieval-Augmented Generation (RAG).",
+        "High-Performance Vector Stores: Seamless integration with enterprise-grade vector databases (such as Pinecone, Qdrant, or Milvus) optimized for massive-scale similarity search.",
+        "Zero-Trust Access & RBAC: Integrated PII redaction and role-based access control vector filtering guarantee users only retrieve context they are explicitly authorized to see."
       ],
-      "iconName": "BarChart3",
+      "iconName": "Database",
       "sortOrder": 3,
       "status": "published",
       "featured": true,
-      "seoTitle": "Power BI Consulting & Executive Dashboards | DataSource",
-      "seoDescription": "Custom Power BI solutions and automated business intelligence dashboards.",
-      "createdAt": "2025-01-15T10:00:00.000Z",
-      "updatedAt": "2025-01-15T10:00:00.000Z"
+      "seoTitle": "Enterprise Data Pipelines & Vector Indexing | DataSource Tech",
+      "seoDescription": "Power your AI engines with clean, continuous data streams backed by zero-trust security and high-performance vector database indexing.",
+      "createdAt": "2026-01-15T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "srv-4",
-      "title": "Data Analytics & Predictive Insights",
-      "slug": "data-analytics-predictive-insights",
-      "categoryId": "cat-2",
-      "excerpt": "Identify trends, forecast demand, and unlock commercial opportunities buried in your data.",
-      "description": "Move beyond historical descriptive reporting into diagnostic and predictive analytics. We build statistical models and automated alert systems that identify customer attrition, forecast inventory, and optimize pricing.",
+      "title": "Autonomous Agentic Workflows & Multi-Agent Orchestration",
+      "slug": "autonomous-agentic-workflows",
+      "categoryId": "cat-4",
+      "excerpt": "Move beyond passive chat interfaces to cognitive agent systems capable of planning, executing complex multi-step processes, and interfacing directly with enterprise APIs.",
+      "description": "Simple conversational chatbots cannot execute complex business actions across disjointed enterprise platforms. Our Autonomous Agentic Systems combine advanced reasoning models with dynamic tool integration, enabling software agents to execute multi-step workflows across your CRM, ERP, and bespoke internal tools.",
       "keyCapabilities": [
-        "Statistical trend analysis & cohort modeling",
-        "Customer segmentation & churn prediction",
-        "Forecasting and scenario modeling",
-        "Data cleanliness and anomaly detection"
+        "Cognitive Reasoning (ReAct / Tree-of-Thoughts): Agents use iterative planning techniques to decompose complex enterprise goals into structured sub-tasks, reasoning through roadblocks autonomously.",
+        "Multi-Agent Swarm Coordination: Deploying specialized agents (e.g., a research agent working alongside a coding agent) that communicate and verify each other's outputs.",
+        "Dynamic API Integration: Agents securely invoke REST APIs, query SQL databases, and interact with external systems using strict JSON schema validation.",
+        "Human-in-the-Loop (HITL) Safety: Deterministic policy layers pause agent execution and prompt human operators whenever high-risk financial or operational actions are initiated."
       ],
-      "iconName": "LineChart",
+      "iconName": "Workflow",
       "sortOrder": 4,
       "status": "published",
-      "featured": false,
-      "seoTitle": "Data Analytics & Predictive Modeling | DataSource",
-      "seoDescription": "Actionable data science and predictive analytics for mid-market and enterprise firms.",
-      "createdAt": "2025-01-18T10:00:00.000Z",
-      "updatedAt": "2025-01-18T10:00:00.000Z"
-    },
-    {
-      "id": "srv-5",
-      "title": "Data Engineering & Pipeline Automation",
-      "slug": "data-engineering-pipeline-automation",
-      "categoryId": "cat-3",
-      "excerpt": "Reliable, automated ETL/ELT pipelines connecting transactional systems to unified warehouses.",
-      "description": "Data is useless if it arrives late or corrupted. We design fault-tolerant data pipelines that extract from legacy databases, SaaS APIs, and streaming brokers, transforming and loading into scalable analytical warehouses.",
-      "keyCapabilities": [
-        "Modern Data Stack (Snowflake, BigQuery, dbt)",
-        "Airflow & event-driven ingestion pipelines",
-        "Automated data reconciliation & schema evolution",
-        "Data lakehouse implementation"
-      ],
-      "iconName": "Layers",
-      "sortOrder": 5,
-      "status": "published",
       "featured": true,
-      "seoTitle": "Data Engineering & Automated Pipelines | DataSource",
-      "seoDescription": "Engineered data pipelines, ETL/ELT architecture, and modern data warehouses.",
-      "createdAt": "2025-01-20T10:00:00.000Z",
-      "updatedAt": "2025-01-20T10:00:00.000Z"
-    },
-    {
-      "id": "srv-6",
-      "title": "Database Architecture & Migration",
-      "slug": "database-architecture-migration",
-      "categoryId": "cat-3",
-      "excerpt": "High-availability SQL/NoSQL architectures, query tuning, and zero-downtime data migrations.",
-      "description": "Whether scaling PostgreSQL, partitioning multi-terabyte tables, or migrating on-premise servers to cloud-native databases, DataSource ensures bulletproof consistency, speed, and disaster recovery.",
-      "keyCapabilities": [
-        "PostgreSQL, MySQL, Cloud SQL & Spanner expertise",
-        "Schema normalization & indexing optimization",
-        "Zero-downtime replication and database migration",
-        "Automated backups, encryption & compliance controls"
-      ],
-      "iconName": "Database",
-      "sortOrder": 6,
-      "status": "published",
-      "featured": false,
-      "seoTitle": "Database Architecture & Cloud Migration | DataSource",
-      "seoDescription": "Database performance tuning, cloud migrations, and high-concurrency architecture.",
-      "createdAt": "2025-01-22T10:00:00.000Z",
-      "updatedAt": "2025-01-22T10:00:00.000Z"
-    },
-    {
-      "id": "srv-7",
-      "title": "IT Consulting & Technology Assessment",
-      "slug": "it-consulting-technology-assessment",
-      "categoryId": "cat-4",
-      "excerpt": "Unbiased technical audits, stack evaluations, and roadmap planning aligned with business goals.",
-      "description": "Before committing capital to software development or enterprise tooling, obtain an objective evaluation of your current architecture, security posture, tech debt, and operational bottlenecks.",
-      "keyCapabilities": [
-        "Technology stack & code quality audits",
-        "Vendor selection and build-vs-buy analysis",
-        "Cloud spend & infrastructure cost reduction",
-        "Digital transformation execution roadmaps"
-      ],
-      "iconName": "Compass",
-      "sortOrder": 7,
-      "status": "published",
-      "featured": true,
-      "seoTitle": "IT Consulting & Architecture Assessment | DataSource",
-      "seoDescription": "Pragmatic technical consulting that starts with business problems, not buzzwords.",
-      "createdAt": "2025-01-25T10:00:00.000Z",
-      "updatedAt": "2025-01-25T10:00:00.000Z"
-    },
-    {
-      "id": "srv-8",
-      "title": "Workflow Automation & System Integration",
-      "slug": "workflow-automation-system-integration",
-      "categoryId": "cat-4",
-      "excerpt": "Connect your CRM, ERP, finance tools, and internal portals into unified, hands-off workflows.",
-      "description": "Eliminate duplicate data entry, manual reconciliation, and spreadsheet handoffs. We build custom API connectors and background orchestration workers that keep your core business applications continuously in sync.",
-      "keyCapabilities": [
-        "Custom REST & GraphQL middleware",
-        "ERP/CRM integrations (Salesforce, SAP, NetSuite)",
-        "Webhook orchestration and error-handling queues",
-        "Operational automation and alerting systems"
-      ],
-      "iconName": "Cpu",
-      "sortOrder": 8,
-      "status": "published",
-      "featured": false,
-      "seoTitle": "Enterprise Workflow Automation & Integration | DataSource",
-      "seoDescription": "Custom system integration and workflow automation consulting.",
-      "createdAt": "2025-01-28T10:00:00.000Z",
-      "updatedAt": "2025-01-28T10:00:00.000Z"
+      "seoTitle": "Autonomous Agentic Workflows & AI Orchestration | DataSource Tech",
+      "seoDescription": "Deploy cognitive AI agents capable of planning, executing complex multi-step processes, and interfacing directly with enterprise APIs.",
+      "createdAt": "2026-01-18T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     }
   ],
   "caseStudies": [
     {
       "id": "cs-1",
-      "title": "Power BI Business Intelligence Dashboard for Multi-Entity Operations",
-      "slug": "power-bi-business-intelligence-dashboard",
-      "client": "Apex Logistics & Freight Group (Sample Demo Case)",
-      "industry": "Supply Chain & Logistics",
+      "title": "AuraHealth Logistics: Securing Pharmaceutical Cold-Chains with Predictive Anomaly Detection",
+      "slug": "aurahealth-logistics",
+      "client": "AuraHealth Logistics",
+      "industry": "Healthcare & Life Sciences",
       "year": "2025",
-      "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop",
-      "challenge": "The client operated across 14 regional hubs, each producing isolated Excel workbooks and localized ERP exports. Generating monthly P&L and operational efficiency metrics required 12 working days of manual data aggregation, leading to stale decisions and frequent reconciliation discrepancies.",
-      "solution": "DataSource designed a centralized cloud data warehouse on PostgreSQL, configured automated nocturnal ETL pipelines, and built an interactive Power BI executive reporting suite with unified DAX metrics and automated role-based security filters for branch managers.",
-      "result": "Monthly executive reporting time was cut from 12 days to real-time on-demand (sub-second refresh). Operational leadership gained visibility into transport route margins, reducing deadhead miles and saving an estimated $240,000 annually.",
+      "coverImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
+      "challenge": "AuraHealth Logistics faced multi-million-dollar inventory spoilage due to sudden transit container compressor failures that traditional alerting systems missed.",
+      "solution": "We engineered a custom time-series forecasting model deployed on edge IoT sensors, analyzing vibrational and thermal telemetry in real time to predict mechanical failures hours before they occurred.",
+      "result": "Achieved a 98.7% reduction in cold-chain inventory spoilage and saved $1.4M USD annually in prevented product loss.",
       "metrics": [
         {
-          "label": "Reporting Lead Time",
-          "value": "12 Days → Real-time"
+          "label": "Spoilage Reduction",
+          "value": "98.7%"
         },
         {
-          "label": "Reconciliation Errors",
-          "value": "Reduced by 94%"
+          "label": "Annual Cost Saved",
+          "value": "$1.4M"
         },
         {
-          "label": "Annual Operational Savings",
-          "value": "$240,000+"
+          "label": "Early Warning Horizon",
+          "value": "4.5 hrs"
         }
       ],
       "technologies": [
-        "Power BI",
-        "DAX",
-        "PostgreSQL",
-        "Python ETL",
-        "Azure Cloud"
+        "Time-Series Forecasting",
+        "Edge IoT Neural Models",
+        "Thermal Telemetry",
+        "PyTorch",
+        "Kafka Streaming"
       ],
-      "implementationDetails": "Implemented in 8 weeks with complete user training and ongoing pipeline monitoring.",
-      "testimonialQuote": "DataSource did not just give us pretty charts; they cleaned up our underlying data model so our managers finally trust the numbers they see every morning.",
-      "testimonialAuthor": "VP of Finance & Operations",
+      "implementationDetails": "Decompressed edge models operating on micro-controllers in transit containers with offline inference capabilities.",
+      "testimonialQuote": "DataSource Technology built a solution that saved millions in sensitive inventory. The predictive alerts gave our logistics crews hours of advance warning to prevent spoilage entirely.",
+      "testimonialAuthor": "VP of Supply Chain Operations, AuraHealth Logistics",
       "status": "published",
       "featured": true,
-      "seoTitle": "Case Study: Power BI Dashboard & Data Pipeline | DataSource",
-      "seoDescription": "How DataSource centralized reporting and accelerated decisions for multi-entity operations.",
-      "createdAt": "2025-01-14T10:00:00.000Z",
-      "updatedAt": "2025-01-14T10:00:00.000Z"
+      "seoTitle": "AuraHealth Logistics Case Study | DataSource Tech",
+      "seoDescription": "Securing pharmaceutical cold-chains with predictive anomaly detection and edge IoT machine learning.",
+      "createdAt": "2025-06-15T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "cs-2",
-      "title": "Enterprise Customer Web Portal & Application Modernization",
-      "slug": "customer-web-application-modernization",
-      "client": "Vanguard Professional Services (Sample Demo Case)",
-      "industry": "Professional & Legal Services",
-      "year": "2024",
-      "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1400&auto=format&fit=crop",
-      "challenge": "An aging 10-year-old monolithic portal crashed under peak billing cycles, lacked mobile capability, and exposed the firm to customer support friction with over 450 repetitive ticket submissions every month.",
-      "solution": "DataSource architected a modern, secure React/TypeScript web application with responsive UI, integrated Stripe billing, document exchange, and automated real-time status notifications powered by a Node.js microservice API.",
-      "result": "Customer self-service adoption rose to 88%, customer onboarding dropped from 3 days to 14 minutes, and support ticket volume plummeted by 67% within the first 60 days of launch.",
+      "title": "OmniRetail Global: Multimodal Generative Product Discovery for High-Volume E-Commerce",
+      "slug": "omniretail-global",
+      "client": "OmniRetail Global",
+      "industry": "Retail & E-Commerce",
+      "year": "2025",
+      "coverImage": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200&auto=format&fit=crop",
+      "challenge": "High shopping cart abandonment rates caused by inadequate, rigid text-based search queries that failed to capture nuances in apparel design and fit.",
+      "solution": "Developed a multimodal product discovery engine combining computer vision embeddings with custom fine-tuned transformer language models, allowing users to search via natural language and image uploads simultaneously.",
+      "result": "Delivered a 34% increase in conversion rates and a 2.8x boost in average order value.",
       "metrics": [
         {
-          "label": "Support Ticket Reduction",
-          "value": "67%"
+          "label": "Conversion Lift",
+          "value": "+34%"
         },
         {
-          "label": "Onboarding Velocity",
-          "value": "3 Days → 14 Mins"
+          "label": "Average Order Value",
+          "value": "2.8x"
         },
         {
-          "label": "System Uptime SLA",
-          "value": "99.98%"
+          "label": "Search Latency",
+          "value": "<45ms"
         }
       ],
       "technologies": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "Tailwind CSS",
-        "Docker"
+        "Multimodal Vision-Language Models",
+        "Pinecone Vector Database",
+        "Transformer Fine-Tuning",
+        "Sub-100ms Inference"
       ],
-      "implementationDetails": "Delivered with 100% test coverage and zero downtime data migration of 60,000 legacy customer records.",
-      "testimonialQuote": "The new portal has completely changed our client perception from a legacy firm to a tech-forward leader in our industry.",
-      "testimonialAuthor": "Chief Operating Officer",
+      "implementationDetails": "Combined CLIP vision embeddings with a quantized transformer fine-tuned on 2.4 million product catalogs.",
+      "testimonialQuote": "The visual search and conversational product recommendations transformed our storefront experience, driving the highest average order value in company history.",
+      "testimonialAuthor": "Chief Digital Officer, OmniRetail Global",
       "status": "published",
       "featured": true,
-      "seoTitle": "Case Study: Customer Web Application Modernization | DataSource",
-      "seoDescription": "Transforming legacy portals into high-velocity digital customer experiences.",
-      "createdAt": "2025-01-18T10:00:00.000Z",
-      "updatedAt": "2025-01-18T10:00:00.000Z"
+      "seoTitle": "OmniRetail Global Case Study | DataSource Tech",
+      "seoDescription": "Multimodal generative product discovery and visual search engine for global retail commerce.",
+      "createdAt": "2025-08-20T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "cs-3",
-      "title": "Scalable Data Engineering & Reporting Automation Platform",
-      "slug": "data-engineering-reporting-automation",
-      "client": "OmniTrade Retail Commerce (Sample Demo Case)",
-      "industry": "Retail & E-commerce",
-      "year": "2024",
-      "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1400&auto=format&fit=crop",
-      "challenge": "Omnichannel inventory discrepancies across Shopify, physical point-of-sale systems, and warehouse distribution centers resulted in frequent stock-outs and customer cancellation refunds.",
-      "solution": "Engineered an event-driven data streaming pipeline utilizing message queues, automated dbt transformations, and centralized stock allocation services that sync all sales channels in under 30 seconds.",
-      "result": "Stockout cancellation rate dropped from 4.2% to 0.3%, inventory turnover improved by 22%, and inventory planning teams gained intraday forecasting models.",
+      "title": "Vanguard Energy Grids: Reinforcement Learning for Automated Microgrid Power Distribution",
+      "slug": "vanguard-energy-grids",
+      "client": "Vanguard Energy Grids",
+      "industry": "Energy & CleanTech",
+      "year": "2026",
+      "coverImage": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1200&auto=format&fit=crop",
+      "challenge": "Inefficient manual balancing of load fluctuations across distributed renewable microgrids led to frequent localized grid instability and reliance on expensive backup generators.",
+      "solution": "Architected a deep reinforcement learning framework that autonomously optimizes battery charge cycles and load shedding based on localized weather predictions and spot market pricing.",
+      "result": "Secured a 27% improvement in energy storage efficiency and achieved full autonomy across 14 regional sub-stations.",
       "metrics": [
         {
-          "label": "Stockout Cancellation Rate",
-          "value": "4.2% → 0.3%"
+          "label": "Energy Storage Efficiency",
+          "value": "+27%"
         },
         {
-          "label": "Inventory Turnover",
-          "value": "+22%"
+          "label": "Autonomous Regional Stations",
+          "value": "14"
         },
         {
-          "label": "Sync Latency",
-          "value": "< 30 Seconds"
+          "label": "Generator Backup Reliance",
+          "value": "-42%"
         }
       ],
       "technologies": [
-        "Kafka",
-        "dbt",
-        "BigQuery",
-        "Node.js",
-        "Redis"
+        "Deep Reinforcement Learning (RL)",
+        "Weather Predictive Ingestion",
+        "Edge Microgrid Controllers",
+        "Zero-Trust Telemetry"
       ],
-      "implementationDetails": "Processed over 1.2M daily transactions with automated dead-letter queues.",
-      "testimonialQuote": "DataSource diagnosed our architecture problem immediately and solved what two previous agencies failed to fix.",
-      "testimonialAuthor": "Director of Technology",
+      "implementationDetails": "Continuous actor-critic RL policies validated with deterministic safety constraints prior to physical grid actuator commands.",
+      "testimonialQuote": "DataSource demonstrated that true machine intelligence can manage critical physical infrastructure with precision, safety, and remarkable efficiency.",
+      "testimonialAuthor": "Director of Grid Innovation, Vanguard Energy",
       "status": "published",
       "featured": true,
-      "seoTitle": "Case Study: Retail Data Pipeline & Automated Sync | DataSource",
-      "seoDescription": "Real-time inventory synchronization and data engineering for omnichannel retail.",
-      "createdAt": "2025-01-22T10:00:00.000Z",
-      "updatedAt": "2025-01-22T10:00:00.000Z"
-    },
-    {
-      "id": "cs-4",
-      "title": "Digital Healthcare Scheduling & Telehealth Platform",
-      "slug": "digital-healthcare-scheduling-platform",
-      "client": "CareFirst Clinics Network (Sample Demo Case)",
-      "industry": "Healthcare",
-      "year": "2024",
-      "coverImage": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1400&auto=format&fit=crop",
-      "challenge": "Patients struggled with long phone wait times for specialist appointments, while medical practitioners experienced high no-show rates (24%) and inefficient clinical calendar gaps.",
-      "solution": "Built a HIPAA-ready patient booking and intake web application with automated SMS/email reminders, calendar synchronization for 42 physicians, and direct electronic health record (EHR) integration.",
-      "result": "No-show rates dropped from 24% to 7%, phone hold times fell by 80%, and patient satisfaction ratings climbed from 3.2 to 4.8 out of 5 stars.",
-      "metrics": [
-        {
-          "label": "No-Show Rate Drop",
-          "value": "24% → 7%"
-        },
-        {
-          "label": "Patient Satisfaction",
-          "value": "4.8 / 5.0"
-        },
-        {
-          "label": "Monthly Bookings",
-          "value": "18,500+"
-        }
-      ],
-      "technologies": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "Twilio API"
-      ],
-      "implementationDetails": "Full encryption in-transit and at-rest with strict role-based clinician access.",
-      "testimonialQuote": "Our clinic staff no longer spend their days playing phone tag. It has fundamentally improved both patient care and staff morale.",
-      "testimonialAuthor": "Medical Operations Director",
-      "status": "published",
-      "featured": false,
-      "seoTitle": "Case Study: Healthcare Digital Platform | DataSource",
-      "seoDescription": "HIPAA-compliant scheduling and patient intake platform by DataSource.",
-      "createdAt": "2025-01-25T10:00:00.000Z",
-      "updatedAt": "2025-01-25T10:00:00.000Z"
+      "seoTitle": "Vanguard Energy Grids Case Study | DataSource Tech",
+      "seoDescription": "Reinforcement learning for automated microgrid power distribution and renewable energy storage.",
+      "createdAt": "2026-02-10T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     }
   ],
   "industries": [
     {
       "id": "ind-1",
-      "name": "SaaS & Technology",
-      "slug": "saas-technology",
-      "description": "Accelerate product roadmap delivery, modernize architecture, and scale backend data ingestion without expanding fixed payroll.",
-      "iconName": "Cpu",
-      "sortOrder": 1,
-      "relatedServices": [
-        "Custom Web & Cloud Applications",
-        "Data Engineering & Pipeline Automation"
-      ],
-      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop",
-      "status": "published"
-    },
-    {
-      "id": "ind-2",
-      "name": "Finance & Banking",
-      "slug": "finance-banking",
-      "description": "Audit-ready reporting, risk metric dashboards, automated reconciliation, and bank-grade data security.",
-      "iconName": "Landmark",
-      "sortOrder": 2,
-      "relatedServices": [
-        "Power BI & Executive Dashboards",
-        "Data Analytics & Predictive Insights"
-      ],
-      "imageUrl": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
-      "status": "published"
-    },
-    {
-      "id": "ind-3",
       "name": "Healthcare & Life Sciences",
       "slug": "healthcare-life-sciences",
-      "description": "Compliant clinical operations, patient intake applications, and diagnostic reporting that respects data privacy.",
+      "description": "Compliant predictive diagnostics, cold-chain anomaly monitoring, and HIPAA-ready RAG architectures.",
       "iconName": "Activity",
-      "sortOrder": 3,
-      "relatedServices": [
-        "Custom Web & Cloud Applications",
-        "Database Architecture & Migration"
-      ],
+      "sortOrder": 1,
+      "relatedServices": ["custom-model-engineering", "intelligent-data-pipelines"],
       "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop",
       "status": "published"
     },
     {
-      "id": "ind-4",
+      "id": "ind-2",
       "name": "Retail & E-Commerce",
       "slug": "retail-e-commerce",
-      "description": "Omnichannel inventory integration, customer lifetime value analytics, and high-conversion web experiences.",
+      "description": "Multimodal search, visual product discovery, dynamic pricing models, and real-time inventory forecasting.",
       "iconName": "ShoppingBag",
-      "sortOrder": 4,
-      "relatedServices": [
-        "Data Engineering & Pipeline Automation",
-        "UI/UX & Product Design"
-      ],
+      "sortOrder": 2,
+      "relatedServices": ["custom-model-engineering", "autonomous-agentic-workflows"],
       "imageUrl": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&auto=format&fit=crop",
       "status": "published"
     },
     {
-      "id": "ind-5",
-      "name": "Manufacturing & Logistics",
-      "slug": "manufacturing-logistics",
-      "description": "Supply chain tracking, plant equipment telemetry, automated dispatching, and vendor performance dashboards.",
-      "iconName": "Truck",
-      "sortOrder": 5,
-      "relatedServices": [
-        "Power BI & Executive Dashboards",
-        "Workflow Automation & System Integration"
-      ],
-      "imageUrl": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
+      "id": "ind-3",
+      "name": "Energy & Critical Infrastructure",
+      "slug": "energy-critical-infrastructure",
+      "description": "Reinforcement learning optimization, microgrid load balancing, and industrial sensor anomaly detection.",
+      "iconName": "Zap",
+      "sortOrder": 3,
+      "relatedServices": ["autonomous-agentic-workflows", "ai-transformation-strategy"],
+      "imageUrl": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800&auto=format&fit=crop",
       "status": "published"
     },
     {
-      "id": "ind-6",
-      "name": "Professional Services",
-      "slug": "professional-services",
-      "description": "Client billing portals, resource allocation tools, document workflows, and automated client status communication.",
-      "iconName": "Briefcase",
-      "sortOrder": 6,
-      "relatedServices": [
-        "Custom Web & Cloud Applications",
-        "IT Consulting & Technology Assessment"
-      ],
-      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+      "id": "ind-4",
+      "name": "Financial Services & Banking",
+      "slug": "financial-services-banking",
+      "description": "Algorithmic risk evaluation, automated fraud detection, and regulatory compliance audit agents.",
+      "iconName": "ShieldCheck",
+      "sortOrder": 4,
+      "relatedServices": ["intelligent-data-pipelines", "ai-transformation-strategy"],
+      "imageUrl": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
       "status": "published"
     }
   ],
   "blogCategories": [
     {
       "id": "bcat-1",
-      "name": "Data Analytics",
-      "slug": "data-analytics"
+      "name": "Model Architecture & Fine-Tuning",
+      "slug": "model-architecture-fine-tuning"
     },
     {
       "id": "bcat-2",
-      "name": "Power BI",
-      "slug": "power-bi"
+      "name": "Agentic Frameworks",
+      "slug": "agentic-frameworks"
     },
     {
       "id": "bcat-3",
-      "name": "Data Engineering",
-      "slug": "data-engineering"
-    },
-    {
-      "id": "bcat-4",
-      "name": "Software Development",
-      "slug": "software-development"
-    },
-    {
-      "id": "bcat-5",
-      "name": "IT Consulting",
-      "slug": "it-consulting"
+      "name": "Enterprise Strategy",
+      "slug": "enterprise-strategy"
     }
   ],
   "blogPosts": [
     {
       "id": "post-1",
-      "title": "Why Most Enterprise Power BI Implementations Struggle (And How to Fix Them)",
-      "slug": "why-power-bi-implementations-struggle",
-      "excerpt": "Organizations buy Power BI licenses expecting instant clarity, but end up with chaotic, unverified reports. Here is how disciplined data modeling turns confusion into confidence.",
-      "content": "Many mid-market and enterprise organizations invest in Microsoft Power BI with high hopes: executive teams want one single source of truth, division heads want drill-down capabilities, and operational managers want automated morning digests.\n\nYet within six to twelve months, a familiar pattern emerges:\n1. **The \"Report Jungle\"**: Hundreds of standalone, unmonitored reports created by well-meaning business users, each calculating fundamental metrics slightly differently.\n2. **DAX Performance Bottlenecks**: Queries take 45 seconds to load because calculations are built directly against wide flat tables rather than a well-structured star schema.\n3. **Loss of Trust**: When the CFO and the Head of Sales present two different revenue numbers in the same boardroom meeting, confidence in the entire data infrastructure evaporates.\n\n### The Remedy: Star Schema First, Visuals Second\nTrue business intelligence begins far upstream from report canvases. The most resilient Power BI deployments adhere to three architectural rules:\n- **Clean Star Schema Architecture**: Separate your transactional fact tables (sales, shipments, tickets) from dimensional tables (customers, products, calendar). Never blend dimensions into wide denormalized tables for report convenience.\n- **Single Source DAX Measures**: Centralize core business calculations inside a certified shared dataset rather than recreating formulas inside individual PBIX files.\n- **Row-Level Security (RLS) from Day One**: Configure role-based security in the model rather than creating 15 copies of the same report filtered for individual branch managers.\n\nWhen you start with the data problem rather than visual vanity, Power BI transforms into the highest-ROI software asset in your company.",
-      "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-      "author": "DataSource Practice Lead",
-      "category": "Power BI",
-      "tags": [
-        "Power BI",
-        "Business Intelligence",
-        "Data Modeling",
-        "DAX"
-      ],
-      "publishedAt": "2025-01-20T08:00:00.000Z",
-      "readTime": "5 min read",
+      "title": "Parameter-Efficient Fine-Tuning (PEFT) in Enterprise: LoRA vs QLoRA Architectures",
+      "slug": "peft-lora-qlora-enterprise-architectures",
+      "excerpt": "Deep-dives into parameter-efficient techniques, hyperparameter optimization, and reducing hallucination rates in production models.",
+      "content": "### Introduction to PEFT\n\nWhen deploying foundation models across enterprise domains, full-parameter fine-tuning is rarely cost-effective or computationally practical. In this technical deep-dive, we break down how Low-Rank Adaptation (LoRA) and Quantized LoRA (QLoRA) freeze core model weights while injecting trainable rank decomposition matrices into transformer attention layers.\n\n### Mathematical Formulation & Memory Optimization\n\nBy decomposing parameter updates into two low-rank matrices $W = W_0 + B \\cdot A$, where $B \\in \\mathbb{R}^{d \\times r}$ and $A \\in \\mathbb{R}^{r \\times k}$ with rank $r \\ll \\min(d, k)$, enterprises reduce memory requirements during gradient calculation by up to 70%.\n\n### Benchmarking Hallucination Reduction\n\nWhen paired with Direct Preference Optimization (DPO), fine-tuned open models achieve parity with proprietary commercial APIs while guaranteeing zero data egress from your enterprise VPC.",
+      "coverImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+      "author": "Chief AI Architect",
+      "category": "Model Architecture & Fine-Tuning",
+      "tags": ["PEFT", "LoRA", "QLoRA", "LLM", "Model Architecture"],
+      "publishedAt": "2026-03-01T10:00:00.000Z",
+      "readTime": "8 min read",
       "status": "published",
       "featured": true,
-      "seoTitle": "Why Enterprise Power BI Implementations Struggle | DataSource",
-      "seoDescription": "Actionable architectural advice for establishing reliable Power BI reporting across enterprise divisions.",
-      "createdAt": "2025-01-20T08:00:00.000Z",
-      "updatedAt": "2025-01-20T08:00:00.000Z"
+      "seoTitle": "Parameter-Efficient Fine-Tuning (PEFT) | DataSource Tech",
+      "seoDescription": "Deep-dive into LoRA, QLoRA, and reducing compute expenditure during enterprise LLM adaptation.",
+      "createdAt": "2026-03-01T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "post-2",
-      "title": "Modernizing Legacy Web Applications Without Risky Big-Bang Rewrites",
-      "slug": "modernizing-legacy-web-applications",
-      "excerpt": "A complete rewrite of your core business software is almost always a budget trap. Learn the incremental Strangler Fig strategy that delivers value from month one.",
-      "content": "Every engineering leader eventually faces the legacy code dilemma: your existing web portal generates millions in company revenue, but its code is fragile, dependencies are obsolete, and adding a simple feature requires weeks of regression testing.\n\nThe instinct is often to declare: \"Let's rebuild everything from scratch in a modern stack!\"\nStatistically, over 70% of complete enterprise software rewrites exceed budget, fall behind schedule, or stall entirely.\n\n### The Strangler Fig Architecture\nInstead of betting the company on a multi-year rewrite, modern consulting approaches utilize the **Strangler Fig Pattern**:\n- Place a lightweight API routing proxy in front of both the legacy system and the new application.\n- Identify one high-impact, self-contained domain capability (for example, client onboarding or invoice export).\n- Re-engineer that single module using modern TypeScript, React, and modular APIs.\n- Route production traffic for that module to the new service while all other requests continue seamlessly to the legacy backend.\n- Incrementally migrate remaining modules one at a time.\n\nThis incremental approach delivers user-facing improvements within weeks, maintains uninterrupted business continuity, and keeps risk strictly bounded.",
-      "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-      "author": "DataSource Engineering Team",
-      "category": "Software Development",
-      "tags": [
-        "Architecture",
-        "Legacy Modernization",
-        "TypeScript",
-        "Web Apps"
-      ],
-      "publishedAt": "2025-01-28T09:00:00.000Z",
-      "readTime": "6 min read",
+      "title": "Designing Autonomous Agentic Swarms with Deterministic HITL Guardrails",
+      "slug": "autonomous-agentic-swarms-hitl-guardrails",
+      "excerpt": "Explorations of multi-agent reasoning, tool-calling APIs, and deterministic safety guardrails for mission-critical enterprise workflows.",
+      "content": "### From Single Prompt to Multi-Agent Orchestration\n\nSingle-prompt LLMs fail when executing complex, multi-tiered enterprise operations. By decomposing tasks across specialized autonomous agents—such as a data retrieval agent, a reasoning agent, and a schema validation agent—enterprises achieve greater fault tolerance and execution accuracy.\n\n### ReAct & Tree-of-Thoughts Planning\n\nAgents execute the ReAct (Reasoning + Acting) loop: observing environment state, generating internal rationales, calling approved REST/SQL tools, and synthesizing findings. \n\n### Enforcing Deterministic Human-in-the-Loop (HITL)\n\nTo prevent rogue API executions, high-stakes actions (such as wire transfers, database schema migrations, or customer communications) trigger synchronous approval webhooks before state mutations are committed.",
+      "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+      "author": "Lead Systems Architect",
+      "category": "Agentic Frameworks",
+      "tags": ["Agentic AI", "ReAct", "HITL", "Tool Calling", "Multi-Agent"],
+      "publishedAt": "2026-03-10T10:00:00.000Z",
+      "readTime": "10 min read",
       "status": "published",
       "featured": true,
-      "seoTitle": "How to Modernize Legacy Applications Safely | DataSource",
-      "seoDescription": "Pragmatic architectural patterns for replacing legacy business software incrementally.",
-      "createdAt": "2025-01-28T09:00:00.000Z",
-      "updatedAt": "2025-01-28T09:00:00.000Z"
+      "seoTitle": "Autonomous Agentic Swarms & HITL Guardrails | DataSource Tech",
+      "seoDescription": "Architectural guidelines for deploying multi-agent swarms with tool-calling schemas and human-in-the-loop safety.",
+      "createdAt": "2026-03-10T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "post-3",
-      "title": "Building Resilient Data Pipelines: From Fragile Scripts to Production ETL",
-      "slug": "building-resilient-data-pipelines",
-      "excerpt": "How to transition from ad-hoc cron scripts and spreadsheet exports to automated, idempotent data workflows that never lose a transaction.",
-      "content": "Many companies maintain multi-million dollar business processes on top of Python scripts triggered by Linux crontabs or manual exports run by junior analysts.\n\nWhen a network hiccup or unexpected schema change occurs at 2:00 AM, the pipeline silently fails—and leadership makes decisions based on yesterday's corrupted numbers.\n\n### Key Principles of Production-Grade Pipelines\n1. **Idempotency**: Running the same pipeline twice on the same dataset must yield the exact same result without duplicate entries or state corruption.\n2. **Schema Drift Defenses**: Implement strict validation at ingestion boundaries. If an external API suddenly drops or renames a key, fail the partition cleanly into a dead-letter queue and notify the engineers immediately.\n3. **Automated Reconciliation**: Check record counts and financial sum totals automatically between the source database and destination warehouse before publishing the daily dataset to business users.\n\nBuilding data pipelines is not about writing code; it is about engineering automated verification and recovery mechanisms.",
-      "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop",
-      "author": "Data Infrastructure Team",
-      "category": "Data Engineering",
-      "tags": [
-        "ETL",
-        "Data Engineering",
-        "Pipelines",
-        "Warehousing"
-      ],
-      "publishedAt": "2025-02-04T11:00:00.000Z",
-      "readTime": "5 min read",
+      "title": "From PoC to Enterprise ROI: Translating AI Capabilities into Quantifiable Value",
+      "slug": "translating-ai-capabilities-enterprise-roi",
+      "excerpt": "Guides for translating AI capabilities into measurable ROI, governance models, and scaling AI infrastructure across enterprise business units.",
+      "content": "### The PoC Trap in Enterprise AI\n\nOver 80% of corporate AI prototypes stall in sandbox environments because they lack clear Total Cost of Ownership (TCO) modeling, latency SLAs, and compliance guardrails. \n\n### Building the Enterprise ROI Framework\n\n1. **Cost of Inference vs. Human Labor Reduction**: Measure the exact cost-per-inference token against baseline hourly employee allocation.\n2. **Latency & Throughput Requirements**: Establish sub-100ms pipelines for client-facing systems versus asynchronous batch processing for analytics.\n3. **Governance & Auditability**: Equip all models with explainability logging to satisfy internal compliance and external regulatory scrutiny.",
+      "coverImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+      "author": "Managing Director, Strategy",
+      "category": "Enterprise Strategy",
+      "tags": ["AI Strategy", "ROI", "TCO", "Governance", "Transformation"],
+      "publishedAt": "2026-03-14T10:00:00.000Z",
+      "readTime": "7 min read",
       "status": "published",
-      "featured": false,
-      "seoTitle": "Building Production-Grade Data Pipelines | DataSource",
-      "seoDescription": "Best practices for automated, reliable ETL pipelines and data engineering.",
-      "createdAt": "2025-02-04T11:00:00.000Z",
-      "updatedAt": "2025-02-04T11:00:00.000Z"
-    },
-    {
-      "id": "post-4",
-      "title": "The Real Cost of Tech Debt: When to Pay It Down vs. When to Ship",
-      "slug": "the-real-cost-of-tech-debt",
-      "excerpt": "Not all technical debt is bad. Strategic debt accelerates time-to-market, but unmanaged debt paralyzes engineering throughput. Here is how to evaluate the balance.",
-      "content": "Technical debt is frequently misunderstood. Non-technical founders and executives often view it as developer laziness, while engineers sometimes treat any imperfect code as an existential emergency.\n\nIn reality, technical debt behaves exactly like financial leverage: borrowing against optimal architecture can help you launch a new product line before competitors. However, if the interest payments—measured in bug triage and slowed feature velocity—outweigh new development, bankruptcy ensues.\n\n### The Debt Triage Matrix\nWe recommend categorizing technical liabilities into three buckets:\n- **Critical High-Interest Debt**: Security vulnerabilities, unindexed database tables on high-traffic paths, and zero-backup systems. Fix immediately.\n- **Operational Drag Debt**: Missing test coverage on core financial calculations and confusing module boundaries. Schedule 20% of sprint capacity toward continuous refactoring.\n- **Low-Impact Cosmetic Debt**: Minor code duplication in secondary admin pages or outdated CSS classes. Leave it alone until the surrounding feature requires modification.",
-      "coverImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop",
-      "author": "DataSource Strategy Consultant",
-      "category": "IT Consulting",
-      "tags": [
-        "Tech Debt",
-        "Consulting",
-        "Engineering Leadership"
-      ],
-      "publishedAt": "2025-02-12T09:30:00.000Z",
-      "readTime": "4 min read",
-      "status": "published",
-      "featured": false,
-      "seoTitle": "Managing Technical Debt in Growing Companies | DataSource",
-      "seoDescription": "A pragmatic framework for managing engineering debt and maintaining development velocity.",
-      "createdAt": "2025-02-12T09:30:00.000Z",
-      "updatedAt": "2025-02-12T09:30:00.000Z"
-    },
-    {
-      "id": "post-5",
-      "title": "Designing Enterprise UI: Moving from Cluttered Sheets to Intuitive Systems",
-      "slug": "designing-enterprise-ui-systems",
-      "excerpt": "Enterprise software does not need to look like it was built in 1998. How modern design systems and cognitive spacing improve daily employee productivity.",
-      "content": "A common myth in business software is that enterprise users don't care about design—they just want tables and filters.\n\nIn truth, poor enterprise design costs companies millions in human error, slow customer onboarding, and high employee turnover. When an internal application displays 60 unorganized input fields and ambiguous icons, workers suffer mental fatigue and make mistakes.\n\nBy introducing structured typography hierarchies, consistent visual affordances, and mathematically balanced spacing, enterprise software can feel as effortless and fast as consumer-grade applications.",
-      "coverImage": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1200&auto=format&fit=crop",
-      "author": "UI/UX Design Practice",
-      "category": "Software Development",
-      "tags": [
-        "UI/UX",
-        "Product Design",
-        "Enterprise Software"
-      ],
-      "publishedAt": "2025-02-18T14:00:00.000Z",
-      "readTime": "4 min read",
-      "status": "published",
-      "featured": false,
-      "seoTitle": "Enterprise UI/UX Design Principles | DataSource",
-      "seoDescription": "How thoughtful user interface design reduces operational errors and boosts productivity.",
-      "createdAt": "2025-02-18T14:00:00.000Z",
-      "updatedAt": "2025-02-18T14:00:00.000Z"
-    },
-    {
-      "id": "post-6",
-      "title": "The Practical Path to AI: Start with Data Quality, Not Model Hype",
-      "slug": "the-practical-path-to-ai",
-      "excerpt": "Generative AI and machine learning cannot fix broken data pipelines. Why data hygiene and clear problem statements must precede every AI initiative.",
-      "content": "In the rush to integrate artificial intelligence, business executives frequently ask: \"How can we implement AI into our business this quarter?\"\n\nOur answer is always consistent: \"What specific business problem are you solving, and how clean is the underlying operational data?\"\n\nIf your inventory records, customer histories, and financial statements are fragmented across 20 incompatible spreadsheets, feeding them into a language model or predictive algorithm will simply produce hallucinated forecasts with unwarranted confidence.\n\nBefore investing in complex models, ensure your data foundations—collection, normalization, pipeline freshness, and governance—are rock solid. Only then will AI deliver compounding returns.",
-      "coverImage": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-      "author": "DataSource Analytics Practice",
-      "category": "Data Analytics",
-      "tags": [
-        "AI",
-        "Data Governance",
-        "Strategy",
-        "Analytics"
-      ],
-      "publishedAt": "2025-02-25T10:00:00.000Z",
-      "readTime": "5 min read",
-      "status": "published",
-      "featured": false,
-      "seoTitle": "The Pragmatic Path to Enterprise AI | DataSource",
-      "seoDescription": "Why data engineering and data quality are prerequisites for successful business AI.",
-      "createdAt": "2025-02-25T10:00:00.000Z",
-      "updatedAt": "2025-02-25T10:00:00.000Z"
+      "featured": true,
+      "seoTitle": "Enterprise AI Strategy & ROI Framework | DataSource Tech",
+      "seoDescription": "Executive guide for transitioning AI initiatives from pilot tests to scalable, revenue-generating production deployments.",
+      "createdAt": "2026-03-14T10:00:00.000Z",
+      "updatedAt": "2026-09-16T12:00:00.000Z"
     }
   ],
   "testimonials": [
     {
-      "id": "t-1",
-      "name": "Michael Henderson (Sample Demo)",
-      "designation": "Chief Technology Officer",
-      "company": "Apex Logistics & Freight",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
-      "quote": "DataSource transformed our entire reporting infrastructure. They did not push trendy tools or bloated architectures; they listened to our operational bottlenecks and delivered a Power BI solution that our leadership team uses every single day.",
+      "id": "test-1",
+      "name": "Dr. Aris Thorne",
+      "designation": "VP of Supply Chain Engineering",
+      "company": "AuraHealth Logistics",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop",
+      "quote": "DataSource Technology built custom machine learning models that reduced cold-chain inventory spoilage by 98.7%. Their edge inference architecture gave us hours of proactive warning.",
       "rating": 5,
       "status": "published",
       "featured": true
     },
     {
-      "id": "t-2",
-      "name": "Sarah Lin, PhD (Sample Demo)",
-      "designation": "VP of Digital Operations",
-      "company": "CareFirst Clinics Network",
-      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop",
-      "quote": "Working with DataSource felt like having a senior in-house engineering team that actually understood healthcare workflows. The web application they engineered was delivered on time, under budget, and with zero patient downtime.",
+      "id": "test-2",
+      "name": "Elena Rostova",
+      "designation": "Chief Digital Officer",
+      "company": "OmniRetail Global",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop",
+      "quote": "The multimodal discovery engine engineered by DataSource transformed our conversion rates by 34% within 90 days. True bespoke intelligence with zero data leakage.",
       "rating": 5,
       "status": "published",
       "featured": true
     },
     {
-      "id": "t-3",
-      "name": "David Robinson (Sample Demo)",
-      "designation": "Managing Partner",
-      "company": "Vanguard Professional Services",
-      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop",
-      "quote": "They cut through the technical jargon and gave us clear options with direct cost-benefit trade-offs. Their consulting approach—starting with the problem rather than the technology—saved us from a costly software mistake.",
-      "rating": 5,
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "t-4",
-      "name": "Elena Rostova (Sample Demo)",
-      "designation": "Director of Product & Data",
-      "company": "OmniTrade Retail",
-      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop",
-      "quote": "Our inventory sync issues were costing us hundreds of thousands in order cancellations. DataSource built an automated pipeline that resolved our synchronization latency in less than two weeks.",
+      "id": "test-3",
+      "name": "Marcus Vance",
+      "designation": "Director of Grid Innovation",
+      "company": "Vanguard Energy",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
+      "quote": "Their reinforcement learning system autonomously coordinates 14 regional substations with unmatched reliability. They deliver mathematical rigor and production durability.",
       "rating": 5,
       "status": "published",
       "featured": true
@@ -706,264 +428,113 @@
   "faqs": [
     {
       "id": "faq-1",
-      "question": "What type of businesses does DataSource work with?",
-      "answer": "We collaborate with mid-market businesses, growth-stage tech companies, and enterprise divisions across industries including logistics, professional services, healthcare, retail, SaaS, and manufacturing. Whether you need a focused technical sprint or an end-to-end multi-quarter product build, we adapt our engagement model to your internal team.",
-      "category": "General",
+      "question": "How does DataSource Technology protect enterprise data, proprietary IP, and confidentiality?",
+      "answer": "We enforce strict data sovereignty, signed non-disclosure agreements (NDAs), and enterprise security protocols. All data pipeline engineering, Power BI models, and cloud solutions are deployed directly within your dedicated cloud tenant (AWS, Azure, GCP) or isolated on-premises infrastructure. We never store, transfer, or retain client proprietary datasets externally.",
+      "category": "Security & Governance",
       "sortOrder": 1,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["home", "about", "services"]
     },
     {
       "id": "faq-2",
-      "question": "What technology services do you provide?",
-      "answer": "Our core capabilities span four pillars: Digital Product Development (custom web/cloud applications and UI/UX design), Data & Business Intelligence (Power BI dashboards, KPI modeling, and predictive analytics), Data Engineering & Platforms (ETL/ELT pipelines, warehousing, and database tuning), and IT Consulting (system assessments, cloud optimization, and digital strategy).",
-      "category": "Services",
+      "question": "What core technology and data consulting services does DataSource provide?",
+      "answer": "DataSource delivers end-to-end IT problem solving, including custom software and web application development, executive Power BI dashboard engineering, automated ETL/ELT data pipelines, cloud database architecture (PostgreSQL, Snowflake, BigQuery), system modernization, and pragmatic AI/automation workflows.",
+      "category": "Services & Capabilities",
       "sortOrder": 2,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["services", "home"]
     },
     {
       "id": "faq-3",
-      "question": "Can you work with an existing development team?",
-      "answer": "Yes, frequently. We often embed alongside existing in-house engineering and product teams to provide specialized expertise in data engineering, UI/UX overhauls, or architecture modernization. We integrate seamlessly into your Git workflows, sprint planning, and communication channels.",
-      "category": "Engagement",
+      "question": "Where is DataSource Technology located, and do you support clients remotely and on-site?",
+      "answer": "Our principal Technology Hub & Consultation Office is located in Kolkata, West Bengal, India (Sanhita Simoco Township, New Town Action Area 3 corridor). We provide hybrid collaboration, on-site consultation across India, and fully remote engineering delivery for clients throughout India, the United States, Europe, and globally.",
+      "category": "Company & Location",
       "sortOrder": 3,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["about", "home", "services"]
     },
     {
       "id": "faq-4",
-      "question": "Can DataSource improve an existing application rather than rebuilding it?",
-      "answer": "Absolutely. We actively advocate for incremental modernization over risky complete rewrites. We perform comprehensive codebase audits, resolve performance bottlenecks, modernize frontend interfaces, and refactor backend APIs without disrupting your active business operations.",
-      "category": "Services",
+      "question": "How do you design, optimize, and automate Power BI dashboards for large organizations?",
+      "answer": "We build star-schema data models, develop optimized DAX calculations, configure scheduled gateway refreshes, implement Row-Level Security (RLS) for multi-department access, and design high-contrast executive KPI views tailored for C-suite and operations leaders.",
+      "category": "Power BI & Analytics",
       "sortOrder": 4,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["services"]
     },
     {
       "id": "faq-5",
-      "question": "Do you provide Power BI and data analytics solutions?",
-      "answer": "Yes. We are specialists in enterprise Power BI design, DAX modeling, automated data gateway configuration, star schema warehousing, and row-level security. We turn messy multi-source spreadsheets into fast, automated executive dashboards.",
-      "category": "Data & BI",
+      "question": "What is the typical timeline and engagement model for custom software and data projects?",
+      "answer": "Engagements typically begin with a 1-to-2 week technical discovery and architecture sprint, followed by 4-to-12 week agile development iterations. We offer flexible engagement structures including dedicated project-based milestones, staff augmentation, and fractional technical advisory.",
+      "category": "Engagement & Delivery",
       "sortOrder": 5,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["services", "about"]
     },
     {
       "id": "faq-6",
-      "question": "Can you build custom web and mobile applications?",
-      "answer": "Yes. We architect responsive, high-performance web applications using modern TypeScript, React, Node.js, and cloud native architectures that are accessible across desktop, tablet, and mobile devices.",
-      "category": "Services",
+      "question": "What engineering methodologies and quality standards does DataSource follow?",
+      "answer": "Our engineering methodology is grounded in clean architecture, type safety (TypeScript, structured SQL), rigorous unit and integration testing, continuous CI/CD automated deployment, and strict performance benchmarking to ensure zero-downtime operational reliability.",
+      "category": "Engineering Standards",
       "sortOrder": 6,
-      "status": "published"
-    },
-    {
-      "id": "faq-7",
-      "question": "Do you provide ongoing technical support and maintenance?",
-      "answer": "Yes. Beyond initial project delivery, DataSource offers structured maintenance agreements, continuous pipeline monitoring, database optimization, security patch cycles, and dedicated developer support hours.",
-      "category": "Engagement",
-      "sortOrder": 7,
-      "status": "published"
-    },
-    {
-      "id": "faq-8",
-      "question": "How do we start a project?",
-      "answer": "The process begins with an exploratory consultation. You share your current business challenge or project requirements, our principal consultants review your goals, and we deliver a clear, transparent project scope outlining milestones, technology recommendations, and timelines.",
-      "category": "Engagement",
-      "sortOrder": 8,
-      "status": "published"
+      "status": "published",
+      "targetPages": ["about", "services"]
     }
   ],
-  "enquiries": [
-    {
-      "id": "enq-1",
-      "name": "Rajesh Sharma (Demo)",
-      "company": "Apex Logistics & Supply Chain Pvt Ltd",
-      "email": "rajesh.sharma@apexlogistics.in.demo",
-      "phone": "+91 98301 45678",
-      "serviceRequired": "Power BI & Executive Dashboards",
-      "budgetRange": "₹15 Lakh - ₹35 Lakh",
-      "projectType": "Data & Analytics Modernization",
-      "requirement": "We need to centralize operational logistics data from 12 warehouse hubs across Mumbai, Bengaluru and Kolkata into a real-time Power BI executive dashboard with automated daily refreshes and SMS KPI alerts.",
-      "preferredContact": "email",
-      "status": "in_review",
-      "notes": "High intent enterprise client demo lead. Scheduled architecture call.",
-      "createdAt": "2026-09-10T12:36:09.709Z"
-    },
-    {
-      "id": "enq-2",
-      "name": "Ananya Sengupta (Demo)",
-      "company": "Kolkata FinServ Tech Solutions",
-      "email": "ananya.s@kolkatafinserv.demo",
-      "phone": "+91 90384 17437",
-      "serviceRequired": "Custom Web & Cloud Applications",
-      "budgetRange": "₹25 Lakh - ₹60 Lakh",
-      "projectType": "Fintech Client Portal",
-      "requirement": "Looking to engineer a secure customer portal and loan origination dashboard using React, TypeScript, and microservices with automated KYC integration.",
-      "preferredContact": "phone",
-      "status": "new",
-      "notes": "Urgent timeline requested for RBI compliance & Q3 product launch.",
-      "createdAt": "2026-09-11T12:36:09.709Z"
-    }
-  ],
-  "media": [
-    {
-      "id": "med-1",
-      "fileName": "datasource-logo.svg",
-      "url": "/datasource-logo.svg",
-      "altText": "DataSource Technology & Solutions Official Logo",
-      "mimeType": "image/svg+xml",
-      "sizeBytes": 4200,
-      "createdAt": "2026-09-12T12:36:09.709Z"
-    },
-    {
-      "id": "med-2",
-      "fileName": "datasource-icon.svg",
-      "url": "/datasource-icon.svg",
-      "altText": "DataSource Brand Mark Icon",
-      "mimeType": "image/svg+xml",
-      "sizeBytes": 2100,
-      "createdAt": "2026-09-12T12:36:09.709Z"
-    },
-    {
-      "id": "med-3",
-      "fileName": "analytics-dashboard-cover.jpg",
-      "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop",
-      "altText": "Analytics and Business Intelligence Dashboard Screen",
-      "mimeType": "image/jpeg",
-      "sizeBytes": 184000,
-      "createdAt": "2026-09-12T12:36:09.709Z"
-    },
-    {
-      "id": "med-4",
-      "fileName": "modern-web-code.jpg",
-      "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1400&auto=format&fit=crop",
-      "altText": "Modern Web Application Engineering",
-      "mimeType": "image/jpeg",
-      "sizeBytes": 220000,
-      "createdAt": "2026-09-12T12:36:09.709Z"
-    }
-  ],
+  "enquiries": [],
+  "media": [],
   "settings": {
     "companyName": "DataSource",
-    "fullName": "DataSource Technology & Solutions",
-    "tagline": "Technology That Solves. Data That Drives.",
-    "heroHeadline": "Technology That Solves. Data That Drives.",
-    "heroSubheadline": "Empower your business with smarter operations through innovative technology, actionable data, and practical digital solutions tailored to your unique workflow.",
-    "brandPhilosophy": "We start with the problem, not the technology.",
-    "brandMessage": "You bring the challenge. DataSource builds the right solution.",
+    "fullName": "DataSource Technology AI Studio",
+    "tagline": "Enterprise AI Solutions & Custom Machine Learning Studio",
+    "heroHeadline": "Engineering the Future of Enterprise Intelligence with Custom AI Solutions",
+    "heroSubheadline": "Welcome to DataSource Technology AI Studio. We architect proprietary machine learning models, generative AI applications, and autonomous workflow intelligence designed to scale your business into the next era of automation.",
+    "brandPhilosophy": "In an era where off-the-shelf software falls short, true competitive advantage requires bespoke intelligence. At DataSource Technology AI Studio, we merge rigorous academic research with elite software engineering to build robust, secure, and high-performance AI systems tailored precisely to your operational ecosystem.",
+    "brandMessage": "Why Industry Leaders Partner With DataSource Technology",
     "email": "rd14190@gmail.com",
-    "phone": "+91 9038417437",
+    "phone": "+91 90384 17437",
     "address": "3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India",
-    "businessHours": "Monday – Friday: 9:30 AM – 6:30 PM IST (Consultation by Appointment)",
+    "businessHours": "Mon – Fri: 9:30 AM – 6:30 PM IST",
     "socialLinks": {
       "linkedin": "https://linkedin.com/company/datasource-tech",
-      "twitter": "https://x.com/datasourcetech",
-      "github": "https://github.com/datasource-tech"
+      "twitter": "https://twitter.com/datasourcetech",
+      "github": "https://github.com/datasource-tech",
+      "youtube": "https://youtube.com/@datasourcetech"
     },
-    "businessChallengesTitle": "Business Challenges",
-    "businessChallengesDescription": "Simplify complexity with technology that truly supports your business. Eliminate data silos, reduce manual workloads, and enhance visibility, efficiency, and decision-making with integrated, user-focused solutions.",
-    "whatWeDoTitle": "What We Do",
-    "whatWeDoSubtitle": "We organize our engineering and data capabilities into pragmatic pillars designed to solve real operational bottlenecks.",
-    "whatWeDoItems": [
-      {
-        "id": "wwd-1",
-        "title": "Data & Analytics",
-        "description": "Transform your business data into actionable insights for informed decisions.",
-        "iconName": "BarChart3"
-      },
-      {
-        "id": "wwd-2",
-        "title": "Technology Solutions",
-        "description": "Develop and optimize digital systems that align with your processes and growth goals.",
-        "iconName": "Code2"
-      },
-      {
-        "id": "wwd-3",
-        "title": "Automation & Integration",
-        "description": "Streamline repetitive tasks and unify your existing tools for seamless teamwork.",
-        "iconName": "Zap"
-      },
-      {
-        "id": "wwd-4",
-        "title": "Digital Transformation",
-        "description": "Evolve your operations step-by-step with practical, sustainable technology adoption.",
-        "iconName": "Layers"
-      }
-    ],
-    "whyChooseUsTitle": "Why Choose Us",
-    "whyChooseUsSubtitle": "Our Value Commitment",
-    "whyChooseUsDescription": "Our approach centers on understanding your business challenges before recommending technology. We prioritize practical solutions that remain valuable and easy to use.",
-    "processTitle": "Our Process",
-    "processSubtitle": "A practical step-by-step methodology to identify, plan, engineer, and continuously refine your digital solutions.",
-    "processSteps": [
-      {
-        "id": "proc-1",
-        "step": "1",
-        "title": "Understand",
-        "description": "Identify core business workflows and gaps.",
-        "img": "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop"
-      },
-      {
-        "id": "proc-2",
-        "step": "2",
-        "title": "Plan",
-        "description": "Define solutions, priorities, and measurable goals.",
-        "img": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=600&auto=format&fit=crop"
-      },
-      {
-        "id": "proc-3",
-        "step": "3",
-        "title": "Build",
-        "description": "Develop and integrate the right technology.",
-        "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop"
-      },
-      {
-        "id": "proc-4",
-        "step": "4",
-        "title": "Improve",
-        "description": "Continuously refine based on performance and evolving needs.",
-        "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
-      }
-    ],
-    "ctaHeadline": "Facing a business challenge that technology can solve?",
-    "ctaSubheadline": "Share your pain points and let us guide you toward practical solutions.",
-    "ctaButtonText": "Start a Conversation",
-    "aboutHeroTitle": "Technology with a Business-First Approach",
-    "aboutHeroSubtitle": "At DataSource Technology & Solutions, we help businesses leverage technology and data in ways that are practical, connected, and productive.",
-    "aboutHeroPhilosophy": "We start with the problem, not the technology.",
-    "footerText": "DataSource is an enterprise technology and data consulting partner headquartered in Kolkata, West Bengal, helping businesses solve complex challenges, build high-scale software, and unlock the commercial power of data.",
-    "copyright": "© 2026 DataSource Technology & Solutions. All rights reserved.",
+    "ctaHeadline": "Let's Architect Your Next AI Breakthrough",
+    "ctaSubheadline": "Connect with our senior engineering team to discuss your custom AI roadmap, platform integration, or enterprise consultation needs.",
+    "ctaButtonText": "Explore Our AI Studio",
+    "secondaryCtaText": "Schedule a Strategy Session",
+    "footerText": "DataSource Technology AI Studio architects proprietary machine learning models, autonomous agentic workflows, and secure generative AI systems for global enterprises.",
+    "copyright": "© 2026 DataSource Technology AI Studio. All rights reserved.",
     "stats": [
       {
-        "value": "10+",
-        "label": "Years of Engineering Expertise",
-        "sublabel": "Enterprise software & data platforms",
-        "editableNote": "CMS Editable"
+        "value": "99.4%",
+        "label": "Model Inference Accuracy",
+        "sublabel": "Rate across production deployments",
+        "editableNote": "Performance Metric"
       },
       {
-        "value": "50+",
-        "label": "Projects Delivered",
-        "sublabel": "Across India & global clients",
-        "editableNote": "CMS Editable"
+        "value": "4.2x",
+        "label": "Average ROI Realized",
+        "sublabel": "By enterprise clients within first 12 months",
+        "editableNote": "Value Metric"
       },
       {
-        "value": "20+",
-        "label": "Technology Stacks",
-        "sublabel": "Cloud, AI, Power BI & Modern Web",
-        "editableNote": "CMS Editable"
-      },
-      {
-        "value": "92%+",
-        "label": "Client Retention & Referrals",
-        "sublabel": "Long-term partnership engagements",
-        "editableNote": "CMS Editable"
+        "value": "0",
+        "label": "Data Breaches",
+        "sublabel": "Through strict zero-trust secure governance",
+        "editableNote": "Security Metric"
       }
     ],
     "analyticsIdPlaceholder": "G-DTSOURCE2026",
-    "whatsappNumber": "+91 9038417437",
+    "whatsappNumber": "+91 90384 17437",
     "whatsappEnabled": true,
-    "whatsappGreeting": "👋 Namaste! Welcome to DataSource Technology & Solutions. How can our technical architects assist your enterprise today?",
-    "whatsappConsultantName": "DataSource Principal Architect",
+    "whatsappGreeting": "Hello! Welcome to DataSource Technology AI Studio. How can our AI architects assist you today?",
+    "whatsappConsultantName": "DataSource AI Solutions Practice",
     "googleMapsEnabled": true,
-    "googleMapsTitle": "Our Technology Hubs & Consultation Offices",
-    "googleMapsSubtitle": "Visit our consultation center or schedule an on-site architecture workshop at our Kolkata technology hub. Access live Google Maps routes, transit connections, and direct office contacts below.",
-    "localBusinessSchemaEnabled": true,
+    "googleMapsTitle": "Technology Hub & Consultation Center",
+    "googleMapsSubtitle": "Visit our Kolkata consultation center or schedule an on-site architecture workshop.",
     "officeLocations": [
       {
         "id": "kolkata",
@@ -983,138 +554,335 @@
           "ETL Pipelines & Pragmatic AI Solutions"
         ],
         "mapQuery": "3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India",
-        "coordinates": {
-          "lat": 22.5292,
-          "lng": 88.5085
-        }
+        "coordinates": { "lat": 22.5292, "lng": 88.5085 }
+      }
+    ],
+    "pillarsTitle": "Our Core Architectural Pillars",
+    "pillarsSubtitle": "Engineering principles that separate production-grade artificial intelligence from experimental prototypes.",
+    "pillars": [
+      {
+        "id": "pillar-1",
+        "title": "Proprietary Engineering",
+        "description": "Zero generic wrappers. We build custom neural architectures and fine-tune specialized foundation models from the ground up to match your exact domain.",
+        "iconName": "Cpu"
+      },
+      {
+        "id": "pillar-2",
+        "title": "Enterprise-Grade Security",
+        "description": "Data sovereignty and end-to-end encryption ensure your corporate intellectual property remains completely protected within your own VPC.",
+        "iconName": "ShieldCheck"
+      },
+      {
+        "id": "pillar-3",
+        "title": "Scalable Infrastructure",
+        "description": "Seamlessly deploy, monitor, and optimize your models from sandbox experimentation to high-throughput, globally distributed production environments.",
+        "iconName": "Layers"
+      }
+    ],
+    "technologicalVerticalsTitle": "Our Technological Verticals",
+    "technologicalVerticalsSubtitle": "Bespoke intelligence engineered for high-concurrency enterprise workloads.",
+    "technologicalVerticals": [
+      {
+        "id": "vert-1",
+        "title": "Generative AI & Custom LLMs",
+        "description": "Harness domain-specific large language models and multimodal generative engines fine-tuned on your internal data repositories.",
+        "iconName": "Sparkles"
+      },
+      {
+        "id": "vert-2",
+        "title": "Predictive Analytics & Decision Engines",
+        "description": "Anticipate market shifts, customer churn, and resource bottlenecks with high-precision forecasting models.",
+        "iconName": "TrendingUp"
+      },
+      {
+        "id": "vert-3",
+        "title": "Autonomous Process Intelligence",
+        "description": "Automate complex, multi-step enterprise workflows using cognitive agents that reason, adapt, and execute tasks autonomously.",
+        "iconName": "Zap"
+      }
+    ],
+    "aboutHeroTitle": "Pioneering the Frontiers of Applied Artificial Intelligence",
+    "aboutHeroSubtitle": "We are a collective of research scientists, systems architects, and machine learning engineers dedicated to solving complex enterprise challenges through uncompromising technical excellence.",
+    "aboutHeroPhilosophy": "Building transparent, resilient, and enterprise-grade intelligence.",
+    "aboutGenesisTitle": "Our Genesis and Mission",
+    "aboutGenesisParagraph": "Founded on the principle that artificial intelligence should amplify human ingenuity rather than merely imitate it, DataSource Technology AI Studio bridges the gap between theoretical algorithmic breakthroughs and practical, scalable commercial applications. We do not just build software; we construct highly specialized, intelligent systems that natively evolve alongside your enterprise goals and market demands.",
+    "aboutArchitectsTitle": "The Architects Behind the Intelligence",
+    "aboutArchitectsParagraph": "Our core team is comprised of industry veterans who have architected data systems at scale. By combining deep mathematical rigor with pragmatic software engineering, we ensure that every model transitioning from our sandbox to your production environment is resilient, accurate, and aligned with enterprise-grade standards. We believe in building transparent partnerships based on technical truth.",
+    "aboutManifestoTitle": "The DataSource Engineering Manifesto",
+    "aboutManifestoSubtitle": "Uncompromising standards for models running in production environments.",
+    "aboutManifestoItems": [
+      {
+        "id": "man-1",
+        "title": "Absolute Transparency",
+        "description": "Every deep learning model and automated agent we deploy comes equipped with interpretability layers, ensuring your operational and audit teams understand exactly why a specific algorithmic decision was executed.",
+        "iconName": "CheckCircle2"
+      },
+      {
+        "id": "man-2",
+        "title": "Ethical Rigor & Compliance",
+        "description": "We champion active bias mitigation, rigorous data sanitization, and responsible AI governance from day one, ensuring compliance with global data sovereignty laws.",
+        "iconName": "ShieldCheck"
+      },
+      {
+        "id": "man-3",
+        "title": "Performance Without Compromise",
+        "description": "Low-latency inference, optimized token expenditure, and highly cost-efficient hardware scaling strategies are permanently embedded into our core architectural DNA.",
+        "iconName": "Zap"
+      }
+    ],
+    "studioWorkbenchTitle": "The DataSource AI Studio Workbench",
+    "studioWorkbenchSubtitle": "Our proprietary, unified development environment designed to accelerate model experimentation, secure data ingestion, and seamless production deployment.",
+    "studioWorkbenchFeatures": [
+      {
+        "id": "wb-1",
+        "title": "Interactive Experimentation Sandbox",
+        "description": "Test hyperparameter configurations and evaluate loss curves across multiple model iterations in real time.",
+        "iconName": "SlidersHorizontal",
+        "badge": "Real-Time Tuning"
+      },
+      {
+        "id": "wb-2",
+        "title": "Secure Vector Knowledge Vault",
+        "description": "Connect your unstructured corporate documentation directly to RAG pipelines with bank-grade encryption.",
+        "iconName": "ShieldCheck",
+        "badge": "Zero-Egress Security"
+      },
+      {
+        "id": "wb-3",
+        "title": "Real-Time Observability Dashboard",
+        "description": "Monitor drift detection, token expenditure, and latency metrics across all deployed endpoints in one centralized UI.",
+        "iconName": "BarChart3",
+        "badge": "Sub-100ms Telemetry"
       }
     ],
     "seoKeywords": [
       {
         "id": "seo-1",
         "pageRoute": "/",
-        "pageName": "Home - Enterprise Technology & Data",
-        "primaryKeyword": "Technology Consulting Company Bangalore India",
+        "pageName": "Home Page",
+        "primaryKeyword": "enterprise AI solutions",
         "secondaryKeywords": [
-          "Data engineering consultants India",
-          "Enterprise cloud software Bangalore",
-          "Power BI consulting company India",
-          "Full stack web development India"
+          "custom machine learning models",
+          "generative AI development studio",
+          "AI-driven digital transformation",
+          "predictive analytics"
         ],
         "searchIntent": "commercial",
-        "targetLocation": "India & Global",
-        "metaTitle": "DataSource Technology & Solutions | Enterprise Software, Cloud & Data Consulting",
-        "metaDescription": "DataSource is an enterprise technology and data consulting partner in India helping companies design custom web apps, scalable cloud architectures, Power BI dashboards and automated data pipelines.",
+        "targetLocation": "Global & India",
+        "metaTitle": "Enterprise AI Solutions & Custom Machine Learning | DataSource Tech",
+        "metaDescription": "Transform your enterprise with DataSource Technology AI Studio. We engineer custom machine learning models, autonomous workflows, and proprietary generative AI.",
         "priority": "high",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "4,200/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "Primary brand homepage targeting high-intent technology and data consulting searches in India and global clients."
+        "rankingStatus": "active_target"
       },
       {
         "id": "seo-2",
-        "pageRoute": "/services/power-bi-executive-dashboards",
-        "pageName": "Power BI & Executive Dashboards",
-        "primaryKeyword": "Power BI Consulting Services India",
+        "pageRoute": "/about",
+        "pageName": "About Us",
+        "primaryKeyword": "AI research lab",
         "secondaryKeywords": [
-          "Power BI dashboard developers Bangalore",
-          "Executive KPI reporting consultants Mumbai",
-          "Power BI automated refresh setup India",
-          "DAX modeling and Star Schema consulting"
+          "machine learning engineers",
+          "enterprise AI studio",
+          "artificial intelligence architects",
+          "AI ethics and governance"
         ],
-        "searchIntent": "transactional",
-        "targetLocation": "Pan-India & Overseas",
-        "metaTitle": "Power BI Consulting & Executive Dashboards India | DataSource",
-        "metaDescription": "Custom Power BI dashboard engineering, DAX star schema modeling, automated data gateway configuration, and executive KPI scorecards by DataSource in India.",
+        "searchIntent": "informational",
+        "targetLocation": "Global",
+        "metaTitle": "About Us | AI Research & Enterprise Engineering | DataSource Tech",
+        "metaDescription": "Meet the collective of research scientists and systems architects at DataSource Technology AI Studio dedicated to solving complex enterprise challenges.",
         "priority": "high",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "3,100/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "Targeting decision-makers looking to hire Power BI consultants and automate executive reporting."
+        "rankingStatus": "active_target"
       },
       {
         "id": "seo-3",
-        "pageRoute": "/services/data-engineering-pipeline-automation",
-        "pageName": "Data Engineering & Pipeline Automation",
-        "primaryKeyword": "Data Engineering Company in Bangalore",
+        "pageRoute": "/services",
+        "pageName": "Core Services Overview",
+        "primaryKeyword": "custom machine learning development",
         "secondaryKeywords": [
-          "ETL data pipeline developers India",
-          "Snowflake BigQuery migration consultants",
-          "Airflow data pipeline architecture India",
-          "Lakehouse modernization services India"
+          "enterprise AI consulting",
+          "scalable neural network architecture",
+          "AI services"
         ],
         "searchIntent": "commercial",
-        "targetLocation": "Bengaluru / Pan-India",
-        "metaTitle": "Data Engineering & Pipeline Automation Services India | DataSource",
-        "metaDescription": "Fault-tolerant ETL/ELT pipelines, Snowflake and BigQuery data warehousing, Airflow workflow orchestration, and Lakehouse engineering by DataSource.",
+        "targetLocation": "Global",
+        "metaTitle": "Enterprise AI Services & Lifecycle Support | DataSource Tech",
+        "metaDescription": "Discover our end-to-end AI services, from custom model engineering and autonomous workflows to intelligent data pipelines and strategic AI consulting.",
         "priority": "high",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "2,800/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "High commercial intent for mid-market and enterprise data warehouse migrations."
+        "rankingStatus": "active_target"
       },
       {
         "id": "seo-4",
-        "pageRoute": "/services/custom-web-cloud-applications",
-        "pageName": "Custom Web & Cloud Applications",
-        "primaryKeyword": "Custom Software Development Company India",
+        "pageRoute": "/services/custom-model-engineering",
+        "pageName": "Custom Model Engineering",
+        "primaryKeyword": "custom LLM fine-tuning",
         "secondaryKeywords": [
-          "Enterprise React TypeScript developers India",
-          "Cloud web application engineers Bangalore",
-          "Node.js API and microservices architecture",
-          "SaaS application development India"
+          "bespoke neural networks",
+          "Parameter-Efficient Fine-Tuning",
+          "PEFT",
+          "domain adaptation",
+          "LoRA"
         ],
         "searchIntent": "transactional",
-        "targetLocation": "India & Global Export",
-        "metaTitle": "Custom Web & Cloud Application Development India | DataSource",
-        "metaDescription": "Production-grade custom web application design and cloud software engineering with React, TypeScript, Node.js, and AWS/GCP cloud architectures.",
+        "targetLocation": "Global",
+        "metaTitle": "Custom LLM Fine-Tuning & Model Engineering | DataSource Tech",
+        "metaDescription": "We build and fine-tune domain-specific large language models (LLMs) and neural networks tailored to your proprietary data and industry terminology.",
         "priority": "high",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "5,400/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "Attracts domestic and global clients looking for premium full-stack engineering teams."
+        "rankingStatus": "active_target"
       },
       {
         "id": "seo-5",
-        "pageRoute": "/services",
-        "pageName": "All Technology & Data Services",
-        "primaryKeyword": "IT Consulting and Data Solutions India",
+        "pageRoute": "/services/ai-transformation-strategy",
+        "pageName": "AI-Driven Digital Transformation",
+        "primaryKeyword": "enterprise AI strategy",
         "secondaryKeywords": [
-          "Digital product development services India",
-          "Enterprise data consulting firms Bangalore",
-          "Software architecture audit India",
-          "UI UX product design consulting"
+          "AI digital transformation consulting",
+          "AI infrastructure roadmap",
+          "AI ROI assessment"
         ],
         "searchIntent": "commercial",
-        "targetLocation": "India & Global",
-        "metaTitle": "Technology & Data Consulting Services India | DataSource",
-        "metaDescription": "Explore DataSource's full range of enterprise services: digital product development, Power BI dashboards, data pipeline engineering, and IT consulting.",
-        "priority": "medium",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "1,900/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "Overview hub page for all service categories."
+        "targetLocation": "Global",
+        "metaTitle": "AI Digital Transformation & Enterprise Strategy | DataSource Tech",
+        "metaDescription": "Transition from isolated AI PoCs to enterprise-wide scalable value with our risk-mitigated, quantifiable AI digital transformation roadmaps.",
+        "priority": "high",
+        "rankingStatus": "active_target"
       },
       {
         "id": "seo-6",
-        "pageRoute": "/contact",
-        "pageName": "Contact & Office Locations",
-        "primaryKeyword": "Contact Technology Consultants Bangalore",
+        "pageRoute": "/services/intelligent-data-pipelines",
+        "pageName": "Intelligent Data Pipelines",
+        "primaryKeyword": "enterprise data pipelines",
         "secondaryKeywords": [
-          "DataSource office locations India",
-          "Book IT architecture consultation India",
-          "Hire data engineering consultants India",
-          "Bangalore tech consulting contact number"
+          "vector database indexing",
+          "RAG data ingestion",
+          "real-time ETL",
+          "AI data governance",
+          "Pinecone"
         ],
-        "searchIntent": "navigational",
-        "targetLocation": "Bengaluru, Mumbai, Kolkata, Delhi NCR, Hyderabad",
-        "metaTitle": "Contact DataSource Technology & Solutions | Bangalore, Mumbai, Kolkata, Delhi, Hyderabad",
-        "metaDescription": "Connect with DataSource technical architects across our India hubs in Bengaluru, Mumbai, Kolkata, Delhi NCR, and Hyderabad. Call +91 9038417437 or book a consultation.",
+        "searchIntent": "commercial",
+        "targetLocation": "Global",
+        "metaTitle": "Enterprise Data Pipelines & Vector Indexing | DataSource Tech",
+        "metaDescription": "Power your AI engines with clean, continuous data streams backed by zero-trust security and high-performance vector database indexing.",
         "priority": "high",
-        "rankingStatus": "active_target",
-        "targetMonthlySearches": "1,200/mo",
-        "lastAudited": "2026-09-12",
-        "notes": "Local search and direct conversion hub for enquiries and office visits."
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-7",
+        "pageRoute": "/services/autonomous-agentic-workflows",
+        "pageName": "Autonomous Agentic Workflows",
+        "primaryKeyword": "autonomous agentic workflows",
+        "secondaryKeywords": [
+          "multi-agent orchestration",
+          "cognitive agents",
+          "tool-calling AI agents",
+          "ReAct prompting"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "Global",
+        "metaTitle": "Autonomous Agentic Workflows & AI Orchestration | DataSource Tech",
+        "metaDescription": "Deploy cognitive AI agents capable of planning, executing complex multi-step processes, and interfacing directly with enterprise APIs.",
+        "priority": "high",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-8",
+        "pageRoute": "/studio",
+        "pageName": "AI Studio Platform",
+        "primaryKeyword": "proprietary AI development platform",
+        "secondaryKeywords": [
+          "machine learning workspace",
+          "model experimentation pipeline",
+          "MLOps platform"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "Global",
+        "metaTitle": "The DataSource AI Studio Platform | Machine Learning Workspace",
+        "metaDescription": "Accelerate model experimentation, secure data ingestion, and seamless production deployment with our proprietary AI Studio Platform.",
+        "priority": "high",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-9",
+        "pageRoute": "/case-studies",
+        "pageName": "Case Studies",
+        "primaryKeyword": "enterprise AI case studies",
+        "secondaryKeywords": [
+          "machine learning success stories",
+          "AI workflow automation examples"
+        ],
+        "searchIntent": "commercial",
+        "targetLocation": "Global",
+        "metaTitle": "Enterprise AI Case Studies & Proven Impact | DataSource Tech",
+        "metaDescription": "Read our unique enterprise case studies showcasing how global organizations leverage DataSource Technology AI Studio to transform operations.",
+        "priority": "high",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-10",
+        "pageRoute": "/contact",
+        "pageName": "Contact & Engagement",
+        "primaryKeyword": "contact DataSource Technology",
+        "secondaryKeywords": [
+          "hire AI engineers",
+          "enterprise AI consultation",
+          "AI strategy session"
+        ],
+        "searchIntent": "transactional",
+        "targetLocation": "Global & India",
+        "metaTitle": "Contact Our AI Engineers | DataSource Technology AI Studio",
+        "metaDescription": "Connect with our senior engineering team at DataSource Technology AI Studio. Reach us via email or phone to discuss your custom AI roadmap.",
+        "priority": "high",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-11",
+        "pageRoute": "/insights",
+        "pageName": "Insights & Engineering Ledger",
+        "primaryKeyword": "AI engineering blog",
+        "secondaryKeywords": [
+          "machine learning research articles",
+          "enterprise AI insights",
+          "custom LLM tutorials",
+          "MLOps best practices"
+        ],
+        "searchIntent": "informational",
+        "targetLocation": "Global",
+        "metaTitle": "AI Engineering Insights & Research Blog | DataSource Tech",
+        "metaDescription": "Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at DataSource Technology.",
+        "priority": "high",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-12",
+        "pageRoute": "/privacy-policy",
+        "pageName": "Privacy Policy",
+        "primaryKeyword": "AI data privacy policy",
+        "secondaryKeywords": [
+          "secure AI data handling",
+          "enterprise data protection",
+          "zero-trust AI compliance"
+        ],
+        "searchIntent": "informational",
+        "targetLocation": "Global",
+        "metaTitle": "Privacy Policy & Enterprise Data Governance | DataSource Tech",
+        "metaDescription": "Review our privacy policy to understand how DataSource Technology securely handles, processes, and protects your corporate data and personal information.",
+        "priority": "medium",
+        "rankingStatus": "active_target"
+      },
+      {
+        "id": "seo-13",
+        "pageRoute": "/terms-of-service",
+        "pageName": "Terms of Service",
+        "primaryKeyword": "AI terms of service",
+        "secondaryKeywords": [
+          "machine learning enterprise agreement",
+          "custom AI IP rights",
+          "AI liability clause"
+        ],
+        "searchIntent": "informational",
+        "targetLocation": "Global",
+        "metaTitle": "Terms of Service & Master Service Agreement | DataSource Tech",
+        "metaDescription": "Read the terms of service governing the use of DataSource Technology's AI studio platform, custom model engineering, and enterprise solutions.",
+        "priority": "medium",
+        "rankingStatus": "active_target"
       }
     ]
   }

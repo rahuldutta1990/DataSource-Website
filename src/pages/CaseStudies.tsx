@@ -26,9 +26,10 @@ export const CaseStudies: React.FC = () => {
   return (
     <div className="min-h-screen transition-colors duration-200">
       <SEOHead
-        title="Enterprise Case Studies & Architecture Outcomes"
-        description="Discover how DataSource has solved mission-critical engineering, Power BI dashboard automation, and cloud migration challenges across retail, healthcare, finance, and logistics."
-        keywords="technology consulting case studies, power bi implementation results, data engineering success stories"
+        title="Enterprise AI Case Studies & Proven Impact | DataSource Tech"
+        description="Read our unique enterprise case studies showcasing how global organizations leverage DataSource Technology AI Studio to transform operations."
+        keywords="enterprise AI case studies, machine learning success stories, AI workflow automation examples"
+        canonical="https://datasourcerechnology.ai.studio/case-studies"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: 'Case Studies', url: '/case-studies' },
@@ -40,10 +41,10 @@ export const CaseStudies: React.FC = () => {
           <div className="max-w-3xl space-y-4">
             <Eyebrow text="Portfolio &amp; Outcomes" variant="blue" />
             <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1B2B] dark:text-white font-heading">
-              Real Impact, Proven Results
+              Enterprise AI Case Studies &amp; Proven Impact
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 font-body">
-              Explore how DataSource partners with businesses to eliminate technical bottlenecks, modernize web applications, and engineer high-performance data analytics platforms.
+              Explore how global enterprises leverage DataSource Technology AI Studio to eliminate critical operational bottlenecks, deploy edge machine learning, and achieve measurable ROI.
             </p>
           </div>
 

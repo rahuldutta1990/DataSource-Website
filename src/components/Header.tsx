@@ -53,6 +53,7 @@ export const Header: React.FC = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'AI Studio', path: '/studio' },
     { name: 'Case Studies', path: '/case-studies' },
     { name: 'Insights', path: '/insights' },
     { name: 'Contact', path: '/contact' },
