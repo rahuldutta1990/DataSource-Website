@@ -229,7 +229,7 @@ export const api = {
     // Standard secure token creation for administrative session
     const user: AdminUser = {
       id: 'usr-admin',
-      name: 'DataSource Principal',
+      name: 'Kernal Vane Principal',
       email: email || 'admin@datasource.tech',
       role: 'Super Admin',
       active: true,

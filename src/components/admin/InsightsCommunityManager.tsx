@@ -192,7 +192,7 @@ export const InsightsCommunityManager: React.FC<InsightsCommunityManagerProps> =
     if (!replyText.trim()) return;
     setReplying(true);
     try {
-      await api.replyToComment(commentId, replyText, 'DataSource AI Engineering Practice');
+      await api.replyToComment(commentId, replyText, 'Kernal Vane AI Engineering Practice');
       setComments((prev) =>
         prev.map((c) =>
           c.id === commentId
@@ -200,7 +200,7 @@ export const InsightsCommunityManager: React.FC<InsightsCommunityManagerProps> =
                 ...c,
                 adminReply: replyText.trim(),
                 adminRepliedAt: new Date().toISOString(),
-                adminReplierName: 'DataSource AI Engineering Practice',
+                adminReplierName: 'Kernal Vane AI Engineering Practice',
               }
             : c
         )
@@ -631,7 +631,7 @@ export const InsightsCommunityManager: React.FC<InsightsCommunityManagerProps> =
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
                         <span className="text-xs font-bold text-white">
-                          Official Reply from {c.adminReplierName || 'DataSource AI Team'}
+                          Official Reply from {c.adminReplierName || 'Kernal Vane AI Team'}
                         </span>
                         <span className="text-[10px] text-slate-500">
                           {c.adminRepliedAt && new Date(c.adminRepliedAt).toLocaleDateString()}
@@ -685,7 +685,7 @@ export const InsightsCommunityManager: React.FC<InsightsCommunityManagerProps> =
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#38BDF8] hover:underline"
                       >
                         <CornerDownRight className="w-3.5 h-3.5" />
-                        <span>{c.adminReply ? 'Edit Official Reply' : 'Reply as DataSource Staff'}</span>
+                        <span>{c.adminReply ? 'Edit Official Reply' : 'Reply as Kernal Vane Staff'}</span>
                       </button>
                     )}
                   </div>

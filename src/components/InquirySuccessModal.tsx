@@ -73,12 +73,12 @@ export const InquirySuccessModal: React.FC<InquirySuccessModalProps> = ({
 
   const generateWhatsAppUrl = () => {
     const cleanNumber = cleanWhatsAppDigits(targetWhatsAppPhone);
-    const text = `*New Enterprise Consultation Inquiry*\n\n*Reference:* ${refId}\n*Name:* ${data.name}\n*Email:* ${data.email}\n*Phone:* ${data.phone || 'N/A'}\n*Company:* ${data.company || 'N/A'}\n*Practice / Service:* ${data.serviceInterest || 'General Inquiry'}\n*Project Type:* ${data.projectType || 'General'}\n*Budget:* ${data.budgetRange || 'Flexible'}\n\n*Message:* ${data.message || 'Consultation requested'}\n\n_Sent via DataSource Technology AI Studio_`;
+    const text = `*New Enterprise Consultation Inquiry*\n\n*Reference:* ${refId}\n*Name:* ${data.name}\n*Email:* ${data.email}\n*Phone:* ${data.phone || 'N/A'}\n*Company:* ${data.company || 'N/A'}\n*Practice / Service:* ${data.serviceInterest || 'General Inquiry'}\n*Project Type:* ${data.projectType || 'General'}\n*Budget:* ${data.budgetRange || 'Flexible'}\n\n*Message:* ${data.message || 'Consultation requested'}\n\n_Sent via Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)_`;
     return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
   };
 
   const handleCopy = () => {
-    const text = `DataSource Technology AI Studio — Consultation Inquiry Confirmation
+    const text = `Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) — Consultation Inquiry Confirmation
 Reference ID: ${refId}
 Client: ${data.name} (${data.email}${data.phone ? ` / ${data.phone}` : ''})
 Company: ${data.company || 'N/A'}
@@ -180,7 +180,7 @@ Timestamp: ${data.submittedAt || new Date().toLocaleString()}`;
                   <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                     <Mail className="w-3.5 h-3.5 text-[#0077FF] shrink-0" />
                     <span className="truncate">
-                      Dispatched to: <strong className="text-slate-900 dark:text-slate-100 font-mono">rd14190@gmail.com</strong>
+                      Dispatched to: <strong className="text-slate-900 dark:text-slate-100 font-mono">dev720rd@gmail.com</strong>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">

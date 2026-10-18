@@ -96,7 +96,7 @@ export const OfficeLocationsManager: React.FC<OfficeLocationsManagerProps> = ({
       country: 'India',
       address: '',
       phone: '+91 9038417437',
-      email: 'rd14190@gmail.com',
+      email: 'dev720rd@gmail.com',
       hours: 'Mon – Fri: 9:30 AM – 6:30 PM IST',
       transit: 'Public transit & parking nearby',
       focus: ['Data Engineering', 'Power BI Dashboards', 'Web & Cloud Architecture'],

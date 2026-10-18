@@ -27,14 +27,14 @@ async function startServer() {
 Allow: /
 Disallow: /admin
 Disallow: /api/admin
-Sitemap: ${process.env.APP_URL || 'https://datasource.tech'}/sitemap.xml
+Sitemap: ${process.env.APP_URL || 'https://kernelvane.tech'}/sitemap.xml
 `);
   });
 
   // Dynamic sitemap.xml
   app.get('/sitemap.xml', (_req, res) => {
     const db = loadDb();
-    const baseUrl = process.env.APP_URL || 'https://datasource.tech';
+    const baseUrl = process.env.APP_URL || 'https://kernelvane.tech';
     const now = new Date().toISOString().split('T')[0];
 
     const staticRoutes = [

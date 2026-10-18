@@ -51,7 +51,7 @@ const CATEGORY_PRESETS = [
 
 const RECOMMENDED_FAQS: Omit<FAQ, 'id'>[] = [
   {
-    question: 'How does DataSource Technology protect enterprise data, proprietary IP, and confidentiality?',
+    question: 'How does Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) protect enterprise data, proprietary IP, and confidentiality?',
     answer:
       'We enforce strict data sovereignty, signed non-disclosure agreements (NDAs), and enterprise security protocols. All data pipeline engineering, Power BI models, and cloud solutions are deployed directly within your dedicated cloud tenant (AWS, Azure, GCP) or isolated on-premises infrastructure. We never store, transfer, or retain client proprietary datasets externally.',
     category: 'Security & Governance',
@@ -60,16 +60,16 @@ const RECOMMENDED_FAQS: Omit<FAQ, 'id'>[] = [
     targetPages: ['home', 'about', 'services'],
   },
   {
-    question: 'What core technology and data consulting services does DataSource provide?',
+    question: 'What core IT consulting and software technology services does Kernal Vane Technology provide?',
     answer:
-      'DataSource delivers end-to-end IT problem solving, including custom software and web application development, executive Power BI dashboard engineering, automated ETL/ELT data pipelines, cloud database architecture (PostgreSQL, Snowflake, BigQuery), system modernization, and pragmatic AI/automation workflows.',
+      'Kernal Vane Technology delivers end-to-end IT problem solving, including custom software and web application development, executive Power BI dashboard engineering, automated ETL/ELT data pipelines, cloud database architecture (PostgreSQL, Snowflake, BigQuery), system modernization, and pragmatic AI/automation workflows.',
     category: 'Services & Capabilities',
     sortOrder: 2,
     status: 'published',
     targetPages: ['services', 'home'],
   },
   {
-    question: 'Where is DataSource Technology located, and do you support clients remotely and on-site?',
+    question: 'Where is Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) located, and do you support clients remotely and on-site?',
     answer:
       'Our principal Technology Hub & Consultation Office is located in Kolkata, West Bengal, India (Sanhita Simoco Township, New Town Action Area 3 corridor). We provide hybrid collaboration, on-site consultation across India, and fully remote engineering delivery for clients throughout India, the United States, Europe, and globally.',
     category: 'About & Company',
@@ -96,7 +96,7 @@ const RECOMMENDED_FAQS: Omit<FAQ, 'id'>[] = [
     targetPages: ['services', 'about'],
   },
   {
-    question: 'What engineering methodologies and quality standards does DataSource follow?',
+    question: 'What engineering methodologies and quality standards does Kernal Vane Technology follow?',
     answer:
       'Our engineering methodology is grounded in clean architecture, type safety (TypeScript, structured SQL), rigorous unit and integration testing, continuous CI/CD automated deployment, and strict performance benchmarking to ensure zero-downtime operational reliability.',
     category: 'Engineering Standards',
@@ -715,13 +715,13 @@ export const FAQSchemaManager: React.FC<FAQSchemaManagerProps> = ({
                 <div className="text-xs text-slate-600">https://datasource.tech &gt; {schemaPageTarget}</div>
                 <div className="text-base font-medium text-[#1a0dab] hover:underline cursor-pointer">
                   {schemaPageTarget === 'services'
-                    ? 'Enterprise IT, Cloud & Data Consulting Services | DataSource'
+                    ? 'IT Consulting & Software Technology in the AI Era | Kernal Vane Technology'
                     : schemaPageTarget === 'about'
-                    ? 'About DataSource Technology | Engineering & AI Consulting'
-                    : 'DataSource Technology & Solutions | Enterprise Software & Data'}
+                    ? 'About Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) | Engineering & AI Consulting'
+                    : 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) | Enterprise Software & Data'}
                 </div>
                 <div className="text-xs text-slate-700 mt-1">
-                  DataSource provides high-performance custom software, Power BI executive dashboards, and automated ETL data pipelines...
+                  Kernal Vane Technology provides high-performance custom software, Power BI executive dashboards, and automated ETL data pipelines...
                 </div>
 
                 {/* FAQ rich expansion preview */}
@@ -785,7 +785,7 @@ export const FAQSchemaManager: React.FC<FAQSchemaManagerProps> = ({
                       setFormQuestion(e.target.value);
                       if (formErrors.question) setFormErrors((prev) => ({ ...prev, question: undefined }));
                     }}
-                    placeholder="e.g. What core technology and data consulting services does DataSource provide?"
+                    placeholder="e.g. What core IT consulting and software technology services does Kernal Vane Technology provide?"
                     className={`w-full px-4 py-2.5 rounded-xl bg-slate-900 text-white text-sm border focus:outline-none transition-colors ${
                       formErrors.question
                         ? 'border-rose-500 focus:border-rose-500'

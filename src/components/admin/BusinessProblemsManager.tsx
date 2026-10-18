@@ -83,7 +83,7 @@ export const BusinessProblemsManager: React.FC<BusinessProblemsManagerProps> = (
   );
   const [sectionSubtitle, setSectionSubtitle] = useState<string>(
     settings?.businessProblemsSubtitle ||
-      'Most technology projects fail when companies buy software before diagnosing their real operational bottleneck. Select the challenge you are dealing with today to see how DataSource solves it with practical engineering and data clarity.'
+      'Most technology projects fail when companies buy software before diagnosing their real operational bottleneck. Select the challenge you are dealing with today to see how Kernal Vane Technology solves it with practical engineering and data clarity.'
   );
   const [sectionEnabled, setSectionEnabled] = useState<boolean>(
     settings?.businessProblemsEnabled !== false
@@ -799,7 +799,7 @@ export const BusinessProblemsManager: React.FC<BusinessProblemsManagerProps> = (
               {/* Row 6: Consulting Solution */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#38BDF8] mb-1.5">
-                  DataSource Consulting Solution (“How We Solve It”)
+                  Kernal Vane Consulting Solution (“How We Solve It”)
                 </label>
                 <textarea
                   rows={3}

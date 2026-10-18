@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
             <div className="lg:col-span-5 space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-semibold tracking-wide">
                 <Newspaper className="w-3.5 h-3.5 text-cyan-400" />
-                <span>DataSource Tech Briefing</span>
+                <span>Kernal Vane Tech Briefing</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-heading">
                 Subscribe for Tech &amp; Data Insights
@@ -93,14 +93,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-12">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
-            <Link to="/" className="inline-block focus:outline-none" aria-label="DataSource Home">
+            <Link to="/" className="inline-block focus:outline-none" aria-label="Kernal Vane Technology Home">
               <DataSourceLogo
                 variant="white-horizontal"
                 className="h-11 sm:h-12 md:h-13 w-auto max-w-[320px] sm:max-w-[360px]"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              DataSource is a technology and data consulting partner helping businesses solve technical problems, build digital products, improve operations, and turn data into useful business decisions.
+              Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) is a premier technology partner helping businesses solve technical problems, build custom software platforms, engineer Power BI dashboards, and automate operations.
             </p>
             <div className="pt-2 text-xs text-cyan-400 font-semibold tracking-wide">
               Brand Philosophy: &ldquo;We start with the problem, not the technology.&rdquo;
@@ -179,7 +179,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/about" className="hover:text-cyan-400 transition-colors">
-                  About DataSource
+                  About Kernal Vane
                 </Link>
               </li>
               <li>
@@ -189,7 +189,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/about#process" className="hover:text-cyan-400 transition-colors">
-                  The DataSource Way
+                  The Kernal Vane Way
                 </Link>
               </li>
               <li>
@@ -219,14 +219,14 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                <a href="mailto:rd14190@gmail.com" className="hover:text-cyan-400 transition-colors">
-                  rd14190@gmail.com
+                <a href="mailto:dev720rd@gmail.com" className="hover:text-cyan-400 transition-colors">
+                  dev720rd@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <a href="tel:+919038417437" className="hover:text-cyan-400 transition-colors font-medium">
-                  +91 9038417437
+                <a href="tel:+916289560141" className="hover:text-cyan-400 transition-colors font-medium">
+                  +91 6289560141
                 </a>
               </li>
               <li className="flex items-start gap-2.5 pt-1 text-xs text-slate-400">
@@ -244,7 +244,7 @@ export const Footer: React.FC = () => {
             <div className="bg-white p-3 rounded-xl shadow-lg border border-slate-700/80 inline-block space-y-2">
               <img
                 src={settings?.footerQrCodeUrl || '/upi-qr.png'}
-                alt="DataSource UPI Payment QR"
+                alt="Kernal Vane Technology UPI Payment QR"
                 className="w-32 h-32 object-contain mx-auto rounded-lg"
                 referrerPolicy="no-referrer"
               />
@@ -259,7 +259,7 @@ export const Footer: React.FC = () => {
       {/* Bottom Legal & Admin Bar */}
       <div className="border-t border-slate-800/80 py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 DataSource Technology &amp; Solutions. All rights reserved.</p>
+          <p>© 2026 Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy Policy

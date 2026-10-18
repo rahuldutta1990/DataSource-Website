@@ -151,7 +151,7 @@ export function trackEvent(eventName: string, params?: Record<string, any>): voi
   }
 }
 
-// Pre-configured conversion events across the DataSource application
+// Pre-configured conversion events across the Kernal Vane Technology application
 export const AnalyticsEvents = {
   LEAD_SUBMITTED: 'lead_inquiry_submitted',
   NEWSLETTER_SUBSCRIBED: 'newsletter_subscribed',

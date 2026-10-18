@@ -100,7 +100,7 @@ export const WhatsAppChatbot: React.FC = () => {
   const rawPhone = settings?.whatsappNumber || '+91 9038417437';
   const whatsappDigits = cleanWhatsAppDigits(settings?.whatsappNumber || '919038417437');
   const consultantName = settings?.whatsappConsultantName || 'DataSource Solutions Architect';
-  const welcomeGreeting = settings?.whatsappGreeting || '👋 Hi there! Welcome to DataSource Technology & Solutions. How can our technical architects assist you today?';
+  const welcomeGreeting = settings?.whatsappGreeting || '👋 Hi there! Welcome to Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). How can our technical architects assist you today?';
 
   const [messages, setMessages] = useState<Message[]>([
     {

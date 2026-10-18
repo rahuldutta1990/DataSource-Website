@@ -425,13 +425,13 @@ export async function subscribeNewsletterToFirestore(
     await addDoc(collection(db, 'newsletterSubscribers'), newSubscriber);
     return {
       success: true,
-      message: 'Thank you for subscribing! You are now on the DataSource executive mailing list.',
+      message: 'Thank you for subscribing! You are now on the Kernal Vane Technology executive mailing list.',
     };
   } catch (error) {
     console.warn('Notice writing subscriber to Firestore:', error);
     return {
       success: true,
-      message: 'Thank you for subscribing! You are now on the DataSource executive mailing list.',
+      message: 'Thank you for subscribing! You are now on the Kernal Vane Technology executive mailing list.',
     };
   }
 }
@@ -521,7 +521,7 @@ const initialComments: InsightComment[] = [
     createdAt: '2026-09-15T14:22:00.000Z',
     adminReply: 'Great question, David! For real-time compliance docs, we leverage hierarchical indexing where parent documents retain semantic chunks while child metadata indices update asynchronously via transactional CDC streams.',
     adminRepliedAt: '2026-09-15T16:05:00.000Z',
-    adminReplierName: 'DataSource AI Architecture Practice',
+    adminReplierName: 'Kernal Vane AI Architecture Practice',
   },
   {
     id: 'comm-2',
@@ -552,7 +552,7 @@ const initialComments: InsightComment[] = [
     createdAt: '2026-09-13T11:45:00.000Z',
     adminReply: 'Thank you Marcus! We have a full deep-dive on agent consensus algorithms and supervisor failure recovery dropping in the next dispatch.',
     adminRepliedAt: '2026-09-13T13:30:00.000Z',
-    adminReplierName: 'DataSource Editorial Board',
+    adminReplierName: 'Kernal Vane Editorial Board',
   },
 ];
 
@@ -694,7 +694,7 @@ export async function updateCommentStatusInFirestore(
 export async function replyToCommentInFirestore(
   commentId: string,
   replyText: string,
-  adminReplierName: string = 'DataSource Engineering Team'
+  adminReplierName: string = 'Kernal Vane Engineering Team'
 ): Promise<void> {
   await updateDoc(doc(db, 'comments', commentId), {
     adminReply: replyText.trim(),

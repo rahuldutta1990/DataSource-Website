@@ -56,8 +56,8 @@ export const Insights: React.FC = () => {
     <div className="min-h-screen transition-colors duration-200">
       {/* On-Page SEO Meta Data */}
       <SEOHead
-        title="AI Engineering Insights & Research Blog | DataSource Tech"
-        description="Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at DataSource Technology."
+        title="AI Engineering Insights & Research Blog | Kernal Vane Technology"
+        description="Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)."
         keywords="AI engineering blog, machine learning research articles, enterprise AI insights, custom LLM tutorials, MLOps best practices"
         canonical="https://datasourcerechnology.ai.studio/insights"
         breadcrumbs={[
@@ -75,7 +75,7 @@ export const Insights: React.FC = () => {
               AI Engineering Insights &amp; Research Ledger
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 font-body">
-              Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at DataSource Technology.
+              Explore technical deep-dives, machine learning research, and enterprise AI implementation strategies from the engineering team at Kernal Vane Technology (IT Consulting and Software Technology in the AI Era).
             </p>
           </div>
 

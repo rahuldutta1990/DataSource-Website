@@ -180,7 +180,7 @@ export async function sendAdminNewsletterNotification(subscriber: {
   recipient: string;
   mode: 'smtp' | 'simulated';
 }> {
-  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'rd14190@gmail.com';
+  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'dev720rd@gmail.com';
   const from = process.env.SMTP_FROM || 'DataSource Alerts <no-reply@datasource.tech>';
   const subject = `📰 New Newsletter Subscriber: ${subscriber.email}`;
 

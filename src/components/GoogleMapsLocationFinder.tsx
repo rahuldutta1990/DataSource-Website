@@ -68,7 +68,7 @@ const PRESET_QUERIES = [
   {
     label: 'Kolkata HQ & Consultation Center',
     prompt:
-      'What are the main landmarks, highways, and transit routes near the DataSource Technology Hub at Sanhita Simoco Township, Hatisala Six Lane, New Town Action 3, Kolkata 700135?',
+      'What are the main landmarks, highways, and transit routes near the Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) Hub at Sanhita Simoco Township, Hatisala Six Lane, New Town Action 3, Kolkata 700135?',
     mapQuery:
       '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India',
     lat: 22.5292,
@@ -168,7 +168,7 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
       console.warn('Maps Grounding fallback handled:', err);
       // Seamless graceful fallback: Never show broken error banner
       setResult(DEFAULT_MAPS_RESULT);
-      setInfoNotice('Showing verified DataSource technology hubs and Google Maps locations.');
+      setInfoNotice('Showing verified Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) hubs and Google Maps locations.');
     } finally {
       setLoading(false);
     }
@@ -211,7 +211,7 @@ export const GoogleMapsLocationFinder: React.FC<{ initialCity?: string; classNam
               Interactive Office &amp; Tech Hub Explorer
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Explore DataSource technology offices, client consultation meeting centers, and nearby innovation hubs with live Google Maps grounding, place links, and verified reviews.
+              Explore Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) offices, client consultation meeting centers, and nearby innovation hubs with live Google Maps grounding, place links, and verified reviews.
             </p>
           </div>
 

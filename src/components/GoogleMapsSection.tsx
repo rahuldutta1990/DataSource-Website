@@ -15,8 +15,8 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'India',
     address:
       '3B13, Flat: 5D, Sanhita Simoco Township, Satuli, Langal Benki, Bhaganpur, Kashipur, Pithapukur, Bhangar, PO&PS: Hatisala Near Hatisala Six Lane, New Town Action 3, Kolkata 700135, West Bengal, India',
-    phone: '+91 9038417437',
-    email: 'rd14190@gmail.com',
+    phone: '+91 6289560141',
+    email: 'dev720rd@gmail.com',
     hours: 'Mon – Fri: 9:30 AM – 6:30 PM IST (Consultation by Appointment)',
     transit: 'Near Hatisala Six Lane, New Town Action Area 3 • 25 min from Biswa Bangla Gate & Major IT Corridors',
     focus: [

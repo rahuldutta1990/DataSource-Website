@@ -12,7 +12,7 @@ import {
   Calendar,
   Sparkles,
 } from 'lucide-react';
-import { DataSourceLogo } from './DataSourceLogo.js';
+import { DataSourceLogo, KernalVaneLogo } from './DataSourceLogo.js';
 import { DynamicIcon } from './DynamicIcon.js';
 import { AutoSearch } from './AutoSearch.js';
 import { ServiceCategory, ServiceItem } from '../types.js';
@@ -72,25 +72,25 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-6">
             <span className="text-cyan-400 font-semibold tracking-wide uppercase text-[11px]">
-              Technology That Solves. Data That Drives.
+              Kernal Vane Technology • IT Consulting and Software Technology in the AI Era
             </span>
             <span className="text-slate-500">•</span>
             <span className="text-slate-300">We start with the problem, not the technology.</span>
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:rd14190@gmail.com"
+              href="mailto:dev720rd@gmail.com"
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-cyan-400" />
-              <span>rd14190@gmail.com</span>
+              <span>dev720rd@gmail.com</span>
             </a>
             <a
-              href="tel:+919038417437"
+              href="tel:+916289560141"
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors font-medium"
             >
               <Phone className="w-3.5 h-3.5 text-cyan-400" />
-              <span>+91 9038417437</span>
+              <span>+91 6289560141</span>
             </a>
           </div>
         </div>
@@ -106,8 +106,8 @@ export const Header: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo - Proportional & Cleanly Scaled */}
-          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="DataSource Home">
-            <DataSourceLogo
+          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="Kernal Vane Technology Home">
+            <KernalVaneLogo
               variant={isDark ? 'white-horizontal' : 'horizontal'}
               className={`w-auto transition-all duration-300 ${isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 md:h-9.5 lg:h-10'}`}
               showTagline={false}
@@ -345,7 +345,7 @@ export const Header: React.FC = () => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <div className="text-center text-xs text-slate-500 dark:text-slate-400">
-                <span>Direct: rd14190@gmail.com • +91 9038417437</span>
+                <span>Direct: dev720rd@gmail.com • +91 6289560141</span>
               </div>
             </div>
           </div>

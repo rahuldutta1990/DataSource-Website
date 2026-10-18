@@ -18,11 +18,11 @@ interface SEOHeadProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const DEFAULT_TITLE = 'DataSource Technology & Solutions | Enterprise Software, Cloud & Data Consulting';
-const DEFAULT_DESC = 'DataSource is a technology and data consulting partner helping businesses design custom software, build scalable cloud architecture, deploy automated Power BI dashboards and engineer reliable data pipelines.';
-const DEFAULT_KEYWORDS = 'technology consulting, software engineering, cloud architecture, data pipeline automation, Power BI dashboards, IT consulting, database migration, AI solutions';
+const DEFAULT_TITLE = 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)';
+const DEFAULT_DESC = 'Kernal Vane Technology - IT Consulting and Software Technology in the AI Era. We engineer custom enterprise software, AI models, Power BI intelligence, and automated data pipelines.';
+const DEFAULT_KEYWORDS = 'Kernal Vane Technology, IT consulting AI era, software technology, enterprise software engineering, cloud architecture, automated data pipelines, Power BI dashboards, IT consulting, AI solutions';
 const DEFAULT_OG_IMAGE = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop';
-const BASE_URL = 'https://datasource.tech';
+const BASE_URL = 'https://kernelvane.tech';
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
@@ -35,7 +35,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   breadcrumbs,
 }) => {
   const location = useLocation();
-  const fullTitle = title ? `${title} | DataSource Technology & Solutions` : DEFAULT_TITLE;
+  const fullTitle = title ? `${title} | Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)` : DEFAULT_TITLE;
   const currentUrl = canonicalUrl || `${BASE_URL}${location.pathname}`;
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     setMeta('property', 'og:url', currentUrl);
     setMeta('property', 'og:type', ogType);
     setMeta('property', 'og:image', ogImage);
-    setMeta('property', 'og:site_name', 'DataSource Technology & Solutions');
+    setMeta('property', 'og:site_name', 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)');
 
     // 4. Twitter Card
     setMeta('name', 'twitter:card', 'summary_large_image');
@@ -98,14 +98,14 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       '@context': 'https://schema.org',
       '@type': ['ProfessionalService', 'LocalBusiness', 'ITService'],
       '@id': `${BASE_URL}/#organization`,
-      name: 'DataSource Technology & Solutions',
-      alternateName: 'DataSource Tech India',
+      name: 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)',
+      alternateName: 'Kernal Vane Technology',
       url: BASE_URL,
-      logo: `${BASE_URL}/datasource-icon.svg`,
+      logo: `${BASE_URL}/kernelvane-logo.svg`,
       image: DEFAULT_OG_IMAGE,
       description: DEFAULT_DESC,
-      telephone: '+91 9038417437',
-      email: 'rd14190@gmail.com',
+      telephone: '+91 6289560141',
+      email: 'dev720rd@gmail.com',
       priceRange: '₹₹₹',
       currenciesAccepted: 'INR, USD, EUR, GBP',
       paymentAccepted: 'Bank Wire, NEFT/RTGS, UPI, Corporate Credit Card',
@@ -133,17 +133,17 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       contactPoint: [
         {
           '@type': 'ContactPoint',
-          telephone: '+91-9038417437',
+          telephone: '+91-6289560141',
           contactType: 'sales',
-          email: 'rd14190@gmail.com',
+          email: 'dev720rd@gmail.com',
           areaServed: ['IN', 'US', 'GB', 'Worldwide'],
           availableLanguage: ['English', 'Hindi', 'Bengali'],
         },
         {
           '@type': 'ContactPoint',
-          telephone: '+91-9038417437',
+          telephone: '+91-6289560141',
           contactType: 'technical support',
-          email: 'rd14190@gmail.com',
+          email: 'dev720rd@gmail.com',
           areaServed: ['IN', 'Worldwide'],
           availableLanguage: ['English', 'Hindi', 'Bengali'],
         },
@@ -195,7 +195,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       department: [
         {
           '@type': 'LocalBusiness',
-          name: 'DataSource Mumbai Financial & Enterprise Hub',
+          name: 'Kernal Vane Mumbai Financial & Enterprise Hub',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'Bandra Kurla Complex (BKC), G Block, Bandra East',
@@ -205,12 +205,12 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             addressCountry: 'IN',
           },
           geo: { '@type': 'GeoCoordinates', latitude: 19.0657, longitude: 72.8687 },
-          telephone: '+91 9038417437',
+          telephone: '+91 6289560141',
           email: 'mumbai@datasource.tech',
         },
         {
           '@type': 'LocalBusiness',
-          name: 'DataSource Kolkata Eastern Innovation Lab',
+          name: 'Kernal Vane Kolkata Eastern Innovation Lab',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'Salt Lake Sector V, Bidhannagar',
@@ -220,12 +220,12 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             addressCountry: 'IN',
           },
           geo: { '@type': 'GeoCoordinates', latitude: 22.5801, longitude: 88.4312 },
-          telephone: '+91 9038417437',
+          telephone: '+91 6289560141',
           email: 'kolkata@datasource.tech',
         },
         {
           '@type': 'LocalBusiness',
-          name: 'DataSource Delhi NCR Technology Hub',
+          name: 'Kernal Vane Delhi NCR Technology Hub',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'DLF Cyber City, Building 10, DLF Phase 2',
@@ -235,12 +235,12 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             addressCountry: 'IN',
           },
           geo: { '@type': 'GeoCoordinates', latitude: 28.4908, longitude: 77.0898 },
-          telephone: '+91 9038417437',
+          telephone: '+91 6289560141',
           email: 'delhi@datasource.tech',
         },
         {
           '@type': 'LocalBusiness',
-          name: 'DataSource Hyderabad Cyberabad Tech Lab',
+          name: 'Kernal Vane Hyderabad Cyberabad Tech Lab',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'HITEC City, Madhapur',
@@ -250,7 +250,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
             addressCountry: 'IN',
           },
           geo: { '@type': 'GeoCoordinates', latitude: 17.4474, longitude: 78.3762 },
-          telephone: '+91 9038417437',
+          telephone: '+91 6289560141',
           email: 'hyderabad@datasource.tech',
         },
       ],

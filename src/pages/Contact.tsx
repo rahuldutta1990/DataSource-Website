@@ -89,11 +89,11 @@ export const Contact: React.FC = () => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [inquiryReceipt, setInquiryReceipt] = useState<InquirySuccessData | null>(null);
 
-  const targetWhatsAppPhone = '+91 9038417437';
-  const targetWhatsAppDigits = '919038417437';
+  const targetWhatsAppPhone = '+91 6289560141';
+  const targetWhatsAppDigits = '916289560141';
 
   const generateWhatsAppLeadMessage = (lead: typeof formData) => {
-    return `🚀 *New Consultation Request (DataSource Website)*
+    return `🚀 *New Consultation Request (Kernal Vane Technology Website)*
 ━━━━━━━━━━━━━━━━━━━━━
 👤 *Name:* ${lead.name || 'Client'}
 🏢 *Company:* ${lead.company || 'Not Specified'}
@@ -277,8 +277,8 @@ ${lead.message || 'Architecture consultation requested'}
   return (
     <div className="min-h-screen transition-colors duration-200">
       <SEOHead
-        title="Contact Our AI Research & Engineering Studio | DataSource Tech"
-        description="Initiate a technical consultation with DataSource Technology AI Studio. Engage directly with our senior machine learning engineers and AI systems architects."
+        title="Contact Our AI Research & Engineering Studio | Kernal Vane Technology"
+        description="Initiate a technical consultation with Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). Engage directly with our senior machine learning engineers and AI systems architects."
         keywords="contact AI studio, enterprise AI consultation, hire machine learning engineers, AI partnership, technical AI scoping"
         canonical="https://datasourcerechnology.ai.studio/contact"
         breadcrumbs={[
@@ -332,7 +332,7 @@ ${lead.message || 'Architecture consultation requested'}
                         <div>
                           <p className="text-xs font-bold text-slate-900 dark:text-white">Email Dispatch</p>
                           <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight mt-0.5">
-                            Sent to <strong className="text-blue-600 dark:text-blue-400 font-mono">rd14190@gmail.com</strong>
+                            Sent to <strong className="text-blue-600 dark:text-blue-400 font-mono">dev720rd@gmail.com</strong>
                           </p>
                         </div>
                       </div>
@@ -719,8 +719,8 @@ ${lead.message || 'Architecture consultation requested'}
                     <Phone className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-slate-400">Phone &amp; WhatsApp</p>
-                      <a href="tel:+919038417437" className="text-white font-bold hover:text-cyan-400">
-                        +91 9038417437
+                      <a href="tel:+916289560141" className="text-white font-bold hover:text-cyan-400">
+                        +91 6289560141
                       </a>
                     </div>
                   </div>
@@ -729,8 +729,8 @@ ${lead.message || 'Architecture consultation requested'}
                     <Mail className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-slate-400">Email</p>
-                      <a href="mailto:rd14190@gmail.com" className="text-white font-bold hover:text-cyan-400">
-                        rd14190@gmail.com
+                      <a href="mailto:dev720rd@gmail.com" className="text-white font-bold hover:text-cyan-400">
+                        dev720rd@gmail.com
                       </a>
                     </div>
                   </div>
@@ -777,7 +777,7 @@ ${lead.message || 'Architecture consultation requested'}
 
                 <div className="pt-2 flex flex-col sm:flex-row gap-3 relative z-10">
                   <a
-                    href={`https://wa.me/${targetWhatsAppDigits}?text=Hello%20DataSource%20team%2C%20I%20would%20like%20to%20discuss%20a%20technical%20project%20consultation.`}
+                    href={`https://wa.me/${targetWhatsAppDigits}?text=Hello%20Kernal%20Vane%20team%2C%20I%20would%20like%20to%20discuss%20a%20technical%20project%20consultation.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-98"
@@ -792,10 +792,10 @@ ${lead.message || 'Architecture consultation requested'}
               {/* Tagline Box */}
               <div className="p-6 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">
-                  The DataSource Promise
+                  The Kernal Vane Promise
                 </span>
                 <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  &ldquo;You bring the challenge. DataSource builds the right solution.&rdquo;
+                  &ldquo;You bring the challenge. Kernal Vane Technology builds the right solution.&rdquo;
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pt-1">
                   We don&apos;t do high-pressure sales calls. Our initial consultation focuses entirely on scoping your technical problem and outlining potential architectural paths.
@@ -827,7 +827,7 @@ ${lead.message || 'Architecture consultation requested'}
         onClose={() => setShowSuccessToast(false)}
         onActionClick={() => setShowSuccessModal(true)}
         title="Message Sent Successfully"
-        message="Your consultation request has been received and routed to our principal engineering team. Confirmation sent to rd14190@gmail.com."
+        message="Your consultation request has been received and routed to our principal engineering team. Confirmation sent to dev720rd@gmail.com."
         referenceId={inquiryReceipt?.referenceId}
         duration={5000}
         actionLabel="View Receipt"

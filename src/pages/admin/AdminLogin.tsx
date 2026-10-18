@@ -215,7 +215,7 @@ export const AdminLogin: React.FC = () => {
 
           <div className="mt-6 pt-6 border-t border-slate-800 text-center">
             <Link to="/" className="text-xs text-slate-400 hover:text-cyan-400 transition-colors">
-              ← Return to DataSource Public Website
+              ← Return to Kernal Vane Technology Public Website
             </Link>
           </div>
         </div>
