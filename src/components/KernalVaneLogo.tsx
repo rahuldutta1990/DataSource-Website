@@ -1,6 +1,5 @@
 export {
   DataSourceLogo,
-  KernalVaneLogo,
   KernelVaneLogo,
   type DataSourceLogoProps,
 } from './DataSourceLogo.js';

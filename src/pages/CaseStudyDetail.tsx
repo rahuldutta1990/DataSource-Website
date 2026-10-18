@@ -48,7 +48,7 @@ export const CaseStudyDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
       <SEOHead
-        title={caseStudy.seoTitle || `${caseStudy.title} | Kernal Vane Technology`}
+        title={caseStudy.seoTitle || `${caseStudy.title} | Kernel Vane Technology`}
         description={caseStudy.seoDescription || caseStudy.challenge}
         canonical={`https://datasourcerechnology.ai.studio/case-studies/${caseStudy.slug}`}
         breadcrumbs={[
@@ -120,7 +120,7 @@ export const CaseStudyDetail: React.FC = () => {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">
                   Phase 2 • Engineering Approach
                 </span>
-                <h2 className="text-2xl font-bold text-[#0B1B2B] dark:text-white font-heading">The Kernal Vane Solution</h2>
+                <h2 className="text-2xl font-bold text-[#0B1B2B] dark:text-white font-heading">The Kernel Vane Solution</h2>
                 <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-body text-base sm:text-lg">
                   {caseStudy.solution}
                 </p>

@@ -67,7 +67,7 @@ export const Services: React.FC = () => {
     <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
       {/* On-Page SEO Meta Data with Dynamic FAQPage JSON-LD Schema */}
       <SEOHead
-        title="Enterprise AI Services & Lifecycle Support | Kernal Vane Technology"
+        title="Enterprise AI Services & Lifecycle Support | Kernel Vane Technology"
         description="Discover our end-to-end AI services, from custom model engineering and autonomous workflows to intelligent data pipelines and strategic AI consulting."
         keywords="custom machine learning development, enterprise AI consulting, scalable neural network architecture, AI services, Power BI dashboards, ETL pipelines"
         canonicalUrl="https://datasource.tech/services"

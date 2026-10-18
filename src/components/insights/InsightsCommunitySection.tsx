@@ -104,7 +104,7 @@ export const InsightsCommunitySection: React.FC<InsightsCommunitySectionProps> =
 
   // Handle Share Actions
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://datasource.tech/insights';
-  const shareTitle = `${insightTitle} | Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)`;
+  const shareTitle = `${insightTitle} | Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)`;
 
   const handleCopyLink = () => {
     if (navigator.clipboard) {
@@ -120,7 +120,7 @@ export const InsightsCommunitySection: React.FC<InsightsCommunitySectionProps> =
       try {
         await navigator.share({
           title: shareTitle,
-          text: `Read this engineering insight from Kernal Vane Technology (IT Consulting and Software Technology in the AI Era): ${insightTitle}`,
+          text: `Read this engineering insight from Kernel Vane Technology (IT Consulting and Software Technology in the AI Era): ${insightTitle}`,
           url: currentUrl,
         });
         recordShareMetric();
@@ -584,7 +584,7 @@ export const InsightsCommunitySection: React.FC<InsightsCommunitySectionProps> =
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-[#0077FF] dark:text-cyan-400" />
                       <span className="text-xs font-bold text-slate-900 dark:text-white">
-                        {comment.adminReplierName || 'Kernal Vane Engineering Practice'}
+                        {comment.adminReplierName || 'Kernel Vane Engineering Practice'}
                       </span>
                       <span className="text-[10px] font-bold uppercase tracking-wider bg-[#0077FF]/10 text-[#0077FF] dark:text-cyan-300 px-2 py-0.2 rounded">
                         Verified Staff

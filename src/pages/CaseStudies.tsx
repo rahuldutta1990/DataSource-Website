@@ -26,8 +26,8 @@ export const CaseStudies: React.FC = () => {
   return (
     <div className="min-h-screen transition-colors duration-200">
       <SEOHead
-        title="Enterprise AI Case Studies & Proven Impact | Kernal Vane Technology"
-        description="Read our unique enterprise case studies showcasing how global organizations leverage Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) to transform operations."
+        title="Enterprise AI Case Studies & Proven Impact | Kernel Vane Technology"
+        description="Read our unique enterprise case studies showcasing how global organizations leverage Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) to transform operations."
         keywords="enterprise AI case studies, machine learning success stories, AI workflow automation examples"
         canonical="https://datasourcerechnology.ai.studio/case-studies"
         breadcrumbs={[
@@ -44,7 +44,7 @@ export const CaseStudies: React.FC = () => {
               Enterprise AI Case Studies &amp; Proven Impact
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 font-body">
-              Explore how global enterprises leverage Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) to eliminate critical operational bottlenecks, deploy edge machine learning, and achieve measurable ROI.
+              Explore how global enterprises leverage Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) to eliminate critical operational bottlenecks, deploy edge machine learning, and achieve measurable ROI.
             </p>
           </div>
 

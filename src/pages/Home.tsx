@@ -103,7 +103,7 @@ export const Home: React.FC = () => {
     ]).finally(() => setLoading(false));
   }, []);
 
-  // Automatic carousel scroll effect for "The Kernal Vane Way"
+  // Automatic carousel scroll effect for "The Kernel Vane Way"
   useEffect(() => {
     const container = document.getElementById('datasource-way-carousel');
     if (!container) return;
@@ -239,7 +239,7 @@ export const Home: React.FC = () => {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)',
+    name: 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)',
     url: 'https://datasource.tech',
   };
 
@@ -250,7 +250,7 @@ export const Home: React.FC = () => {
       {/* On-Page SEO Meta Tags & Schema */}
       <SEOHead
         title="Technology That Solves. Data That Drives."
-        description="Kernal Vane Technology helps enterprises design custom cloud software, automated Power BI dashboards, high-throughput data engineering pipelines and strategic IT architecture."
+        description="Kernel Vane Technology helps enterprises design custom cloud software, automated Power BI dashboards, high-throughput data engineering pipelines and strategic IT architecture."
         keywords="enterprise technology consulting, power bi dashboards, cloud applications, data engineering, database migration, IT assessment"
         schema={combinedHomeSchema}
       />
@@ -261,7 +261,7 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
-            alt="Kernal Vane Professional Technology & Data Headquarters"
+            alt="Kernel Vane Professional Technology & Data Headquarters"
             className="w-full h-full object-cover object-center opacity-10 dark:opacity-15 mix-blend-luminosity scale-105"
           />
           {/* Multi-layered soft gradients allowing constellation particles through */}
@@ -407,7 +407,7 @@ export const Home: React.FC = () => {
                   <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 group">
                     <img
                       src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
-                      alt="Kernal Vane Professional Technology and Data Consultants in Advisory Session"
+                      alt="Kernel Vane Professional Technology and Data Consultants in Advisory Session"
                       className="w-full h-full object-cover object-center opacity-90 group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B] via-transparent to-transparent opacity-90" />
@@ -467,7 +467,7 @@ export const Home: React.FC = () => {
                   {/* Brand Promise Line */}
                   <div className="mt-3 py-2 px-3 rounded-lg bg-[#0077FF]/5 dark:bg-[#0077FF]/15 border border-[#0077FF]/15 dark:border-[#0077FF]/30 flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-700 dark:text-slate-300">You bring the challenge.</span>
-                    <span className="font-bold text-[#0077FF] dark:text-[#38BDF8]">Kernal Vane Technology builds the solution.</span>
+                    <span className="font-bold text-[#0077FF] dark:text-[#38BDF8]">Kernel Vane Technology builds the solution.</span>
                   </div>
                 </div>
               </div>
@@ -591,13 +591,13 @@ export const Home: React.FC = () => {
               <div className="relative rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-md group">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop"
-                  alt="Kernal Vane Senior Technology Consulting Team"
+                  alt="Kernel Vane Senior Technology Consulting Team"
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B]/90 via-[#0B1B2B]/40 to-transparent flex items-end p-4">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#38BDF8] bg-black/50 px-2 py-0.5 rounded">
-                      Kernal Vane Advisory Guild
+                      Kernel Vane Advisory Guild
                     </span>
                     <p className="text-white text-xs font-semibold mt-1">
                       Hands-on architecture reviews, zero-fluff audits, and pragmatic problem-solving
@@ -611,7 +611,7 @@ export const Home: React.FC = () => {
                   to="/about"
                   className="inline-flex items-center gap-2 text-[#0077FF] dark:text-[#38BDF8] font-bold hover:text-[#0052CC] dark:hover:text-cyan-300 transition-colors group"
                 >
-                  <span>Explore Kernal Vane Story &amp; Leadership</span>
+                  <span>Explore Kernel Vane Story &amp; Leadership</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -666,7 +666,7 @@ export const Home: React.FC = () => {
               Measurable Technical &amp; Operational Impact
             </h2>
             <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 italic">
-              *Sample performance indicators — fully manageable and customizable via the Kernal Vane CMS
+              *Sample performance indicators — fully manageable and customizable via the Kernel Vane CMS
             </p>
           </motion.div>
 
@@ -838,7 +838,7 @@ export const Home: React.FC = () => {
               Real Impact, Proven Results
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base mt-2">
-              Explore how Kernal Vane Technology solves engineering bottlenecks and turns raw business records into measurable operational advantages.
+              Explore how Kernel Vane Technology solves engineering bottlenecks and turns raw business records into measurable operational advantages.
             </p>
           </motion.div>
 
@@ -959,7 +959,7 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop"
-            alt="Kernal Vane Engineering Framework Center"
+            alt="Kernel Vane Engineering Framework Center"
             className="w-full h-full object-cover opacity-15 mix-blend-luminosity scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B1B2B]/95 via-[#0B1B2B]/90 to-[#0B1B2B]/95" />
@@ -1205,7 +1205,7 @@ export const Home: React.FC = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base mt-2">
-              Everything you need to know about working with Kernal Vane Technology (IT Consulting and Software Technology in the AI Era).
+              Everything you need to know about working with Kernel Vane Technology (IT Consulting and Software Technology in the AI Era).
             </p>
           </motion.div>
 

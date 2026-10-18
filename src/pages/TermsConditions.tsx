@@ -15,7 +15,7 @@ export const TermsConditions: React.FC = () => {
           <div className="prose prose-slate max-w-none text-slate-700 dark:text-slate-300 leading-relaxed font-body space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">1. Introduction</h2>
             <p>
-              Welcome to the website of Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). By accessing or using our website, you agree to comply with and be bound by these Terms &amp; Conditions.
+              Welcome to the website of Kernel Vane Technology (IT Consulting and Software Technology in the AI Era). By accessing or using our website, you agree to comply with and be bound by these Terms &amp; Conditions.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">2. Professional Services Engagements</h2>
@@ -25,7 +25,7 @@ export const TermsConditions: React.FC = () => {
 
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">3. Intellectual Property Rights</h2>
             <p>
-              All trademarks, logos, brand assets, and custom editorial content published on this website are the property of Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) and may not be reproduced without prior written permission.
+              All trademarks, logos, brand assets, and custom editorial content published on this website are the property of Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) and may not be reproduced without prior written permission.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">4. Contact Information</h2>

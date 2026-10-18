@@ -12,7 +12,7 @@ import {
   Calendar,
   Sparkles,
 } from 'lucide-react';
-import { DataSourceLogo, KernalVaneLogo } from './DataSourceLogo.js';
+import { DataSourceLogo, KernelVaneLogo } from './DataSourceLogo.js';
 import { DynamicIcon } from './DynamicIcon.js';
 import { AutoSearch } from './AutoSearch.js';
 import { ServiceCategory, ServiceItem } from '../types.js';
@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-6">
             <span className="text-cyan-400 font-semibold tracking-wide uppercase text-[11px]">
-              Kernal Vane Technology • IT Consulting and Software Technology in the AI Era
+              Kernel Vane Technology • IT Consulting and Software Technology in the AI Era
             </span>
             <span className="text-slate-500">•</span>
             <span className="text-slate-300">We start with the problem, not the technology.</span>
@@ -106,8 +106,8 @@ export const Header: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo - Proportional & Cleanly Scaled */}
-          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="Kernal Vane Technology Home">
-            <KernalVaneLogo
+          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="Kernel Vane Technology Home">
+            <KernelVaneLogo
               variant={isDark ? 'white-horizontal' : 'horizontal'}
               className={`w-auto transition-all duration-300 ${isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 md:h-9.5 lg:h-10'}`}
               showTagline={false}

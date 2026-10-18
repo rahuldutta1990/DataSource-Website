@@ -190,7 +190,7 @@ export const GoogleAnalyticsManager: React.FC<GoogleAnalyticsManagerProps> = ({
   };
 
   const handleFirePageViewTest = () => {
-    trackPageView('/insights/retrieval-augmented-generation-architecture', 'RAG Architecture Whitepaper | Kernal Vane Technology');
+    trackPageView('/insights/retrieval-augmented-generation-architecture', 'RAG Architecture Whitepaper | Kernel Vane Technology');
     if (onNotification) {
       onNotification('info', 'Fired simulated test page_view to GA4');
     }
@@ -618,7 +618,7 @@ export const GoogleAnalyticsManager: React.FC<GoogleAnalyticsManagerProps> = ({
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-md">
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <Info className="w-5 h-5 text-[#0077FF]" />
-          Pre-Configured Conversion Events in Kernal Vane Technology Application
+          Pre-Configured Conversion Events in Kernel Vane Technology Application
         </h2>
         <p className="text-xs text-slate-400 mb-6 max-w-3xl">
           The following standard GA4 events are wired into the application's React components and automatically dispatch rich metadata when users interact with the site:

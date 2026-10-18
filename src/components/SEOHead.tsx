@@ -18,9 +18,9 @@ interface SEOHeadProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const DEFAULT_TITLE = 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)';
-const DEFAULT_DESC = 'Kernal Vane Technology - IT Consulting and Software Technology in the AI Era. We engineer custom enterprise software, AI models, Power BI intelligence, and automated data pipelines.';
-const DEFAULT_KEYWORDS = 'Kernal Vane Technology, IT consulting AI era, software technology, enterprise software engineering, cloud architecture, automated data pipelines, Power BI dashboards, IT consulting, AI solutions';
+const DEFAULT_TITLE = 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)';
+const DEFAULT_DESC = 'Kernel Vane Technology - IT Consulting and Software Technology in the AI Era. We engineer custom enterprise software, AI models, Power BI intelligence, and automated data pipelines.';
+const DEFAULT_KEYWORDS = 'Kernel Vane Technology, IT consulting AI era, software technology, enterprise software engineering, cloud architecture, automated data pipelines, Power BI dashboards, IT consulting, AI solutions';
 const DEFAULT_OG_IMAGE = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop';
 const BASE_URL = 'https://kernelvane.tech';
 
@@ -35,7 +35,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   breadcrumbs,
 }) => {
   const location = useLocation();
-  const fullTitle = title ? `${title} | Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)` : DEFAULT_TITLE;
+  const fullTitle = title ? `${title} | Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)` : DEFAULT_TITLE;
   const currentUrl = canonicalUrl || `${BASE_URL}${location.pathname}`;
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     setMeta('property', 'og:url', currentUrl);
     setMeta('property', 'og:type', ogType);
     setMeta('property', 'og:image', ogImage);
-    setMeta('property', 'og:site_name', 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)');
+    setMeta('property', 'og:site_name', 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)');
 
     // 4. Twitter Card
     setMeta('name', 'twitter:card', 'summary_large_image');
@@ -98,8 +98,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       '@context': 'https://schema.org',
       '@type': ['ProfessionalService', 'LocalBusiness', 'ITService'],
       '@id': `${BASE_URL}/#organization`,
-      name: 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)',
-      alternateName: 'Kernal Vane Technology',
+      name: 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)',
+      alternateName: 'Kernel Vane Technology',
       url: BASE_URL,
       logo: `${BASE_URL}/kernelvane-logo.svg`,
       image: DEFAULT_OG_IMAGE,
@@ -195,7 +195,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       department: [
         {
           '@type': 'LocalBusiness',
-          name: 'Kernal Vane Mumbai Financial & Enterprise Hub',
+          name: 'Kernel Vane Mumbai Financial & Enterprise Hub',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'Bandra Kurla Complex (BKC), G Block, Bandra East',
@@ -210,7 +210,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
         },
         {
           '@type': 'LocalBusiness',
-          name: 'Kernal Vane Kolkata Eastern Innovation Lab',
+          name: 'Kernel Vane Kolkata Eastern Innovation Lab',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'Salt Lake Sector V, Bidhannagar',
@@ -225,7 +225,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
         },
         {
           '@type': 'LocalBusiness',
-          name: 'Kernal Vane Delhi NCR Technology Hub',
+          name: 'Kernel Vane Delhi NCR Technology Hub',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'DLF Cyber City, Building 10, DLF Phase 2',
@@ -240,7 +240,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
         },
         {
           '@type': 'LocalBusiness',
-          name: 'Kernal Vane Hyderabad Cyberabad Tech Lab',
+          name: 'Kernel Vane Hyderabad Cyberabad Tech Lab',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'HITEC City, Madhapur',

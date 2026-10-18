@@ -33,6 +33,9 @@ import {
   Tag,
   BarChart3,
   Activity,
+  Upload,
+  RotateCcw,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { DataSourceLogo } from '../../components/DataSourceLogo.js';
 import { ContrastChecker } from '../../components/admin/ContrastChecker.js';
@@ -89,6 +92,8 @@ export const AdminDashboard: React.FC = () => {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [customLogoPreview, setCustomLogoPreview] = useState<string | null>(null);
+  const [copiedAsset, setCopiedAsset] = useState<string | null>(null);
 
   // Edit Modals
   const [editingService, setEditingService] = useState<Partial<ServiceItem> | null>(null);
@@ -576,7 +581,7 @@ export const AdminDashboard: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 font-medium">
-        Loading Kernal Vane CMS Portal...
+        Loading Kernel Vane CMS Portal...
       </div>
     );
   }
@@ -865,7 +870,7 @@ export const AdminDashboard: React.FC = () => {
           <div className="space-y-8">
             <div>
               <h1 className="text-3xl font-extrabold text-white font-heading">
-                Kernal Vane CMS Overview
+                Kernel Vane CMS Overview
               </h1>
               <p className="text-sm text-slate-400 mt-1">
                 Manage live digital assets, client engagement inquiries, and consulting content.
@@ -1019,7 +1024,7 @@ export const AdminDashboard: React.FC = () => {
                     Brand Palette &amp; WCAG Contrast Verifier
                   </h3>
                   <p className="text-xs text-slate-400 mt-0.5">
-                    Test foreground and background color combinations against WCAG 2.1 AA/AAA accessibility requirements using Kernal Vane Technology brand palettes.
+                    Test foreground and background color combinations against WCAG 2.1 AA/AAA accessibility requirements using Kernel Vane Technology brand palettes.
                   </p>
                 </div>
               </div>
@@ -1441,7 +1446,7 @@ export const AdminDashboard: React.FC = () => {
                     content: '',
                     coverImage:
                       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-                    author: 'Kernal Vane Engineering Practice',
+                    author: 'Kernel Vane Engineering Practice',
                     publishedAt: new Date().toISOString(),
                     tags: ['Architecture', 'Data'],
                   })
@@ -1559,10 +1564,10 @@ export const AdminDashboard: React.FC = () => {
                     <span>Official Brand Asset • Active</span>
                   </div>
                   <h2 className="text-xl font-bold text-white font-heading">
-                    Kernal Vane Technology Logo &amp; Identity
+                    Kernel Vane Technology Logo &amp; Brand Assets
                   </h2>
                   <p className="text-xs text-slate-400 mt-0.5">
-                    Updated primary logo rendered with identical proportional scaling across all public and administrative surfaces.
+                    Official primary logo rendered with identical proportional scaling across all public and administrative surfaces.
                   </p>
                 </div>
                 <div className="text-right text-xs text-slate-400 font-mono">
@@ -1576,21 +1581,30 @@ export const AdminDashboard: React.FC = () => {
                 <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-4 flex items-center justify-between">
                     <span>Light Surface (Header / Public)</span>
-                    <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded">h-10 Proportional</span>
+                    <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono font-bold">h-10 Proportional</span>
                   </div>
-                  <div className="py-4 flex items-center justify-center">
-                    <DataSourceLogo variant="horizontal" className="h-10 w-auto" />
+                  <div className="py-4 flex items-center justify-center min-h-[70px]">
+                    {customLogoPreview || settings?.customLogoUrl ? (
+                      <img
+                        src={customLogoPreview || settings?.customLogoUrl}
+                        alt="Kernel Vane Custom Logo"
+                        className="h-10 w-auto max-h-10 object-contain"
+                      />
+                    ) : (
+                      <DataSourceLogo variant="horizontal" className="h-10 w-auto" />
+                    )}
                   </div>
                   <div className="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between text-xs text-slate-600">
                     <a
-                      href="/kernelvane-logo.svg"
+                      href="/KernelVane_Logo_Light_4000px.png"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#0077FF] hover:underline font-semibold"
+                      className="text-[#0077FF] hover:underline font-semibold flex items-center gap-1"
                     >
-                      Open SVG (Light)
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Primary PNG (4000px)</span>
                     </a>
-                    <span className="text-slate-400 font-mono text-[11px]">kernelvane-logo.svg</span>
+                    <span className="text-slate-400 font-mono text-[11px]">KernelVane_Logo_Light_4000px.png</span>
                   </div>
                 </div>
 
@@ -1598,68 +1612,157 @@ export const AdminDashboard: React.FC = () => {
                 <div className="bg-[#0B1B2B] rounded-2xl p-6 border border-slate-800 shadow-sm flex flex-col justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
                     <span>Dark Surface (Admin Sidebar / Footer)</span>
-                    <span className="text-[10px] bg-slate-800 text-cyan-300 px-2 py-0.5 rounded">h-10 Proportional</span>
+                    <span className="text-[10px] bg-slate-800 text-cyan-300 px-2 py-0.5 rounded font-mono font-bold">h-10 Proportional</span>
                   </div>
-                  <div className="py-4 flex items-center justify-center">
-                    <DataSourceLogo variant="white-horizontal" className="h-10 w-auto" />
+                  <div className="py-4 flex items-center justify-center min-h-[70px]">
+                    {customLogoPreview || settings?.customLogoUrl ? (
+                      <img
+                        src={customLogoPreview || settings?.customLogoUrl}
+                        alt="Kernel Vane Custom Logo"
+                        className="h-10 w-auto max-h-10 object-contain brightness-110"
+                      />
+                    ) : (
+                      <DataSourceLogo variant="white-horizontal" className="h-10 w-auto" />
+                    )}
                   </div>
                   <div className="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-xs text-slate-400">
                     <a
                       href="/kernelvane-logo-white.svg"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-cyan-400 hover:underline font-semibold"
+                      className="text-cyan-400 hover:underline font-semibold flex items-center gap-1"
                     >
-                      Open SVG (Dark)
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Dark SVG (Vector)</span>
                     </a>
                     <span className="text-slate-500 font-mono text-[11px]">kernelvane-logo-white.svg</span>
                   </div>
                 </div>
               </div>
 
-              {/* Sizing & Surface Verification Specs */}
-              <div className="bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 text-xs space-y-2">
-                <div className="text-slate-300 font-semibold flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400" />
-                  <span>Proportional Sizing Verification Matrix</span>
+              {/* Admin Logo Upload & Asset Management Controls */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                      <ImageIcon className="w-4 h-4 text-cyan-400" />
+                      <span>Upload or Replace Logo Asset</span>
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      Upload a new logo image (PNG, SVG, WebP) to preview and deploy across the platform.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <label className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#0077FF] hover:bg-blue-600 text-white cursor-pointer transition-colors shadow-sm">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Upload New Logo</span>
+                      <input
+                        type="file"
+                        accept="image/png, image/svg+xml, image/jpeg, image/webp"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = (event) => {
+                            const res = event.target?.result as string;
+                            setCustomLogoPreview(res);
+                            if (settings) {
+                              setSettings({ ...settings, customLogoUrl: res });
+                            }
+                            setStatusMessage('Custom logo loaded into preview. Click "Save Settings" below to persist.');
+                            setTimeout(() => setStatusMessage(null), 4000);
+                          };
+                          reader.readAsDataURL(file);
+                        }}
+                      />
+                    </label>
+                    {(customLogoPreview || settings?.customLogoUrl) && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCustomLogoPreview(null);
+                          if (settings) {
+                            setSettings({ ...settings, customLogoUrl: undefined });
+                          }
+                          setStatusMessage('Reverted to default official KernelVane logo.');
+                          setTimeout(() => setStatusMessage(null), 3000);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        <span>Reset to Default</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-400 font-mono pt-1">
-                  <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                    <div className="text-slate-500 uppercase text-[9px]">Header Default</div>
-                    <div className="text-white font-bold">h-8 to h-10</div>
+
+                {/* Sizing & Surface Verification Specs */}
+                <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800/80 text-xs space-y-2">
+                  <div className="text-slate-300 font-semibold flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-emerald-400" />
+                      <span>Proportional Sizing Matrix (Retained Size)</span>
+                    </div>
+                    <span className="text-[11px] text-cyan-400 font-mono">100% Exact Proportion</span>
                   </div>
-                  <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                    <div className="text-slate-500 uppercase text-[9px]">Header Scrolled</div>
-                    <div className="text-white font-bold">h-7 to h-8</div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-400 font-mono pt-1">
+                    <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                      <div className="text-slate-500 uppercase text-[9px]">Header Default</div>
+                      <div className="text-white font-bold">h-8 to h-10</div>
+                    </div>
+                    <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                      <div className="text-slate-500 uppercase text-[9px]">Header Scrolled</div>
+                      <div className="text-white font-bold">h-7 to h-8</div>
+                    </div>
+                    <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                      <div className="text-slate-500 uppercase text-[9px]">Main Footer</div>
+                      <div className="text-white font-bold">h-11 to h-13</div>
+                    </div>
+                    <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                      <div className="text-slate-500 uppercase text-[9px]">Admin Nav</div>
+                      <div className="text-white font-bold">h-9 w-auto</div>
+                    </div>
                   </div>
-                  <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                    <div className="text-slate-500 uppercase text-[9px]">Main Footer</div>
-                    <div className="text-white font-bold">h-11 to h-13</div>
+                  <div className="pt-2 flex flex-wrap items-center gap-2.5 text-slate-400 text-[11px]">
+                    <span className="text-slate-500 font-semibold">Available Assets:</span>
+                    <a
+                      href="/KernelVane_Logo_Light_4000px.png"
+                      download="KernelVane_Logo_Light_4000px.png"
+                      className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 hover:text-cyan-300 hover:border-cyan-500/50 font-mono inline-flex items-center gap-1"
+                    >
+                      <Download className="w-3 h-3" />
+                      <span>4000px Light PNG</span>
+                    </a>
+                    <a
+                      href="/KernelVane_Logo_Primary_transparent_6000px.png"
+                      download="KernelVane_Logo_Primary_transparent_6000px.png"
+                      className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 hover:text-cyan-300 hover:border-cyan-500/50 font-mono inline-flex items-center gap-1"
+                    >
+                      <Download className="w-3 h-3" />
+                      <span>6000px Transparent PNG</span>
+                    </a>
+                    <a
+                      href="/kernelvane-logo.svg"
+                      download="kernelvane-logo.svg"
+                      className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 hover:text-cyan-300 hover:border-cyan-500/50 font-mono inline-flex items-center gap-1"
+                    >
+                      <Download className="w-3 h-3" />
+                      <span>SVG Vector</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText('/KernelVane_Logo_Light_4000px.png');
+                        setCopiedAsset('logo');
+                        setTimeout(() => setCopiedAsset(null), 2000);
+                      }}
+                      className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white font-mono inline-flex items-center gap-1"
+                    >
+                      {copiedAsset === 'logo' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedAsset === 'logo' ? 'Path Copied!' : 'Copy Asset Path'}</span>
+                    </button>
                   </div>
-                  <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                    <div className="text-slate-500 uppercase text-[9px]">Admin Nav</div>
-                    <div className="text-white font-bold">h-9 w-auto</div>
-                  </div>
-                </div>
-                <div className="pt-2 flex flex-wrap items-center gap-3 text-slate-400 text-[11px]">
-                  <span>Direct Assets:</span>
-                  <a
-                    href="/KernelVane_Logo_Primary_transparent_6000px.png"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-cyan-400 hover:underline font-mono"
-                  >
-                    KernelVane_Logo_Primary_transparent_6000px.png
-                  </a>
-                  <span>•</span>
-                  <a
-                    href="/kernelvane-logo.svg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-cyan-400 hover:underline font-mono"
-                  >
-                    kernelvane-logo.svg
-                  </a>
                 </div>
               </div>
             </div>
@@ -1851,7 +1954,7 @@ export const AdminDashboard: React.FC = () => {
                       type="text"
                       value={settings.whatsappConsultantName || ''}
                       onChange={(e) => setSettings({ ...settings, whatsappConsultantName: e.target.value })}
-                      placeholder="e.g. Kernal Vane Solutions Architect"
+                      placeholder="e.g. Kernel Vane Solutions Architect"
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                     <p className="text-[11px] text-slate-500 mt-1">
@@ -1868,7 +1971,7 @@ export const AdminDashboard: React.FC = () => {
                     rows={2}
                     value={settings.whatsappGreeting || ''}
                     onChange={(e) => setSettings({ ...settings, whatsappGreeting: e.target.value })}
-                    placeholder="👋 Hi there! Welcome to Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). How can our technical architects assist you today?"
+                    placeholder="👋 Hi there! Welcome to Kernel Vane Technology (IT Consulting and Software Technology in the AI Era). How can our technical architects assist you today?"
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm resize-none focus:outline-none focus:border-emerald-500 transition-colors"
                   />
                   <p className="text-[11px] text-slate-500 mt-1">
@@ -2900,7 +3003,7 @@ export const AdminDashboard: React.FC = () => {
               </div>
 
               <a
-                href={`mailto:${viewingInquiry.email}?subject=Kernal Vane Technology Consulting Inquiry follow-up`}
+                href={`mailto:${viewingInquiry.email}?subject=Kernel Vane Technology Consulting Inquiry follow-up`}
                 className="inline-flex items-center gap-1.5 bg-[#0077FF] hover:bg-[#0062D6] text-white px-4 py-2 rounded-xl text-xs font-bold"
               >
                 <Mail className="w-3.5 h-3.5" />

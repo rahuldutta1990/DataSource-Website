@@ -69,8 +69,8 @@ export const About: React.FC = () => {
     <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
       {/* On-Page SEO Meta Data with Dynamic FAQPage JSON-LD Schema */}
       <SEOHead
-        title="About Us | AI Research & Enterprise Engineering | Kernal Vane Technology"
-        description="Meet the collective of research scientists and systems architects at Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) dedicated to solving complex enterprise challenges."
+        title="About Us | AI Research & Enterprise Engineering | Kernel Vane Technology"
+        description="Meet the collective of research scientists and systems architects at Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) dedicated to solving complex enterprise challenges."
         keywords="AI research lab, machine learning engineers, enterprise AI studio, artificial intelligence architects, AI ethics and governance, Kolkata technology hub"
         canonicalUrl="https://datasource.tech/about"
         schema={faqSchema ? [faqSchema] : undefined}
@@ -86,7 +86,7 @@ export const About: React.FC = () => {
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-            alt="Kernal Vane Technology Innovation & Engineering Center"
+            alt="Kernel Vane Technology Innovation & Engineering Center"
             className="w-full h-full object-cover opacity-10 dark:opacity-15 mix-blend-luminosity scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent dark:from-[#0A1220] dark:via-[#0A1220]/95 dark:to-transparent" />
@@ -99,7 +99,7 @@ export const About: React.FC = () => {
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl space-y-6"
           >
-            <Eyebrow text="About Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)" variant="blue" />
+            <Eyebrow text="About Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)" variant="blue" />
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B1B2B] dark:text-white tracking-tight font-heading leading-tight">
               {settings?.aboutHeroTitle || 'Pioneering the Frontiers of Applied Artificial Intelligence'}
             </h1>
@@ -131,7 +131,7 @@ export const About: React.FC = () => {
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed font-body text-base sm:text-lg">
                 {settings?.aboutGenesisParagraph ||
-                  'Founded on the principle that artificial intelligence should amplify human ingenuity rather than merely imitate it, Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) bridges the gap between theoretical algorithmic breakthroughs and practical, scalable commercial applications. We do not just build software; we construct highly specialized, intelligent systems that natively evolve alongside your enterprise goals and market demands.'}
+                  'Founded on the principle that artificial intelligence should amplify human ingenuity rather than merely imitate it, Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) bridges the gap between theoretical algorithmic breakthroughs and practical, scalable commercial applications. We do not just build software; we construct highly specialized, intelligent systems that natively evolve alongside your enterprise goals and market demands.'}
               </p>
               <div className="pt-2 flex flex-wrap gap-4">
                 <Link
@@ -160,7 +160,7 @@ export const About: React.FC = () => {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 aspect-[4/3]">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
-                  alt="Kernal Vane Technology Architects Collaborating"
+                  alt="Kernel Vane Technology Architects Collaborating"
                   className="w-full h-full object-cover opacity-85"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B] via-transparent to-transparent opacity-80" />
@@ -192,7 +192,7 @@ export const About: React.FC = () => {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 aspect-[4/3]">
                 <img
                   src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop"
-                  alt="Kernal Vane Technologynical Architects"
+                  alt="Kernel Vane Technologynical Architects"
                   className="w-full h-full object-cover opacity-85"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B2B] via-transparent to-transparent opacity-80" />
@@ -237,13 +237,13 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* The Kernal Vane Engineering Manifesto */}
+      {/* The Kernel Vane Engineering Manifesto */}
       <section className="py-20 lg:py-28 bg-[#FAFCFF] dark:bg-[#070D18]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <Eyebrow text="Engineering Standards" variant="cyan" />
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1B2B] dark:text-white font-heading">
-              {settings?.aboutManifestoTitle || 'The Kernal Vane Engineering Manifesto'}
+              {settings?.aboutManifestoTitle || 'The Kernel Vane Engineering Manifesto'}
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-lg">
               {settings?.aboutManifestoSubtitle ||
@@ -289,7 +289,7 @@ export const About: React.FC = () => {
                 Frequently Asked Company &amp; Location Questions
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-body">
-                Learn about Kernal Vane Technology&apos;s corporate structure, Kolkata Technology Hub, remote delivery capabilities, and engineering rigor.
+                Learn about Kernel Vane Technology&apos;s corporate structure, Kolkata Technology Hub, remote delivery capabilities, and engineering rigor.
               </p>
             </div>
 

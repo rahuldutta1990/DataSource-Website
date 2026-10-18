@@ -73,12 +73,12 @@ export const InquirySuccessModal: React.FC<InquirySuccessModalProps> = ({
 
   const generateWhatsAppUrl = () => {
     const cleanNumber = cleanWhatsAppDigits(targetWhatsAppPhone);
-    const text = `*New Enterprise Consultation Inquiry*\n\n*Reference:* ${refId}\n*Name:* ${data.name}\n*Email:* ${data.email}\n*Phone:* ${data.phone || 'N/A'}\n*Company:* ${data.company || 'N/A'}\n*Practice / Service:* ${data.serviceInterest || 'General Inquiry'}\n*Project Type:* ${data.projectType || 'General'}\n*Budget:* ${data.budgetRange || 'Flexible'}\n\n*Message:* ${data.message || 'Consultation requested'}\n\n_Sent via Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)_`;
+    const text = `*New Enterprise Consultation Inquiry*\n\n*Reference:* ${refId}\n*Name:* ${data.name}\n*Email:* ${data.email}\n*Phone:* ${data.phone || 'N/A'}\n*Company:* ${data.company || 'N/A'}\n*Practice / Service:* ${data.serviceInterest || 'General Inquiry'}\n*Project Type:* ${data.projectType || 'General'}\n*Budget:* ${data.budgetRange || 'Flexible'}\n\n*Message:* ${data.message || 'Consultation requested'}\n\n_Sent via Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)_`;
     return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
   };
 
   const handleCopy = () => {
-    const text = `Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) — Consultation Inquiry Confirmation
+    const text = `Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) — Consultation Inquiry Confirmation
 Reference ID: ${refId}
 Client: ${data.name} (${data.email}${data.phone ? ` / ${data.phone}` : ''})
 Company: ${data.company || 'N/A'}

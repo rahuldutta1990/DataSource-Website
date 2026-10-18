@@ -58,7 +58,7 @@ export const InsightDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
       <SEOHead
-        title={post.seoTitle || `${post.title} | Kernal Vane Technology`}
+        title={post.seoTitle || `${post.title} | Kernel Vane Technology`}
         description={post.seoDescription || post.excerpt}
         canonical={`https://datasourcerechnology.ai.studio/insights/${post.slug}`}
         breadcrumbs={[
@@ -154,7 +154,7 @@ export const InsightDetail: React.FC = () => {
               <div>
                 <h3 className="text-2xl font-bold font-heading">Need Help Applying This?</h3>
                 <p className="text-slate-300 text-sm mt-1 max-w-md">
-                  Kernal Vane Technology architects and software engineers can audit your current architecture and help you plan your next step.
+                  Kernel Vane Technology architects and software engineers can audit your current architecture and help you plan your next step.
                 </p>
               </div>
               <Link

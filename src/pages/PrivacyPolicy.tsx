@@ -16,7 +16,7 @@ export const PrivacyPolicy: React.FC = () => {
           <div className="prose prose-slate max-w-none text-slate-700 dark:text-slate-300 leading-relaxed font-body space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">1. Commitment to Privacy</h2>
             <p>
-              Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) (&ldquo;Kernal Vane Technology&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is committed to protecting the confidentiality, integrity, and security of information provided by our clients, website visitors, and partners.
+              Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) (&ldquo;Kernel Vane Technology&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is committed to protecting the confidentiality, integrity, and security of information provided by our clients, website visitors, and partners.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">2. Information We Collect</h2>

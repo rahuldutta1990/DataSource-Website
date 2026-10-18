@@ -607,7 +607,7 @@ export const ContrastChecker: React.FC = () => {
                 >
                   Pill Badge
                 </span>
-                <span className="text-xs opacity-75 font-mono">Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)</span>
+                <span className="text-xs opacity-75 font-mono">Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)</span>
               </div>
 
               <h4 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight">
@@ -615,7 +615,7 @@ export const ContrastChecker: React.FC = () => {
               </h4>
 
               <p className="text-sm sm:text-base leading-relaxed opacity-90 max-w-xl">
-                Kernal Vane Technology engineers robust, scalable software and data pipelines and executive dashboards that empower commercial decision making with real-time accuracy and zero latency.
+                Kernel Vane Technology engineers robust, scalable software and data pipelines and executive dashboards that empower commercial decision making with real-time accuracy and zero latency.
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -652,7 +652,7 @@ export const ContrastChecker: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-base font-bold text-white font-heading">
-              Kernal Vane Technology Official Brand Palette Swatches
+              Kernel Vane Technology Official Brand Palette Swatches
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
               Click any swatch to apply to active target: <strong className="text-cyan-400">{targetSlot === 'text' ? 'Foreground (Text)' : 'Background'}</strong>

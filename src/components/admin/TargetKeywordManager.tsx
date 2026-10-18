@@ -46,7 +46,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'commercial',
     targetLocation: 'India & Global',
-    metaTitle: 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) | Enterprise Software, Cloud & Data Consulting',
+    metaTitle: 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) | Enterprise Software, Cloud & Data Consulting',
     metaDescription:
       'DataSource is an enterprise technology and data consulting partner in India helping companies design custom web apps, scalable cloud architectures, Power BI dashboards and automated data pipelines.',
     priority: 'high',
@@ -68,7 +68,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'transactional',
     targetLocation: 'Pan-India & Overseas',
-    metaTitle: 'Power BI Consulting & Executive Dashboards India | Kernal Vane Technology',
+    metaTitle: 'Power BI Consulting & Executive Dashboards India | Kernel Vane Technology',
     metaDescription:
       'Custom Power BI dashboard engineering, DAX star schema modeling, automated data gateway configuration, and executive KPI scorecards by DataSource in India.',
     priority: 'high',
@@ -90,7 +90,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'commercial',
     targetLocation: 'Kolkata / Pan-India',
-    metaTitle: 'Data Engineering & Pipeline Automation Services India | Kernal Vane Technology',
+    metaTitle: 'Data Engineering & Pipeline Automation Services India | Kernel Vane Technology',
     metaDescription:
       'Fault-tolerant ETL/ELT pipelines, Snowflake and BigQuery data warehousing, Airflow workflow orchestration, and Lakehouse engineering by DataSource.',
     priority: 'high',
@@ -112,7 +112,7 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'transactional',
     targetLocation: 'India & Global Export',
-    metaTitle: 'Custom Web & Cloud Application Development India | Kernal Vane Technology',
+    metaTitle: 'Custom Web & Cloud Application Development India | Kernel Vane Technology',
     metaDescription:
       'Production-grade custom web application design and cloud software engineering with React, TypeScript, Node.js, and AWS/GCP cloud architectures.',
     priority: 'high',
@@ -134,9 +134,9 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'commercial',
     targetLocation: 'India & Global',
-    metaTitle: 'Technology & Data Consulting Services India | Kernal Vane Technology',
+    metaTitle: 'Technology & Data Consulting Services India | Kernel Vane Technology',
     metaDescription:
-      'Explore Kernal Vane\'s full range of enterprise services: digital product development, Power BI dashboards, data pipeline engineering, and IT consulting.',
+      'Explore Kernel Vane\'s full range of enterprise services: digital product development, Power BI dashboards, data pipeline engineering, and IT consulting.',
     priority: 'medium',
     rankingStatus: 'active_target',
     targetMonthlySearches: '1,900/mo',
@@ -156,9 +156,9 @@ const DEFAULT_INDIAN_SEO_KEYWORDS: SEOKeywordTarget[] = [
     ],
     searchIntent: 'navigational',
     targetLocation: 'Kolkata, West Bengal, India',
-    metaTitle: 'Contact Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) | Kolkata, West Bengal, India',
+    metaTitle: 'Contact Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) | Kolkata, West Bengal, India',
     metaDescription:
-      'Connect with Kernal Vane technical architects at our Kolkata Technology Hub. Call +91 6289560141 or book a consultation.',
+      'Connect with Kernel Vane technical architects at our Kolkata Technology Hub. Call +91 6289560141 or book a consultation.',
     priority: 'high',
     rankingStatus: 'active_target',
     targetMonthlySearches: '1,200/mo',
@@ -243,8 +243,8 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
     setFormSecondaryKeywords('');
     setFormSearchIntent('commercial');
     setFormTargetLocation('India & Global');
-    setFormMetaTitle('Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) | Enterprise Software & Data');
-    setFormMetaDescription('Kernal Vane Technology helps enterprise businesses solve technical challenges with cloud apps, Power BI, and data pipelines.');
+    setFormMetaTitle('Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) | Enterprise Software & Data');
+    setFormMetaDescription('Kernel Vane Technology helps enterprise businesses solve technical challenges with cloud apps, Power BI, and data pipelines.');
     setFormPriority('high');
     setFormRankingStatus('active_target');
     setFormMonthlySearches('2,500/mo');
@@ -396,8 +396,8 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
         {
           '@type': ['Organization', 'ProfessionalService', 'LocalBusiness', 'ITService'],
           '@id': 'https://datasource.tech/#organization',
-          name: settings?.fullName || 'Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)',
-          alternateName: 'Kernal Vane Technology India',
+          name: settings?.fullName || 'Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)',
+          alternateName: 'Kernel Vane Technology India',
           url: 'https://datasource.tech',
           logo: 'https://datasource.tech/datasource-icon.svg',
           telephone: settings?.phone || '+91 6289560141',
@@ -773,7 +773,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                           D
                         </div>
                         <div className="text-[12px] text-[#202124] leading-tight">
-                          <span className="font-medium">Kernal Vane Technology (IT Consulting and Software Technology in the AI Era)</span>
+                          <span className="font-medium">Kernel Vane Technology (IT Consulting and Software Technology in the AI Era)</span>
                           <span className="text-[#5f6368] text-[11px] block">https://datasource.tech{kw.pageRoute}</span>
                         </div>
                       </div>
@@ -1046,7 +1046,7 @@ export const TargetKeywordManager: React.FC<TargetKeywordManagerProps> = ({
                   type="text"
                   value={formMetaTitle}
                   onChange={(e) => setFormMetaTitle(e.target.value)}
-                  placeholder="e.g. Power BI Consulting & Executive Dashboards India | Kernal Vane Technology"
+                  placeholder="e.g. Power BI Consulting & Executive Dashboards India | Kernel Vane Technology"
                   required
                   className="w-full bg-slate-950 text-white px-3 py-2 rounded-xl text-xs border border-slate-800 focus:outline-none focus:border-blue-500"
                 />

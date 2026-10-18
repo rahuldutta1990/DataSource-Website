@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
             <div className="lg:col-span-5 space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-semibold tracking-wide">
                 <Newspaper className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Kernal Vane Tech Briefing</span>
+                <span>Kernel Vane Tech Briefing</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-heading">
                 Subscribe for Tech &amp; Data Insights
@@ -93,14 +93,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-12">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
-            <Link to="/" className="inline-block focus:outline-none" aria-label="Kernal Vane Technology Home">
+            <Link to="/" className="inline-block focus:outline-none" aria-label="Kernel Vane Technology Home">
               <DataSourceLogo
                 variant="white-horizontal"
                 className="h-11 sm:h-12 md:h-13 w-auto max-w-[320px] sm:max-w-[360px]"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              Kernal Vane Technology (IT Consulting and Software Technology in the AI Era) is a premier technology partner helping businesses solve technical problems, build custom software platforms, engineer Power BI dashboards, and automate operations.
+              Kernel Vane Technology (IT Consulting and Software Technology in the AI Era) is a premier technology partner helping businesses solve technical problems, build custom software platforms, engineer Power BI dashboards, and automate operations.
             </p>
             <div className="pt-2 text-xs text-cyan-400 font-semibold tracking-wide">
               Brand Philosophy: &ldquo;We start with the problem, not the technology.&rdquo;
@@ -108,29 +108,29 @@ export const Footer: React.FC = () => {
             {/* Social icons */}
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://linkedin.com/company/datasource-tech"
+                href="https://linkedin.com/company/kernelvane-tech"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-[#0077FF] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="DataSource LinkedIn"
+                aria-label="Kernel Vane LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://x.com/datasourcetech"
+                href="https://x.com/kernelvanetech"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-[#0077FF] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="DataSource Twitter / X"
+                aria-label="Kernel Vane Twitter / X"
               >
                 <Twitter className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com/datasource-tech"
+                href="https://github.com/kernelvane-tech"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-[#0077FF] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="DataSource GitHub"
+                aria-label="Kernel Vane GitHub"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -179,7 +179,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/about" className="hover:text-cyan-400 transition-colors">
-                  About Kernal Vane
+                  About Kernel Vane
                 </Link>
               </li>
               <li>
@@ -189,7 +189,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/about#process" className="hover:text-cyan-400 transition-colors">
-                  The Kernal Vane Way
+                  The Kernel Vane Way
                 </Link>
               </li>
               <li>
@@ -244,7 +244,7 @@ export const Footer: React.FC = () => {
             <div className="bg-white p-3 rounded-xl shadow-lg border border-slate-700/80 inline-block space-y-2">
               <img
                 src={settings?.footerQrCodeUrl || '/upi-qr.png'}
-                alt="Kernal Vane Technology UPI Payment QR"
+                alt="Kernel Vane Technology UPI Payment QR"
                 className="w-32 h-32 object-contain mx-auto rounded-lg"
                 referrerPolicy="no-referrer"
               />
@@ -259,7 +259,7 @@ export const Footer: React.FC = () => {
       {/* Bottom Legal & Admin Bar */}
       <div className="border-t border-slate-800/80 py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). All rights reserved.</p>
+          <p>© 2026 Kernel Vane Technology (IT Consulting and Software Technology in the AI Era). All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy Policy

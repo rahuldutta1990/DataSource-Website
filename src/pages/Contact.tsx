@@ -93,7 +93,7 @@ export const Contact: React.FC = () => {
   const targetWhatsAppDigits = '916289560141';
 
   const generateWhatsAppLeadMessage = (lead: typeof formData) => {
-    return `🚀 *New Consultation Request (Kernal Vane Technology Website)*
+    return `🚀 *New Consultation Request (Kernel Vane Technology Website)*
 ━━━━━━━━━━━━━━━━━━━━━
 👤 *Name:* ${lead.name || 'Client'}
 🏢 *Company:* ${lead.company || 'Not Specified'}
@@ -277,8 +277,8 @@ ${lead.message || 'Architecture consultation requested'}
   return (
     <div className="min-h-screen transition-colors duration-200">
       <SEOHead
-        title="Contact Our AI Research & Engineering Studio | Kernal Vane Technology"
-        description="Initiate a technical consultation with Kernal Vane Technology (IT Consulting and Software Technology in the AI Era). Engage directly with our senior machine learning engineers and AI systems architects."
+        title="Contact Our AI Research & Engineering Studio | Kernel Vane Technology"
+        description="Initiate a technical consultation with Kernel Vane Technology (IT Consulting and Software Technology in the AI Era). Engage directly with our senior machine learning engineers and AI systems architects."
         keywords="contact AI studio, enterprise AI consultation, hire machine learning engineers, AI partnership, technical AI scoping"
         canonical="https://datasourcerechnology.ai.studio/contact"
         breadcrumbs={[
@@ -777,7 +777,7 @@ ${lead.message || 'Architecture consultation requested'}
 
                 <div className="pt-2 flex flex-col sm:flex-row gap-3 relative z-10">
                   <a
-                    href={`https://wa.me/${targetWhatsAppDigits}?text=Hello%20Kernal%20Vane%20team%2C%20I%20would%20like%20to%20discuss%20a%20technical%20project%20consultation.`}
+                    href={`https://wa.me/${targetWhatsAppDigits}?text=Hello%20Kernel%20Vane%20team%2C%20I%20would%20like%20to%20discuss%20a%20technical%20project%20consultation.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-98"
@@ -792,10 +792,10 @@ ${lead.message || 'Architecture consultation requested'}
               {/* Tagline Box */}
               <div className="p-6 rounded-2xl bg-white dark:bg-[#0E1726] border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#0077FF] dark:text-[#38BDF8]">
-                  The Kernal Vane Promise
+                  The Kernel Vane Promise
                 </span>
                 <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  &ldquo;You bring the challenge. Kernal Vane Technology builds the right solution.&rdquo;
+                  &ldquo;You bring the challenge. Kernel Vane Technology builds the right solution.&rdquo;
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pt-1">
                   We don&apos;t do high-pressure sales calls. Our initial consultation focuses entirely on scoping your technical problem and outlining potential architectural paths.

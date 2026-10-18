@@ -71,14 +71,14 @@ export const Studio: React.FC = () => {
     <div className="min-h-screen transition-colors duration-200 overflow-x-hidden">
       {/* On-Page SEO Meta Data */}
       <SEOHead
-        title="The Kernal Vane AI Studio Platform | Machine Learning Workspace"
+        title="The Kernel Vane AI Studio Platform | Machine Learning Workspace"
         description="Accelerate model experimentation, secure data ingestion, and seamless production deployment with our proprietary AI Studio Platform."
         keywords="proprietary AI development platform, machine learning workspace, model experimentation pipeline, MLOps platform"
         canonical="https://datasourcerechnology.ai.studio/studio"
         schema={{
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'Kernal Vane Technology AI Studio Platform',
+          name: 'Kernel Vane Technology AI Studio Platform',
           applicationCategory: 'BusinessApplication',
           operatingSystem: 'Cloud Web Platform',
           description: 'A centralized, enterprise-grade environment designed to accelerate machine learning experimentation, secure data ingestion, and seamless production deployment.',
@@ -100,7 +100,7 @@ export const Studio: React.FC = () => {
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-              The Kernal Vane AI Studio:{' '}
+              The Kernel Vane AI Studio:{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
                 Your Unified Intelligence Workbench
               </span>

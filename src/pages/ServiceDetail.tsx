@@ -50,7 +50,7 @@ export const ServiceDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAFCFF] dark:bg-[#070D18] transition-colors duration-200">
       <SEOHead
-        title={service.seoTitle || `${service.title} | Kernal Vane Technology`}
+        title={service.seoTitle || `${service.title} | Kernel Vane Technology`}
         description={service.seoDescription || service.excerpt}
         canonical={`https://datasourcerechnology.ai.studio/services/${service.slug}`}
         breadcrumbs={[
@@ -147,7 +147,7 @@ export const ServiceDetail: React.FC = () => {
               <div className="bg-white dark:bg-[#0E1726] rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-4">
                 <h3 className="text-base font-bold text-slate-900 dark:text-white font-heading">Ready to Discuss?</h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                  Speak directly with a Kernal Vane Technology practice lead to scope your timeline, architecture requirements, and budget.
+                  Speak directly with a Kernel Vane Technology practice lead to scope your timeline, architecture requirements, and budget.
                 </p>
                 <Link
                   to="/contact"
