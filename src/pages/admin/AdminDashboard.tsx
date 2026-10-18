@@ -1571,7 +1571,7 @@ export const AdminDashboard: React.FC = () => {
                   </p>
                 </div>
                 <div className="text-right text-xs text-slate-400 font-mono">
-                  Ratio: 780 × 190 (Vector Sizing)
+                  Ratio: 710 × 138 (Vector Sizing)
                 </div>
               </div>
 

@@ -68,16 +68,16 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Top micro-bar for direct contact confidence */}
-      <div className="bg-[#0B1B2B] text-slate-300 text-xs py-2 px-4 border-b border-slate-800/80 hidden md:block">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <span className="text-cyan-400 font-semibold tracking-wide uppercase text-[11px]">
+      <div className="bg-[#0B1B2B] text-slate-300 text-xs py-1.5 sm:py-2 px-3 sm:px-4 border-b border-slate-800/80 hidden md:block w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
+          <div className="flex items-center gap-3 xl:gap-6 min-w-0 truncate">
+            <span className="text-cyan-400 font-semibold tracking-wide uppercase text-[10px] xl:text-[11px] truncate shrink-0">
               Kernel Vane Technology • IT Consulting and Software Technology in the AI Era
             </span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-300">We start with the problem, not the technology.</span>
+            <span className="text-slate-500 hidden xl:inline">•</span>
+            <span className="text-slate-300 text-xs hidden xl:inline truncate">We start with the problem, not the technology.</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 xl:gap-6 shrink-0 text-xs">
             <a
               href="mailto:dev720rd@gmail.com"
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
@@ -98,18 +98,18 @@ export const Header: React.FC = () => {
 
       {/* Main Sticky Header */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ease-in-out ${
+        className={`sticky top-0 z-50 transition-all duration-300 ease-in-out w-full ${
           isScrolled
-            ? 'bg-white/95 dark:bg-[#080E1A]/95 backdrop-blur-md shadow-md dark:shadow-slate-950/50 border-b border-slate-200/80 dark:border-slate-800/90 py-2.5 lg:py-3'
-            : 'bg-white dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/60 py-4 lg:py-5'
+            ? 'bg-white/95 dark:bg-[#080E1A]/95 backdrop-blur-md shadow-md dark:shadow-slate-950/50 border-b border-slate-200/80 dark:border-slate-800/90 py-2 lg:py-2.5'
+            : 'bg-white dark:bg-[#070D18] border-b border-slate-100 dark:border-slate-800/60 py-3 lg:py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 flex items-center justify-between gap-2 lg:gap-3 xl:gap-4 min-w-0">
           {/* Brand Logo - Proportional & Cleanly Scaled */}
-          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0" aria-label="Kernel Vane Technology Home">
+          <Link to="/" className="flex items-center gap-2 group focus:outline-none shrink-0 min-w-0" aria-label="Kernel Vane Technology Home">
             <KernelVaneLogo
               variant={isDark ? 'white-horizontal' : 'horizontal'}
-              className={`w-auto transition-all duration-300 ${isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 md:h-9.5 lg:h-10'}`}
+              className={`w-auto transition-all duration-300 ${isScrolled ? 'h-6 sm:h-7 lg:h-7.5 xl:h-8' : 'h-7 sm:h-7.5 md:h-8 lg:h-8.5 xl:h-9.5'}`}
               showTagline={false}
             />
           </Link>
@@ -117,6 +117,15 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0 whitespace-nowrap">
             {navLinks.map((link) => {
+              const isContact = link.path === '/contact';
+              const linkClasses = `whitespace-nowrap inline-flex items-center gap-1 px-1.5 xl:px-3 py-1 xl:py-1.5 text-xs xl:text-sm font-semibold rounded-lg transition-colors shrink-0 ${
+                isContact ? 'hidden xl:inline-flex' : ''
+              } ${
+                isActive(link.path)
+                  ? 'text-[#0066FF] dark:text-[#38BDF8] bg-[#0066FF]/5 dark:bg-[#38BDF8]/10'
+                  : 'text-[#1E293B] dark:text-slate-200 hover:text-[#0066FF] dark:hover:text-[#38BDF8] hover:bg-slate-50 dark:hover:bg-slate-800/60'
+              }`;
+
               if (link.hasDropdown) {
                 return (
                   <div
@@ -127,14 +136,10 @@ export const Header: React.FC = () => {
                   >
                     <Link
                       to={link.path}
-                      className={`whitespace-nowrap inline-flex items-center gap-1 px-2.5 xl:px-3.5 py-1.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-lg transition-colors shrink-0 ${
-                        isActive(link.path)
-                          ? 'text-[#0066FF] dark:text-[#38BDF8] bg-[#0066FF]/5 dark:bg-[#38BDF8]/10'
-                          : 'text-[#1E293B] dark:text-slate-200 hover:text-[#0066FF] dark:hover:text-[#38BDF8] hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                      }`}
+                      className={linkClasses}
                     >
                       <span className="whitespace-nowrap">{link.name}</span>
-                      <ChevronDown className={`w-3.5 h-3.5 xl:w-4 xl:h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
                     </Link>
 
                     {/* Dropdown Menu */}
@@ -184,11 +189,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`whitespace-nowrap shrink-0 px-2.5 xl:px-3.5 py-1.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-lg transition-colors ${
-                    isActive(link.path)
-                      ? 'text-[#0066FF] dark:text-[#38BDF8] bg-[#0066FF]/5 dark:bg-[#38BDF8]/10'
-                      : 'text-[#1E293B] dark:text-slate-200 hover:text-[#0066FF] dark:hover:text-[#38BDF8] hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                  }`}
+                  className={linkClasses}
                 >
                   <span className="whitespace-nowrap">{link.name}</span>
                 </Link>
@@ -196,15 +197,15 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Header Action & Theme Switcher (Sign-in removed per user specification) */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3.5 shrink-0">
+          {/* Header Action & Theme Switcher */}
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-3 shrink-0">
             {/* Auto Search Bar */}
             <AutoSearch />
 
             {/* Dark Mode Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="relative p-2 xl:p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#0077FF] dark:hover:text-[#38BDF8] hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-[#0077FF]/30 shrink-0"
+              className="relative p-1.5 xl:p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#0077FF] dark:hover:text-[#38BDF8] hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-[#0077FF]/30 shrink-0"
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
@@ -217,14 +218,14 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="relative inline-flex items-center gap-1.5 xl:gap-2 bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:via-[#0066EE] hover:to-[#0090EE] text-white px-3.5 xl:px-5 py-2 xl:py-2.5 rounded-full text-xs xl:text-sm font-bold tracking-tight xl:tracking-wide shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 group shrink-0 whitespace-nowrap active:scale-[0.98] overflow-hidden"
+              className="relative inline-flex items-center gap-1.5 xl:gap-2 bg-gradient-to-r from-[#0066FF] via-[#0077FF] to-[#00A3FF] hover:from-[#0055EE] hover:via-[#0066EE] hover:to-[#0090EE] text-white px-3 xl:px-4.5 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-bold tracking-tight shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 group shrink-0 whitespace-nowrap active:scale-[0.98] overflow-hidden"
               id="header-book-consultant-btn"
             >
               {/* Subtle hover shine sweep */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
               <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-cyan-200 shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <span className="whitespace-nowrap font-bold">Book a Consultant</span>
-              <ArrowRight className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-white/90 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-white/90 shrink-0 group-hover:translate-x-0.5 transition-transform duration-200" />
             </Link>
           </div>
 
@@ -240,7 +241,7 @@ export const Header: React.FC = () => {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] hover:from-[#0055EE] hover:to-[#0090EE] text-white text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm shadow-blue-500/25 border border-blue-400/30 shrink-0 whitespace-nowrap active:scale-95 transition-all"
+              className="inline-flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] hover:from-[#0055EE] hover:to-[#0090EE] text-white text-xs font-bold px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full shadow-sm shadow-blue-500/25 border border-blue-400/30 shrink-0 whitespace-nowrap active:scale-95 transition-all"
               id="mobile-book-consultant-btn"
             >
               <Calendar className="w-3.5 h-3.5 text-cyan-200 shrink-0" />

@@ -9,7 +9,6 @@ export interface DataSourceLogoProps {
 export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
   variant = 'horizontal',
   className = 'h-10',
-  showTagline = true,
 }) => {
   if (variant === 'icon-only') {
     return (
@@ -56,9 +55,8 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
   }
 
   const isWhite = variant === 'white-horizontal';
-  const isCompact = variant === 'compact' || !showTagline;
-  const viewBox = isCompact ? '0 0 740 145' : '0 0 780 190';
-  const iconTransform = isCompact ? 'translate(10, -18)' : 'translate(10, 0)';
+  const viewBox = '0 0 710 138';
+  const iconTransform = 'translate(10, -22)';
 
   return (
     <svg
@@ -66,8 +64,7 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={{ overflow: 'visible' }}
-      aria-label="KernelVane - IT Consulting & Software • Code That Solves. Direction That Delivers."
+      aria-label="KernelVane - IT Consulting & Software"
     >
       <defs>
         <linearGradient id={`kv-shaft-${isWhite ? 'w' : 'd'}`} x1="110" y1="100" x2="170" y2="100" gradientUnits="userSpaceOnUse">
@@ -112,10 +109,10 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
         {/* Brand Name: KernelVane */}
         <text
           x="0"
-          y={isCompact ? '76' : '78'}
+          y="76"
           fontFamily="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
           fontWeight="800"
-          fontSize={isCompact ? '70' : '72'}
+          fontSize="72"
           letterSpacing="-0.03em"
           fill={isWhite ? '#FFFFFF' : '#0F172A'}
         >
@@ -125,40 +122,15 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
         {/* Subtitle: IT CONSULTING & SOFTWARE */}
         <text
           x="2"
-          y={isCompact ? '112' : '116'}
+          y="114"
           fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
           fontWeight="700"
-          fontSize="19"
+          fontSize="18.5"
           letterSpacing="0.28em"
           fill={isWhite ? '#94A3B8' : '#1E293B'}
         >
           I T   C O N S U L T I N G   &amp;   S O F T W A R E
         </text>
-
-        {!isCompact && (
-          <>
-            <line
-              x1="2"
-              y1="134"
-              x2="520"
-              y2="134"
-              stroke={isWhite ? '#334155' : '#CBD5E1'}
-              strokeWidth="2"
-            />
-            {/* Tagline: Code That Solves. Direction That Delivers. */}
-            <text
-              x="2"
-              y="164"
-              fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
-              fontWeight="600"
-              fontSize="20"
-              letterSpacing="-0.01em"
-              fill={isWhite ? '#CBD5E1' : '#475569'}
-            >
-              Code That Solves. Direction That Delivers.
-            </text>
-          </>
-        )}
       </g>
     </svg>
   );
@@ -166,4 +138,5 @@ export const DataSourceLogo: React.FC<DataSourceLogoProps> = ({
 
 // Aliases for seamless drop-in everywhere across the codebase
 export const KernelVaneLogo = DataSourceLogo;
+export const KernalVaneLogo = DataSourceLogo;
 export default DataSourceLogo;
